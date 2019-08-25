@@ -1,0 +1,173 @@
+body{
+  margin : 0;
+}
+
+a{
+  cursor: pointer;
+}
+
+footer{
+  background-color: rgb(126, 46, 56);
+  width: 100%;
+  height: 64px;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+@font-face {
+    font-family: DHTitle;
+    src: url(../fuentes/CASTELAR.ttf);
+}
+
+h1{
+    font-family: DHTitle !important;
+    font-weight: bolder;
+}
+
+.contenido {
+  min-height: 100vh;
+}
+
+.divisor{
+  margin: 10px 0px !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.loadingBar {
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  left: 0;
+  z-index: 99999;
+}
+
+.grids{
+  width: 100% !important;
+}
+
+.gridsF{
+  width: 100% !important;
+  padding: 0px 5%;
+}
+
+#menuheader div.MuiPaper-root{
+  margin-top: 25px;
+}
+
+.list-container{
+  height: 83.5vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: auto;
+  /* padding: 10px 0px; */
+}
+
+.list-containerP{
+  height: 87.5vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: auto;
+  /* padding: 10px 0px; */
+}
+
+.list-item{
+  max-width: 100%;
+}
+
+.list-item a{
+  padding: 20px 10px;
+}
+
+.header-main{
+  box-shadow: 0 !important;
+}
+
+.input-with-icon-textfield{
+  height: 20px;
+}
+
+ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px !important;
+}
+
+li.sideList{
+  padding: 10px;
+  border-bottom: 1px lightgray solid;
+  cursor: pointer;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  color: rgba(80, 80, 80);
+}
+
+option{
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+li.sideList:hover{
+  background: rgba(0,0,0,0.18);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  opacity: .75;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey;  */
+  /* border: 1px rgba(0,0,0, .05) solid; */
+  /* border-radius: 10px; */
+  opacity: .75;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 10, 10, .3); 
+  /* border-radius: 10px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 10, 10, .5); 
+}
+
+.selected, .selectedP{
+  background: rgba(0,0,0,0.15);
+}
+
+header{
+  height: 7vh;
+  justify-content: center;
+}
+
+a{
+  color: rgba(80, 80, 80);
+  text-decoration: none;
+}
+
+.selectedButton{
+  color: white !important;
+  background : #38673d !important;
+}
+
+.selectedButton:hover{
+  color: white !important;
+  background : #315a35 !important;
+}
+
+.banderas {
+  width: 35px !important;
+  border-radius: 50%;
+  height: 35px !important;
+}
+
+#simple-menu div.MuiPaper-root{
+  box-shadow: none;
+  margin-top: 40px;
+
+  background-color: rgba(0,0,0,0);
+}

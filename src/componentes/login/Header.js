@@ -1,0 +1,42 @@
+import React from 'react';
+import classNames from 'classnames';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import Divider from "@material-ui/core/Divider"
+
+import MenuIdiomas from '../MenuIdiomas'
+
+const stylesHed = {
+  subtitulo1:{
+    marginTop: "10px",
+  },
+  grids : {
+    margin: "5vh 0"
+  }
+}
+
+class Header extends React.Component{
+
+  render(){
+    const { classes } = this.props;
+    return(
+      <div>
+        <Grid className={classNames("grids", classes.grids)} container justify="center">
+          <Grid item xs={10}  align="center">
+            <Typography variant="h1" align="center">
+              Diccionario Husserl
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <MenuIdiomas/>
+          </Grid>
+        </Grid>
+        <br/>
+        <Divider className="divisor"/>
+      </div>
+    )
+  }
+}
+
+export default withStyles(stylesHed)(Header);

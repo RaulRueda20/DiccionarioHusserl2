@@ -1,12 +1,67 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import App from './componentes/App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import "./css/index.css";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const theme = createMuiTheme({
+  palette: {
+   primary: { main: "rgb(126, 46, 56)"},
+   secondary: { main:"#daa79f"},
+ },
+ //typography: {
+   // fontfamily : [
+   //   'QuickSand',
+   // ]
+ //}
+});
+
+theme.typography.h1={
+  fontSize : "3rem",
+  fontFamily: "DHTitle",
+  color: "rgba(0,0,0,.9)"
+}
+
+theme.typography.h2={
+  fontSize : "2rem",
+  fontFamily: "ROBOTO",
+  color: "rgba(0,0,0,.8)",
+  fontWeight: "400"
+}
+
+theme.typography.h3={
+  fontSize : "1.5rem",
+  fontFamily: "ROBOTO",
+  color: "rgba(0,0,0,.8)",
+  fontWeight: "300"
+}
+
+theme.typography.h4={
+  fontSize : "1.2rem",
+  fontFamily: "ROBOTO",
+  color: "rgba(0,0,0,.7)",
+  fontWeight: "300"
+}
+
+theme.typography.h5={
+  fontSize : "1rem",
+  fontFamily: "ROBOTO",
+  fontWeight: "300",
+  color: "rgba(0,0,0,.7)"
+}
+
+theme.typography.h6={
+  fontSize : "0.90rem",
+  fontFamily: "ROBOTO",
+  color: "rgba(0,0,0,.7)",
+  fontWeight: "300"
+}
+
+ReactDOM.render(
+  <MuiThemeProvider theme={theme}>
+    <App />
+  </MuiThemeProvider>,
+  document.querySelector("#root")
+);
+
