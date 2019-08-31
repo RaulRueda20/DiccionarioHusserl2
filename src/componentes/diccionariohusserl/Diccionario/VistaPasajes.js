@@ -6,9 +6,12 @@ import BusquedaVP from './BusquedaVP';
 import PasajesVP from './PasajesVP';
 import ListaLetras from './ListaLetras';
 import MenuDerecho from './MenuDerecho';
+
 function VistaPasajes(props){
     const [hijos, setHijos] = React.useState([]);
     const [padres, setPadres] = React.useState([]);
+
+    console.log("idiomasPasajes", props.languageP)
 
     return (
         <Grid container>
@@ -22,7 +25,7 @@ function VistaPasajes(props){
                 />
             </Grid>  
             <Grid item xs={6}>
-                <PasajesVP  idExpresion={props.idExpresion} setIdExpresion={props.setIdExpresion}/>
+                <PasajesVP  idExpresion={props.idExpresion} setIdExpresion={props.setIdExpresion} languageP={props.languageP} setLanguageP={props.setLanguageP}/>
             </Grid>
             <Grid item xs={3}>
                 <MenuDerecho expresionSeleccionada={props.idExpresion} hijos={hijos} setHijos={setHijos}/>

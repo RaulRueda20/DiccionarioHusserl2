@@ -7,6 +7,7 @@ import VistaPasajes from './VistaPasajes';
 function DiccionarioMain(props){
   const [letraMain, setLetraMain] = React.useState('A');
   const [language,setLanguage] = React.useState("al");
+  const [languageP,setLanguageP] = React.useState("al");
   const [expresiones, setExpresiones] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState([1]);
   const [vistaP, setVistaP]=React.useState("expresion")
@@ -25,6 +26,7 @@ function DiccionarioMain(props){
       /> : <VistaPasajes
         expresiones={expresiones} setExpresiones={setExpresiones} vistaP={vistaP} 
         setVistaP={setVistaP} language={language} setLanguage={setLanguage} 
+        languageP={languageP} setLanguageP={setLanguageP}
         letraMain={letraMain} setLetraMain={setLetraMain} idExpresion={idExpresion}
         setIdExpresion={setIdExpresion}
       />
