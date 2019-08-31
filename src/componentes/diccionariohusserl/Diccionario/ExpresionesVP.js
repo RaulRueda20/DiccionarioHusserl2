@@ -6,8 +6,6 @@ import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import IconButton from '@material-ui/core/IconButton';
-import Jerarquia from '@material-ui/icons/DeviceHub';
 import classNames from 'classnames';
 
 import {webService} from '../../../js/webServices';
@@ -95,8 +93,9 @@ const ExpansionPanelDetails = withStyles(theme => ({
   },
 }))(MuiExpansionPanelDetails);
 
-export default function Expresiones(props) {
+export default function ExpresionesVP(props) {
   const [expanded, setExpanded] = React.useState('panel');
+  const [pasajes, setPasajes] = React.useState([])
   const {classes}=props;
 
   const handleChange = panel => (event, newExpanded) => {
@@ -105,42 +104,34 @@ export default function Expresiones(props) {
 
   var expresiones = props.expresiones
 
-  var language=props.language
+  // React.useEffect(()=>{
+  //   var service = "/referencias/obtieneReferenciasByTerm/" + props.idExpresion
+  //   webService(service, "GET", {}, (data) => {
+  //     console.log("data pasajes", data)
+  //   })
+  // }, [props.idExpresion])
 
-  React.useEffect(()=>{
-    var service = "/expresiones/" + language + "/" + props.letraMain
-    webService(service, "GET", {}, (data) => {
-      props.setExpresiones(fixReferencias(data.data.response))
-      props.setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
-      console.log("expresiones", props.expresiones)
-      console.log("idExpresion", props.idExpresion)
-    })
-  }, [props.letraMain])
+//   var Vistas=props.setVista
 
-  var Vistas=props.setVista
+//   function clickHandleVista(){
+//     props.setVistaP("pasajes")
+//   }
 
-  function clickHandleVista(){
-    props.setVistaP("pasajes")
-  }
-
-  const handleClickExpresion=(event)=>{
-    console.log("evento", event.target)
-    props.setIdExpresion(event.target.value)
-  }
+  // const handleClickExpresion=(event)=>{
+  //   console.log("evento", event.target)
+  //   props.setIdExpresion(event.target.value)
+  // }
 
   return (
     <div>
         {expresiones.map((expresion, index)=>(
           <ExpansionPanel key ={expresion.id} square expanded={expanded === 'panel'+index} onChange={handleChange('panel'+index)} TransitionProps={{ unmountOnExit: true }}>
             <ExpansionPanelSummary  
-              className={classNames({"selected" : expresion.id === props.idExpresion})} 
+              className={classNames({"selected" : expresion.id === props.idExpresion}, "sideList")} 
               key={expresion.id} value={expresion.id}
               id ={expresion.id} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1d-content" id={'panel'+index+"d-header"}
             >
-              <Link key ={expresion.id} onClick={clickHandleVista}>{expresion.expresion + " // " + expresion.traduccion}</Link>
-              <IconButton className="jerarquia" onClick={handleClickExpresion}>
-                <Jerarquia fontSize="small"/>
-              </IconButton>
+              <Link to={ExpresionesVP} key ={expresion.id} >{expresion.pretty_e + " // " + expresion.pretty_t}</Link>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails id ={expresion.id}>
               <Typography key ={expresion.id}>

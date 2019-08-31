@@ -12,6 +12,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/styles';
 
+import {webService} from '../../../js/webServices';
+
 const styles = {
   TextFieldbus:{
      width:"100%"
@@ -21,19 +23,27 @@ const styles = {
 function MenuDerecho(props){
   const {classes}=props;
 
+  // console.log("expresion seleccionada al menu derecho", props.idExpresion)
+
+  const paintJerarquia = (lista) => {
+    var lastString = ""
+    for(var i in lista){
+      if(i == lista.length-1)
+        lastString += lista[i].expresion + "."
+      else lastString += lista[i].expresion + ", "
+    }
+    return lastString
+  }
+
+  // React.useEffect(()=>{
+  //   var service = "/expresiones/"+props.language+"/hijosList/" + props.idExpresion
+  //   webService(service, "GET", {}, (data) => {
+  //       props.setHijos(data.data.response)
+  //   })
+  // }, [props.expresionId])
+
   return (
     <div>
-      <FormControl classname={classes.TextFieldbus}>
-        <InputLabel htmlFor="input-with-icon-adornment">Busqueda por letra</InputLabel>
-        <Input
-          id="input-with-icon-adornment"
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          }
-        />
-      </FormControl>
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}

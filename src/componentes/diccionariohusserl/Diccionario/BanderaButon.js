@@ -15,8 +15,6 @@ const bandIn = {
 function BanderaButon(props){
   const {classes} = props;
 
-  console.log("idioma determinado", props.language)
-
   var idioma = props.setLanguage
 
   const clickChangeLanguageEs=()=>{

@@ -94,7 +94,7 @@ ul{
   padding: 0px !important;
 }
 
-li.sideList{
+.sideList{
   padding: 10px;
   border-bottom: 1px lightgray solid;
   cursor: pointer;
@@ -170,4 +170,9 @@ a{
   margin-top: 40px;
 
   background-color: rgba(0,0,0,0);
+}
+
+#jerarquia{
+  bottom: 10px;
+  left: 100px;
 }
