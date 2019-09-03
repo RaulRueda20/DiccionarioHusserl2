@@ -31,8 +31,6 @@ function VistaExpresiones(props){
 //   const [vistaP, setVistaP]=React.useState("expresion")
 const [open,setOpen]=React.useState(true);
 const [expresion, setExpresion] = React.useState(emptyObj)
-const [hijos, setHijos] = React.useState([]);
-const [padres, setPadres] = React.useState([]);
 
 //   var language=props.language
 
@@ -61,8 +59,8 @@ const [padres, setPadres] = React.useState([]);
             />
         </Grid>
         <Grid item xs={3}>
-            <Busqueda/>
-            <MenuDerecho expresionSeleccionada={props.idExpresion} hijos={hijos} setHijos={setHijos}/>
+            <Busqueda expresiones={props.expresiones} setExpresiones={props.setExpresiones}/>
+            <MenuDerecho expresionSeleccionada={props.idExpresion} hijos={props.hijos} setHijos={props.setHijos}/>
         </Grid>
         <Grid item xs={12}>
             <Cintilla open={open} setOpen={setOpen}/>

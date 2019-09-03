@@ -1,13 +1,9 @@
 import  React from 'react';
-import { Link } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles';
-import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
-import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import Jerarquia from '@material-ui/icons/DeviceHub';
+import Grid from '@material-ui/core/Grid';
+
 import classNames from 'classnames';
 
 import {webService} from '../../../js/webServices';
@@ -54,58 +50,11 @@ const fixReferencias = (referencias) => {
   return expresiones
 }
 
-const ExpansionPanel = withStyles({
-  root: {
-    border: '1px solid rgba(0, 0, 0, .125)',
-    boxShadow: 'none',
-    '&:not(:last-child)': {
-      borderBottom: 0,
-    },
-    '&:before': {
-      display: 'none',
-    },
-    '&$expanded': {
-      margin: 'auto',
-    },
-  },
-  expanded: {},
-})(MuiExpansionPanel);
-
-const ExpansionPanelSummary = withStyles({
-  root: {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
-    borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    marginBottom: -1,
-    minHeight: 56,
-    '&$expanded': {
-      minHeight: 56,
-    },
-  },
-  content: {
-    '&$expanded': {
-      margin: '12px 0',
-    },
-  },
-  expanded: {},
-})(MuiExpansionPanelSummary);
-
-const ExpansionPanelDetails = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiExpansionPanelDetails);
-
 export default function Expresiones(props) {
-  const [expanded, setExpanded] = React.useState('panel');
+  const [panel, setPanel] = React.useState(false);
   const {classes}=props;
 
-  const handleChange = panel => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : true);
-  };
-
   var expresiones = props.expresiones
-
-  var language=props.language
 
   React.useEffect(()=>{
     var service = "/expresiones/" + language + "/" + props.letraMain
@@ -123,32 +72,41 @@ export default function Expresiones(props) {
     props.setVistaP("pasajes")
   }
 
-  const handleClickExpresion=(event)=>{
-    console.log("evento", event.target)
-    props.setIdExpresion(event.target.value)
+  function clickHandlePanel(){
+    setPanel(true)
   }
 
   return (
-    <div>
-        {expresiones.map((expresion, index)=>(
-          <ExpansionPanel key ={expresion.id} square expanded={expanded === 'panel'+index} onChange={handleChange('panel'+index)} TransitionProps={{ unmountOnExit: true }}>
-            <ExpansionPanelSummary  
-              className={classNames({"selected" : expresion.id === props.idExpresion})} 
-              key={expresion.id} value={expresion.id}
-              id ={expresion.id} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1d-content" id={'panel'+index+"d-header"}
-            >
-              <Link key ={expresion.id} onClick={clickHandleVista}>{expresion.expresion + " // " + expresion.traduccion}</Link>
-              <IconButton className="jerarquia" onClick={handleClickExpresion}>
-                <Jerarquia fontSize="small"/>
-              </IconButton>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails id ={expresion.id}>
-              <Typography key ={expresion.id}>
-                {expresion.referencias[0].referencia_original + " // " + expresion.referencias[0].referencia_traduccion}
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+    <div className="list-container">
+      <ul>
+      {expresiones.map((expresion, index)=>(
+        <li 
+          className={classNames({"selected" : expresion.id === props.idExpresion}, "sideList")} 
+          key={expresion.id} value={expresion.id} onClick={clickHandleVista}
+          id ={expresion.id}
+        >
+          <Grid container>
+            <Grid item xs={10}>
+              {expresion.expresion + '//' + expresion.traduccion}
+            </Grid>
+            <Grid item xs={1}>
+              <div onClick={clickHandlePanel}>
+                <Icon>
+                  <ExpandMoreIcon/>
+                </Icon>
+              </div>
+            </Grid>
+            <Grid item xs={1}>
+              <div>
+                <Icon>
+                  <Jerarquia/>
+                </Icon>
+              </div>
+            </Grid>
+          </Grid>
+        </li>
         ))}
+      </ul>
     </div>
   );
 }

@@ -6,6 +6,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/styles';
 
+import '../../../css/expresiones.css';
+
 const styles = {
     TextFieldbus:{
        width:"100%"
@@ -14,7 +16,23 @@ const styles = {
 
 function Busqueda(props){
     const {classes}=props;
-    
+
+    var expresiones=props.expresiones
+  
+  const handleChangeBusquedaExpresionesDiccionario = (event) => {
+    var expresionBuscadaDic=event.target.value
+    expresiones.map(expresion=>{
+      var expresionNombre=expresion.expresion +  expresion.traduccion +  expresion.id
+      var expresionEncontrada= expresionNombre.indexOf(expresionBuscadaDic)
+      console.log("expresion buscada",expresionBuscadaDic)
+      console.log("expresion encontrada",expresionEncontrada)
+      document.getElementById(expresion.id).classList.remove("hiddenE")
+      if (expresionEncontrada == -1){
+        document.getElementById(expresion.id).className += " hiddenE";
+      }
+    })
+  }
+
     return(
         <FormControl className={classes.TextFieldbus}>
             <InputLabel htmlFor="input-with-icon-adornment">Busqueda por letra</InputLabel>
@@ -25,6 +43,7 @@ function Busqueda(props){
                 <SearchIcon />
                 </InputAdornment>
             }
+            onChange={handleChangeBusquedaExpresionesDiccionario}
             />
         </FormControl>
     )

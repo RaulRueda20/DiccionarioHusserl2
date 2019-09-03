@@ -8,6 +8,7 @@ import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/styles';
 
+
 import es from "../../../Imagenes/spain.png";
 import al from "../../../Imagenes/germany.png";
 
@@ -34,6 +35,22 @@ function BusquedaVP(props){
         idioma("al");
     }
 
+    var expresiones = props.expresiones
+
+    const handleChangeBusquedaExpresionesDiccionarioVP = (event) => {
+        var expresionBuscadaDicVP=event.target.value
+        expresiones.map(expresion=>{
+          var expresionNombre=expresion.expresion +  expresion.traduccion +  expresion.id
+          var expresionEncontrada= expresionNombre.indexOf(expresionBuscadaDicVP)
+          console.log("expresion buscada",expresionBuscadaDicVP)
+          console.log("expresion encontrada",expresionEncontrada)
+          document.getElementById("VP"+expresion.id).classList.remove("hiddenE")
+          if (expresionEncontrada == -1){
+            document.getElementById("VP"+expresion.id).className += " hiddenE";
+          }
+        })
+      }
+
     return(
         <Grid container>
             <Grid item xs={10}>
@@ -46,6 +63,7 @@ function BusquedaVP(props){
                         <SearchIcon />
                         </InputAdornment>
                     }
+                    onChange={handleChangeBusquedaExpresionesDiccionarioVP}
                     />
                 </FormControl>
             </Grid>

@@ -35,13 +35,6 @@ function MenuDerecho(props){
     return lastString
   }
 
-  // React.useEffect(()=>{
-  //   var service = "/expresiones/"+props.language+"/hijosList/" + props.idExpresion
-  //   webService(service, "GET", {}, (data) => {
-  //       props.setHijos(data.data.response)
-  //   })
-  // }, [props.expresionId])
-
   return (
     <div>
         <ExpansionPanel>

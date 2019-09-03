@@ -11,15 +11,13 @@ function VistaPasajes(props){
     const [hijos, setHijos] = React.useState([]);
     const [padres, setPadres] = React.useState([]);
 
-    console.log("idiomasPasajes", props.languageP)
-
     return (
         <Grid container>
             <Grid item xs={12}>
                 <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
             </Grid>
             <Grid item xs={3}>
-                <BusquedaVP language={props.language} setLanguage={props.setLanguage}/>
+                <BusquedaVP language={props.language} setLanguage={props.setLanguage} expresiones={props.expresiones} setExpresiones={props.setExpresiones}/>
                 <ExpresionesVP expresiones={props.expresiones} setExpresiones={props.setExpresiones} idExpresion={props.idExpresion} 
                 setIdExpresion={props.setIdExpresion} language={props.language}letraMain={props.letraMain} vistaP={props.vistaP} setVistaP={props.setVistaP}
                 />
