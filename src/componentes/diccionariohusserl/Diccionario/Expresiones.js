@@ -3,6 +3,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Icon from '@material-ui/core/Icon';
 import Jerarquia from '@material-ui/icons/DeviceHub';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import classNames from 'classnames';
 
@@ -52,9 +53,12 @@ const fixReferencias = (referencias) => {
 
 export default function Expresiones(props) {
   const [panel, setPanel] = React.useState(false);
+  const [id,setId] = React.useState([])
   const {classes}=props;
 
   var expresiones = props.expresiones
+  var language = props.language
+  var idExp = props.idExpresion
 
   React.useEffect(()=>{
     var service = "/expresiones/" + language + "/" + props.letraMain
@@ -66,14 +70,15 @@ export default function Expresiones(props) {
     })
   }, [props.letraMain])
 
-  var Vistas=props.setVista
-
   function clickHandleVista(){
     props.setVistaP("pasajes")
   }
 
   function clickHandlePanel(){
-    setPanel(true)
+    var listaid = id
+    var listaClaves = listaid.push(props.idExpresion)
+    console.log("id pusheada", listaClaves)
+    console.log("id de la expresion", props.idExpresion)
   }
 
   return (
@@ -82,12 +87,12 @@ export default function Expresiones(props) {
       {expresiones.map((expresion, index)=>(
         <li 
           className={classNames({"selected" : expresion.id === props.idExpresion}, "sideList")} 
-          key={expresion.id} value={expresion.id} onClick={clickHandleVista}
+          key={expresion.id} value={expresion.id} 
           id ={expresion.id}
         >
           <Grid container>
             <Grid item xs={10}>
-              {expresion.expresion + '//' + expresion.traduccion}
+              <p onClick={clickHandleVista}>{expresion.expresion + '//' + expresion.traduccion}</p>
             </Grid>
             <Grid item xs={1}>
               <div onClick={clickHandlePanel}>
@@ -104,6 +109,13 @@ export default function Expresiones(props) {
               </div>
             </Grid>
           </Grid>
+          <div>
+            <ul>
+              <li>
+              
+              </li>
+            </ul>
+          </div>
         </li>
         ))}
       </ul>

@@ -25,24 +25,8 @@ const emptyObj = {
 }
 
 function VistaExpresiones(props){
-//   const [letraMain, setLetraMain] = React.useState('A');
-//   const [language,setLanguage] = React.useState("al");
-//   const [expresiones, setExpresiones] = React.useState([]);
-//   const [vistaP, setVistaP]=React.useState("expresion")
 const [open,setOpen]=React.useState(true);
 const [expresion, setExpresion] = React.useState(emptyObj)
-
-//   var language=props.language
-
-//   React.useEffect(()=>{
-//     var service = "/expresiones/" + language + "/" + props.letraMain
-//     webService(service, "GET", {}, (data) => {
-//       props.setExpresiones(fixReferencias(data.data.response))
-//       props.setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
-//       console.log("expresiones", props.expresiones)
-//       console.log("idExpresion", props.idExpresion)
-//     })
-//   }, [props.letraMain])
 
     return(
         <Grid container>
