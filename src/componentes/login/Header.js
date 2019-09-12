@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from "@material-ui/core/Divider"
 
-import MenuIdiomas from '../MenuIdiomas'
+import MenuIdioma from '../MenuIdioma'
 
 const stylesHed = {
   subtitulo1:{
@@ -16,27 +16,34 @@ const stylesHed = {
   }
 }
 
-class Header extends React.Component{
+function Header(props){
+  const { classes } = props;
+  const [lenguajePagina, setLenguajePagina]=React.useState("es")
 
-  render(){
-    const { classes } = this.props;
-    return(
-      <div>
-        <Grid className={classNames("grids", classes.grids)} container justify="center">
-          <Grid item xs={10}  align="center">
-            <Typography variant="h1" align="center">
-              Diccionario Husserl
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <MenuIdiomas/>
-          </Grid>
+  return(
+    <div>
+      <Grid className={classNames("grids", classes.grids)} container justify="center">
+        <Grid item xs={10}  align="center">
+          <Typography variant="h1" align="center">
+            Diccionario Husserl
+          </Typography>
         </Grid>
-        <br/>
-        <Divider className="divisor"/>
-      </div>
-    )
-  }
+        <Grid item xs={2}>
+          <MenuIdioma lenguajePagina={lenguajePagina} setLenguajePagina={setLenguajePagina}/>
+        </Grid>
+      </Grid>
+      <br/>
+      <Divider className="divisor"/>
+      <Grid container>
+        <Grid item xs={11}  align="center">
+          <Typography variant="h4" align="center">
+            Léxico bilingüe (alemán y español) de expresiones definidas a partir de las obras de Edmund Husserl (1859-1938)
+          </Typography>
+        </Grid>
+      </Grid>
+      <br/>
+    </div>
+  )
 }
 
 export default withStyles(stylesHed)(Header);

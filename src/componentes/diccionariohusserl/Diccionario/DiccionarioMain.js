@@ -8,13 +8,11 @@ function DiccionarioMain(props){
   const [language,setLanguage] = React.useState("al");
   const [languageP,setLanguageP] = React.useState("al");
   const [expresiones, setExpresiones] = React.useState([]);
-  const [idExpresion, setIdExpresion] = React.useState([1]);
+  const [idExpresion, setIdExpresion] = React.useState('');
   const [vistaP, setVistaP]=React.useState("expresion")
   const [hijos, setHijos] = React.useState([]);
   const [padres, setPadres] = React.useState([]);
-  // const [open,setOpen]=React.useState(true);
-
-  // console.log("idExpresiones en DiccionarioMain", idExpresion)
+  // const [open,setOpen]=React.useState(true);}
 
   return(
     <div>

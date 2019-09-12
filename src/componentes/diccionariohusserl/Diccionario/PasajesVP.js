@@ -1,10 +1,10 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Grid from '@material-ui/core/Grid';
 
 import BanderaPasajes from './BanderaPasajes';
+import ContenidoPasajes from './ContenidoPasajes';
 
 import {webService} from '../../../js/webServices';
 
@@ -13,17 +13,13 @@ function PasajesVP(props){
   const [pasajesT, setPasajesT]=React.useState("")
   
   React.useEffect(()=>{
-      var service = "/referencias/obtieneReferenciasByTerm/" + props.idExpresion
+      var service = "/referencias/obtieneReferenciasByTerm/" + 2
       webService(service, "GET", {}, (data) => {
         console.log("data pasajes", data)
-        setPasajesO(data.data.response)
-        setPasajesT(data.data.response)
+        setPasajesO(data.data.response[0])
+        setPasajesT(data.data.response[0])
       })
   }, [props.idExpresion])
-
-  var language=props.languageP
-
-  console.log("pasajes Idiomas", language)
 
   return(
     <div>
@@ -39,9 +35,7 @@ function PasajesVP(props){
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <Typography>
-            Pasajes en proceso
-          </Typography>
+          <ContenidoPasajes languageP={props.languageP} pasajesT={pasajesT} setPasajesT={setPasajesT} pasajesO={pasajesO} setPasajesO={setPasajesO}/>
         </Grid>
       </Grid>
     </div>

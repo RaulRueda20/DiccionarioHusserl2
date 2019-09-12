@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
 import {webService} from '../../../js/webServices';
+import * as localStore from '../../../js/localStore';
 
 import ListaLetras from './ListaLetras';
 import LetraIndice from './LetraIndice';
@@ -24,9 +25,63 @@ const emptyObj = {
     tpretty: ""
 }
 
+const fixReferencias = (referencias) => {
+  var expresiones=[]
+  var posicActual = -1
+  var expreActual = ""
+  var i = 0
+  console.log(referencias.length)
+  while (i<referencias.length){
+    if (expreActual != referencias[i].expresion){
+      posicActual++
+      expreActual = referencias[i].expresion
+      expresiones.push({
+        clave : referencias[i].clave,
+        expresion : referencias[i].expresion,
+        id : referencias[i].id,
+        index_de: referencias[i].index_de,
+        index_es: referencias[i].index_es,
+        orden: referencias[i].orden,
+        pretty_e: referencias[i].pretty_e,
+        pretty_t: referencias[i].pretty_t,
+        referencias : [],
+        traduccion: referencias[i].traduccion
+      })
+      expresiones[posicActual].referencias.push({
+        referencia_original : referencias[i].referencia_original,
+        referencia_traduccion : referencias[i].referencia_traduccion,
+        refid : referencias[i].refid,
+      })
+      i++
+    }else{
+      expresiones[posicActual].referencias.push({
+        referencia_original : referencias[i].referencia_original,
+        referencia_traduccion : referencias[i].referencia_traduccion,
+        refid : referencias[i].refid,
+      })
+      i++
+      // expresiones
+    }
+  }
+  return expresiones
+}
+
 function VistaExpresiones(props){
-const [open,setOpen]=React.useState(true);
-const [expresion, setExpresion] = React.useState(emptyObj)
+    const [open,setOpen]=React.useState(true);
+    const [expresion, setExpresion] = React.useState(emptyObj)
+
+    React.useEffect(()=>{
+        var service = "/expresiones/" + props.language + "/" + props.letraMain
+        webService(service, "GET", {}, (data) => {
+          console.log("data de expresiones", data)
+          console.log("expresiones", props.idExpresion)
+          props.setExpresiones(fixReferencias(data.data.response))
+          if(props.idExpresion === ''){
+            props.setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
+          }
+        })
+      }, [props.letraMain])
+    
 
     return(
         <Grid container>
@@ -39,7 +94,7 @@ const [expresion, setExpresion] = React.useState(emptyObj)
         </Grid>
         <Grid item xs={8} aling='center'>
             <Expresiones expresiones={props.expresiones} setExpresiones={props.setExpresiones} idExpresion={props.idExpresion} 
-            setIdExpresion={props.setIdExpresion} language={props.language} letraMain={props.letraMain} vistaP={props.vistaP} setVistaP={props.setVistaP}
+            setIdExpresion={props.setIdExpresion} vistaP={props.vistaP} setVistaP={props.setVistaP}
             />
         </Grid>
         <Grid item xs={3}>

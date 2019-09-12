@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 import MenuHeader from './MenuHeader';
-import MenuIdiomas from '../MenuIdiomas'
+import MenuIdioma from '../MenuIdioma'
 
 class HeaderMain extends React.Component{
 
@@ -23,7 +23,7 @@ class HeaderMain extends React.Component{
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              <MenuIdiomas/>
+              <MenuIdioma/>
             </Grid>
           </Toolbar>
         </AppBar>

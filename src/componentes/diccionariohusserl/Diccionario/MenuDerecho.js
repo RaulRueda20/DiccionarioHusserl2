@@ -23,7 +23,7 @@ const styles = {
 function MenuDerecho(props){
   const {classes}=props;
 
-  // console.log("expresion seleccionada al menu derecho", props.idExpresion)
+  console.log("expresion seleccionada al menu derecho", props.idExpresion)
 
   const paintJerarquia = (lista) => {
     var lastString = ""
