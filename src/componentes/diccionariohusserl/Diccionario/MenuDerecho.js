@@ -1,29 +1,65 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Divider from '@material-ui/core/Divider';
-import SearchIcon from '@material-ui/icons/Search';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import { withStyles } from '@material-ui/styles';
+import Typography from '@material-ui/core/Typography';
 
 import {webService} from '../../../js/webServices';
+import * as localStore from '../../../js/localStore';
 
-const styles = {
-  TextFieldbus:{
-     width:"100%"
-    }
-  }
+// const ExpansionPanel = withStyles({
+//   root: {
+//     border: '1px solid rgba(0, 0, 0, .125)',
+//     boxShadow: 'none',
+//     '&:not(:last-child)': {
+//       borderBottom: 0,
+//     },
+//     '&:before': {
+//       display: 'none',
+//     },
+//     '&$expanded': {
+//       margin: 'auto',
+//     },
+//   },
+//   expanded: {},
+// })(MuiExpansionPanel);
+
+const ExpansionPanelDetails = withStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+    overflowX:"hidden",
+    maxHeight: 85
+  },
+}))(MuiExpansionPanelDetails);
+
+// const ExpansionPanelSummary = withStyles({
+//   root: {
+//     backgroundColor: 'rgba(0, 0, 0, .03)',
+//     borderBottom: '1px solid rgba(0, 0, 0, .125)',
+//     marginBottom: -1,
+//     minHeight: 56,
+//     '&$expanded': {
+//       minHeight: 56,
+//     },
+//   },
+//   content: {
+//     '&$expanded': {
+//       margin: '12px 0',
+//     },
+//   },
+//   expanded: {},
+// })(MuiExpansionPanelSummary);
 
 function MenuDerecho(props){
   const {classes}=props;
+  const [referenciasConsultadasVista, setReferenciasConsultadasVista]=React.useState([])
+  const [expanded, setExpanded] = React.useState('panel2');
 
-  console.log("expresion seleccionada al menu derecho", props.idExpresion)
+  const handleChange = panel => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
   const paintJerarquia = (lista) => {
     var lastString = ""
@@ -35,42 +71,56 @@ function MenuDerecho(props){
     return lastString
   }
 
+  React.useEffect(()=>{
+    if(localStore.getObjects("referenciasConsultadas")==false){
+      var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
+      setReferenciasConsultadasVista(referenciaConsultadaSacada)
+    }else{
+      var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
+      setReferenciasConsultadasVista(referenciaConsultadaSacada)
+    }
+  }, [true])
+
   return (
     <div>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
-          >
-            <Typography>Jerarquía</Typography>
-          </ExpansionPanelSummary>
+        <ExpansionPanel square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography>Jerarquía:</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            Derivada de:
+          </Typography>
+        </ExpansionPanelDetails>
+        <Divider />
+        <ExpansionPanelDetails>
+          <Typography>Expresión:</Typography>
+        </ExpansionPanelDetails>
           <Divider />
-          <ExpansionPanelDetails>
-            <Typography>Derivada de:</Typography>
-          </ExpansionPanelDetails>
-          <Divider />
-          <ExpansionPanelDetails>
-            <Typography>Expresión:</Typography>
-          </ExpansionPanelDetails>
-          <Divider />
-          <ExpansionPanelDetails>
-            <Typography>Expresiones derivadas:</Typography>
-          </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>Expresiones derivadas:</Typography>
+        </ExpansionPanelDetails>
+        <Divider />
+        <ExpansionPanelDetails>
+          <Typography>Ver también:</Typography>
+        </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-          >
-          <Typography>Referencias consultadas:</Typography>
-          </ExpansionPanelSummary>
+        <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
+          <Typography>Referencias Consultadas:</Typography>
+        </ExpansionPanelSummary>
           <ExpansionPanelDetails>
+            <ul>
+              {referenciasConsultadasVista.map(consultas=>(
+                <li>
+                  {consultas.expresion + "//" + consultas.traduccion}
+                </li>
+              ))}
+            </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
     </div>
   )
 }
 
-export default  withStyles(styles)(MenuDerecho);
+export default MenuDerecho; 

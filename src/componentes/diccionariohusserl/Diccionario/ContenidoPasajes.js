@@ -9,8 +9,6 @@ function ContenidoPasajes(props){
     var pasaje_traduccion = props.pasajesT.pasaje_traduccion;
     var languageP = props.languageP
 
-    console.log("html", pasaje_original)
-
     function htmlPasajeOriginal(){
         return {__html:pasaje_original}
     }

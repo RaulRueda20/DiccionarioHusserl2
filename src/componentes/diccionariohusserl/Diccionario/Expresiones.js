@@ -5,25 +5,47 @@ import Jerarquia from '@material-ui/icons/DeviceHub';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import * as localStore from '../../../js/localStore';
+
 import classNames from 'classnames';
 
 export default function Expresiones(props){
-  const [id,setId] = React.useState([])
+  const [expresionSeleccionada,setExpresionSeleccionada] = React.useState(null)
+  const [flagFuncionAccionada, setFlagFuncionAccionada]=React.useState(false)
+
   const {classes}=props;
 
-  function clickHandleVista(){
-    props.setVistaP("pasajes")
+  function clickHandleVista(event){
+    setFlagFuncionAccionada(true)
+    if(flagFuncionAccionada==true){
+      props.setVistaP("pasajes")
+      var expresionClickeada=event.currentTarget.value;
+      var expresionesReferencias=props.expresiones[expresionClickeada];
+      if(localStore.getObjects("referenciasConsultadas")==false){
+        var referenciasConsultadas=[];
+        referenciasConsultadas.push(expresionesReferencias)
+        localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+      }else{
+        var store=localStore.getObjects("referenciasConsultadas")
+        store.push(expresionesReferencias)
+        localStore.setObjects("referenciasConsultadas",store)
+      }
+    }
   }
 
-  const handleChangeId=(event)=>{
-    props.setIdExpresion(event.target.value)
-    var listaid = id
-    var listaClaves = listaid.push(props.idExpresion)
-    console.log("id pusheada", listaClaves)
-    console.log("id de la expresion", props.idExpresion)
+  function handleClickPanel(event){
+    var expresionIdSeleccionada = event.currentTarget.id;
+    if(flagFuncionAccionada==false && expresionSeleccionada==null){
+      var expresionQueSelecciono=[];
+      expresionQueSelecciono.push(expresionIdSeleccionada)
+      expresionSeleccionada(expresionQueSelecciono)
+      props.setIdExpresion(expresionIdSeleccionada)
+      console.log("expresionIdSeleccionada",expresionIdSeleccionada)
+    }
   }
 
-  console.log("id enviado", props.idExpresion)
+  console.log("flag",flagFuncionAccionada)
+  console.log("expresionId",props.idExpresion)
 
   return (
     <div className="list-container">
@@ -31,15 +53,15 @@ export default function Expresiones(props){
       {props.expresiones.map((expresion, index)=>(
         <li 
           className={classNames({"selected" : expresion.id === props.idExpresion}, "sideList")} 
-          key={expresion.id} value={expresion.id} 
-          id ={expresion.id} 
+          key={expresion.id} value={index} 
+          id={expresion.id} onDoubleClick={clickHandleVista}
         >
           <Grid container>
             <Grid item xs={10}>
-              <p onClick={clickHandleVista}>{expresion.id + "-" + expresion.expresion + '//' + expresion.traduccion}</p>
+              <p>{expresion.expresion + '//' + expresion.traduccion}</p>
             </Grid>
             <Grid item xs={1}>
-              <div onClick={handleChangeId}>
+              <div id={expresion.id} onClick={handleClickPanel}>
                 <Icon>
                   <ExpandMoreIcon/>
                 </Icon>
