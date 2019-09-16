@@ -97,10 +97,6 @@ function MenuDerecho(props){
         <ExpansionPanelDetails>
           <Typography>Expresiones derivadas:</Typography>
         </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelDetails>
-          <Typography>Ver también:</Typography>
-        </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
@@ -115,6 +111,14 @@ function MenuDerecho(props){
               ))}
             </ul>
           </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}l>
+          <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
+            <Typography>Ver También:</Typography>
+            <ExpansionPanelDetails>
+
+            </ExpansionPanelDetails>
+          </ExpansionPanelSummary>
         </ExpansionPanel>
     </div>
   )
