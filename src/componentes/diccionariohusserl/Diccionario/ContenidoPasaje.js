@@ -8,7 +8,7 @@ import ContenidoPasajes from './ContenidoPasajes';
 
 import {webService} from '../../../js/webServices';
 
-function PasajesVP(props){
+function ContenidoPasaje(props){
   const [pasajesO, setPasajesO]=React.useState("")
   const [pasajesT, setPasajesT]=React.useState("")
   
@@ -42,4 +42,4 @@ function PasajesVP(props){
   )
 }
 
-export default PasajesVP;
+export default ContenidoPasaje;

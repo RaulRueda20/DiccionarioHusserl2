@@ -45,7 +45,7 @@ const fixReferencias = (referencias) => {
   return expresiones
 }
 
-export default function ExpresionesVP(props) {
+export default function ListaIzquierdaExpresion(props) {
   const [expanded, setExpanded] = React.useState('panel');
   const [pasajes, setPasajes] = React.useState([])
   const {classes}=props;

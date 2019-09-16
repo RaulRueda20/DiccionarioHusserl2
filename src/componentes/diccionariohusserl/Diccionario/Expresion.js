@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Grid from '@material-ui/core/Grid';
 
 import {webService} from '../../../js/webServices';
@@ -8,11 +9,21 @@ import ListaLetras from './ListaLetras';
 import LetraIndice from './LetraIndice';
 import BanderaButon from './BanderaButon';
 import MenuDerecho from './MenuDerecho';
-import Expresiones from './Expresiones';
+import ListaExpresiones from './ListaExpresiones';
 import Cintilla from './Cintilla';
 import Busqueda from './Busqueda';
 
-const emptyObj = {
+function Expresion(props){
+  const [letraMain, setLetraMain] = React.useState('A');
+  const [language,setLanguage] = React.useState("al");
+  const [languageP,setLanguageP] = React.useState("al");
+  const [expresiones, setExpresiones] = React.useState([]);
+  const [idExpresion, setIdExpresion] = React.useState('');
+  const [hijos, setHijos] = React.useState([]);
+  const [padres, setPadres] = React.useState([]);
+  const [open,setOpen]=React.useState(true)
+
+  const emptyObj = {
     clave: "",
     epretty: "",
     expresion_original: "",
@@ -66,46 +77,43 @@ const fixReferencias = (referencias) => {
   return expresiones
 }
 
-function VistaExpresiones(props){
-    const [open,setOpen]=React.useState(true);
-    const [expresion, setExpresion] = React.useState(emptyObj)
+  React.useEffect(()=>{
+    var service = "/expresiones/" + language + "/" + letraMain
+    webService(service, "GET", {}, (data) => {
+      console.log("data de language", language)
+      console.log("letraMain", letraMain)
+      setExpresiones(fixReferencias(data.data.response))
+      if(idExpresion === ''){
+        setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
+      }
+    })
+  }, [letraMain, language])
 
-    React.useEffect(()=>{
-        var service = "/expresiones/" + props.language + "/" + props.letraMain
-        webService(service, "GET", {}, (data) => {
-          console.log("data de expresiones", data)
-          console.log("expresiones", props.idExpresion)
-          props.setExpresiones(fixReferencias(data.data.response))
-          if(props.idExpresion === ''){
-            props.setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
-          }
-        })
-      }, [props.letraMain])
-    
-
-    return(
-        <Grid container>
+  return(
+    <div>
+      <Grid container>
         <Grid item xs={12}>
-            <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
+            <ListaLetras letraMain={letraMain} setLetraMain={setLetraMain}/>
         </Grid>
         <Grid item xs={1} align="center" style={{borderRight:"1px rgb(240, 240, 240) solid"}}>
-            <LetraIndice letraMain={props.letraMain}/>
-            <BanderaButon language={props.language} setLanguage={props.setLanguage}/>
+            <LetraIndice letraMain={letraMain}/>
+            <BanderaButon language={language} setLanguage={setLanguage}/>
         </Grid>
         <Grid item xs={8} aling='center'>
-            <Expresiones expresiones={props.expresiones} setExpresiones={props.setExpresiones} idExpresion={props.idExpresion} 
-            setIdExpresion={props.setIdExpresion} vistaP={props.vistaP} setVistaP={props.setVistaP}
+            <ListaExpresiones expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
+            setIdExpresion={setIdExpresion} language={language} setLanguage={setLanguage}
             />
         </Grid>
         <Grid item xs={3}>
-            <Busqueda expresiones={props.expresiones} setExpresiones={props.setExpresiones}/>
-            <MenuDerecho expresionSeleccionada={props.idExpresion} hijos={props.hijos} setHijos={props.setHijos}/>
+            <Busqueda expresiones={expresiones} setExpresiones={setExpresiones}/>
+            <MenuDerecho expresionSeleccionada={idExpresion} hijos={hijos} setHijos={setHijos}/>
         </Grid>
         <Grid item xs={12}>
             <Cintilla open={open} setOpen={setOpen}/>
         </Grid>
-        </Grid>
-    )
+      </Grid>
+    </div>
+  )
 }
 
-export default VistaExpresiones;
+export default Expresion;
