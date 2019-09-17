@@ -68,21 +68,23 @@ function MenuDerecho(props){
   const {classes}=props;
   const [referenciasConsultadasVista, setReferenciasConsultadasVista]=React.useState([])
   const [listaVerTambien,setListaVerTambien]=React.useState([]);
-  const [expanded, setExpanded] = React.useState([]);
+  const [expanded1, setExpanded1] = React.useState(false);
+  const [expanded2, setExpanded2] = React.useState(false);
+  const [expanded3, setExpanded3] = React.useState(false);
   const [hijos,setHijos]=React.useState("");
   const [padres,setPadres]=React.useState("");
 
-  const handleChange = panel => (event, newExpanded) => {
-    var panelesExpandidos = expanded
-    if(panelesExpandidos.indexOf(panel) > -1){
-      panelesExpandidos.splice(panelesExpandidos.indexOf(panel), 1)
-    }else{
-      panelesExpandidos.push(panel)
-    }
-    console.log(panelesExpandidos)
-    setExpanded(panelesExpandidos);
-    console.log(expanded.indexOf('panel1') != -1)
-  };
+  // const handleChange = panel => (event, newExpanded) => {
+  //   var panelesExpandidos = expanded
+  //   if(panelesExpandidos.indexOf(panel) > -1){
+  //     panelesExpandidos.splice(panelesExpandidos.indexOf(panel), 1)
+  //   }else{
+  //     panelesExpandidos.push(panel)
+  //   }
+  //   // console.log(panelesExpandidos)
+  //   setExpanded(panelesExpandidos);
+  //   // console.log(expanded.indexOf('panel1') != -1)
+  // };
 
   const paintJerarquia = (lista) => {
     var lastString = ""
@@ -110,13 +112,13 @@ function MenuDerecho(props){
     }
   },[props.expresionSeleccionada])
 
-  const checkPanel = (panel) => {
-    return expanded.indexOf(panel) != -1
-  }
+  // const checkPanel = (panel) => {
+  //   return expanded.indexOf(panel) != -1
+  // }
 
   return (
     <div>
-        <ExpansionPanel square expanded={checkPanel('panel1')} onClick={handleChange('panel1')}>
+        <ExpansionPanel square expanded={expanded1} onChange={() => setExpanded1(!expanded1)}>
           <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography>Jerarquía:</Typography>
           </ExpansionPanelSummary>
@@ -134,7 +136,7 @@ function MenuDerecho(props){
           <Typography>Expresiones derivadas: {hijos.length > 0 ? paintJerarquia(hijos) : null}</Typography>
         </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel square expanded={expanded.indexOf('panel2') != -1} onClick={handleChange('panel2')}>
+        <ExpansionPanel square expanded={expanded2} onChange={() => setExpanded2(!expanded2)}>
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
           <Typography>Referencias Consultadas:</Typography>
         </ExpansionPanelSummary>
@@ -148,7 +150,7 @@ function MenuDerecho(props){
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel square expanded={expanded.indexOf('panel3') != -1} onChange={handleChange('panel3')}l>
+        <ExpansionPanel square expanded={expanded3} onChange={() => setExpanded3(!expanded3)}l>
           <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
             <Typography>Ver También:</Typography>
           </ExpansionPanelSummary>
