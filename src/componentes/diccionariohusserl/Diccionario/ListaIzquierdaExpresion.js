@@ -1,85 +1,78 @@
 import  React from 'react';
-import classNames from 'classnames';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Icon from '@material-ui/core/Icon';
+import Grid from '@material-ui/core/Grid';
 
-import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
 
-const fixReferencias = (referencias) => {
-  var expresiones=[]
-  var posicActual = -1
-  var expreActual = ""
-  var i = 0
-  console.log(referencias.length)
-  while (i<referencias.length){
-    if (expreActual != referencias[i].expresion){
-      posicActual++
-      expreActual = referencias[i].expresion
-      expresiones.push({
-        clave : referencias[i].clave,
-        expresion : referencias[i].expresion,
-        id : referencias[i].id,
-        index_de: referencias[i].index_de,
-        index_es: referencias[i].index_es,
-        orden: referencias[i].orden,
-        pretty_e: referencias[i].pretty_e,
-        pretty_t: referencias[i].pretty_t,
-        referencias : [],
-        traduccion: referencias[i].traduccion
-      })
-      expresiones[posicActual].referencias.push({
-        referencia_original : referencias[i].referencia_original,
-        referencia_traduccion : referencias[i].referencia_traduccion,
-        refid : referencias[i].refid,
-      })
-      i++
-    }else{
-      expresiones[posicActual].referencias.push({
-        referencia_original : referencias[i].referencia_original,
-        referencia_traduccion : referencias[i].referencia_traduccion,
-        refid : referencias[i].refid,
-      })
-      i++
-      // expresiones
+import classNames from 'classnames';
+
+export default function ListaIzquierdaExpresiones(props){
+  const [expresionSeleccionadaListaIzquierda,setExpresionSeleccionadaListaIzquierda] = React.useState(null)
+  const [flagFuncionAccionada, setFlagFuncionAccionada]=React.useState(false)
+
+  const {classes, match}=props;
+
+  var expresiones=props.expresiones;
+
+  console.log("Expresiones", expresiones)
+
+  function clickHandleListaExpresiones(event){
+      var expresionClickeada=event.currentTarget.value;
+      var expresionesReferencias=props.expresiones[expresionClickeada];
+      if(localStore.getObjects("referenciasConsultadas")==false){
+        var referenciasConsultadas=[];
+        referenciasConsultadas.push(expresionesReferencias)
+        localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+      }else{
+        var store=localStore.getObjects("referenciasConsultadas")
+        store.push(expresionesReferencias)
+        localStore.setObjects("referenciasConsultadas",store)
+      }
+  }
+
+  function handleClickPanelListaExpresiones(event){
+    var expresionIdSeleccionada = event.currentTarget.id;
+    if(flagFuncionAccionada==false && expresionSeleccionadaListaIzquierda==null){
+      var expresionQueSelecciono=[];
+      expresionQueSelecciono.push(expresionIdSeleccionada)
+      setExpresionSeleccionadaListaIzquierda(expresionQueSelecciono)
+      props.setIdExpresion(expresionIdSeleccionada)
+      console.log("expresionIdSeleccionada",expresionIdSeleccionada)
     }
   }
-  return expresiones
-}
 
-export default function ListaIzquierdaExpresion(props) {
-  const [expanded, setExpanded] = React.useState('panel');
-  const [pasajes, setPasajes] = React.useState([])
-  const {classes}=props;
-
-  var expresiones = props.expresiones
-
-  // React.useEffect(()=>{
-  //   var service = "/referencias/obtieneReferenciasByTerm/" + props.idExpresion
-  //   webService(service, "GET", {}, (data) => {
-  //     console.log("data pasajes", data)
-  //   })
-  // }, [props.idExpresion])
-
-//   var Vistas=props.setVista
-
-//   function clickHandleVista(){
-//     props.setVistaP("pasajes")
-//   }
-
-  // const handleClickExpresion=(event)=>{
-  //   console.log("evento", event.target)
-  //   props.setIdExpresion(event.target.value)
-  // }
+  console.log("flag",flagFuncionAccionada)
+  console.log("expresionId",props.idExpresion)
 
   return (
     <div className="list-container">
       <ul>
       {expresiones.map((expresion, index)=>(
         <li 
-          className={classNames({"selected" : expresion.id === props.idExpresion}, "sideList")} 
-          key={"VP"+expresion.id} value={"VP"+expresion.id} 
-          id ={"VP"+expresion.id}
+          className="sideList" 
+          key={expresion.id} value={index} 
+          id={expresion.id} 
         >
-          {expresion.expresion + '//' + expresion.traduccion}
+          <Grid container justify="center" alignItems="center">
+            <Grid item xs={10} onClick={clickHandleListaExpresiones}>
+              <p className={"parrafo"}>{expresion.expresion + '//' + expresion.traduccion}</p>
+            </Grid>
+            <Grid item id={expresion.id} xs={1} onClick={handleClickPanelListaExpresiones}>
+                <Icon>
+                  <ExpandMoreIcon/>
+                </Icon>
+            </Grid>
+            <Grid item xs={1}>
+            </Grid>
+          </Grid>
+          <div>
+            <ul>
+              <li>
+              
+              </li>
+            </ul>
+          </div>
         </li>
         ))}
       </ul>

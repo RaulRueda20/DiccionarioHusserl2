@@ -5,7 +5,7 @@
 // export {textBot};
 import * as localStore from '../js/localStore';
 
-const TDiccionario= lang => {
+const tituloDiccionario = lang => {
   // const lang = localStore.getItem("lang")
   switch(lang){
     case "es":
@@ -21,7 +21,7 @@ const TDiccionario= lang => {
   }
 }
 
-const SubmitButtonText= lang => {
+const botonIngresar= lang => {
   // const lang = localStore.getItem("lang")
   switch(lang){
     case "es":
@@ -37,7 +37,7 @@ const SubmitButtonText= lang => {
   }
 }
 
-const SbtDiccionario= lang => {
+const subtituloDiccionario= lang => {
   switch (lang) {
     case "es":
       return "Léxico bilingüe (alemán y español) de expresiones definidas a partir de las obras de Edmund Husserl (1859-1938)"
@@ -52,7 +52,7 @@ const SbtDiccionario= lang => {
   }
 }
 
-const SbtInic= lang => {
+const inicio= lang => {
   switch (lang) {
     case "es":
       return "Inicio"
@@ -67,7 +67,7 @@ const SbtInic= lang => {
   }
 }
 
-const Correo= lang => {
+const correo= lang => {
   switch (lang) {
     case "es":
       return "Correo Electrónico"
@@ -82,7 +82,7 @@ const Correo= lang => {
   }
 }
 
-const Contra= lang => {
+const contra= lang => {
   switch (lang) {
     case "es":
       return "Contraseña"
@@ -97,7 +97,7 @@ const Contra= lang => {
   }
 }
 
-const OlvC= lang => {
+const olvidoDeContra= lang => {
   switch (lang) {
     case "es":
       return "¿Olvido su contraseña?"
@@ -112,7 +112,7 @@ const OlvC= lang => {
   }
 }
 
-const Registrarse= lang => {
+const registrarse= lang => {
   switch (lang) {
     case "es":
       return "Si no está registrado, registrarse"
@@ -127,7 +127,7 @@ const Registrarse= lang => {
   }
 }
 
-const Aqui= lang => {
+const aqui= lang => {
   switch (lang) {
     case "es":
       return "Aquí."
@@ -142,7 +142,7 @@ const Aqui= lang => {
   }
 }
 
-const Sbtfoot= lang => {
+const subtitulo1Footer= lang => {
   switch (lang) {
     case "es":
       return "El proyecto del Diccionario Husserl es desarrollado por Antonio Zirión Quijano en el "
@@ -157,7 +157,7 @@ const Sbtfoot= lang => {
   }
 }
 
-const sbtfoot2= lang => {
+const subtitulo2Footer= lang => {
   switch (lang) {
     case "es":
       return " en la "
@@ -172,7 +172,7 @@ const sbtfoot2= lang => {
   }
 }
 
-const foot= lang => {
+const footer= lang => {
   switch (lang) {
     case "es":
       return "© Antonio Zirión Quijano, 2018. Derechos reservados conforme a la ley."
@@ -187,7 +187,7 @@ const foot= lang => {
   }
 }
 
-const sbtRegistro= lang => {
+const registro= lang => {
   switch (lang) {
     case "es":
       return "Registro"
@@ -202,7 +202,7 @@ const sbtRegistro= lang => {
   }
 }
 
-const Nomb= lang => {
+const nombre= lang => {
   switch (lang) {
     case "es":
       return "Nombre"
@@ -217,7 +217,7 @@ const Nomb= lang => {
   }
 }
 
-const Apell= lang => {
+const apellido= lang => {
   switch (lang) {
     case "es":
       return "Apellidos"
@@ -232,7 +232,7 @@ const Apell= lang => {
   }
 }
 
-const Escue= lang => {
+const escuela= lang => {
   switch (lang) {
     case "es":
       return "Institución / Escuela"
@@ -247,7 +247,7 @@ const Escue= lang => {
   }
 }
 
-const Puesto= lang => {
+const puesto= lang => {
   switch (lang) {
     case "es":
       return "Grado Académico / Puesto"
@@ -262,7 +262,7 @@ const Puesto= lang => {
   }
 }
 
-const Pais= lang => {
+const pais= lang => {
   switch (lang) {
     case "es":
       return "País"
@@ -277,7 +277,7 @@ const Pais= lang => {
   }
 }
 
-const CompContra = lang => {
+const comprobacionContra = lang => {
   switch (lang) {
     case "es":
       return "Comprobación de la contraseña"
@@ -292,7 +292,7 @@ const CompContra = lang => {
   }
 }
 
-const Resgistrado= lang => {
+const resgistrado= lang => {
   switch (lang) {
     case "es":
       return "¿Ya está registrado?, ingrese "
@@ -307,7 +307,7 @@ const Resgistrado= lang => {
   }
 }
 
-const Tmodal= lang => {
+const modalRecuperacionContra= lang => {
   switch (lang) {
     case "es":
       return "Recuperar Contraseña"
@@ -322,7 +322,7 @@ const Tmodal= lang => {
   }
 }
 
-const Menmodal= lang => {
+const modalIngresarCorreo= lang => {
   switch (lang) {
     case "es":
       return "Para recuperar su contraseña, es necesario que ingrese su correo electrónico"
@@ -337,7 +337,7 @@ const Menmodal= lang => {
   }
 }
 
-const Talerterr= lang => {
+const tituloAlertaError= lang => {
   switch (lang) {
     case "es":
       return "Alerta de Error"
@@ -352,7 +352,7 @@ const Talerterr= lang => {
   }
 }
 
-const Talertex= lang => {
+const alertaTexto= lang => {
   switch (lang) {
     case "es":
       return "Operación Exitosa"
@@ -367,7 +367,7 @@ const Talertex= lang => {
   }
 }
 
-const Malertex= lang => {
+const modalAlertaTexto= lang => {
   switch (lang) {
     case "es":
       return "Se ha enviado una liga a su correo electrónico para reestablecer su contraseña."
@@ -382,7 +382,7 @@ const Malertex= lang => {
   }
 }
 
-const Malerterr= lang => {
+const ModalCorreoInvalido= lang => {
   switch (lang) {
     case "es":
       return "Correo electrónico invalido"
@@ -397,7 +397,7 @@ const Malerterr= lang => {
   }
 }
 
-const AceptAlert= lang => {
+const aceptarAlerta= lang => {
   switch (lang) {
     case "es":
       return "Aceptar"
@@ -412,6 +412,6 @@ const AceptAlert= lang => {
   }
 }
 
-export {TDiccionario, SubmitButtonText, SbtDiccionario, SbtInic, Correo, Contra, OlvC, Registrarse, Aqui,
-  Sbtfoot, sbtfoot2, foot, sbtRegistro, Nomb, Apell, Escue, Puesto, Pais, CompContra, Resgistrado, Tmodal,
-   Menmodal, Talerterr, Talertex, Malertex, Malerterr, AceptAlert}
+export {tituloDiccionario, botonIngresar, subtituloDiccionario, inicio, correo, contra, olvidoDeContra, registrarse, aqui,
+  subtitulo1Footer, subtitulo2Footer, footer, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra, resgistrado, 
+  modalRecuperacionContra,modalIngresarCorreo, tituloAlertaError, alertaTexto, modalAlertaTexto, ModalCorreoInvalido, aceptarAlerta}

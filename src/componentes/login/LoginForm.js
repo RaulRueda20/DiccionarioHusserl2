@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Snackbar from '@material-ui/core/Snackbar'
 import { withStyles } from '@material-ui/styles';
 
 import Alerts from '../Alerts';
@@ -41,7 +42,7 @@ class LoginForm extends React.Component {
   }
   // static contextType  = LanguageContext;
 
-  state={  correo:'', password:'', alert : false, mensajeAlert : "", tituloAlert: "", loading : false}
+  state={  correo:'', password:'', alert : false, mensajeAlert : "", tituloAlert: "", loading : false, recuperacionContra:false}
 
    onFormSubmit = (event) => {
     event.preventDefault();
@@ -62,6 +63,10 @@ class LoginForm extends React.Component {
 
   handleAlertClose = () => {
     this.setState({alert:false})
+  }
+
+  handleClickModal=()=>{
+    this.setState({recuperacionContra:true})
   }
 
   componentDidMount = () =>{
@@ -117,16 +122,21 @@ class LoginForm extends React.Component {
               </Grid>
             </Grid>
           </Grid>
-
           <Grid item xs={12} sm={8} lg={7}>
             <Typography variant = "h4">
-              Si no está registrado, registrarse<a href="#" onClick={() => this.props.setLogin(false) }> Aqui</a>
+              ¿Olvidó su contraseña? Recuperela <a onClick={()=>this.state.recuperacionContra}>aquí</a>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={8} lg={7}>
+            <Typography variant = "h4">
+              Si no está registrado, registrarse<a href="#" onClick={() => this.props.setLogin(false) }> aquí</a>
             </Typography>
           </Grid>
         </Grid>
         <Alerts lang={this.props.lang} mensaje={this.state.mensajeAlert} open={this.state.alert} handleClose={this.handleAlertClose} titulo={this.state.tituloAlert}/>
         <LinearProgress className={classNames([{"hidden" : !this.state.loading}, "loadingBar"])}/>
         <Link id="toMain" to="/husserl"/>
+        <Snackbar lang={this.props.lang} open={this.state.recuperacionContra}/> 
       </form>
     )
   }

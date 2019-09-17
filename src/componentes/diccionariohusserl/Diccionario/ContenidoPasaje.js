@@ -4,14 +4,14 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import Grid from '@material-ui/core/Grid';
 
 import BanderaPasajes from './BanderaPasajes';
-import ContenidoPasajes from './ContenidoPasajes';
+import PasajesRenderizados from './PasajesRenderizados';
 
 import {webService} from '../../../js/webServices';
 
 function ContenidoPasaje(props){
   const [pasajesO, setPasajesO]=React.useState("")
   const [pasajesT, setPasajesT]=React.useState("")
-  
+
   React.useEffect(()=>{
       var service = "/referencias/obtieneReferenciasByTerm/" + 2
       webService(service, "GET", {}, (data) => {
@@ -35,7 +35,7 @@ function ContenidoPasaje(props){
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <ContenidoPasajes languageP={props.languageP} pasajesT={pasajesT} setPasajesT={setPasajesT} pasajesO={pasajesO} setPasajesO={setPasajesO}/>
+          <PasajesRenderizados pasajesO={pasajesO} setPasajesO={setPasajesO} pasajesT={pasajesT} setPasajesT={setPasajesT}/>
         </Grid>
       </Grid>
     </div>

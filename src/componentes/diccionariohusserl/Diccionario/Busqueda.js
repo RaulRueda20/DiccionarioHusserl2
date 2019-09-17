@@ -24,11 +24,9 @@ function Busqueda(props){
     expresiones.map(expresion=>{
       var expresionNombre=expresion.expresion +  expresion.traduccion +  expresion.id
       var expresionEncontrada= expresionNombre.indexOf(expresionBuscadaDic)
-      console.log("expresion buscada",expresionBuscadaDic)
-      console.log("expresion encontrada",expresionEncontrada)
-      document.getElementById(expresion.id).classList.remove("hiddenE")
+      document.getElementById("expresion"+expresion.id).classList.remove("hiddenE")
       if (expresionEncontrada == -1){
-        document.getElementById(expresion.id).className += " hiddenE";
+        document.getElementById("expresion"+expresion.id).className += " hiddenE";
       }
     })
   }

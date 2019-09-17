@@ -6,55 +6,55 @@ import Jerarquia from '@material-ui/icons/DeviceHub';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
 
 import classNames from 'classnames';
+import Axios from 'axios';
 
 export default function ListaExpresiones(props){
-  const [expresionSeleccionada,setExpresionSeleccionada] = React.useState(null)
-  const [flagFuncionAccionada, setFlagFuncionAccionada]=React.useState(false)
+  const [expresionSeleccionadaPanel,setExpresionSeleccionadaPanel] = React.useState(null);
 
   const {classes, match}=props;
 
   function clickHandleVista(event){
-      var expresionClickeada=event.currentTarget.value;
-      var expresionesReferencias=props.expresiones[expresionClickeada];
-      if(localStore.getObjects("referenciasConsultadas")==false){
-        var referenciasConsultadas=[];
-        referenciasConsultadas.push(expresionesReferencias)
-        localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
-      }else{
-        var store=localStore.getObjects("referenciasConsultadas")
-        store.push(expresionesReferencias)
-        localStore.setObjects("referenciasConsultadas",store)
-      }
-  }
-
-  function handleClickPanel(event){
-    var expresionIdSeleccionada = event.currentTarget.id;
-    if(flagFuncionAccionada==false && expresionSeleccionada==null){
-      var expresionQueSelecciono=[];
-      expresionQueSelecciono.push(expresionIdSeleccionada)
-      setExpresionSeleccionada(expresionQueSelecciono)
-      props.setIdExpresion(expresionIdSeleccionada)
-      console.log("expresionIdSeleccionada",expresionIdSeleccionada)
+    var expresionClickeada=event.currentTarget.id;
+    var expresionesReferencias=props.expresiones[expresionClickeada];
+    if(localStore.getObjects("referenciasConsultadas")==false){
+      var referenciasConsultadas=[];
+      referenciasConsultadas.push(expresionesReferencias)
+      localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+    }else{
+      var store=localStore.getObjects("referenciasConsultadas")
+      store.push(expresionesReferencias)
+      localStore.setObjects("referenciasConsultadas",store)
     }
   }
 
-  console.log("flag",flagFuncionAccionada)
-  console.log("expresionId",props.idExpresion)
+  function handleClickPanel(event){
+    if(event.currentTarget.id==null){
+      var expresionQueSelecciono=[];
+      expresionQueSelecciono.push(event.currentTarget.id)
+      setExpresionSeleccionadaPanel(expresionQueSelecciono)
+      props.setIdExpresion(event.currentTarget.id)
+    }
+  }
 
+  function getJerarquia(event){
+    props.setExpresionSeleccionada(event.currentTarget.id)
+  }
+  
   return (
     <div className="list-container">
       <ul>
       {props.expresiones.map((expresion, index)=>(
         <li 
           className="sideList" 
-          key={expresion.id} value={index} 
-          id={expresion.id} 
+          key={expresion.id} 
+          id={"expresion"+expresion.id} value={expresion.id}
         >
           <Grid container justify="center" alignItems="center">
-            <Grid item xs={10} onClick={clickHandleVista}>
+            <Grid item xs={10} id={index} onClick={clickHandleVista}>
               <Link to={`/husserl/pasaje/${expresion.id}`}>
                 <p className={"parrafo"}>{expresion.expresion + '//' + expresion.traduccion}</p>
               </Link>
@@ -65,7 +65,7 @@ export default function ListaExpresiones(props){
                 </Icon>
             </Grid>
             <Grid item xs={1}>
-              <div>
+              <div id={expresion.id} onClick={getJerarquia}>
                 <Icon>
                   <Jerarquia/>
                 </Icon>

@@ -2,7 +2,7 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography';
 
 
-function ContenidoPasajes(props){
+function PasajesRenderizados(props){
     const {classes}=props;
 
     var pasaje_original = props.pasajesO.pasaje_original;
@@ -26,4 +26,4 @@ function ContenidoPasajes(props){
     )
 }
 
-export default ContenidoPasajes;
+export default PasajesRenderizados;

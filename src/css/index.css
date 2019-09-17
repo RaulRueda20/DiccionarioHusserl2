@@ -57,7 +57,7 @@ h1{
 }
 
 .list-container{
-  height: 100% !important;
+  height: calc(100vh - 88px) !important;
   overflow-y: scroll;
   overflow-x: hidden;
   width: auto;
@@ -179,4 +179,10 @@ a{
 .parrafo{
   margin-block-start: 10px !important;
   margin-block-end: 10px !important;
+}
+
+.consultaDePasajes:hover{
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
 }

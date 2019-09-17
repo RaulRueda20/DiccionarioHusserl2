@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import ClearIcon from '@material-ui/icons/Clear';
+import { width } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   // '@global': {
@@ -19,10 +20,10 @@ const useStyles = makeStyles(theme => ({
   //   right: theme.spacing(2),
   // },
   snackbar: {
-    [theme.breakpoints.down('xs')]: {
-      bottom: 90
-      // width: "800px !important"
-    },
+    width: "100% !important",
+    left: 0,
+    right:0, 
+    transform: "none"
   },
 }));
 
@@ -33,29 +34,22 @@ export default function Cintilla(props) {
     props.setOpen(false)
   }
 
-  function clickHandleClose(){
-    props.setOpen(false)
-  }
-
   return (
     <React.Fragment>
-      <div>
-        <Snackbar
-          open={props.open}
-          onClose={handleClose}
-          autoHideDuration={4000}
-          ContentProps={{
-            'aria-describedby': 'snackbar-fab-message-id',
-          }}
-          message={<span id="snackbar-fab-message-id">¡Advertencia! Los pasajes en español de Ideas I están en proceso de sustitución: la versión de José Gaos (1962) se reemplaza por la versión de Zirión (2013). Ver los detalles en la Guía.</span>}
-          action={
-            <IconButton color="inherit" onClick={clickHandleClose}>
-              <ClearIcon fontSize="small"/>
-            </IconButton>
-          }
-          className={classes.snackbar}
-        />
-      </div>
+      <Snackbar
+        open={props.open}
+        onClose={event => handleClose(event, "clickaway")}
+        ContentProps={{
+          'aria-describedby': 'snackbar-fab-message-id',
+        }}
+        message={<span id="snackbar-fab-message-id">¡Advertencia! Los pasajes en español de Ideas I están en proceso de sustitución: la versión de José Gaos (1962) se reemplaza por la versión de Zirión (2013). Ver los detalles en la Guía.</span>}
+        // action={
+        //   <IconButton color="inherit">
+        //     <ClearIcon fontSize="small"/>
+        //   </IconButton>
+        // }
+        className={classes.snackbar}
+      />
     </React.Fragment>
   );
 }

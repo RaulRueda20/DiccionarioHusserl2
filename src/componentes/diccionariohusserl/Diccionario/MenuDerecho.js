@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
+import { typography } from '@material-ui/system';
 
 const ExpansionPanel = withStyles({
   root: {
@@ -51,13 +52,36 @@ const ExpansionPanelSummary = withStyles({
   expanded: {},
 })(MuiExpansionPanelSummary);
 
+const emptyObj = {
+  clave: "",
+  epretty: "",
+  expresion_original: "",
+  expresion_traduccion: "",
+  id: null,
+  orden: null,
+  ref_original: "",
+  ref_traduccion: "",
+  refid: "",
+  tpretty: ""}
+
 function MenuDerecho(props){
   const {classes}=props;
   const [referenciasConsultadasVista, setReferenciasConsultadasVista]=React.useState([])
-  const [expanded, setExpanded] = React.useState('');
+  const [listaVerTambien,setListaVerTambien]=React.useState([]);
+  const [expanded, setExpanded] = React.useState([]);
+  const [hijos,setHijos]=React.useState("");
+  const [padres,setPadres]=React.useState("");
 
   const handleChange = panel => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+    var panelesExpandidos = expanded
+    if(panelesExpandidos.indexOf(panel) > -1){
+      panelesExpandidos.splice(panelesExpandidos.indexOf(panel), 1)
+    }else{
+      panelesExpandidos.push(panel)
+    }
+    console.log(panelesExpandidos)
+    setExpanded(panelesExpandidos);
+    console.log(expanded.indexOf('panel1') != -1)
   };
 
   const paintJerarquia = (lista) => {
@@ -71,34 +95,46 @@ function MenuDerecho(props){
   }
 
   React.useEffect(()=>{
-    console.log("rc:"+localStore.getObjects("referenciasConsultadas"))
+    console.log("eseleccionada", props.expresionSeleccionada)
     if(localStore.getObjects("referenciasConsultadas")!=false){
       var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
       setReferenciasConsultadasVista(referenciaConsultadaSacada)
     }
-  }, [localStore.getObjects("referenciasConsultadas")])
+    if (props.expresionSeleccionada!=null && props.expresionSeleccionada != ""){
+      var service = "/vertambien/" + props.expresionSeleccionada
+      webService(service, "GET", {}, data => {
+        setListaVerTambien(data.data.response)
+        webService(("/expresiones/"+props.language+"/hijosList/"+props.expresionSeleccionada),"GET", {}, (data) => setHijos(data.data.response))
+        webService(("/expresiones/"+props.language+"/abuelosList/"+props.expresionSeleccionada), "GET", {}, (data2) =>setPadres(data2.data.response))
+      })
+    }
+  },[props.expresionSeleccionada])
+
+  const checkPanel = (panel) => {
+    return expanded.indexOf(panel) != -1
+  }
 
   return (
     <div>
-        <ExpansionPanel square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Jerarquía:</Typography>
-        </ExpansionPanelSummary>
+        <ExpansionPanel square expanded={checkPanel('panel1')} onClick={handleChange('panel1')}>
+          <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+            <Typography>Jerarquía:</Typography>
+          </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Derivada de:
+            Derivada de: {padres.length > 0 ? paintJerarquia(padres) : null}
           </Typography>
         </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelDetails>
-          <Typography>Expresión:</Typography>
+          <Typography>Expresión: {props.expresionSeleccionada.expresion_original}</Typography>
         </ExpansionPanelDetails>
           <Divider />
         <ExpansionPanelDetails>
-          <Typography>Expresiones derivadas:</Typography>
+          <Typography>Expresiones derivadas: {hijos.length > 0 ? paintJerarquia(hijos) : null}</Typography>
         </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <ExpansionPanel square expanded={expanded.indexOf('panel2') != -1} onClick={handleChange('panel2')}>
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
           <Typography>Referencias Consultadas:</Typography>
         </ExpansionPanelSummary>
@@ -106,19 +142,25 @@ function MenuDerecho(props){
             <ul>
               {referenciasConsultadasVista.map(consultas=>(
                 <li>
-                  {consultas.expresion + "//" + consultas.traduccion}
+                  <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
                 </li>
               ))}
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}l>
+        <ExpansionPanel square expanded={expanded.indexOf('panel3') != -1} onChange={handleChange('panel3')}l>
           <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
             <Typography>Ver También:</Typography>
-            <ExpansionPanelDetails>
-
-            </ExpansionPanelDetails>
           </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <ul>
+              {listaVerTambien.map(expresion=>{
+                return <li>
+                  <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                </li>
+              })}
+            </ul>
+          </ExpansionPanelDetails>
         </ExpansionPanel>
     </div>
   )

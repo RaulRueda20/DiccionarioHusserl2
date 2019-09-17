@@ -1,6 +1,7 @@
 import React from 'react';
-
 import Grid from '@material-ui/core/Grid';
+import LinearProgress from '@material-ui/core/LinearProgress'
+import classNames from 'classnames';
 
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
@@ -16,12 +17,11 @@ import Busqueda from './Busqueda';
 function Expresion(props){
   const [letraMain, setLetraMain] = React.useState('A');
   const [language,setLanguage] = React.useState("al");
-  const [languageP,setLanguageP] = React.useState("al");
   const [expresiones, setExpresiones] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState('');
-  const [hijos, setHijos] = React.useState([]);
-  const [padres, setPadres] = React.useState([]);
-  const [open,setOpen]=React.useState(true)
+  const [open,setOpen]=React.useState(true);
+  const [loading, setLoading]=React.useState(false);
+  const [expresionSeleccionada, setExpresionSeleccionada]=React.useState("");
 
   const emptyObj = {
     clave: "",
@@ -78,14 +78,14 @@ const fixReferencias = (referencias) => {
 }
 
   React.useEffect(()=>{
+    setLoading(true)
     var service = "/expresiones/" + language + "/" + letraMain
     webService(service, "GET", {}, (data) => {
-      console.log("data de language", language)
-      console.log("letraMain", letraMain)
       setExpresiones(fixReferencias(data.data.response))
       if(idExpresion === ''){
         setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
       }
+    setLoading(false)
     })
   }, [letraMain, language])
 
@@ -101,17 +101,21 @@ const fixReferencias = (referencias) => {
         </Grid>
         <Grid item xs={8} aling='center'>
             <ListaExpresiones expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
-            setIdExpresion={setIdExpresion} language={language} setLanguage={setLanguage}
+            setIdExpresion={setIdExpresion} language={language} setLanguage={setLanguage} 
+            expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
             />
         </Grid>
         <Grid item xs={3}>
             <Busqueda expresiones={expresiones} setExpresiones={setExpresiones}/>
-            <MenuDerecho expresionSeleccionada={idExpresion} hijos={hijos} setHijos={setHijos}/>
+            <MenuDerecho idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
+            expresiones={expresiones} setExpresiones={setExpresiones} expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
+            />
         </Grid>
         <Grid item xs={12}>
             <Cintilla open={open} setOpen={setOpen}/>
         </Grid>
       </Grid>
+      <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
     </div>
   )
 }
