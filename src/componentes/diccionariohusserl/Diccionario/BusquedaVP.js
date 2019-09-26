@@ -12,14 +12,16 @@ import { withStyles } from '@material-ui/styles';
 import es from "../../../Imagenes/spain.png";
 import al from "../../../Imagenes/germany.png";
 
-const styles = {
+const styles={
     TextFieldbus:{
        width:"100%"
     },
     imagenesBandera:{
-        width: "30px !important",
-        height: "30px !important",
-      }
+        width: "33px !important",
+        height: "25px !important",
+        fontSize: "0px",
+        minHeight: "0px"
+    }
 }
 
 function BusquedaVP(props){
@@ -69,8 +71,8 @@ function BusquedaVP(props){
             </Grid>
             <Grid item xs={2}>
                 {props.language == 'es' ?
-                    <Fab className={classes.imagenesBandera} onClick={clickChangeLanguageAlVP}><img className="banderas" src={al}/></Fab>
-                    : <Fab className={classes.imagenesBandera} onClick={clickChangeLanguageEsVP}><img className="banderas" src={es}/></Fab>
+                    <Fab className={classes.imagenesBandera} onClick={clickChangeLanguageAlVP}><img className="banderaIzquierda" src={al}/></Fab>
+                    : <Fab className={classes.imagenesBandera} onClick={clickChangeLanguageEsVP}><img className="banderaIzquierda" src={es}/></Fab>
                 }
             </Grid>
         </Grid>

@@ -21,7 +21,7 @@ const tituloDiccionario = lang => {
   }
 }
 
-const botonIngresar= lang => {
+const ingresar= lang => {
   // const lang = localStore.getItem("lang")
   switch(lang){
     case "es":
@@ -29,11 +29,11 @@ const botonIngresar= lang => {
     case "en":
       return "Submit"
     case "fr":
-      return "tumama"
+      return "Entrer"
     case "al":
-      return "tumami"
+      return "Eintreten"
     case "ca":
-      return "temamaste"
+      return "Entrar"
   }
 }
 
@@ -42,43 +42,43 @@ const subtituloDiccionario= lang => {
     case "es":
       return "Léxico bilingüe (alemán y español) de expresiones definidas a partir de las obras de Edmund Husserl (1859-1938)"
     case "en":
-      return "pitutin"
+      return "German-Spanish Lexicon of Expressions from Works by Edmund Husserl (1859-1938)"
     case "fr":
-      return "papa"
+      return "Lexique germano-espagnol des expressions d'oeuvres de Edmund Husserl (1859-1938)"
     case "al":
-      return "pititr"
+      return "Deutsch-spanisches Lexikon husserlscher Ausdrücke. Edmund Husserl (1859-1938)"
     case "ca":
-      return "ppapa"
+      return "Lèxic alemany-espanyol de les expressions de les obres d'Edmund Husserl (1859-1938)"
   }
 }
 
 const inicio= lang => {
   switch (lang) {
     case "es":
-      return "Inicio"
+      return "INICIO"
     case "en":
-      return "pitutin"
+      return "START"
     case "fr":
-      return "papa"
+      return "DÉBUT"
     case "al":
-      return "pititr"
+      return "EINTRITT"
     case "ca":
-      return "ppapa"
+      return "Començar"
   }
 }
 
-const correo= lang => {
+const email= lang => {
   switch (lang) {
     case "es":
       return "Correo Electrónico"
     case "en":
-      return "pitutin"
+      return "Email Address"
     case "fr":
-      return "papa"
+      return "Adresse électronique"
     case "al":
-      return "pititr"
+      return "E-Mail Adresse"
     case "ca":
-      return "ppapa"
+      return "Correu electrònic"
   }
 }
 
@@ -87,13 +87,13 @@ const contra= lang => {
     case "es":
       return "Contraseña"
     case "en":
-      return "pitutin"
+      return "Password"
     case "fr":
-      return "papa"
+      return "Mot de passe"
     case "al":
-      return "pititr"
+      return "Passwort"
     case "ca":
-      return "ppapa"
+      return "Contrasenya"
   }
 }
 
@@ -102,13 +102,13 @@ const olvidoDeContra= lang => {
     case "es":
       return "¿Olvido su contraseña?"
     case "en":
-      return "pitutin"
+      return "Forgot your password?"
     case "fr":
-      return "papa"
+      return "Mot de passe oublié?"
     case "al":
-      return "pititr"
+      return "Passwort vergessen?"
     case "ca":
-      return "ppapa"
+      return "Has oblidat la teva contrasenya?"
   }
 }
 
@@ -117,88 +117,103 @@ const registrarse= lang => {
     case "es":
       return "Si no está registrado, registrarse"
     case "en":
-      return "pitutin"
+      return "Not yet registered? Please sign up"
     case "fr":
-      return "papa"
+      return "Pas encore enregistré? Inscrivez vous s'il vous plait"
     case "al":
-      return "pititr"
+      return "Noch nicht registriert? Bitte registrieren"
     case "ca":
-      return "ppapa"
+      return "Encara no està registrat? Registreu-vos"
   }
 }
 
 const aqui= lang => {
   switch (lang) {
     case "es":
-      return "Aquí."
+      return "aquí."
     case "en":
-      return "pitutin"
+      return "here."
     case "fr":
-      return "papa"
+      return "ici."
     case "al":
-      return "pititr"
+      return "hier."
     case "ca":
-      return "ppapa"
+      return "aquí"
   }
 }
 
-const subtitulo1Footer= lang => {
+const Footer1= lang => {
   switch (lang) {
     case "es":
       return "El proyecto del Diccionario Husserl es desarrollado por Antonio Zirión Quijano en el "
     case "en":
-      return "pitutin"
+      return "The Husserl Dictionary is a project developed by Antonio Zirión Quijano at the"
     case "fr":
-      return "papa"
+      return "Antonio Zirión Quijano, 2018. Tous les droits sont réservés."
     case "al":
-      return "pititr"
+      return "Das Husserl Wörterbuch Projekt ist entwickelt von Antonio Zirión Quijano im"
     case "ca":
-      return "ppapa"
+      return "El Diccionari Husserl és un projecte desenvolupat per Antonio Zirión Quijano a la Universitat Autònoma de Barcelona"
   }
 }
 
-const subtitulo2Footer= lang => {
+const Footer2= lang => {
   switch (lang) {
     case "es":
       return " en la "
     case "en":
-      return "pitutin"
+      return "of"
     case "fr":
-      return "papa"
+      return "de"
     case "al":
-      return "pititr"
+      return "von"
     case "ca":
-      return "ppapa"
+      return "de"
   }
 }
 
-const footer= lang => {
+const Footer3= lang => {
   switch (lang) {
     case "es":
       return "© Antonio Zirión Quijano, 2018. Derechos reservados conforme a la ley."
     case "en":
-      return "pitutin"
+      return "© Antonio Zirión Quijano, 2018. All Rights reserved."
     case "fr":
-      return "papa"
+      return "© Antonio Zirión Quijano, 2018. Tous les droits sont réservés."
     case "al":
-      return "pititr"
+      return "© Antonio Zirión Quijano, 2018. Alle Rechte vorbehalten"
     case "ca":
-      return "ppapa"
+      return "© Antonio Zirión Quijano, 2018. Tots els drets reservats."
   }
 }
 
 const registro= lang => {
   switch (lang) {
     case "es":
-      return "Registro"
+      return "REGISTRO"
     case "en":
-      return "pitutin"
+      return "REGISTER"
     case "fr":
-      return "papa"
+      return "INSCRIPTION"
     case "al":
-      return "pititr"
+      return "REGISTRIERUNG"
     case "ca":
-      return "ppapa"
+      return "REGISTRAR-SE"
+  }
+}
+
+const registrado= lang => {
+  switch (lang) {
+    case "es":
+      return "¿Ya está registrado?, ingrese "
+    case "en":
+      return "Already registered?"
+    case "fr":
+      return "Déjà enregistré?"
+    case "al":
+      return "Schon registriert? Anmelden"
+    case "ca":
+      return "Ja registrat?"
   }
 }
 
@@ -207,13 +222,13 @@ const nombre= lang => {
     case "es":
       return "Nombre"
     case "en":
-      return "pitutin"
+      return "Name"
     case "fr":
-      return "papa"
+      return "Prénom"
     case "al":
-      return "pititr"
+      return "Vorname"
     case "ca":
-      return "ppapa"
+      return "Nom"
   }
 }
 
@@ -222,13 +237,13 @@ const apellido= lang => {
     case "es":
       return "Apellidos"
     case "en":
-      return "pitutin"
+      return "Last Name"
     case "fr":
-      return "papa"
+      return "Nom de famille"
     case "al":
-      return "pititr"
+      return "Nachname(n)"
     case "ca":
-      return "ppapa"
+      return "Cognom"
   }
 }
 
@@ -237,13 +252,13 @@ const escuela= lang => {
     case "es":
       return "Institución / Escuela"
     case "en":
-      return "pitutin"
+      return "Institution or School"
     case "fr":
-      return "papa"
+      return "Institution ou école"
     case "al":
-      return "pititr"
+      return "Institution oder Schule"
     case "ca":
-      return "ppapa"
+      return "Institució o escola"
   }
 }
 
@@ -252,13 +267,13 @@ const puesto= lang => {
     case "es":
       return "Grado Académico / Puesto"
     case "en":
-      return "pitutin"
+      return "Academic Degree or Position"
     case "fr":
-      return "papa"
+      return "Diplôme universitaire ou poste"
     case "al":
-      return "pititr"
+      return "Akademischer Grad oder Platz"
     case "ca":
-      return "ppapa"
+      return "Titulació acadèmica o càrrec"
   }
 }
 
@@ -267,13 +282,13 @@ const pais= lang => {
     case "es":
       return "País"
     case "en":
-      return "pitutin"
+      return "Country"
     case "fr":
-      return "papa"
+      return "Pays"
     case "al":
-      return "pititr"
+      return "Land"
     case "ca":
-      return "ppapa"
+      return "País"
   }
 }
 
@@ -282,28 +297,13 @@ const comprobacionContra = lang => {
     case "es":
       return "Comprobación de la contraseña"
     case "en":
-      return "pitutin"
+      return "Password Confirmation"
     case "fr":
-      return "papa"
+      return "Confirmation mot de passe"
     case "al":
-      return "pititr"
+      return "Passwort Bestätigung"
     case "ca":
-      return "ppapa"
-  }
-}
-
-const resgistrado= lang => {
-  switch (lang) {
-    case "es":
-      return "¿Ya está registrado?, ingrese "
-    case "en":
-      return "pitutin"
-    case "fr":
-      return "papa"
-    case "al":
-      return "pititr"
-    case "ca":
-      return "ppapa"
+      return "Comprovació de la contrasenya"
   }
 }
 
@@ -312,106 +312,336 @@ const modalRecuperacionContra= lang => {
     case "es":
       return "Recuperar Contraseña"
     case "en":
-      return "pitutin"
+      return "Password retrieval"
     case "fr":
-      return "papa"
+      return "Récupération de mot de passe"
     case "al":
-      return "pititr"
+      return "Passwort zurückbekommen"
     case "ca":
-      return "ppapa"
+      return "Recuperació de la contrasenya"
   }
 }
 
 const modalIngresarCorreo= lang => {
   switch (lang) {
     case "es":
-      return "Para recuperar su contraseña, es necesario que ingrese su correo electrónico"
+      return "Para recuperar su contraseña, es necesario que ingrese su correo electrónico:"
     case "en":
-      return "pitutin"
+      return "To retrieve your password, please write your email adress:"
     case "fr":
-      return "papa"
+      return "Pour récupérer votre mot de passe, entrez votre email:"
     case "al":
-      return "pititr"
+      return "Um sein Passwort zurück zu bekommen, bitte seine E-Mail-Adresse anmelden:"
     case "ca":
-      return "ppapa"
+      return "Per recuperar la vostra contrasenya, escriviu la vostra adreça de correu electrònic:"
   }
 }
 
-const tituloAlertaError= lang => {
-  switch (lang) {
-    case "es":
-      return "Alerta de Error"
-    case "en":
-      return "pitutin"
-    case "fr":
-      return "papa"
-    case "al":
-      return "pititr"
-    case "ca":
-      return "ppapa"
-  }
-}
-
-const alertaTexto= lang => {
-  switch (lang) {
-    case "es":
-      return "Operación Exitosa"
-    case "en":
-      return "pitutin"
-    case "fr":
-      return "papa"
-    case "al":
-      return "pititr"
-    case "ca":
-      return "ppapa"
-  }
-}
-
-const modalAlertaTexto= lang => {
+const exitoBody= lang => {
   switch (lang) {
     case "es":
       return "Se ha enviado una liga a su correo electrónico para reestablecer su contraseña."
     case "en":
-      return "pitutin"
+      return "A link has been sent to your email to reset your password."
     case "fr":
-      return "papa"
+      return "Un lien a été envoyé a votre adresse email pour réinitialiser votre mot de passe."
     case "al":
-      return "pititr"
+      return "Es wurde eine E-mail gesendet, um Ihr Passwort zurückzusetzen"
     case "ca":
-      return "ppapa"
+      return "S'ha enviat una lliga al seu correu electrònic per restablir la seva contrasenya."
   }
 }
 
-const ModalCorreoInvalido= lang => {
+const correoInvalido= lang => {
   switch (lang) {
     case "es":
-      return "Correo electrónico invalido"
+      return "Correo electrónico o contraseña invalido"
     case "en":
-      return "pitutin"
+      return "Invalid email or password"
     case "fr":
-      return "papa"
+      return "Email ou mont de passe invalide"
     case "al":
-      return "pititr"
+      return "Ungültige E-Mail-Adresse oder ungültiges Passwort"
     case "ca":
-      return "ppapa"
+      return "Correu electrònic o contrasenya invàlid"
   }
 }
 
-const aceptarAlerta= lang => {
+const correoNoEncontrado= lang => {
+  switch (lang) {
+    case "es":
+      return "Correo electrónico no encontrado"
+    case "en":
+      return "Email not found"
+    case "fr":
+      return "Email non trouvé"
+    case "al":
+      return "E-Mail nitch gefunden"
+    case "ca":
+      return "Correu electrònic trobat"
+  }
+}
+
+const aceptarAlert= lang => {
   switch (lang) {
     case "es":
       return "Aceptar"
     case "en":
-      return "pitutin"
+      return "Accept"
     case "fr":
-      return "papa"
+      return "Acceptez"
     case "al":
-      return "pititr"
+      return "Akzeptieren"
     case "ca":
-      return "ppapa"
+      return "Acceptar"
   }
 }
 
-export {tituloDiccionario, botonIngresar, subtituloDiccionario, inicio, correo, contra, olvidoDeContra, registrarse, aqui,
-  subtitulo1Footer, subtitulo2Footer, footer, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra, resgistrado, 
-  modalRecuperacionContra,modalIngresarCorreo, tituloAlertaError, alertaTexto, modalAlertaTexto, ModalCorreoInvalido, aceptarAlerta}
+const menuDiccionario= lang => {
+  switch (lang) {
+    case "es":
+      return "Diccionario"
+    case "en":
+      return "Dictionary"
+    case "fr":
+      return "Dictionnaire"
+    case "al":
+      return "Wörterbuch"
+    case "ca":
+      return "Diccionari"
+  }
+}
+
+const menuAcercaDe= lang => {
+  switch (lang) {
+    case "es":
+      return "Acerca del Diccionario"
+    case "en":
+      return "About the Dictionary"
+    case "fr":
+      return "A propos du dictionnaire"
+    case "al":
+      return "Über das Wörterbuch"
+    case "ca":
+      return "Sobre el Diccionari"
+  }
+}
+
+const menuGuia= lang => {
+  switch (lang) {
+    case "es":
+      return "Guía de uso"
+    case "en":
+      return "Usage guide"
+    case "fr":
+      return "Guide d'utilisation"
+    case "al":
+      return "Gebrauchsanweisung"
+    case "ca":
+      return "Guia d'ús"
+  }
+}
+
+const menuSalir= lang => {
+  switch (lang) {
+    case "es":
+      return "Salir"
+    case "en":
+      return "Exit"
+    case "fr":
+      return "Sortie"
+    case "al":
+      return "Logout"
+    case "ca":
+      return "Sortir"
+  }
+}
+
+const menuDerechoJerarquia= lang => {
+  switch (lang) {
+    case "es":
+      return "Jerarquía"
+    case "en":
+      return "Hierarchy"
+    case "fr":
+      return "Hiérarchie"
+    case "al":
+      return "Rangordnung"
+    case "ca":
+      return "Jerarquia"
+  }
+}
+
+const menuDerechoJerarquiaDerivadaDe= lang => {
+  switch (lang) {
+    case "es":
+      return "Derivada de:"
+    case "en":
+      return "Derived from:"
+    case "fr":
+      return "Dérivé de:"
+    case "al":
+      return "Abgeleitet von:"
+    case "ca":
+      return "Deriva de:"
+  }
+}
+
+const menuDerechoJerarquiaExpresion= lang => {
+  switch (lang) {
+    case "es":
+      return "Expresión:"
+    case "en":
+      return "Expression:"
+    case "fr":
+      return "Expression:"
+    case "al":
+      return "Ausdruck:"
+    case "ca":
+      return "Expressió:"
+  }
+}
+
+const menuDerechoJerarquiaExpresionesDerivadas= lang => {
+  switch (lang) {
+    case "es":
+      return "Expresiones derivadas:"
+    case "en":
+      return "Expressions derivades:"
+    case "fr":
+      return "Expresions Dérivées:"
+    case "al":
+      return "Ableitungsausdrücke:"
+    case "ca":
+      return "Derived Expressions:"
+  }
+}
+
+const menuDerechoVerTambien= lang => {
+  switch (lang) {
+    case "es":
+      return "Ver también"
+    case "en":
+      return "See also"
+    case "fr":
+      return "Siehe auch"
+    case "al":
+      return "Voir aussi"
+    case "ca":
+      return "Veure també"
+  }
+}
+
+
+const menuDerechoReferenciasConsultadas= lang => {
+  switch (lang) {
+    case "es":
+      return "Referencias consultadas"
+    case "en":
+      return "Looked-up References"
+    case "fr":
+      return "Références consultées"
+    case "al":
+      return "Nachgeschlagene Hinweise"
+    case "ca":
+      return "Referències buscada"
+  }
+}
+
+const busquedaPorLetra= lang => {
+  switch (lang) {
+    case "es":
+      return "Busqueda por letra"
+    case "en":
+      return "Search by letter"
+    case "fr":
+      return "Recherche par lettre"
+    case "al":
+      return "Suche nach Buchstabe"
+    case "ca":
+      return "Cerca per lletra"
+  }
+}
+
+const toolTipMenuPrincipal= lang => {
+  switch (lang) {
+    case "es":
+      return "Menú principal"
+    case "en":
+      return "Main menu"
+    case "fr":
+      return "Menu principal"
+    case "al":
+      return "Hauptmenü"
+    case "ca":
+      return "Menú principal"
+  }
+}
+
+const toolTipMenuIdiomas= lang => {
+  switch (lang) {
+    case "es":
+      return "Menú idiomas"
+    case "en":
+      return "Languages menu"
+    case "fr":
+      return "Menu des langues"
+    case "al":
+      return "Menü Spranchen"
+    case "ca":
+      return "Menú idiomes"
+  }
+}
+
+const toolTipIdiomaDeLaLista= lang => {
+  switch (lang) {
+    case "es":
+      return "Idioma de la lista"
+    case "en":
+      return "List languages"
+    case "fr":
+      return "Liste des langues"
+    case "al":
+      return "Listen Sie die Sprachen auf"
+    case "ca":
+      return "Idiomes de la llista"
+  }
+}
+
+const cintilla= lang => {
+  switch (lang) {
+    case "es":
+      return "¡Advertencia! Los pasajes en español de Ideas I están en proceso de sustitución: la versión de José Gaos (1962) se reemplaza por la versión de Zirión (2013). Ver los detalles en la"
+    case "en":
+      return "The spanish passages of Ideas I are in a process of substitution: the version of José Gaos (1962) is replaced by the version of Zirión (2013). See the details in the"
+    case "fr":
+      return "Les passages en espagnol d'Idées I sont en train d'être substitués: la version de José Gaos (1962) est remplacée par la version de Zirión (2013). Voir les détails dans le"
+    case "al":
+      return "Die spanische Passagenvon Ideen I sind in Ersetzungsprozess: die Übersetzung von José Gaos (1962) wird ersetzt mit der Übersetzung von Zirión (2013). Siehe die Einzelheiten im"
+    case "ca":
+      return "Els passatges espanyols d'Idees I es troben en un procés de substitució: la versió de José Gaos (1962) és substituïda per la versió de Zirión (2013). Vegeu els detalls al document"
+  }
+}
+
+const guia= lang => {
+  switch (lang) {
+    case "es":
+      return "Guía"
+    case "en":
+      return "Guide"
+    case "fr":
+      return "Guide"
+    case "al":
+      return "Handbuch"
+    case "ca":
+      return "Guia"
+  }
+}
+
+
+export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
+  registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
+  modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
+  menuAcercaDe, menuGuia, menuSalir, menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, 
+  menuDerechoJerarquiaExpresionesDerivadas, menuDerechoReferenciasConsultadas, menuDerechoVerTambien, busquedaPorLetra,
+  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia}

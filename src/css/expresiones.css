@@ -5,3 +5,7 @@
 .hiddenE{
 	display: none;
 }
+
+.remarcadoDeReferencias{
+	font-weight: bold !important;
+}

@@ -7,13 +7,14 @@ import Pasaje from './Diccionario/Pasaje';
 import Acercade from './Acercade';
 import Guia from './Guia';
 
-export default function Subvistas({match}){
+export default function Subvistas({match, lang, setLang}){
+
     return(
         <div>
-            <HeaderMain match={match}/>
+            <HeaderMain match={match} lang={lang} setLang={setLang}/>
             <Switch>
-                <Route path={`${match.url}/diccionario`} component={Expresion}/>
-                <Route path={`${match.url}/pasaje/:id`} component={Pasaje}/>
+                <Route path={`${match.url}/diccionario`} render={(props) => <Expresion {...props} lang={lang} setLang={setLang}/>}/>
+                <Route path={`${match.url}/pasaje/:expresion/:id`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang}/>}/>
                 <Route path={`${match.url}/acercade`} component={Acercade}/>
                 <Route path={`${match.url}/guia`} component={Guia}/>
                 <Route path={`${match.url}/`}>

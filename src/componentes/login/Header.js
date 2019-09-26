@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from "@material-ui/core/Divider"
 
+import {tituloDiccionario, subtituloDiccionario} from '../../js/Language';
+
 import MenuIdioma from '../MenuIdioma'
 
 const stylesHed = {
@@ -18,18 +20,17 @@ const stylesHed = {
 
 function Header(props){
   const { classes } = props;
-  const [lenguajePagina, setLenguajePagina]=React.useState("es")
 
   return(
     <div>
       <Grid className={classNames("grids", classes.grids)} container justify="center">
-        <Grid item xs={10}  align="center">
+        <Grid item xs={11}  align="center">
           <Typography variant="h1" align="center">
-            Diccionario Husserl
+            {tituloDiccionario(props.lang)}
           </Typography>
         </Grid>
-        <Grid item xs={2}>
-          <MenuIdioma lenguajePagina={lenguajePagina} setLenguajePagina={setLenguajePagina}/>
+        <Grid item xs={1}>
+          <MenuIdioma lang={props.lang} setLang={props.setLang}/>
         </Grid>
       </Grid>
       <br/>
@@ -37,7 +38,7 @@ function Header(props){
       <Grid container>
         <Grid item xs={11}  align="center">
           <Typography variant="h4" align="center">
-            Léxico bilingüe (alemán y español) de expresiones definidas a partir de las obras de Edmund Husserl (1859-1938)
+          {subtituloDiccionario(props.lang)}
           </Typography>
         </Grid>
       </Grid>

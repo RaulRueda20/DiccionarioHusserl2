@@ -7,29 +7,29 @@ import Grid from '@material-ui/core/Grid';
 import MenuHeader from './MenuHeader';
 import MenuIdioma from '../MenuIdioma'
 
-class HeaderMain extends React.Component{
+import {tituloDiccionario} from '../../js/Language';
 
-  render(){
-    return(
-      <Grid container direction="row" justify="center" className="grids">
-        <AppBar position="static" color="primary">
-          <Toolbar variant="dense">
-            <Grid item xs={1}>
-              <MenuHeader match={this.props.match}/>
-            </Grid>
-            <Grid item xs={10} align="center">
-              <Typography variant="h2" style={{color: "white"}}>
-                DICCIONARIO HUSSERL
-              </Typography>
-            </Grid>
-            <Grid item xs={1}>
-              <MenuIdioma/>
-            </Grid>
-          </Toolbar>
-        </AppBar>
-      </Grid>
-    )
-  }
+function HeaderMain(props){
+
+  return(
+    <Grid container direction="row" justify="center" className="grids">
+      <AppBar position="static" color="primary" className="headerMain">
+        <Toolbar variant="dense">
+          <Grid item xs={1}>
+            <MenuHeader match={props.match} lang={props.lang} setLang={props.setLang}/>
+          </Grid>
+          <Grid item xs={10} align="center">
+            <Typography variant="h2" style={{color: "white"}}>
+              {tituloDiccionario(props.lang)}
+            </Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <MenuIdioma lang={props.lang} setLang={props.setLang}/>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    </Grid>
+  )
 }
 
 

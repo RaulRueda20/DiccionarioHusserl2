@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/styles';
 
 import '../../../css/expresiones.css';
 
+import {busquedaPorLetra} from '../../../js/Language';
+
 const styles = {
     TextFieldbus:{
        width:"100%"
@@ -15,9 +17,9 @@ const styles = {
 }
 
 function Busqueda(props){
-    const {classes}=props;
+  const {classes}=props;
 
-    var expresiones=props.expresiones
+  var expresiones=props.expresiones
   
   const handleChangeBusquedaExpresionesDiccionario = (event) => {
     var expresionBuscadaDic=event.target.value
@@ -33,7 +35,7 @@ function Busqueda(props){
 
     return(
         <FormControl className={classes.TextFieldbus}>
-            <InputLabel htmlFor="input-with-icon-adornment">Busqueda por letra</InputLabel>
+            <InputLabel htmlFor="input-with-icon-adornment">{busquedaPorLetra(props.lang)}</InputLabel>
             <Input
             id="input-with-icon-adornment"
             startAdornment={

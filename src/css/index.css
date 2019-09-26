@@ -2,9 +2,9 @@ body{
   margin : 0;
 }
 
-a{
+/* a{
   cursor: pointer;
-}
+} */
 
 footer{
   background-color: rgb(126, 46, 56);
@@ -57,11 +57,11 @@ h1{
 }
 
 .list-container{
-  height: calc(100vh - 88px) !important;
-  overflow-y: scroll;
+  height: calc(100vh - 9vh - 31px) !important;
+  overflow-y: scroll; 
   overflow-x: hidden;
   width: auto;
-  /* padding: 10px 0px; */
+  background-color: rgb(230,230,230);
 }
 
 .list-containerP{
@@ -69,7 +69,6 @@ h1{
   overflow-y: scroll;
   overflow-x: hidden;
   width: auto;
-  /* padding: 10px 0px; */
 }
 
 .list-item{
@@ -95,9 +94,7 @@ ul{
 }
 
 .sideList{
-  padding: 0px 10px;
   border-bottom: 1px lightgray solid;
-  cursor: pointer;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   color: rgba(80, 80, 80);
 }
@@ -160,15 +157,14 @@ a{
 }
 
 .banderas {
-  width: 35px !important;
+  width: 36px !important;
   border-radius: 50%;
-  height: 35px !important;
+  height: 36px !important;
 }
 
 #simple-menu div.MuiPaper-root{
   box-shadow: none;
   margin-top: 40px;
-
   background-color: rgba(0,0,0,0);
 }
 
@@ -179,10 +175,72 @@ a{
 .parrafo{
   margin-block-start: 10px !important;
   margin-block-end: 10px !important;
+  padding: 0px 10px;
 }
 
 .consultaDePasajes:hover{
   color: blue;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.ulDelMenuDerecho{
+  max-height: 67px;
+  overflow: scroll;
+  margin-top: 10px;
+  padding: 0 16px !important;
+}
+
+.panelDeDetalle{
+  display: block !important;
+}
+
+.headerMain{
+  height:9vh;
+}
+
+.bordeDeConsultas{
+  border-bottom: 1px;
+  border-bottom-color: lightgrey;
+  border-bottom-style: dotted;
+  padding: 2px;
+}
+
+.iconosIluminados:hover{
+  color: rgb(7, 142, 184);
+  cursor: pointer;
+}
+
+.banderaIzquierda{
+  width: 33px !important;
+  border-radius: 50%;
+  height: 33px !important;
+}
+
+.bordoDelMenuDerecho{
+  border-left:1px solid lightgrey;
+}
+
+.menuSimple{
+  right: 12px;
+}
+
+.links:hover{
+  color: rgb(7, 142, 184);
+  cursor: pointer;
+}
+
+.links{
+  text-decoration: underline;
+}
+
+.ulDelPanelDeExpresiones{
+  padding: 10px 20px !important;
+  border-top: solid lightgrey;
+  background-color: whitesmoke;
+  border-width: 1px;
+}
+
+.listaIzquierda{
+  height: calc(100vh - 9vh - 31px) !important;
 }

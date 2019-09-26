@@ -1,25 +1,33 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
 
+const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
 function PasajesRenderizados(props){
     const {classes}=props;
+    const [pasaje, setPasaje] = React.useState(emptyPasaje)
 
-    var pasaje_original = props.pasajesO.pasaje_original;
-    var pasaje_traduccion = props.pasajesT.pasaje_traduccion;
-    var languageP = props.languageP
+    // console.log("expresion Seleccionada", props.expresionSeleccionada)
+
+    
+    // console.log("pasaje_original", pasaje_original)
+
+    React.useEffect(() => {
+        console.log(props.expresionSeleccionada)
+        var pasaje_original =  props.expresionSeleccionada != null ? props.expresionSeleccionada : emptyPasaje
+        setPasaje(pasaje_original)
+    }, [props.expresionSeleccionada])
 
     function htmlPasajeOriginal(){
-        return {__html:pasaje_original}
+        return {__html:pasaje.pasaje_original}
     }
 
     function htmlPasajeTraduccion(){
-        return {__html:pasaje_traduccion}
+        return {__html:pasaje.pasaje_traduccion}
     }
 
     return (
         <div>
-            {languageP == "al" ?
+            {props.languageP == "al" ?
             <div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div>:<div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div>
             }
         </div>

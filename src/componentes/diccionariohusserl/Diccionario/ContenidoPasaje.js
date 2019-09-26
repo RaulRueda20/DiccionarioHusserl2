@@ -6,20 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import BanderaPasajes from './BanderaPasajes';
 import PasajesRenderizados from './PasajesRenderizados';
 
-import {webService} from '../../../js/webServices';
-
 function ContenidoPasaje(props){
-  const [pasajesO, setPasajesO]=React.useState("")
-  const [pasajesT, setPasajesT]=React.useState("")
-
-  React.useEffect(()=>{
-      var service = "/referencias/obtieneReferenciasByTerm/" + 2
-      webService(service, "GET", {}, (data) => {
-        console.log("data pasajes", data)
-        setPasajesO(data.data.response[0])
-        setPasajesT(data.data.response[0])
-      })
-  }, [props.idExpresion])
 
   return(
     <div>
@@ -35,7 +22,7 @@ function ContenidoPasaje(props){
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <PasajesRenderizados pasajesO={pasajesO} setPasajesO={setPasajesO} pasajesT={pasajesT} setPasajesT={setPasajesT}/>
+          <PasajesRenderizados expresionSeleccionada={props.expresionSeleccionada} languageP={props.languageP}/>
         </Grid>
       </Grid>
     </div>

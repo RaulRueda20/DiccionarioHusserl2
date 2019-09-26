@@ -58,6 +58,13 @@ theme.typography.h6={
   fontWeight: "300"
 }
 
+theme.typography.caption={
+  position: "relative",
+  margin: "16px",
+  fontSize: "0.6em",
+  fontWeight: "bold",
+}
+
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <App />

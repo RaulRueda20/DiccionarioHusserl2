@@ -21,30 +21,18 @@ const loGin ={
   }
 }
 
-class Login extends React.Component{
-  constructor(props){
-    super(props)
-  }
-
-  state = {login: true}
-
-  setLogin = (login) => {
-    if(this.state.login != login) this.setState({ login:login })
-  }
-
-
-  render(){
-    const {classes} = this.props
-    return(
-      <div>
-        <div className={classes.back}/>
-        <Header/>
-        {this.state.login ? <LoginForm  setLogin={this.setLogin}/> : <RegistroForm setLogin={this.setLogin}/>}
-        <br/>
-        <Footer/>
-      </div>
-    )
-  }
+function Login(props){
+  const [login, setLogin] = React.useState(true)
+  const {classes} = props
+  return(
+    <div>
+      <div className={classes.back}/>
+      <Header lang={props.lang} setLang={props.setLang}/>
+      {login ? <LoginForm lang={props.lang} setLang={props.setLang} setLogin={setLogin}/> : <RegistroForm lang={props.lang} setLang={props.setLang} setLogin={setLogin}/>}
+      <br/>
+      <Footer lang={props.lang}/>
+    </div>
+  )
 }
 
 export default withStyles(loGin)(Login);

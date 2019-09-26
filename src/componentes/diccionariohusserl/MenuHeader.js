@@ -6,13 +6,14 @@ import Menu from '@material-ui/core/Menu';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Book from '@material-ui/icons/Book';
 import Description from '@material-ui/icons/Description';
-import Help from '@material-ui/icons/Help';
 import Info from '@material-ui/icons/Info';
 import Exit from '@material-ui/icons/ExitToApp';
-import People from '@material-ui/icons/People';
+
+import {menuDiccionario, menuAcercaDe, menuGuia, menuSalir, toolTipMenuPrincipal} from '../../js/Language';
 
 class MenuHeader extends React.Component{
   state = { anchorEl : null  }
@@ -35,13 +36,16 @@ class MenuHeader extends React.Component{
     const {match} = this.props
     return(
       <div>
-        <IconButton
-          aria-haspopup="true"
-          aria-owns={anchorEl ? 'menuheader': undefined}
-          onClick={this.setMenu}
-        >
-          <MenuIcon fontSize="large"/>
-        </IconButton>
+        <Tooltip title={toolTipMenuPrincipal(this.props.lang)}>
+          <IconButton
+            aria-haspopup="true"
+            aria-owns={anchorEl ? 'menuheader': undefined}
+            onClick={this.setMenu} size="small"
+            className="iconosIluminados"
+          >
+            <MenuIcon fontSize="large"/>
+          </IconButton>
+        </Tooltip>
         <Menu
           id="menuheader"
           anchorEl={anchorEl}
@@ -54,7 +58,7 @@ class MenuHeader extends React.Component{
               <ListItemIcon>
                 <Book />
               </ListItemIcon>
-              <ListItemText primary="Diccionario" />
+              <ListItemText primary={menuDiccionario(this.props.lang)}/>
             </MenuItem>
           </Link>
           <Link to={`${match.url}/acercade`}>
@@ -62,7 +66,7 @@ class MenuHeader extends React.Component{
               <ListItemIcon>
                 <Description />
               </ListItemIcon>
-              <ListItemText primary="Acerca del Diccionario" />
+              <ListItemText primary={menuAcercaDe(this.props.lang)}/>
             </MenuItem>
           </Link>
           <Link to={`${match.url}/guia`}>
@@ -70,14 +74,14 @@ class MenuHeader extends React.Component{
               <ListItemIcon>
                 <Info />
               </ListItemIcon>
-              <ListItemText primary="Guía de uso" />
+              <ListItemText primary={menuGuia(this.props.lang)}/>
             </MenuItem>
           </Link>
           <MenuItem onClick={this.exitMain}>
             <ListItemIcon>
               <Exit />
             </ListItemIcon>
-            <ListItemText primary="Salir" />
+            <ListItemText primary={menuSalir(this.props.lang)}/>
           </MenuItem>
         </Menu>
         <Link id="toLogin" to={'/'} />

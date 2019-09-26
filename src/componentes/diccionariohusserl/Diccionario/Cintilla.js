@@ -1,9 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
-import ClearIcon from '@material-ui/icons/Clear';
-import { width } from '@material-ui/system';
+
+import {cintilla, guia} from '../../../js/Language';
 
 const useStyles = makeStyles(theme => ({
   // '@global': {
@@ -42,7 +42,7 @@ export default function Cintilla(props) {
         ContentProps={{
           'aria-describedby': 'snackbar-fab-message-id',
         }}
-        message={<span id="snackbar-fab-message-id">¡Advertencia! Los pasajes en español de Ideas I están en proceso de sustitución: la versión de José Gaos (1962) se reemplaza por la versión de Zirión (2013). Ver los detalles en la Guía.</span>}
+        message={<span id="snackbar-fab-message-id">{cintilla(props.lang)}<Link to={`/husserl/guia`}>  {guia(props.lang)}</Link></span>}
         // action={
         //   <IconButton color="inherit">
         //     <ClearIcon fontSize="small"/>

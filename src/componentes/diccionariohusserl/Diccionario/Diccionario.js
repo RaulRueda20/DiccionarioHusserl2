@@ -7,8 +7,8 @@ function Diccionario(props){
 
     return(
         <div>
-            <HeaderMain/>
-            <DiccionarioMain/>
+            <HeaderMain lang={props.lang} setlang={props.setLang}/> 
+            <Expresion match={match}/>
         </div>
     )
 }
