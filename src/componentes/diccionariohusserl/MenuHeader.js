@@ -12,6 +12,7 @@ import Book from '@material-ui/icons/Book';
 import Description from '@material-ui/icons/Description';
 import Info from '@material-ui/icons/Info';
 import Exit from '@material-ui/icons/ExitToApp';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 import {menuDiccionario, menuAcercaDe, menuGuia, menuSalir, toolTipMenuPrincipal} from '../../js/Language';
 
@@ -59,6 +60,14 @@ class MenuHeader extends React.Component{
                 <Book />
               </ListItemIcon>
               <ListItemText primary={menuDiccionario(this.props.lang)}/>
+            </MenuItem>
+          </Link>
+          <Link to={`${match.url}/busquedas`}>
+            <MenuItem onClick={this.closeMenu}>
+              <ListItemIcon>
+                <PageviewIcon />
+              </ListItemIcon>
+              <ListItemText primary="Busquedas"/>
             </MenuItem>
           </Link>
           <Link to={`${match.url}/acercade`}>

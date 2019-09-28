@@ -99,6 +99,8 @@ const fixReferencias = (referencias) => {
     }
   }, [letraMain, language])
 
+  console.log("letraMain", letraMain)
+
   function getJerarquia(event){
     console.log("evento", event.currentTarget.id)
     setExpresionSeleccionada({id: event.currentTarget.id.split("/")[0], expresion:event.currentTarget.id.split("/")[1]})
@@ -114,13 +116,13 @@ const fixReferencias = (referencias) => {
         </Grid>
         <Grid item xs={1} align="center" style={{borderRight:"1px rgb(240, 240, 240) solid"}}>
             <LetraIndice letraMain={letraMain}/>
-            <BanderaButon language={language} setLanguage={setLanguage} lang={props.lang}/>
+            <BanderaButon language={props.language} setLanguage={props.setLanguage} lang={props.lang}/>
         </Grid>
         <Grid item xs={8} aling='center'>
             <ListaExpresiones expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
-            setIdExpresion={setIdExpresion} language={language} setLanguage={setLanguage} 
+            setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} 
             expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
-            getJerarquia={getJerarquia} 
+            getJerarquia={getJerarquia}
             />
         </Grid>
         <Grid item xs={3} className="bordoDelMenuDerecho">

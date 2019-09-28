@@ -99,13 +99,28 @@ ul{
   color: rgba(80, 80, 80);
 }
 
+.sideListIzquierdo{
+  border-bottom: 1px lightgray solid;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  color: rgba(80, 80, 80);
+}
+
 option{
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 li.sideList:hover{
+  background: rgba(0,0,0,0.1);
+}
+
+li.sideListIzquierdo:hover{
+  background: rgba(90, 163, 77, 0.301);
+}
+
+.pasajeSeleccionado{
   background: rgba(0,0,0,0.18);
 }
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -157,9 +172,9 @@ a{
 }
 
 .banderas {
-  width: 36px !important;
+  width: 27px !important;
   border-radius: 50%;
-  height: 36px !important;
+  height: 29px !important;
 }
 
 #simple-menu div.MuiPaper-root{
@@ -184,6 +199,10 @@ a{
   text-decoration: underline;
 }
 
+.consultaDePasajes{
+  max-height: 40px;
+}
+
 .ulDelMenuDerecho{
   max-height: 67px;
   overflow: scroll;
@@ -191,8 +210,81 @@ a{
   padding: 0 16px !important;
 }
 
-.panelDeDetalle{
+.ulDelMenuDerechoPadres{
+  max-height: 67px;
+  margin-top: 10px;
+  background-color: rgba(20,10,10,.0.08);
+  overflow: scroll;
+}
+
+.ulDelMenuDerechoExpresion{
+  min-height: 40px;
+  margin-top: 5px;
+  background-color: rgba(20,10,10,.0.05);
+  overflow: scroll;
+}
+
+.ulDelMenuDerechoHijos{
+  max-height: 45px;
+  margin-top: 5px;
+  background-color: rgba(20,10,10,.0.02);
+  overflow: scroll;
+}
+
+.ulDelMenuDerechoVerTambien{
+  max-height: 80px;
+  margin-top: 5px;
+  background-color: rgba(20,10,10,.0.02);
+  overflow: scroll;
+}
+
+.ulDelMenuDerechoReferenciasConsultadas{
+  max-height: 80px;
+  margin-top: 5px;
+  background-color: rgba(20,10,10,.0.02);
+  overflow: scroll;
+}
+
+.panelDeDetallePadres{
   display: block !important;
+  min-height: 40px;
+  background-color: rgba(20,10,10,.08);
+  padding: 5px 0 0 25px !important;
+  border-bottom: 1px rgba(0,0,0,.1) dashed;
+}
+
+.panelDeDetalleExpresion{
+  display: block !important;
+  min-height: 40px;
+  background-color: rgba(20,10,10,.05);
+  padding: 5px 0 0 25px !important;
+  border-bottom: 1px rgba(0,0,0,.1) dashed;
+}
+
+.panelDeDetalleHijos{
+  display: block !important;
+  max-height: 70px;
+  background-color: rgba(20,10,10,.02);
+  padding: 5px 0 0 25px !important;
+  border-bottom: 1px rgba(0,0,0,.1) dashed;
+}
+
+.panelDeDetalleVerTambien{
+  display: block !important;
+  max-height: 90px;
+  height: 100px;
+  background-color: rgba(20,10,10,.02);
+  padding: 5px 0 0 25px !important;
+  border-bottom: 1px rgba(0,0,0,.1) dashed;
+}
+
+
+.panelDeDetalleReferenciasConsultadas{
+  display: block !important;
+  max-height: 80px;
+  background-color: rgba(20,10,10,.02);
+  padding: 5px 0 0 25px !important;
+  border-bottom: 1px rgba(0,0,0,.1) dashed;
 }
 
 .headerMain{
@@ -212,9 +304,33 @@ a{
 }
 
 .banderaIzquierda{
-  width: 33px !important;
-  border-radius: 50%;
-  height: 33px !important;
+  width: 35px !important;
+  height: 25px !important;
+  opacity: 0.5;
+}
+
+.banderaIzquierda:hover{
+  opacity:1;
+}
+
+.banderaBusquedaPasajes{
+  width: 25px !important;
+  height: 15px !important;
+  opacity: 0.5;
+}
+
+.banderaBusquedaPasajes:hover{
+  opacity:1;
+}
+
+.banderaPasajes{
+  width: 30px !important;
+  height: 20px !important;
+  opacity: 0.5;
+}
+
+.banderaPasajes:hover{
+  opacity:1;
 }
 
 .bordoDelMenuDerecho{
@@ -222,7 +338,13 @@ a{
 }
 
 .menuSimple{
-  right: 12px;
+  padding: 0 0 0 0 !important;
+  opacity:0.7;
+  background-color: transparent;
+}
+
+.menuSimple:hover{
+  opacity:1;
 }
 
 .links:hover{
@@ -242,5 +364,47 @@ a{
 }
 
 .listaIzquierda{
-  height: calc(100vh - 9vh - 31px) !important;
+  height: calc(100vh - 140px) !important;
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  width: auto;
+  background-color: rgb(230,230,230);
+}
+
+
+.panelesPrincipales{
+  background-color: rgba(0,0,0,.1) !important;
+}
+
+.tagsMenuDerecho{
+  margin:0px !important;
+}
+
+.contenedorMenuDerecho{
+  max-height: calc(100vh - 150px);
+  overflow: auto;
+}
+
+.panelPrincipal{
+  border-bottom: 1px rgba(0,0,0,.18) solid !important;
+}
+
+.MuiButtonBase-root{
+  background-color: transparent !important;
+}
+
+.pasajesRenderizados{
+  padding: 15px 15px 15px 15px;
+  height: calc(100vh - 150px) !important;
+  overflow: auto;
+  border-right: 1px double lightgrey;
+  border-left: 1px double lightgrey;
+  border-top: 1px double lightgrey;
+}
+
+hr{
+margin-top:1rem;
+margin-bottom: 1rem;
+border: 0;
+border-top: 1px solid rgba(0,0,0,.1)
 }

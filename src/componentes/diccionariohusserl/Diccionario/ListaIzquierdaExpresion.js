@@ -11,8 +11,6 @@ export default function ListaIzquierdaExpresiones(props){
 
   var expresiones=props.expresiones;
 
-  console.log("expresionSeleccionada ", props.expresionSeleccionada)
-
   function clickHandleVista(event){
     var expresionClickeada=event.currentTarget.id;
     var expresionesReferencias=props.expresiones[expresionClickeada];
@@ -25,7 +23,9 @@ export default function ListaIzquierdaExpresiones(props){
       store.push(expresionesReferencias)
       localStore.setObjects("referenciasConsultadas",store)
     }
+    props.setIdExpresion(expresionClickeada)
   }
+
 
   function handleClickPanel(event){
     var expresionesAbiertas=panelesAbiertos;
@@ -41,11 +41,11 @@ export default function ListaIzquierdaExpresiones(props){
   }
 
   return (
-    <div className="list-container">
+    <div className="listaIzquierda">
       <ul>
       {expresiones.map((expresion, index)=>(
         <PanelExpresionIzquierdo expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
-        getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias}/>
+        getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} idExpresion={props.idExpresion}/>
         ))}
       </ul>
     </div>

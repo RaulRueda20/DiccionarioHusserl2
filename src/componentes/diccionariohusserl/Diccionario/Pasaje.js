@@ -10,18 +10,14 @@ import MenuDerechoPasajes from './MenuDerechoPasajes';
 import {webService} from '../../../js/webServices';
 
 function Pasaje(props){
-  const [letraMain, setLetraMain] = React.useState('A');
-  const [language,setLanguage] = React.useState("al");
   const [expresiones, setExpresiones] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState('');
   const [languageP,setLanguageP] = React.useState("al");
-  const [open,setOpen]=React.useState(true);
-  const [loading, setLoading]=React.useState(false);
   const [expresionSeleccionada, setExpresionSeleccionada]=React.useState(null);
   const [expanded1, setExpanded1] = React.useState(false);
   const [expanded2, setExpanded2] = React.useState(false);
   const [expanded3, setExpanded3] = React.useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
+  const [pasajeService, setPasajeService] = React.useState("");
   
     const emptyObj = {
       clave: "",
@@ -90,38 +86,42 @@ function Pasaje(props){
   React.useEffect(()=>{
     var idDeExpresion=props.match.params.expresion;
     var idDeLaReferencia=props.match.params.id;
-    var service = "/expresiones/" + language + "/" + letraMain
-    webService(service, "GET", {}, (data) => {
-      setExpresiones(fixReferencias(data.data.response))
-      if(idExpresion === ''){
-        setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
-      }
-    })
+    var service = "/expresiones/" + props.language + "/" + props.letraMain
+    if(pasajeService != service){
+      setPasajeService(service)
+      webService(service, "GET", {}, (data) => {
+        setExpresiones(fixReferencias(data.data.response))
+        if(idExpresion === ''){
+          setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
+        }
+      })
+    }
     service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
       setExpresionSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
     })
-  }, [letraMain, language])
+  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
 
   return(
     <div>
       <Grid container>
             <Grid item xs={12}>
-              <ListaLetras letraMain={letraMain} setLetraMain={setLetraMain}/>
+              <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
             </Grid>
             <Grid item xs={3}>
-              <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang}/>
+              <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} language={props.language} setLanguage={props.setLanguage}/>
               <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
-                setIdExpresion={setIdExpresion} language={language} setLanguage={setLanguage} expresionSeleccionada={expresionSeleccionada}
+                setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} expresionSeleccionada={expresionSeleccionada}
                 setExpresionSeleccionada={setExpresionSeleccionada}
               />
             </Grid>  
             <Grid item xs={6}>
-                <ContenidoPasaje expresionSeleccionada={expresionSeleccionada} languageP={languageP} setLanguageP={setLanguageP} match={props.match}/>
+                <ContenidoPasaje expresionSeleccionada={expresionSeleccionada} languageP={languageP} setLanguageP={setLanguageP} match={props.match}
+                />
             </Grid>
             <Grid item xs={3}>
-              <MenuDerechoPasajes idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
-              expresiones={expresiones} setExpresiones={setExpresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
+              <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
+              expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
               expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
               lang={props.lang} expresionSeleccionada={expresionSeleccionada}
               />

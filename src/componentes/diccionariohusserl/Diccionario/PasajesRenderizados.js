@@ -6,13 +6,7 @@ function PasajesRenderizados(props){
     const {classes}=props;
     const [pasaje, setPasaje] = React.useState(emptyPasaje)
 
-    // console.log("expresion Seleccionada", props.expresionSeleccionada)
-
-    
-    // console.log("pasaje_original", pasaje_original)
-
     React.useEffect(() => {
-        console.log(props.expresionSeleccionada)
         var pasaje_original =  props.expresionSeleccionada != null ? props.expresionSeleccionada : emptyPasaje
         setPasaje(pasaje_original)
     }, [props.expresionSeleccionada])
@@ -26,7 +20,7 @@ function PasajesRenderizados(props){
     }
 
     return (
-        <div>
+        <div className="pasajesRenderizados">
             {props.languageP == "al" ?
             <div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div>:<div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div>
             }

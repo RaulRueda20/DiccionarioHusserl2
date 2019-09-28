@@ -7,7 +7,7 @@ import Footer from './Footer';
 
 import { withStyles } from '@material-ui/styles';
 
-import fondo from "../../Imagenes/fondo.jpeg";
+import fondo from "../../Imagenes/fondo.png";
 
 const loGin ={
   back: {

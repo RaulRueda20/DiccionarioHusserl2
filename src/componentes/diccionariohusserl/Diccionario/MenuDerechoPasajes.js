@@ -25,34 +25,33 @@ const ExpansionPanel = withStyles({
       margin: 'auto',
     },
   },
-  expanded: {},
+  expanded: {minHeight:'40px !important'},
 })(MuiExpansionPanel);
 
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
-    padding: "0",
-    overflowX:"hidden",
-    paddingTop:"8px",
-    maxHeight: "70px",
+    // padding: "0",
+    // overflowX:"hidden",
+    // paddingTop:"5px",
+    // maxHeight: "70px !important",
     // backgroundColor:'rgb(180,180,180)'
   },
 }))(MuiExpansionPanelDetails);
 
 const ExpansionPanelSummary = withStyles({
   root: {
-    backgroundColor: 'rgba(0, 0, 0, .05)',
+    backgroundColor: "rgba(0,0,0,.11) !important",
     // borderBottom: '1px solid rgba(0, 0, 0, .125)',
     // marginBottom: -1,
     '&$expanded': {
     },
   },
   content: {
-    minHeight:'0 !important',
     '&$expanded': {
       margin: '5px 0',
     },
   },
-  expanded: {},
+  expanded: {minHeight:'48px !important'},
 })(MuiExpansionPanelSummary);
 
 const emptyObj = {
@@ -72,6 +71,7 @@ function MenuDerechoPasajes(props){
   const [listaVerTambien,setListaVerTambien]=React.useState([]);
   const [hijos,setHijos]=React.useState([]);
   const [padres,setPadres]=React.useState([]);
+  const [nombre, setNombre] = React.useState("")
 
   const paintJerarquia = (lista) => {
     var lastString = ""
@@ -83,70 +83,72 @@ function MenuDerechoPasajes(props){
     return lastString
   }
 
+  const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
+
+
   React.useEffect(()=>{
     if(localStore.getObjects("referenciasConsultadas")!=false){
       var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
       setReferenciasConsultadasVista(referenciaConsultadaSacada)
     }
-    // if (props.expresionSeleccionada.id!=""){
-    //   var service = "/vertambien/" + props.expresionSeleccionada.id
-    //   webService(service, "GET", {}, data => {
-    //     setListaVerTambien(data.data.response)
-    //     webService(("/expresiones/"+props.language+"/hijosList/"+props.expresionSeleccionada.id),"GET", {}, (data) => setHijos(data.data.response))
-    //     webService(("/expresiones/"+props.language+"/abuelosList/"+props.expresionSeleccionada.id), "GET", {}, (data2) =>setPadres(data2.data.response))
-    //   })
-    // }
-  },[])
-
-//   props.expresionSeleccionada
-
-  console.log("expresionSeleccionada", props.expresionSeleccionada)
-
+    if (props.idExpresion!=""){
+      var service = "/vertambien/" + props.idExpresion
+      webService(service, "GET", {}, data => {
+        setListaVerTambien(data.data.response)
+        webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) => setHijos(data.data.response))
+        webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>setPadres(data2.data.response))
+      })
+    }
+      var expresion_original =  props.expresionSeleccionada != null ? props.expresionSeleccionada : emptyPasaje
+      setNombre(expresion_original)
+    console.log("expresionSeleccionada",props.expresionSeleccionada)
+  },[props.idExpresion])
+ 
   return (
-    <div>
-        <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)}>
+    <div className="contenedorMenuDerecho">
+        <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)} className="panelPrincipal">
           <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography>{menuDerechoJerarquia(props.lang)}</Typography>
           </ExpansionPanelSummary>
-        <ExpansionPanelDetails className="panelDeDetalle">
+        <ExpansionPanelDetails className="panelDeDetallePadres">
           <Typography variant="caption">
           {menuDerechoJerarquiaDerivadaDe(props.lang)}
           </Typography>
-          {/* <ul className="ulDelMenuDerecho" key={padres.refid}>
+          <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
             {padres.map(padre=>(
               <li>
                 <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
               </li>
             ))}
-          </ul> */}
+          </ul>
         </ExpansionPanelDetails>
         <Divider />
-        <ExpansionPanelDetails className="panelDeDetalle">
+        <ExpansionPanelDetails className="panelDeDetalleExpresion">
           <Typography variant="caption">{menuDerechoJerarquiaExpresion(props.lang)}</Typography>
-          {/* <ul className="ulDelMenuDerecho" >
+          <ul className="ulDelMenuDerechoExpresion" >
             <li>
-              <Typography variant="h6" className="consultaDePasajes">{props.expresionSeleccionada.expresion}</Typography>
+              <Typography variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
             </li>
-          </ul> */}
+          </ul>
         </ExpansionPanelDetails>
           <Divider />
-        <ExpansionPanelDetails className="panelDeDetalle">
+        <ExpansionPanelDetails className="panelDeDetalleHijos">
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
-          {/* <ul className="ulDelMenuDerecho"  key={hijos.refid}> 
+          <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map(hijo=>(
               <li>
                 <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
               </li>
             ))}
-          </ul> */}
+          </ul>
         </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel square expanded={props.expanded2} onChange={()=>props.setExpanded2(!props.expanded2)}>
+        <ExpansionPanel square expanded={props.expanded2} onChange={()=>props.setExpanded2(!props.expanded2)} className="panelPrincipal">
           <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
             <Typography>{menuDerechoVerTambien(props.lang)}</Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails className="panelDeDetalle">
-            <ul className="ulDelMenuDerecho">
+          <ExpansionPanelDetails className="panelDeDetalleVerTambien">
+            <ul className="ulDelMenuDerechoVerTambien">
               {listaVerTambien.map(expresion=>{
                 return <li>
                   <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
@@ -155,18 +157,18 @@ function MenuDerechoPasajes(props){
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel square expanded={props.expanded3} onChange={()=>props.setExpanded3(!props.expanded3)}>
+        <ExpansionPanel square expanded={props.expanded3} onChange={()=>props.setExpanded3(!props.expanded3)} className="panelPrincipal">
         <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
           <Typography>{menuDerechoReferenciasConsultadas(props.lang)}</Typography>
         </ExpansionPanelSummary>
-          <ExpansionPanelDetails className="panelDeDetalle">
-            {/* <ul className="ulDelMenuDerecho">
+          <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
+            <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map(consultas=>(
                 <li className="bordeDeConsultas">
                   <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
                 </li>
               ))}
-            </ul> */}
+            </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
     </div>

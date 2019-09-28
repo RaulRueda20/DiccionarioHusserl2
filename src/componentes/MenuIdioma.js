@@ -17,10 +17,11 @@ import {toolTipMenuIdiomas} from '../js/Language';
 
 const banderas = {
     botonesBan:{
-      width: "36px !important",
-      height: "30px !important",
+      width: "32px !important",
+      height: "19px !important",
       boxShadow: "none",
-      fontSize: "null"
+      fontSize: "null",
+      background: "transparent !important"
     }
   }
 
@@ -57,7 +58,7 @@ function MenuIdioma(props){
     //   }
 
     return(
-        <div>
+        <div className="menuIdiomas">
           <Tooltip title={toolTipMenuIdiomas(props.lang)}>
             <IconButton
               aria-haspopup="true"

@@ -1,5 +1,5 @@
 import React from 'react';
-import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/styles';
 
@@ -10,10 +10,12 @@ import {toolTipIdiomaDeLaLista} from '../../../js/Language';
 
 const bandIn = {
   imagenesBandera:{
-    width: "33px !important",
+    width: "35px !important",
     height: "25px !important",
     fontSize: "0px",
-    minHeight: "0px"
+    minHeight: "0px",
+    minWidth: "0px !important",
+    padding: "0px !important"
   }
 }
 
@@ -34,8 +36,8 @@ function BanderaButon(props){
       <div>
         <Tooltip title={toolTipIdiomaDeLaLista(props.lang)}>
           {props.language == 'es' ?
-            <Fab className={classes.imagenesBandera} onClick={clickChangeLanguageAl}><img className="banderaIzquierda" src={al}/></Fab>
-            : <Fab className={classes.imagenesBandera} onClick={clickChangeLanguageEs}><img className="banderaIzquierda" src={es}/></Fab>
+            <Button size="small" className={classes.imagenesBandera} onClick={clickChangeLanguageAl}><img className="banderaIzquierda" src={al}/></Button>
+            : <Button size="small" className={classes.imagenesBandera} onClick={clickChangeLanguageEs}><img className="banderaIzquierda" src={es}/></Button>
           }
         </Tooltip>
       </div>

@@ -16,7 +16,7 @@ export default function PanelExpresion(props){
 
   return (
     <li 
-        className="sideList" 
+        className={classNames([{"pasajeSeleccionado":props.expresion.id==props.expresionSeleccionada.id}, "sideList"])} 
         key={props.expresion.id} 
         id={"expresion"+props.expresion.id} value={props.expresion.id}
     >
