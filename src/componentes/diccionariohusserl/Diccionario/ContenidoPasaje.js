@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/styles';
 import BanderaPasajes from './BanderaPasajes';
 import PasajesRenderizados from './PasajesRenderizados';
 import ModalDescargas from './ModalDescargas';
+import PanelExpresionIzquierdo from './PanelExpresionIzquierdo';
 
 const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
@@ -53,7 +54,9 @@ function clickHandleDescargas(){
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}/>
+          <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}
+          cerrado={props.panelIzquierdo || props.panelDerecho}
+          />
         </Grid>
       </Grid>
       <ModalDescargas openDescargas={openDescargas} setOpenDescargas={setOpenDescargas} idExpresion={props.idExpresion} 

@@ -12,6 +12,7 @@ function PasajesRenderizados(props){
     React.useEffect(() => {
         var pasaje_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
         setPasaje(pasaje_original)
+        console.log(props.cerrado)
     }, [props.referenciaSeleccionada])
 
     function htmlPasajeOriginal(){
@@ -23,13 +24,19 @@ function PasajesRenderizados(props){
     }
 
     return (
-        <Grid container>
-            <Grid item xs={12} className="pasajesRenderizados">
-                {props.languageP == "al" ?
-                <div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div>:<div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div>
+            <div>
+                {props.cerrado ? 
+                <Grid container>
+                    <Grid item xs={6} className="pasajesRenderizados"><div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div></Grid>
+                    <Grid item xs={6} className="pasajesRenderizados"><div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div></Grid>
+                </Grid>
+                :
+                props.languageP == "al" ? 
+                    <Grid container><Grid item xs={12} className="pasajesRenderizados"><div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div></Grid></Grid> 
+                    :
+                    <Grid container><Grid item xs={12} className="pasajesRenderizados"><div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div></Grid></Grid>
                 }
-            </Grid>
-        </Grid>
+            </div>
     )
 }
 
