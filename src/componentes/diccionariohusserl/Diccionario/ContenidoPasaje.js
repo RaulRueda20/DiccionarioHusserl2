@@ -35,7 +35,8 @@ function clickHandleDescargas(){
 
   return(
     <div>
-      <Grid container justify="center" alignItems="center" alignContent="center">
+      <Grid container justify="center" alignItems="center" alignContent="center" style={{borderRight: "1px double lightgrey",
+    borderLeft: "1px double lightgrey"}}>
         <Grid item xs={1}>
           <Tooltip title={"Descargar pasaje"}>
             <IconButton size="small" className="iconosIluminados" onClick={clickHandleDescargas}>
@@ -44,10 +45,7 @@ function clickHandleDescargas(){
           </Tooltip>
         </Grid>
         <Grid item xs={10} className={classes.gridTituloPasaje}>
-          {props.languageP=="al"?
-          <Typography variant="h3">{tituloPasaje.expresion_original}</Typography>:
-          <Typography variant="h3">{tituloPasaje.expresion_traduccion}</Typography>
-          }
+          <Typography variant="h2">{props.languageP=="al" ? tituloPasaje.expresion_original : tituloPasaje.expresion_traduccion}</Typography>
         </Grid>
         <Grid item xs={1}>
           <BanderaPasajes languageP={props.languageP} setLanguageP={props.setLanguageP}/>
@@ -55,8 +53,7 @@ function clickHandleDescargas(){
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}
-          />
+          <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}/>
         </Grid>
       </Grid>
       <ModalDescargas openDescargas={openDescargas} setOpenDescargas={setOpenDescargas} idExpresion={props.idExpresion} 

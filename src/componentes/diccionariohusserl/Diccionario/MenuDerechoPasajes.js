@@ -51,7 +51,7 @@ const ExpansionPanelSummary = withStyles({
       margin: '5px 0',
     },
   },
-  expanded: {minHeight:'48px !important'},
+  expanded: {minHeight: "0px !important", height: "48px", alignItems: "center"},
 })(MuiExpansionPanelSummary);
 
 const emptyObj = {

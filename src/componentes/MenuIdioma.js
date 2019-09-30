@@ -16,14 +16,17 @@ import al from "../Imagenes/germany.png";
 import {toolTipMenuIdiomas} from '../js/Language';
 
 const banderas = {
-    botonesBan:{
-      width: "32px !important",
-      height: "19px !important",
-      boxShadow: "none",
-      fontSize: "null",
-      background: "transparent !important"
-    }
+  botonesBan:{
+    width: "34px !important",
+    height: "19px !important",
+    boxShadow: "none",
+    fontSize: "null",
+    background: "transparent !important"
+  },
+  menuUl: {
+    marginLeft: "5px"
   }
+}
 
 function MenuIdioma(props){
     const {classes}=props;
@@ -37,26 +40,6 @@ function MenuIdioma(props){
         setAnchorEl(null);
     }
 
-    // const clickChangeLanguageEsPagina=()=>{
-    //   props.setLang("es");
-    //   }
-    
-    //   const clickChangeLanguageAlPagina=()=>{
-    //     props.setLang("al");
-    //   }
-
-    //   const clickChangeLanguageEnPagina=()=>{
-    //     props.setLang("en");
-    //   }
-
-    //   const clickChangeLanguageFrPagina=()=>{
-    //     props.setLang("fr");
-    //   }
-
-    //   const clickChangeLanguageCaPagina=()=>{
-    //     props.setLang("ca");
-    //   }
-
     return(
         <div className="menuIdiomas">
           <Tooltip title={toolTipMenuIdiomas(props.lang)}>
@@ -67,13 +50,14 @@ function MenuIdioma(props){
               size="small"
               className="iconosIluminados"
             >
-              <Lang fontSize="large"/>
+              <Lang style={{fontSize: "2.5rem"}}/>
             </IconButton>
           </Tooltip>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
             onClose={handleClose}
+            className={classes.menuUl}
             open={Boolean(anchorEl)}
           >
             <MenuItem onClick={handleClose} className="menuSimple">

@@ -175,19 +175,11 @@ function ModalDescargas(props){
                 </FormGroup>
                 <Divider className="divisor"/>
                 <Grid container>
-                    <Grid item xs={6} className={classes.gridDeBotones}>
+                    <Grid item xs={12} className={classes.gridDeBotones}>
                         <Button
-                        variant="contained"
-                        type="submit"
-                        >
-                            Aceptar
-                        </Button>
-                    </Grid>
-                    <Grid item xs={6} className={classes.gridDeBotones} >
-                        <Button
-                        variant="contained"
-                        type="submit"
-                        onClick={clickHandleDescarga}
+                            variant="contained"
+                            type="submit"
+                            onClick={clickHandleDescarga}
                         >
                             Descargar consulta
                         </Button>

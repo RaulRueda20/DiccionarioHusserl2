@@ -15,10 +15,12 @@ function Pasaje(props){
   const [idExpresion, setIdExpresion] = React.useState('');
   const [languageP,setLanguageP] = React.useState("al");
   const [referenciaSeleccionada, setReferenciaSeleccionada]=React.useState(null);
+  const [referencias, setReferencias] = React.useState([]);
   const [expanded1, setExpanded1] = React.useState(false);
   const [expanded2, setExpanded2] = React.useState(false);
   const [expanded3, setExpanded3] = React.useState(false);
   const [pasajeService, setPasajeService] = React.useState("");
+
 
   const handleChangePage=(event, newPage)=>{
     setRowsPerPage(newPage)
@@ -46,7 +48,7 @@ function Pasaje(props){
     var posicActual = -1
     var expreActual = ""
     var i = 0
-    console.log(referencias.length)
+    // console.log(referencias.length)
     while (i<referencias.length){
       if (expreActual != referencias[i].expresion){
         posicActual++
@@ -97,47 +99,49 @@ function Pasaje(props){
     var idDeLaReferencia=props.match.params.id;
     var service = "/expresiones/" + props.language + "/" + props.letraMain
     if(pasajeService != service){
+      console.log("Re Rendering")
       setPasajeService(service)
       webService(service, "GET", {}, (data) => {
         setExpresiones(fixReferencias(data.data.response))
-        if(idExpresion === ''){
-          setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
-        }
       })
     }
-    service = "/referencias/obtieneReferencias/" + idDeExpresion
-    webService(service, "GET", {}, (data) => {
-      console.log(data)
-      setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-    })
+    if(idExpresion != idDeExpresion){
+      service = "/referencias/obtieneReferencias/" + idDeExpresion
+      webService(service, "GET", {}, (data) => {
+        setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
+        setReferencias(data.data.response)
+      })
+    }else{
+      setReferenciaSeleccionada(findReferencias(referencias, idDeLaReferencia))
+    }  
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
 
   return(
     <div>
       <Grid container>
-            <Grid item xs={12}>
-              <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
-            </Grid>
-            <Grid item xs={3}>
-              <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} language={props.language} setLanguage={props.setLanguage}/>
-              <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
-                setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-                setReferenciaSeleccionada={setReferenciaSeleccionada} 
-              />
-            </Grid>  
-            <Grid item xs={6}>
-                <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
-                idExpresion={idExpresion} lang={props.lang} match={props.match}/>
-                <Paginador />
-            </Grid>
-            <Grid item xs={3}>
-              <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
-              expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
-              expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-              lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
-              />
-            </Grid>
+        <Grid item xs={12}>
+          <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
         </Grid>
+        <Grid item xs={3}>
+          <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} language={props.language} setLanguage={props.setLanguage}/>
+          <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
+            setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
+            setReferenciaSeleccionada={setReferenciaSeleccionada} 
+          />
+        </Grid>  
+        <Grid item xs={6}>
+            <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
+            idExpresion={idExpresion} lang={props.lang} match={props.match}/>
+            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
+        </Grid>
+        <Grid item xs={3}>
+          <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
+          expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
+          expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
+          lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
+          />
+        </Grid>
+      </Grid>
     </div>
     )
 }

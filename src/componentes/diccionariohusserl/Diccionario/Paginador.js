@@ -1,143 +1,63 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Back from '@material-ui/icons/KeyboardArrowLeft';
+import Next from '@material-ui/icons/KeyboardArrowRight';
+import {Link} from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 
-import ListaIzquierdaExpresion from './ListaIzquierdaExpresion';
-import BusquedaVP from './BusquedaVP';
-import ContenidoPasaje from './ContenidoPasaje';
-import ListaLetras from './ListaLetras';
-import MenuDerechoPasajes from './MenuDerechoPasajes';
-import Paginador from './Paginador';
-
-import {webService} from '../../../js/webServices';
+// import {webService} from '../../../js/webServices';
 
 function Pasaje(props){
   const [expresiones, setExpresiones] = React.useState([]);
-  const [idExpresion, setIdExpresion] = React.useState('');
-  const [languageP,setLanguageP] = React.useState("al");
-  const [referenciaSeleccionada, setReferenciaSeleccionada]=React.useState(null);
-  const [expanded1, setExpanded1] = React.useState(false);
-  const [expanded2, setExpanded2] = React.useState(false);
-  const [expanded3, setExpanded3] = React.useState(false);
-  const [pasajeService, setPasajeService] = React.useState("");
-
-  const handleChangePage=(event, newPage)=>{
-    setRowsPerPage(newPage)
-  }
-
-  const onChangeRowsPerPage=event=>{
-    setRowsPerPage(parseInt)
-  }
-  
-    const emptyObj = {
-      clave: "",
-      epretty: "",
-      expresion_original: "",
-      expresion_traduccion: "",
-      id: null,
-      orden: null,
-      ref_original: "",
-      ref_traduccion: "",
-      refid: "",
-      tpretty: ""
-  }
-  
-  const fixReferencias = (referencias) => {
-    var expresiones=[]
-    var posicActual = -1
-    var expreActual = ""
-    var i = 0
-    console.log(referencias.length)
-    while (i<referencias.length){
-      if (expreActual != referencias[i].expresion){
-        posicActual++
-        expreActual = referencias[i].expresion
-        expresiones.push({
-          clave : referencias[i].clave,
-          expresion : referencias[i].expresion,
-          id : referencias[i].id,
-          index_de: referencias[i].index_de,
-          index_es: referencias[i].index_es,
-          pretty_e: referencias[i].pretty_e,
-          pretty_t: referencias[i].pretty_t,
-          referencias : [],
-          traduccion: referencias[i].traduccion
-        })
-        expresiones[posicActual].referencias.push({
-          referencia_original : referencias[i].referencia_original,
-          referencia_traduccion : referencias[i].referencia_traduccion,
-          refid : referencias[i].refid, orden: referencias[i].orden
-        })
-        i++
-      }else{
-        expresiones[posicActual].referencias.push({
-          referencia_original : referencias[i].referencia_original,
-          referencia_traduccion : referencias[i].referencia_traduccion,
-          refid : referencias[i].refid, orden: referencias[i].orden,
-        })
-        i++
-        // expresiones
-      }
-    }
-    return expresiones
-  }
-
-  const findReferencias = (referencias, referenciaId) =>{
-    for (var i in referencias){
-      if(referencias[i].refid==referenciaId){
-        var referenciaEncontrada=referencias[i];
-      }
-    }
-    return referenciaEncontrada
-  }
+  const [referencias, setReferencias] = React.useState([]);
+  const [referenciaSeleccionada, setReferenciaSeleccionada] = React.useState(null);
 
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
   React.useEffect(()=>{
-    var idDeExpresion=props.match.params.expresion;
-    var idDeLaReferencia=props.match.params.id;
-    var service = "/expresiones/" + props.language + "/" + props.letraMain
-    if(pasajeService != service){
-      setPasajeService(service)
-      webService(service, "GET", {}, (data) => {
-        setExpresiones(fixReferencias(data.data.response))
-        if(idExpresion === ''){
-          setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
-        }
-      })
-    }
-    service = "/referencias/obtieneReferencias/" + idDeExpresion
-    webService(service, "GET", {}, (data) => {
-      setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-    })
-  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
+    console.log("PAGINADOR")
+    console.log(props.referenciaSeleccionada, props.referencias)
+    console.log(props.referencias[0])
+    if(props.referenciaSeleccionada != null) setReferenciaSeleccionada(props.referenciaSeleccionada)
+    if(props.referencias.length > 0) setReferencias(props.referencias)
+    // console.log(props.match.params.expresion)
+  }, [props.referencias, props.referenciaSeleccionada])
 
   return(
     <div>
-      <Grid container>
-            <Grid item xs={12}>
-              <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
-            </Grid>
-            <Grid item xs={3}>
-              <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} language={props.language} setLanguage={props.setLanguage}/>
-              <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
-                setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-                setReferenciaSeleccionada={setReferenciaSeleccionada} 
-              />
-            </Grid>  
-            <Grid item xs={6}>
-                <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
-                idExpresion={idExpresion} lang={props.lang} match={props.match}/>
-            </Grid>
-            <Grid item xs={3}>
-              <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
-              expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
-              expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-              lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
-              />
-            </Grid>
-        </Grid>
+      { referenciaSeleccionada != null && referencias.length > 0 ? 
+      <div>
+        <Tooltip title={referencias[0].ref_original}>
+          <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[0].refid}`} 
+            className="botonPaginador"><span><FirstPage fontSize="small"/></span></Link>
+        </Tooltip>
+        <Tooltip title={referencias[props.referencias.length -1].ref_original}>
+          <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[props.referencias.length -1].refid}`}
+            className="botonPaginador"><span><Back fontSize="small"/></span></Link>
+        </Tooltip>
+
+        {props.referencias.map((referencia, index) => (
+            // <Grid className="botonPaginador" item xs>
+            <Tooltip title={referencias[index].ref_original}>
+              <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className="botonPaginador"><span>{index + 1}</span></Link>
+            </Tooltip>
+            // </Grid>
+          ))
+        }
+
+        <Tooltip title={referencias[props.referencias.length -1].ref_original}>
+          <Link><span className="botonPaginador"><Next fontSize="small"/></span></Link>
+        </Tooltip>
+        <Tooltip title={referencias[props.referencias.length -1].ref_original}>
+          <Link><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>
+        </Tooltip>
+      </div> : null}
+      <Typography variant="h5">Hay {props.referencias.length} {props.referencias.length > 1 ? "pasajes" : "pasaje"} en total.</Typography>
     </div>
-    )
+  )
 }
 
 export default Pasaje;
