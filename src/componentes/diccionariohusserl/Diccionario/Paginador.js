@@ -20,7 +20,6 @@ function Pasaje(props){
   React.useEffect(()=>{
     console.log("PAGINADOR")
     console.log(props.referenciaSeleccionada, props.referencias)
-    console.log(props.referencias[0])
     if(props.referenciaSeleccionada != null) setReferenciaSeleccionada(props.referenciaSeleccionada)
     if(props.referencias.length > 0) setReferencias(props.referencias)
     // console.log(props.match.params.expresion)
@@ -29,7 +28,7 @@ function Pasaje(props){
   return(
     <div>
       { referenciaSeleccionada != null && referencias.length > 0 ? 
-      <div>
+      <div style={{textAlign: 'center'}}>
         <Tooltip title={referencias[0].ref_original}>
           <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[0].refid}`} 
             className="botonPaginador"><span><FirstPage fontSize="small"/></span></Link>
@@ -42,7 +41,7 @@ function Pasaje(props){
         {props.referencias.map((referencia, index) => (
             // <Grid className="botonPaginador" item xs>
             <Tooltip title={referencias[index].ref_original}>
-              <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className="botonPaginador"><span>{index + 1}</span></Link>
+              <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className="botonPaginador" style={{padding: "13px 0px"}}><span>{index + 1}</span></Link>
             </Tooltip>
             // </Grid>
           ))

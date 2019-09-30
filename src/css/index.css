@@ -426,7 +426,8 @@ hr{
 }
 
 .botonPaginador{
-  width: 35px;
+  width: 40px;
+  vertical-align: bottom;
   padding: 10px 0px;
   display: inline-block;
   text-align: center;

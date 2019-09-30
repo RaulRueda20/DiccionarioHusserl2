@@ -109,18 +109,6 @@ function Pasaje(props){
     setPanelDerecho(!panelDerecho)
   }
 
-  function handleExpantionElements(){
-    var x=6;
-    if (panelIzquierdo==true){
-      x+=3
-    }
-    // if (panelDerecho==true){
-    //   x+=3
-    // }
-    console.log("x",x)
-    return x;
-  }
-
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
   React.useEffect(()=>{
