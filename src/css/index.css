@@ -340,7 +340,7 @@ a{
 .menuSimple{
   padding: 0 0 0 0 !important;
   opacity:0.7;
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .menuSimple:hover{
@@ -389,9 +389,9 @@ a{
   border-bottom: 1px rgba(0,0,0,.18) solid !important;
 }
 
-.MuiButtonBase-root{
+/* .MuiButtonBase-root{
   background-color: transparent !important;
-}
+} */
 
 .pasajesRenderizados{
   padding: 15px 15px 15px 15px;
@@ -407,4 +407,8 @@ margin-top:1rem;
 margin-bottom: 1rem;
 border: 0;
 border-top: 1px solid rgba(0,0,0,.1)
+}
+
+.subtituloDescarga{
+  background-color: rgba(0,0,0,.1)
 }

@@ -7,7 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/styles';
 
 import BanderaPasajes from './BanderaPasajes';
-import PasajesRenderizados from './PasajesRenderizados'
+import PasajesRenderizados from './PasajesRenderizados';
+import ModalDescargas from './ModalDescargas';
 
 const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
@@ -21,18 +22,23 @@ const contenidoPasajes={
 function ContenidoPasaje(props){
   const {classes}=props;
   const [tituloPasaje, setTituloPasaje]=React.useState("");
+  const [openDescargas, setOpenDescargas]=React.useState(false)
 
   React.useEffect(() => {
-    var nombreExpresion =  props.expresionSeleccionada != null ? props.expresionSeleccionada : emptyPasaje
+    var nombreExpresion =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setTituloPasaje(nombreExpresion)
-}, [props.expresionSeleccionada])
+}, [props.referenciaSeleccionada])
+
+function clickHandleDescargas(){
+  setOpenDescargas(true)
+}
 
   return(
     <div>
       <Grid container justify="center" alignItems="center" alignContent="center">
         <Grid item xs={1}>
           <Tooltip title={"Descargar pasaje"}>
-            <IconButton size="small" className="iconosIluminados">
+            <IconButton size="small" className="iconosIluminados" onClick={clickHandleDescargas}>
               <GetAppIcon fontSize="large"/>
             </IconButton>
           </Tooltip>
@@ -49,10 +55,12 @@ function ContenidoPasaje(props){
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <PasajesRenderizados expresionSeleccionada={props.expresionSeleccionada} languageP={props.languageP}
+          <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}
           />
         </Grid>
       </Grid>
+      <ModalDescargas openDescargas={openDescargas} setOpenDescargas={setOpenDescargas} idExpresion={props.idExpresion} 
+      lang={props.lang} match={props.match}/>
     </div>
   )
 }

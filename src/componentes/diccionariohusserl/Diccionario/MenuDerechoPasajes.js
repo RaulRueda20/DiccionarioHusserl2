@@ -99,9 +99,8 @@ function MenuDerechoPasajes(props){
         webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>setPadres(data2.data.response))
       })
     }
-      var expresion_original =  props.expresionSeleccionada != null ? props.expresionSeleccionada : emptyPasaje
+      var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
       setNombre(expresion_original)
-    console.log("expresionSeleccionada",props.expresionSeleccionada)
   },[props.idExpresion])
  
   return (

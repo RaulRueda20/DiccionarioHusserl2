@@ -54,8 +54,6 @@ function BusquedaVP(props){
         expresiones.map(expresion=>{
           var expresionNombre=expresion.expresion +  expresion.traduccion +  expresion.id
           var expresionEncontrada= expresionNombre.indexOf(expresionBuscadaDicVP)
-          console.log("expresion buscada",expresionBuscadaDicVP)
-          console.log("expresion encontrada",expresionEncontrada)
           document.getElementById("VP"+expresion.id).classList.remove("hiddenE")
           if (expresionEncontrada == -1){
             document.getElementById("VP"+expresion.id).className += " hiddenE";

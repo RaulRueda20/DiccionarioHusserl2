@@ -107,7 +107,6 @@ function Pasaje(props){
     }
     service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
-      console.log(data)
       setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
     })
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
@@ -128,7 +127,6 @@ function Pasaje(props){
             <Grid item xs={6}>
                 <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
                 idExpresion={idExpresion} lang={props.lang} match={props.match}/>
-                <Paginador />
             </Grid>
             <Grid item xs={3}>
               <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
