@@ -105,71 +105,71 @@ function MenuDerechoPasajes(props){
  
   return (
     <div className="contenedorMenuDerecho">
-        <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)} className="panelPrincipal">
-          <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>{menuDerechoJerarquia(props.lang)}</Typography>
-          </ExpansionPanelSummary>
-        <ExpansionPanelDetails className="panelDeDetallePadres">
-          <Typography variant="caption">
-          {menuDerechoJerarquiaDerivadaDe(props.lang)}
-          </Typography>
-          <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
-            {padres.map(padre=>(
-              <li>
-                <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
-              </li>
-            ))}
-          </ul>
-        </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelDetails className="panelDeDetalleExpresion">
-          <Typography variant="caption">{menuDerechoJerarquiaExpresion(props.lang)}</Typography>
-          <ul className="ulDelMenuDerechoExpresion" >
-            <li>
-              <Typography variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
-            </li>
-          </ul>
-        </ExpansionPanelDetails>
-          <Divider />
-        <ExpansionPanelDetails className="panelDeDetalleHijos">
-          <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
-          <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
-            {hijos.map(hijo=>(
-              <li>
-                <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
-              </li>
-            ))}
-          </ul>
-        </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel square expanded={props.expanded2} onChange={()=>props.setExpanded2(!props.expanded2)} className="panelPrincipal">
-          <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
-            <Typography>{menuDerechoVerTambien(props.lang)}</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className="panelDeDetalleVerTambien">
-            <ul className="ulDelMenuDerechoVerTambien">
-              {listaVerTambien.map(expresion=>{
-                return <li>
-                  <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
-                </li>
-              })}
-            </ul>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel square expanded={props.expanded3} onChange={()=>props.setExpanded3(!props.expanded3)} className="panelPrincipal">
-        <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>{menuDerechoReferenciasConsultadas(props.lang)}</Typography>
+      <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)} className="panelPrincipal">
+        <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography>{menuDerechoJerarquia(props.lang)}</Typography>
         </ExpansionPanelSummary>
-          <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
-            <ul className="ulDelMenuDerechoReferenciasConsultadas">
-              {referenciasConsultadasVista.map(consultas=>(
-                <li className="bordeDeConsultas">
-                  <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
-                </li>
-              ))}
-            </ul>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+      <ExpansionPanelDetails className="panelDeDetallePadres">
+        <Typography variant="caption">
+        {menuDerechoJerarquiaDerivadaDe(props.lang)}
+        </Typography>
+        <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
+          {padres.map(padre=>(
+            <li>
+              <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
+            </li>
+          ))}
+        </ul>
+      </ExpansionPanelDetails>
+      <Divider />
+      <ExpansionPanelDetails className="panelDeDetalleExpresion">
+        <Typography variant="caption">{menuDerechoJerarquiaExpresion(props.lang)}</Typography>
+        <ul className="ulDelMenuDerechoExpresion" >
+          <li>
+            <Typography variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
+          </li>
+        </ul>
+      </ExpansionPanelDetails>
+        <Divider />
+      <ExpansionPanelDetails className="panelDeDetalleHijos">
+        <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
+        <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
+          {hijos.map(hijo=>(
+            <li>
+              <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
+            </li>
+          ))}
+        </ul>
+      </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel square expanded={props.expanded2} onChange={()=>props.setExpanded2(!props.expanded2)} className="panelPrincipal">
+        <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
+          <Typography>{menuDerechoVerTambien(props.lang)}</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className="panelDeDetalleVerTambien">
+          <ul className="ulDelMenuDerechoVerTambien">
+            {listaVerTambien.map(expresion=>{
+              return <li>
+                <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+              </li>
+            })}
+          </ul>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel square expanded={props.expanded3} onChange={()=>props.setExpanded3(!props.expanded3)} className="panelPrincipal">
+      <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
+        <Typography>{menuDerechoReferenciasConsultadas(props.lang)}</Typography>
+      </ExpansionPanelSummary>
+        <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
+          <ul className="ulDelMenuDerechoReferenciasConsultadas">
+            {referenciasConsultadasVista.map(consultas=>(
+              <li className="bordeDeConsultas">
+                <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+              </li>
+            ))}
+          </ul>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
   )
 }

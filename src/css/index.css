@@ -395,7 +395,7 @@ a{
 
 .pasajesRenderizados{
   padding: 15px 15px 15px 15px;
-  height: calc(100vh - 150px) !important;
+  height: calc(100vh - 156px) !important;
   overflow: auto;
   border-right: 1px double lightgrey;
   border-left: 1px double lightgrey;
@@ -411,4 +411,36 @@ border-top: 1px solid rgba(0,0,0,.1)
 
 .subtituloDescarga{
   background-color: rgba(0,0,0,.1)
+}
+
+.IconoIzquierdo{
+  position: absolute !important;
+  left:24.3%!important;
+  top:60%;
+}
+
+.botonIzquierdoEscondido{
+  position: fixed !important;
+  left:-10px !important;
+  top:60%;
+}
+
+.IconoDerecho{
+  position: absolute !important;
+  right:23.8%;
+  top:60%;
+}
+
+.botonDerechoEscondido{
+  position: fixed !important;
+  right:-16px !important;
+  top:60%;
+}
+
+.panelIzquierdoEscondido{
+  display: none;
+}
+
+.panelDerechoEscondido{
+  display: none;
 }
