@@ -15,8 +15,6 @@ import ModalRecuperacion from './ModalRecuperacion';
 import {loginService} from '../../js/webServices';
 import * as localStore from '../../js/localStore';
 
-
-
 const stylesFor = {
  TextField1:{
     justify: 'center',
@@ -89,7 +87,7 @@ function LoginForm (props){
       <Typography variant="h3" align="center" gutterBottom >
         {inicio(props.lang)}
       </Typography>
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit} style={{marginTop : "5%"}}>
         <Grid className="gridsF" container direction="column" alignItems="center" spacing={2}>
           <Grid item xs={12} sm={8} lg={7} className="grids">
             <TextField

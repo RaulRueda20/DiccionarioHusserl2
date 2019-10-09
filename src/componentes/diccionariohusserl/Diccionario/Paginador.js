@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import classNames from 'classnames';
 import Tooltip from '@material-ui/core/Tooltip';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
@@ -26,24 +27,22 @@ function Pasaje(props){
   }, [props.referencias, props.referenciaSeleccionada])
 
   return(
-    <div>
+    <div style={{borderLeft: "1px lightgray solid",borderRight: "1px lightgray solid",padding: "0px 10px"}}>
       { referenciaSeleccionada != null && referencias.length > 0 ? 
       <div style={{textAlign: 'center'}}>
         <Tooltip title={referencias[0].ref_original}>
           <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[0].refid}`} 
-            className="botonPaginador"><span><FirstPage fontSize="small"/></span></Link>
+            className="botonPaginador"><FirstPage fontSize="small"/></Link>
         </Tooltip>
         <Tooltip title={referencias[props.referencias.length -1].ref_original}>
           <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[props.referencias.length -1].refid}`}
-            className="botonPaginador"><span><Back fontSize="small"/></span></Link>
+            className="botonPaginador"><Back fontSize="small"/></Link>
         </Tooltip>
 
         {props.referencias.map((referencia, index) => (
-            // <Grid className="botonPaginador" item xs>
             <Tooltip title={referencias[index].ref_original}>
-              <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className="botonPaginador" style={{padding: "13px 0px"}}><span>{index + 1}</span></Link>
+              <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": props.referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{index + 1}</span></Link>
             </Tooltip>
-            // </Grid>
           ))
         }
 

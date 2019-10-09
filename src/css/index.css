@@ -23,7 +23,7 @@ h1{
     font-weight: bolder;
 }
 
-tp, b{
+tp, b, strong{
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
@@ -118,11 +118,11 @@ li.sideList:hover{
 }
 
 li.sideListIzquierdo:hover{
-  background: rgba(90, 163, 77, 0.301);
+  background: rgba(90, 163, 77, 0.2);
 }
 
 .pasajeSeleccionado{
-  background: rgba(90, 163, 77, 0.5);
+  background: rgba(90, 163, 77, 0.3);
 }
 
 
@@ -372,7 +372,7 @@ a:hover{
 }
 
 .listaIzquierda{
-  height: calc(100vh - 140px) !important;
+  height: calc(100vh - 165px) !important;
   overflow-y: scroll; 
   overflow-x: hidden;
   width: auto;
@@ -403,7 +403,7 @@ a:hover{
 
 .pasajesRenderizados{
   padding: 15px 15px 15px 15px;
-  height: calc(100vh - 156px) !important;
+  height: calc(100vh - 275px) !important;
   overflow: auto;
   border-right: 1px double lightgrey;
   border-left: 1px double lightgrey;
@@ -435,7 +435,7 @@ hr{
 }
 
 .botonPaginador:hover{
-  background: rgba(90, 163, 77, 0.301);
+  background: rgba(90, 163, 77, 0.2);
   text-decoration: none;
   font-weight: 500;
 }
@@ -443,6 +443,7 @@ hr{
   position: absolute !important;
   left:24.3%!important;
   top:60%;
+  z-index: 10;
 }
 
 .botonIzquierdoEscondido{
@@ -455,6 +456,7 @@ hr{
   position: absolute !important;
   right:23.8%;
   top:60%;
+  z-index: 10;
 }
 
 .botonDerechoEscondido{

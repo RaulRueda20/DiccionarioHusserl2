@@ -10,7 +10,8 @@ const styles = {
     color: "rgba(255,255,255, .9)",
   },
   footerBody: {
-    marginTop: 80
+    bottom: "25px",
+    position: "absolute",
   }
 }
 

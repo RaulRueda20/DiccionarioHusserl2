@@ -26,14 +26,6 @@ function Pasaje(props){
   const [pasajeService, setPasajeService] = React.useState("");
   const [panelIzquierdo,setPanelIzquierdo]=React.useState(false);
   const [panelDerecho, setPanelDerecho]=React.useState(false);
-
-  const handleChangePage=(event, newPage)=>{
-    setRowsPerPage(newPage)
-  }
-
-  const onChangeRowsPerPage=event=>{
-    setRowsPerPage(parseInt)
-  }
   
     const emptyObj = {
       clave: "",
@@ -49,7 +41,6 @@ function Pasaje(props){
   }
 
   const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
-
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -122,15 +113,17 @@ function Pasaje(props){
         setExpresiones(fixReferencias(data.data.response))
       })
     }
-    if(idExpresion != idDeExpresion){
+    console.log(idExpresion, idDeExpresion)
+    // if(idExpresion != idDeExpresion){
       service = "/referencias/obtieneReferencias/" + idDeExpresion
       webService(service, "GET", {}, (data) => {
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
         setReferencias(data.data.response)
+        setIdExpresion(idDeExpresion)
       })
-    }else{
-      setReferenciaSeleccionada(findReferencias(referencias, idDeLaReferencia))
-    }  
+    // }else{
+      // setReferenciaSeleccionada(findReferencias(referencias, idDeLaReferencia))
+    // }  
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
 
   return(
@@ -155,31 +148,31 @@ function Pasaje(props){
       </IconButton>
       }
       <Grid container>
-            <Grid item xs={12}>
-              <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
-            </Grid>
-            <Grid item xs={3} className={classNames([{"panelIzquierdoEscondido" : panelIzquierdo==true}])}>
-              <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
-              language={props.language} setLanguage={props.setLanguage} 
-              />
-              <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
-                setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-                setReferenciaSeleccionada={setReferenciaSeleccionada} 
-              />
-            </Grid>
-            <Grid item xs={panelDerecho ? panelIzquierdo ? 12 : 9 : 6 && panelIzquierdo ? 9 : 6}>
-                <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
-                idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo}
-                />
-                <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
-            </Grid>
-            <Grid item xs={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}])}>
-              <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
-              expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
-              expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-              lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
-              />
-            </Grid>
+        <Grid item xs={12}>
+          <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
+        </Grid>
+        <Grid item xs={3} className={classNames([{"panelIzquierdoEscondido" : panelIzquierdo==true}])}>
+          <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
+          language={props.language} setLanguage={props.setLanguage} 
+          />
+          <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
+            setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
+            setReferenciaSeleccionada={setReferenciaSeleccionada} 
+          />
+        </Grid>
+        <Grid item xs={panelDerecho ? panelIzquierdo ? 12 : 9 : 6 && panelIzquierdo ? 9 : 6}>
+            <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
+            idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo}
+            />
+            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
+        </Grid>
+        <Grid item xs={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}])}>
+          <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
+          expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
+          expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
+          lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
+          />
+        </Grid>
       </Grid>
     </div>
     )
