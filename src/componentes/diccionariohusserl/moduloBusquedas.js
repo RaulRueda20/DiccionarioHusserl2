@@ -1,11 +1,20 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
+import SearchBusqueda from './searchBusqueda';
+import SelectorBusqueda from './selectorBusqueda';
+
 
 function moduloBusquedas(props){
     return(
-        <Typography>
-            Modulo de busquedas en proceso
-        </Typography>
+        <Grid container>
+            <Grid item xs={9}>
+                <SearchBusqueda/>
+            </Grid>
+            <Grid item xs={3}>
+                <SelectorBusqueda/>
+            </Grid>
+        </Grid>
     )
 }
 

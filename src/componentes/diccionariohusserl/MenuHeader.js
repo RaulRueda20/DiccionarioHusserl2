@@ -14,7 +14,7 @@ import Info from '@material-ui/icons/Info';
 import Exit from '@material-ui/icons/ExitToApp';
 import PageviewIcon from '@material-ui/icons/Pageview';
 
-import {menuDiccionario, menuAcercaDe, menuGuia, menuSalir, toolTipMenuPrincipal} from '../../js/Language';
+import {menuDiccionario, menuAcercaDe, menuGuia, menuSalir, toolTipMenuPrincipal, busquedas} from '../../js/Language';
 
 class MenuHeader extends React.Component{
   state = { anchorEl : null  }
@@ -67,7 +67,7 @@ class MenuHeader extends React.Component{
               <ListItemIcon>
                 <PageviewIcon />
               </ListItemIcon>
-              <ListItemText primary="Busquedas"/>
+              <ListItemText primary={busquedas(this.props.lang)}/>
             </MenuItem>
           </Link>
           <Link to={`${match.url}/acercade`}>

@@ -668,9 +668,24 @@ const idiomaConsultas= lang => {
   }
 }
 
+const busquedas= lang => {
+  switch (lang) {
+    case "es":
+      return "Busquedas"
+    case "en":
+      return "Search"
+    case "fr":
+      return "Recherche"
+    case "al":
+      return "Suche"
+    case "ca":
+      return "Cerca"
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
   menuAcercaDe, menuGuia, menuSalir, menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, 
   menuDerechoJerarquiaExpresionesDerivadas, menuDerechoReferenciasConsultadas, menuDerechoVerTambien, busquedaPorLetra,
-  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas}
+  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas, busquedas}
