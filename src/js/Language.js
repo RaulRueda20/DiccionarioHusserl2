@@ -638,10 +638,39 @@ const guia= lang => {
   }
 }
 
+const descarga= lang => {
+  switch (lang) {
+    case "es":
+      return "Descargar consulta"
+    case "en":
+      return "Lookup Download"
+    case "fr":
+      return "Consultation télécharger"
+    case "al":
+      return "Suche Herunterladen"
+    case "ca":
+      return "Cerca de descàrrega"
+  }
+}
+
+const idiomaConsultas= lang => {
+  switch (lang) {
+    case "es":
+      return "Idioma de consultas"
+    case "en":
+      return "Query Language"
+    case "fr":
+      return "Langage de requête"
+    case "al":
+      return "Abfragesprache"
+    case "ca":
+      return "Idioma de consultes"
+  }
+}
 
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
   menuAcercaDe, menuGuia, menuSalir, menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, 
   menuDerechoJerarquiaExpresionesDerivadas, menuDerechoReferenciasConsultadas, menuDerechoVerTambien, busquedaPorLetra,
-  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia}
+  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas}

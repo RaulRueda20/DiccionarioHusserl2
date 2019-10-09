@@ -9,7 +9,8 @@ import { withStyles } from '@material-ui/styles';
 import BanderaPasajes from './BanderaPasajes';
 import PasajesRenderizados from './PasajesRenderizados';
 import ModalDescargas from './ModalDescargas';
-import PanelExpresionIzquierdo from './PanelExpresionIzquierdo';
+
+import {descarga} from '../../../js/Language';
 
 const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
@@ -39,7 +40,7 @@ function clickHandleDescargas(){
       <Grid container justify="center" alignItems="center" alignContent="center" style={{borderRight: "1px double lightgrey",
     borderLeft: "1px double lightgrey"}}>
         <Grid item xs={1}>
-          <Tooltip title={"Descargar pasaje"}>
+          <Tooltip title={descarga(props.lang)}>
             <IconButton size="small" className="iconosIluminados" onClick={clickHandleDescargas}>
               <GetAppIcon fontSize="large"/>
             </IconButton>
@@ -49,7 +50,7 @@ function clickHandleDescargas(){
           <Typography variant="h2">{props.languageP=="al" ? tituloPasaje.expresion_original : tituloPasaje.expresion_traduccion}</Typography>
         </Grid>
         <Grid item xs={1}>
-          <BanderaPasajes languageP={props.languageP} setLanguageP={props.setLanguageP}/>
+          <BanderaPasajes languageP={props.languageP} setLanguageP={props.setLanguageP} lang={props.lang}/>
         </Grid>
       </Grid>
       <Grid container>

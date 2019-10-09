@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/styles';
 import es from "../../../Imagenes/spain.png";
 import al from "../../../Imagenes/germany.png";
 
+import {idiomaConsultas} from '../../../js/Language';
+
 const bandIn = {
   imagenesBandera:{
     width: "30px !important",
@@ -33,7 +35,7 @@ function BanderaPasajes(props){
 
   return(
       <div>
-        <Tooltip title={"Idioma de los pasajes"}>
+        <Tooltip title={idiomaConsultas(props.lang)}>
         {props.languageP == 'es' ?
           <Button className={classes.imagenesBandera} onClick={clickChangeLanguageAlBP}><img className="banderaPasajes" src={al}/></Button>
           : <Button className={classes.imagenesBandera} onClick={clickChangeLanguageEsBP}><img className="banderaPasajes" src={es}/></Button>}
