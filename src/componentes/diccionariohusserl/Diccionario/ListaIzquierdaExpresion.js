@@ -24,6 +24,8 @@ export default function ListaIzquierdaExpresiones(props){
       localStore.setObjects("referenciasConsultadas",store)
     }
     props.setIdExpresion(expresionClickeada)
+    props.setExpanded1(true)
+    props.setExpanded2(true)
   }
 
 

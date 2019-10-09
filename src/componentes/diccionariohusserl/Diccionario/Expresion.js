@@ -28,18 +28,7 @@ function Expresion(props){
   const [expanded3, setExpanded3] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
   
-  const emptyObj = {
-    clave: "",
-    epretty: "",
-    expresion_original: "",
-    expresion_traduccion: "",
-    id: null,
-    orden: null,
-    ref_original: "",
-    ref_traduccion: "",
-    refid: "",
-    tpretty: ""
-}
+  
 
 const fixReferencias = (referencias) => {
   var expresiones=[]

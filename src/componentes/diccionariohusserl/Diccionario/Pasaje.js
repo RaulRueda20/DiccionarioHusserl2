@@ -27,21 +27,6 @@ function Pasaje(props){
   const [panelIzquierdo,setPanelIzquierdo]=React.useState(false);
   const [panelDerecho, setPanelDerecho]=React.useState(false);
   
-    const emptyObj = {
-      clave: "",
-      epretty: "",
-      expresion_original: "",
-      expresion_traduccion: "",
-      id: null,
-      orden: null,
-      ref_original: "",
-      ref_traduccion: "",
-      refid: "",
-      tpretty: ""
-  }
-
-  const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
-  
   const fixReferencias = (referencias) => {
     var expresiones=[]
     var posicActual = -1
@@ -157,7 +142,7 @@ function Pasaje(props){
           />
           <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
             setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-            setReferenciaSeleccionada={setReferenciaSeleccionada} 
+            setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2}
           />
         </Grid>
         <Grid item xs={panelDerecho ? panelIzquierdo ? 12 : 9 : 6 && panelIzquierdo ? 9 : 6}>
