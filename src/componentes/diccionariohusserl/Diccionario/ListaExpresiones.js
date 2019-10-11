@@ -1,6 +1,6 @@
 import  React from 'react';
-import PanelExpresion from './PanelExpresion';
 
+import PanelExpresion from './PanelExpresion';
 
 import * as localStore from '../../../js/localStore';
 
@@ -34,7 +34,6 @@ export default function ListaExpresiones(props){
       setPanelesAbiertos(expresionesAbiertas)
   }
   
-
   return (
     <div className="list-container">
       <ul>

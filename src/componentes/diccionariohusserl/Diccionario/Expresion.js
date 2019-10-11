@@ -28,8 +28,6 @@ function Expresion(props){
   const [expanded3, setExpanded3] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
   
-  
-
 const fixReferencias = (referencias) => {
   var expresiones=[]
   var posicActual = -1

@@ -472,3 +472,27 @@ hr{
 .panelDerechoEscondido{
   display: none;
 }
+
+.listaVistaBusqueda{
+  display: none;
+  border-bottom: 1px lightgray solid;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  color: rgba(80, 80, 80);
+}
+
+.contenedorBusqueda{
+  background-color: rgb(230,230,230);
+  margin: 10px 20px;
+  padding: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(91vh - 160px) !important;
+}
+
+.ulBusqueda{
+  height: calc(100vh - 9vh - 31px) !important;
+}
+
+.tituloResultados{
+  margin: 10px !important;
+}

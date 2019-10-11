@@ -25,7 +25,7 @@ const useStyle1=makeStyles(theme=>({
         backgroundColor: amber[700]
     },
     icon:{
-        fonySize:20,
+        fontSize:20,
     },
     iconVariant:{
         opacity: 0.9,
