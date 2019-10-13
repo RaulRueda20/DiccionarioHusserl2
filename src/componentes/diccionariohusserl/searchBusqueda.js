@@ -31,15 +31,14 @@ function SearchBusqueda(props){
         var expresionBuscada = busqueda;
         var service = "/expresiones/getAllList"
         webService(service, "GET", {}, (data) => {
-            props.setExpresionesEncontradas(data.data.response)
-        })
-        props.expresionesEncontradas.map(expresionEncontrada=>{
-            var expresionNombre=expresionEncontrada.t_term_es +  expresionEncontrada.t_term_de +  expresionEncontrada.t_id;
-            var expresionEncontradaB= expresionNombre.indexOf(expresionBuscada);
-            document.getElementById("busqueda"+expresionEncontrada.t_id).classList.remove("listaVistaBusqueda")
-            if (expresionEncontradaB == -1){
-                document.getElementById("busqueda"+expresionEncontrada.t_id).className += " listaVistaBusqueda";
+            var expresionesEncontradas = []
+            var expresiones = data.data.response
+            for(var i in expresiones){
+                var expresionNombre=expresiones[i].t_term_es +  expresiones[i].t_term_de +  expresiones[i].t_id;
+                if(expresionNombre.indexOf(expresionBuscada) > -1) expresionesEncontradas.push(expresiones[i])
             }
+            props.setExpresionesEncontradas(expresionesEncontradas)
+            if(expresionesEncontradas.length > 0) props.setIdExpresionSeleccionada(expresionesEncontradas[0].t_id)
         })
     }
 

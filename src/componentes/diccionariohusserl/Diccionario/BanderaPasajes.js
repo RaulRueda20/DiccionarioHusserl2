@@ -22,7 +22,6 @@ const bandIn = {
 function BanderaPasajes(props){
   const {classes} = props;
 
-  var language=props.languageP
   var setLanguage=props.setLanguageP
 
   const clickChangeLanguageEsBP=()=>{

@@ -13,38 +13,24 @@ import { withStyles } from '@material-ui/styles';
 
 const seleccion={
     selector:{
-        margin:"30px 40px"
+        marginTop:"30px",
     }
 }
 
 function SelectorBusqueda(props){
     const {classes}=props;
-    const [tipoBusquedas,settipoBusquedas]=React.useState([]);
 
-    // React.useEffect(() => {
-    //     axios({
-    //         method:'GET',
-    //         url:prepaServer + "usuarios/all",
-    //         responseType:'json',
-    //         headers: {
-    //             "Content-Type" : "application/json",
-    //             "Authorization" : "Token " + store.getObject("token")
-    //         }
-    //     }).then(response => {
-    //         setUsuarios(response.data)
-    //     }).catch(err => {
-    //         console.log("error", err)
-    //     })
-    // }, [true])
-
+    function handleChange(event){
+        props.setTipoBusqueda(event.target.value)
+    }
 
     return(
         <FormControl className={classes.selector} fullWidth>
             <InputLabel htmlFor="Busquedas">Tipo de busquedas</InputLabel>
             <Select
                 fullWidth
-                value={tipoBusquedas}
-                // onChange={props.handleChange}
+                value={props.tipoBusqueda}
+                onChange={handleChange}
                 // inputProps={{
                 //     name: '',
                 //     id: 'usuario-simple',
@@ -53,14 +39,11 @@ function SelectorBusqueda(props){
                 <MenuItem value="">
                     <em>General</em>
                 </MenuItem>
-                <MenuItem value="Letra">
-                    Por  letra
-                </MenuItem>
                 <MenuItem value="Titulo">
-                    Por  titulo
+                    Dentro  titulo
                 </MenuItem>
                 <MenuItem value="Referencia">
-                    Por  referencia
+                    Dentro  referencia
                 </MenuItem>
                 <MenuItem value="Pasajes">
                     Dentro de los pasajes

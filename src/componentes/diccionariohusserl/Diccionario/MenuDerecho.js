@@ -72,18 +72,6 @@ function MenuDerecho(props){
   const [hijos,setHijos]=React.useState([]);
   const [padres,setPadres]=React.useState([]);
 
-  // const handleChange = panel => (event, newExpanded) => {
-  //   var panelesExpandidos = expanded
-  //   if(panelesExpandidos.indexOf(panel) > -1){
-  //     panelesExpandidos.splice(panelesExpandidos.indexOf(panel), 1)
-  //   }else{
-  //     panelesExpandidos.push(panel)
-  //   }
-  //   // console.log(panelesExpandidos)
-  //   setExpanded(panelesExpandidos);
-  //   // console.log(expanded.indexOf('panel1') != -1)
-  // };
-
   const paintJerarquia = (lista) => {
     var lastString = ""
     for(var i in lista){

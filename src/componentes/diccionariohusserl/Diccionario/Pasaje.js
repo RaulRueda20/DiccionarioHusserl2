@@ -92,13 +92,11 @@ function Pasaje(props){
     var idDeLaReferencia=props.match.params.id;
     var service = "/expresiones/" + props.language + "/" + props.letraMain
     if(pasajeService != service){
-      console.log("Re Rendering")
       setPasajeService(service)
       webService(service, "GET", {}, (data) => {
         setExpresiones(fixReferencias(data.data.response))
       })
     }
-    console.log(idExpresion, idDeExpresion)
     // if(idExpresion != idDeExpresion){
       service = "/referencias/obtieneReferencias/" + idDeExpresion
       webService(service, "GET", {}, (data) => {

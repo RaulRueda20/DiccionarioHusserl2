@@ -3,8 +3,6 @@ import Grid from '@material-ui/core/Grid';
 
 const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
-const rows = []
-
 function PasajesRenderizados(props){
     const {classes}=props;
     const [pasaje, setPasaje] = React.useState(emptyPasaje);
@@ -12,7 +10,6 @@ function PasajesRenderizados(props){
     React.useEffect(() => {
         var pasaje_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
         setPasaje(pasaje_original)
-        console.log(props.cerrado)
     }, [props.referenciaSeleccionada])
 
     function htmlPasajeOriginal(){

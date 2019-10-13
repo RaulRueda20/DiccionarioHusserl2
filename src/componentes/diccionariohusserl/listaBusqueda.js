@@ -5,10 +5,16 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-function ResultadoBusqueda(props){
+function ListaBusqueda(props){
 
+    function clickCambioIdBuscado(event){
+        var idSeleccionado = event.currentTarget.id
+        props.setIdExpresionSeleccionada(idSeleccionado)
+
+    }
+    
     return(
-        <Grid container>
+        <Grid container justify="center" alignItems="center">
             <Grid item xs={12}>
                 <Typography variant="h3" className="tituloResultados"> Resultado de busqueda</Typography>
             </Grid>
@@ -18,9 +24,9 @@ function ResultadoBusqueda(props){
                         <li id={"busqueda"+expresionEncontrada.t_id}
                             value={expresionEncontrada.t_id}
                             key={expresionEncontrada.t_id+"-"+index}
-                            className="listaVistaBusqueda"
+                            className="liBusqueda"
                         >
-                            <Typography variant="h6">
+                            <Typography onClick={event => clickCambioIdBuscado(event)} id={expresionEncontrada.t_id}>
                                 {expresionEncontrada.t_term_de}
                             </Typography>
                         </li>
@@ -31,4 +37,4 @@ function ResultadoBusqueda(props){
     )
 }
 
-export default ResultadoBusqueda;
+export default ListaBusqueda;

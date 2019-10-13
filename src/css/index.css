@@ -483,7 +483,6 @@ hr{
 .contenedorBusqueda{
   background-color: rgb(230,230,230);
   margin: 10px 20px;
-  padding: 20px;
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(91vh - 160px) !important;
@@ -495,4 +494,60 @@ hr{
 
 .tituloResultados{
   margin: 10px !important;
+}
+
+.liBusqueda{
+  border-bottom: dashed lightgray 1px;
+  padding: 20px !important;
+}
+
+.liBusqueda:hover{
+  color: rgb(7, 142, 184);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.pasajesRenderizadosBusqueda{
+  padding: 15px 15px 15px 15px;
+  height: calc(100vh - 390px) !important;
+  overflow: auto;
+  border-right: 1px double lightgrey;
+  border-left: 1px double lightgrey;
+  border-top: 1px double lightgrey;
+}
+
+.pasajesRenderizadosVistaBusqueda{
+  border-top: solid lightgray 1px;
+}
+
+.jerarquiaBusqueda{
+  border-right: dashed lightgray 1px;
+  margin-left: 20px !important;
+  margin-top: 20px !important;
+}
+
+.consultaDePasajesB{
+  max-height: 40px;
+  padding: 4px 0 0 16px !important;
+  overflow: auto;
+}
+
+.consultaDePasajesB:hover{
+  color: rgb(7, 142, 184);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.ulDeBusqueda{
+  max-height: 55px;
+  margin-top: 10px;
+  background-color: rgba(20,10,10,.0.08);
+  overflow: scroll;
+}
+
+.ulDeBusquedaVerTambien{
+  max-height: 67px !important;
+  margin-top: 10px;
+  background-color: rgba(20,10,10,.0.08);
+  overflow: scroll;
 }

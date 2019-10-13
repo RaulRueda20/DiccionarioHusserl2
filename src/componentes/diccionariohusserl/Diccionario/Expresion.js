@@ -86,7 +86,7 @@ const fixReferencias = (referencias) => {
     }
   }, [letraMain, language])
 
-  console.log("letraMain", letraMain)
+  console.log("language", language)
 
   function getJerarquia(event){
     console.log("evento", event.currentTarget.id)
@@ -94,6 +94,8 @@ const fixReferencias = (referencias) => {
     setExpanded1(true)
     setExpanded2(true)
   }
+
+  
 
   return(
     <div>
@@ -103,7 +105,7 @@ const fixReferencias = (referencias) => {
         </Grid>
         <Grid item xs={1} align="center" style={{borderRight:"1px rgb(240, 240, 240) solid"}}>
             <LetraIndice letraMain={letraMain}/>
-            <BanderaButon language={props.language} setLanguage={props.setLanguage} lang={props.lang}/>
+            <BanderaButon language={language} setLanguage={setLanguage} lang={props.lang}/>
         </Grid>
         <Grid item xs={8} aling='center'>
             <ListaExpresiones expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 

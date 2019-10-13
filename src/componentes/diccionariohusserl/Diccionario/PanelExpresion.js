@@ -23,7 +23,7 @@ export default function PanelExpresion(props){
         <Grid container justify="center" alignItems="center">
             <Grid item xs={10} id={props.index} onClick={props.clickHandleVista}>
                 <Link to={`/husserl/pasaje/${props.expresion.id}/${props.expresion.referencias[0].refid}`}>
-                    <p className={"parrafo"}>{props.expresion.expresion + '//' + props.expresion.traduccion}</p>
+                    <p className="parrafo">{props.expresion.expresion + '//' + props.expresion.traduccion}</p>
                 </Link>
             </Grid>
             <Grid item id={props.expresion.id} xs={1} onClick={()=>setOpen(!open)}>
