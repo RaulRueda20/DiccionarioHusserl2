@@ -5,9 +5,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
-
-//Elements
-import JerarquiaBusqueda from './jerarquiaBusqueda'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 //Other req
 import {webService} from '../../js/webServices';
@@ -33,7 +32,6 @@ function ResultadoBusqueda(props){
     React.useEffect(() => {
         var service = "/referencias/obtieneReferencias/" + props.idExpresionSeleccionada
         webService(service, "GET", {}, (data) => {
-            console.log(data)
             setReferencias(data.data.response)
             setReferenciaSeleccionada(data.data.response.length >= 1 ? data.data.response[0] : emptyPasajeB)
         })
@@ -56,8 +54,6 @@ function ResultadoBusqueda(props){
         }
     }, [props.idExpresionSeleccionada, lang])
 
-    console.log("lista",listaVerTambien)
-
     function htmlPasajeOriginal(){
         return {__html:referenciaSeleccionada.pasaje_original}
     }
@@ -74,9 +70,42 @@ function ResultadoBusqueda(props){
                 <Typography variant="h3" className={classes.typosTitulos}>{referenciaSeleccionada.expresion_traduccion}</Typography>
                 <div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div>
             </Grid> 
-            <Grid item xs={12}>
-                <JerarquiaBusqueda idExpresionSeleccionada={props.idExpresionSeleccionada} hijos={hijos} padres={padres} 
-                lang={lang} setLang={setLang} listaVerTambien={listaVerTambien}/>
+            <Grid item xs={5} className="jerarquiaBusquedaIzquierda">
+                <Typography variant="h5">Jerarquia</Typography>
+                <Typography variant="caption">Derivada de:</Typography>
+                <ul className="ulDeBusqueda" key={padres.refid}>
+                {padres.map((padre, index)=>(
+                    <li key={padre.id+"-"+index}>
+                        <Typography variant="h6" className="consultaDePasajesB">{padre.expresion}</Typography>
+                    </li>
+                ))}
+                </ul>
+                <Typography variant="caption">Expresiones derivadas:</Typography>
+                <ul className="ulDeBusqueda" key={hijos.refid}>
+                {hijos.map((hijo, index)=>(
+                    <li key={hijo.id+"-"+index}>
+                        <Typography variant="h6" className="consultaDePasajesB">{hijo.expresion}</Typography>
+                    </li>
+                ))}
+                </ul>
+            </Grid>
+            <Grid item xs={5} className="jerarquiaBusquedaDerecha">
+                <Typography variant="h5">Ver tambien</Typography>
+                <ul className="ulDeBusquedaVerTambien" key={listaVerTambien.id}>
+                {listaVerTambien.map((lista, index)=>(
+                    <li key={lista.id+"-"+index}>
+                        <Typography variant="h6" className="consultaDePasajesB">{lista.expresion + "  //  " + lista.traduccion  + "  //  " + lista.id}</Typography>
+                    </li>
+                ))}
+                </ul>
+            </Grid>
+            <Grid item xs={1}>
+                <FormControlLabel
+                    value="al"
+                    control={<Switch color="primary" checked={lang} onChange={event =>setLang(!lang)}/>}
+                    label={lang ? "Aleman" : "Español"}
+                    labelPlacement="end"
+                />
             </Grid>
         </Grid>
     )

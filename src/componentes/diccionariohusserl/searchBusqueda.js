@@ -9,8 +9,11 @@ import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
+//Other request
 import {webService} from '../../js/webServices';
+import classNames from 'classnames';
 
 const search={
     buscador:{
@@ -24,23 +27,58 @@ const search={
 
 function SearchBusqueda(props){
     const {classes}=props;
-    const [busqueda, setBusqueda] = React.useState("")
+    const [busqueda, setBusqueda] = React.useState("");
+    const [loading, setLoading]=React.useState(false);
 
+    const fixPasajes = (pasajes) => {
+        var pasajesArreglados = [];
+        var posicionActual = -1;
+        var pasajeActual = "";
+        var i = 0;
+        console.log("pasajes", pasajes.length)
+        while(i < pasajes.length){
+            if(pasajeActual != pasajes[i].ref_id){
+                posicionActual++
+                pasajeActual = pasajes[i].ref_id;
+                pasajesArreglados.push({
+                    ref_id: pasajes[i].ref_id,
+                    ref_original: pasajes[i].ref_original,
+                    ref_traduccion: pasajes[i].ref_traduccion,
+                    expresiones: []
+                })
+                pasajesArreglados[posicionActual].expresiones.push({
+                    orden: pasajes[i].orden,
+                    expresion_original: pasajes[i].expresion_original,
+                    expresion_traduccion: pasajes[i].expresion_traduccion
+                })
+                i ++
+            }else{
+                pasajesArreglados[posicionActual].expresiones.push({
+                    orden: pasajes[i].orden,
+                    expresion_original: pasajes[i].expresion_original,
+                    expresion_traduccion: pasajes[i].expresion_traduccion
+                })
+                i ++
+            }
+        }
+        console.log("pasajesArreglados",pasajesArreglados)
+        return pasajesArreglados
+    }
+    
     const handleChangeBusqueda=(event)=>{
         event.preventDefault()
-        var expresionBuscada = busqueda;
-        var service = "/expresiones/getAllList"
-        webService(service, "GET", {}, (data) => {
-            var expresionesEncontradas = []
+        setLoading(true)
+        var serviceb = "/expresiones/busqueda"
+        webService(serviceb, "POST", {parametro:busqueda}, (data) => {
+            var expresionesArregladas = []
             var expresiones = data.data.response
-            for(var i in expresiones){
-                var expresionNombre=expresiones[i].t_term_es +  expresiones[i].t_term_de +  expresiones[i].t_id;
-                if(expresionNombre.indexOf(expresionBuscada) > -1) expresionesEncontradas.push(expresiones[i])
-            }
-            props.setExpresionesEncontradas(expresionesEncontradas)
-            if(expresionesEncontradas.length > 0) props.setIdExpresionSeleccionada(expresionesEncontradas[0].t_id)
+            expresionesArregladas = fixPasajes(expresiones)
+            props.setExpresionesEncontradas(expresionesArregladas)
+            console.log("expresionesEncontradas", props.expresionnesEncontradas)
         })
+        setLoading(false)
     }
+
 
     return (
         <form onSubmit={handleChangeBusqueda}>
@@ -65,6 +103,7 @@ function SearchBusqueda(props){
                     </IconButton>
                 </Grid>
             </Grid>
+            <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
         </form>
     )
 }

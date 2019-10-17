@@ -21,6 +21,9 @@ const moduloBusqueda={
     },
     gridSelectorLetras:{
         paddingRight:"30px !important"
+    },
+    gridResultados:{
+        maxWidth: "71% !important"
     }
 }
 
@@ -32,7 +35,6 @@ function moduloBusquedas(props){
     const [idExpresionSeleccionada, setIdExpresionSeleccionada]=React.useState([]);
 
     React.useEffect(() => {
-        
     }, [true])
 
     return(
@@ -47,14 +49,21 @@ function moduloBusquedas(props){
             <Grid item xs={2} className={classes.gridSelectorBusqueda}>
                 <SelectorBusqueda tipoBusqueda={tipoBusqueda} setTipoBusqueda={setTipoBusqueda}/>
             </Grid>
-            <Grid item xs={3}>
-                <ListaBusqueda expresionesEncontradas={expresionesEncontradas} idExpresionSeleccionada={idExpresionSeleccionada} 
-                setIdExpresionSeleccionada={setIdExpresionSeleccionada}
-                />
-            </Grid>
-            <Grid item xs={9}>
-                <ResultadoBusqueda idExpresionSeleccionada={idExpresionSeleccionada} setIdExpresionSeleccionada={setIdExpresionSeleccionada}/>
-            </Grid>
+            {
+                expresionesEncontradas.length < 1 ? null :
+                <Grid item xs={3}>
+                    <ListaBusqueda expresionesEncontradas={expresionesEncontradas} idExpresionSeleccionada={idExpresionSeleccionada} 
+                    setIdExpresionSeleccionada={setIdExpresionSeleccionada}
+                    />
+                </Grid>
+            }
+
+            {
+                expresionesEncontradas.length < 1 ? null :
+                <Grid item xs={9} className={classes.gridResultados}>
+                    <ResultadoBusqueda idExpresionSeleccionada={idExpresionSeleccionada} setIdExpresionSeleccionada={setIdExpresionSeleccionada}/>
+                </Grid>
+            }
         </Grid>
     )
 }

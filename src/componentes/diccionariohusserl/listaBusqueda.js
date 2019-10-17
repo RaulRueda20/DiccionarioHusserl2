@@ -12,7 +12,7 @@ function ListaBusqueda(props){
         props.setIdExpresionSeleccionada(idSeleccionado)
 
     }
-    
+
     return(
         <Grid container justify="center" alignItems="center">
             <Grid item xs={12}>
@@ -27,7 +27,7 @@ function ListaBusqueda(props){
                             className="liBusqueda"
                         >
                             <Typography onClick={event => clickCambioIdBuscado(event)} id={expresionEncontrada.t_id}>
-                                {expresionEncontrada.t_term_de}
+                                {expresionEncontrada.pasajeal + "  /  " + expresionEncontrada.pasajees}
                             </Typography>
                         </li>
                     ))}

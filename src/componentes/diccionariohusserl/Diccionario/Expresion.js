@@ -74,11 +74,13 @@ const fixReferencias = (referencias) => {
     setLoading(true)
     var service = "/expresiones/" + language + "/" + letraMain
     webService(service, "GET", {}, (data) => {
+      console.log(fixReferencias(data.data.response))
       setExpresiones(fixReferencias(data.data.response))
       if(idExpresion === ''){
         setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
       }
-    setLoading(false)
+      setLoading(false)
+      console.log("expresiones", expresiones)
     })
     if(localStore.getObjects("bienvenida")==false){
       setOpenModal(true)
@@ -86,16 +88,12 @@ const fixReferencias = (referencias) => {
     }
   }, [letraMain, language])
 
-  console.log("language", language)
-
   function getJerarquia(event){
     console.log("evento", event.currentTarget.id)
     setExpresionSeleccionada({id: event.currentTarget.id.split("/")[0], expresion:event.currentTarget.id.split("/")[1]})
     setExpanded1(true)
     setExpanded2(true)
   }
-
-  
 
   return(
     <div>
