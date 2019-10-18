@@ -10,7 +10,8 @@ import SearchBusqueda from './searchBusqueda';
 import SelectorBusqueda from './selectorBusqueda';
 import ListaBusqueda from './listaBusqueda';
 import SelectLetraBusqueda from './selectLetraBusqueda';
-import ResultadoBusqueda from './resultadoBusqueda';
+import ResultadoBusquedaExpresion from './resultadoBusquedaPorExpresion';
+import ResultadoBusquedaReferencia from './resultadoBusquedaPorReferencia';
 
 //Other req
 import {webService} from '../../js/webServices';
@@ -23,7 +24,8 @@ const moduloBusqueda={
         paddingRight:"30px !important"
     },
     gridResultados:{
-        maxWidth: "71% !important"
+        maxHeight: "79.5vh",
+        overflow: "scroll",
     }
 }
 
@@ -32,16 +34,20 @@ function moduloBusquedas(props){
     const [expresionesEncontradas,setExpresionesEncontradas]=React.useState([]);
     const [tipoBusqueda,setTipoBusqueda]=React.useState("");
     const [letraBuscada,setLetraBuscada]=React.useState("");
-    const [idExpresionSeleccionada, setIdExpresionSeleccionada]=React.useState([]);
+    const [posicionPasaje, setPosicionPasaje]=React.useState(0);
+    const [idPasaje, setIdPasaje]=React.useState("");
 
-    React.useEffect(() => {
-    }, [true])
+    // React.useEffect(() => {
+    // }, [true])
+
+
+    console.log(expresionesEncontradas)
 
     return(
         <Grid container>
             <Grid item xs={8}>
-                <SearchBusqueda expresionesEncontradas={expresionesEncontradas} setExpresionesEncontradas={setExpresionesEncontradas} idExpresionSeleccionada={idExpresionSeleccionada} 
-                setIdExpresionSeleccionada={setIdExpresionSeleccionada}/>
+                <SearchBusqueda expresionesEncontradas={expresionesEncontradas} setExpresionesEncontradas={setExpresionesEncontradas} posicionPasaje={posicionPasaje} 
+                setPosicionPasaje={setPosicionPasaje}/>
             </Grid>
             <Grid item xs={2} className={classes.gridSelectorLetras}>
                 <SelectLetraBusqueda letraBuscada={letraBuscada} setLetraBuscada={setLetraBuscada}/>
@@ -52,8 +58,9 @@ function moduloBusquedas(props){
             {
                 expresionesEncontradas.length < 1 ? null :
                 <Grid item xs={3}>
-                    <ListaBusqueda expresionesEncontradas={expresionesEncontradas} idExpresionSeleccionada={idExpresionSeleccionada} 
-                    setIdExpresionSeleccionada={setIdExpresionSeleccionada}
+                    <ListaBusqueda expresionesEncontradas={expresionesEncontradas} posicionPasaje={posicionPasaje} 
+                    setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusqueda} idPasaje={idPasaje} 
+                    setIdPasaje={setIdPasaje}
                     />
                 </Grid>
             }
@@ -61,7 +68,14 @@ function moduloBusquedas(props){
             {
                 expresionesEncontradas.length < 1 ? null :
                 <Grid item xs={9} className={classes.gridResultados}>
-                    <ResultadoBusqueda idExpresionSeleccionada={idExpresionSeleccionada} setIdExpresionSeleccionada={setIdExpresionSeleccionada}/>
+                    {/* {tipoBusqueda == "Referencia" ?
+                    <ResultadoBusquedaReferencia expresionesEncontradas={expresionesEncontradas}/>
+                    :
+                    <ResultadoBusquedaExpresion idExpresionSeleccionada={idExpresionSeleccionada} setIdExpresionSeleccionada={setIdExpresionSeleccionada}
+                    tipoBusqueda={tipoBusqueda}/>
+                    } */}
+                    {/* <ResultadoBusquedaReferencia expresionesEncontradas={expresionesEncontradas[posicionPasaje]} idPasaje={idPasaje}/> */}
+                    <ResultadoBusquedaExpresion idPasaje={idPasaje} setIdPasaje={setIdPasaje}/>
                 </Grid>
             }
         </Grid>

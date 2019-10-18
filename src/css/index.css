@@ -555,3 +555,27 @@ hr{
   background-color: rgba(20,10,10,.0.08);
   overflow: scroll;
 }
+
+.liExpresionesRelacionadas{
+  border-bottom: dashed lightgray 1px;
+  padding: 2px !important;
+}
+
+.liExpresionesRelacionadas:hover{
+  color: rgb(7, 142, 184);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.pasajesRenderizadosBusquedaPorReferencia{
+  padding: 15px 15px 15px 15px;
+  overflow: auto;
+  border-right: 1px double lightgrey;
+  border-left: 1px double lightgrey;
+  border-top: 1px double lightgrey;
+  height: 320px !important;
+}
+
+.ulExpresionesRelacionadas{
+  padding-left: 30px !important;
+}

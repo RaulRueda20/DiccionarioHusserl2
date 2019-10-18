@@ -44,24 +44,27 @@ function SearchBusqueda(props){
                     ref_id: pasajes[i].ref_id,
                     ref_original: pasajes[i].ref_original,
                     ref_traduccion: pasajes[i].ref_traduccion,
+                    ref_libro_de: pasajes[i].ref_libro_de,
+                    ref_libro_es: pasajes[i].ref_libro_es,
                     expresiones: []
                 })
                 pasajesArreglados[posicionActual].expresiones.push({
                     orden: pasajes[i].orden,
                     expresion_original: pasajes[i].expresion_original,
-                    expresion_traduccion: pasajes[i].expresion_traduccion
+                    expresion_traduccion: pasajes[i].expresion_traduccion,
+                    t_id: pasajes[i].t_id
                 })
                 i ++
             }else{
                 pasajesArreglados[posicionActual].expresiones.push({
                     orden: pasajes[i].orden,
                     expresion_original: pasajes[i].expresion_original,
-                    expresion_traduccion: pasajes[i].expresion_traduccion
+                    expresion_traduccion: pasajes[i].expresion_traduccion,
+                    t_id: pasajes[i].t_id
                 })
                 i ++
             }
         }
-        console.log("pasajesArreglados",pasajesArreglados)
         return pasajesArreglados
     }
     
@@ -72,13 +75,10 @@ function SearchBusqueda(props){
         webService(serviceb, "POST", {parametro:busqueda}, (data) => {
             var expresionesArregladas = []
             var expresiones = data.data.response
-            expresionesArregladas = fixPasajes(expresiones)
-            props.setExpresionesEncontradas(expresionesArregladas)
-            console.log("expresionesEncontradas", props.expresionnesEncontradas)
+            props.setExpresionesEncontradas(fixPasajes(expresiones))
         })
         setLoading(false)
     }
-
 
     return (
         <form onSubmit={handleChangeBusqueda}>

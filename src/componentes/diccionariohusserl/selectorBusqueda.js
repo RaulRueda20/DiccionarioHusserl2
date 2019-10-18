@@ -39,14 +39,11 @@ function SelectorBusqueda(props){
                 <MenuItem value="">
                     <em>General</em>
                 </MenuItem>
-                <MenuItem value="Titulo">
-                    Dentro  titulo
+                <MenuItem value="Expresion">
+                    Dentro  expresion
                 </MenuItem>
                 <MenuItem value="Referencia">
                     Dentro  referencia
-                </MenuItem>
-                <MenuItem value="Pasajes">
-                    Dentro de los pasajes
                 </MenuItem>
             </Select>
         </FormControl>
