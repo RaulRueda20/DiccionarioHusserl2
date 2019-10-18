@@ -36,9 +36,6 @@ function SelectorBusqueda(props){
                 //     id: 'usuario-simple',
                 // }}
             >
-                <MenuItem value="">
-                    <em>General</em>
-                </MenuItem>
                 <MenuItem value="Expresion">
                     Dentro  expresion
                 </MenuItem>

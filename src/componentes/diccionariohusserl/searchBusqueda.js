@@ -68,17 +68,63 @@ function SearchBusqueda(props){
         return pasajesArreglados
     }
     
+    const fixReferencias = (referencias) => {
+        var expresiones=[]
+        var posicActual = -1
+        var expreActual = ""
+        var i = 0
+        console.log(referencias.length)
+        while (i<referencias.length){
+            if (expreActual != referencias[i].expresion){
+                posicActual++
+                expreActual = referencias[i].expresion
+                expresiones.push({
+                    term_de : referencias[i].term_de,
+                    term_es : referencias[i].term_es,
+                    index_de: referencias[i].index_de,
+                    index_es: referencias[i].index_es,
+                    term_id: referencias[i].term_id,
+                    referencias : [],
+                })
+                expresiones[posicActual].referencias.push({
+                    ref_def_de : referencias[i].ref_def_de,
+                    ref_def_es : referencias[i].ref_def_es,
+                    ref_id : referencias[i].ref_id,
+                })
+                i++
+            }else{
+                expresiones[posicActual].referencias.push({
+                    ref_def_de : referencias[i].ref_def_de,
+                    ref_def_es : referencias[i].ref_def_es,
+                    ref_id : referencias[i].ref_id,
+                })
+            i++
+            // expresiones
+          }
+        }
+        return expresiones
+      }
+
     const handleChangeBusqueda=(event)=>{
         event.preventDefault()
         setLoading(true)
-        var serviceb = "/expresiones/busqueda"
-        webService(serviceb, "POST", {parametro:busqueda}, (data) => {
-            var expresionesArregladas = []
-            var expresiones = data.data.response
-            props.setExpresionesEncontradas(fixPasajes(expresiones))
-        })
+        if(props.tipoBusqueda=="Referencia"){
+            var serviceb = "/expresiones/busqueda"
+            webService(serviceb, "POST", {parametro:busqueda}, (data) => {
+                var referencias = data.data.response
+                props.setExpresionesEncontradas(fixPasajes(referencias))
+             })
+        }else{
+            var servicebe = "/referencias/busquedaExpresion"
+            webService(servicebe, "POST", {parametro:busqueda}, (data) => {
+                var expresiones = data.data.response
+                props.setExpresionesEncontradas(fixReferencias(expresiones))
+            })
+        }
         setLoading(false)
     }
+
+    console.log("pasajes",props.expresionesEncontradas)
 
     return (
         <form onSubmit={handleChangeBusqueda}>
@@ -88,11 +134,6 @@ function SearchBusqueda(props){
                         <InputLabel htmlFor="input-with-icon-adornment">{"Busqueda general"}</InputLabel>
                         <Input
                         id="input-with-icon-adornment"
-                        // startAdornment={
-                        //     <InputAdornment position="start">
-                        //     <SearchIcon />
-                        //     </InputAdornment>
-                        // }
                         onChange={event => setBusqueda(event.target.value)}
                     />
                     </FormControl>

@@ -29,51 +29,27 @@ function ResultadoBusquedaExpresion(props){
     const [padres,setPadres] = React.useState([]);
     const [lang, setLang] = React.useState(true);
 
-    console.log("idPasaje",props.idPasaje)
-
     React.useEffect(() => {
-        var service = "/obtieneReferenciasByRef/" + props.idPasaje
-        webService(service, "GET", {}, (data) => {
-            console.log(data)
-            // setReferencias(data.data.response)
-            // setReferenciaSeleccionada(data.data.response.length >= 1 ? data.data.response[0] : emptyPasajeB)
-        })
-        // if (props.idExpresionSeleccionada!=""){
-        //     if(lang == true){
-        //         var servicioHijosAl = "/expresiones/"+ "al" +"/hijosList/"+props.idExpresionSeleccionada;
-        //         var servicioPadresAl = "/expresiones/"+ "al" +"/abuelosList/"+props.idExpresionSeleccionada;
-        //         webService(servicioHijosAl,"GET", {}, (data) => setHijos(data.data.response))
-        //         webService(servicioPadresAl,"GET", {}, (data) => setPadres(data.data.response))
-        //     }else{
-        //         var servicioHijosEs = "/expresiones/"+ "es" +"/hijosList/"+props.idExpresionSeleccionada;
-        //         var servicioPadresEs = "/expresiones/"+ "es" +"/abuelosList/"+props.idExpresionSeleccionada
-        //         webService(servicioHijosEs,"GET", {}, (data) => setHijos(data.data.response))
-        //         webService(servicioPadresEs,"GET", {}, (data) => setPadres(data.data.response))
-        //     }
-        //     var service = "/vertambien/" + props.idExpresionSeleccionada
-        //     webService(service, "GET", {}, data => {
-        //       setListaVerTambien(data.data.response)
-        //     })
-        // }
-    }, [props.idExpresionSeleccionada, lang])
+       console.log(props.expresionSeleccionada)
+        console.log(props.expresionSeleccionada.referencias[0].ref_def_de)
+    }, [props.idPasaje, lang, props.expresionSeleccionada])
 
     function htmlPasajeOriginal(){
-        return {__html:referenciaSeleccionada.pasaje_original}
+        return {__html:props.expresionSeleccionada.referencias[0].ref_def_de}
     }
 
     function htmlPasajeTraduccion(){
-        return {__html:referenciaSeleccionada.pasaje_traduccion}
+        return {__html:props.expresionSeleccionada.referencias[0].ref_def_es}
     }
 
     return(
         <Grid container>
             <Grid item xs={12} className="pasajesRenderizadosBusqueda">
-                <Typography variant="h3"  className={classes.typosTitulos}>{referenciaSeleccionada.expresion_original}</Typography>
+            <Typography variant="h4" className={classes.typosTitulos}>{props.expresionSeleccionada.term_de+"  /  "+props.expresionSeleccionada.term_es}</Typography>
                 <div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div>
-                <Typography variant="h3" className={classes.typosTitulos}>{referenciaSeleccionada.expresion_traduccion}</Typography>
                 <div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div>
             </Grid> 
-            <Grid item xs={5} className="jerarquiaBusquedaIzquierda">
+            {/* <Grid item xs={5} className="jerarquiaBusquedaIzquierda">
                 <Typography variant="h5">Jerarquia</Typography>
                 <Typography variant="caption">Derivada de:</Typography>
                 <ul className="ulDeBusqueda" key={padres.refid}>
@@ -109,7 +85,10 @@ function ResultadoBusquedaExpresion(props){
                     label={lang ? "Aleman" : "Español"}
                     labelPlacement="end"
                 />
-            </Grid>
+            </Grid> */}
+            {/* <Grid item xs={12}>
+                <Typography>Busqueda por expresiones</Typography>
+            </Grid> */}
         </Grid>
     )
 }

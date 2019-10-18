@@ -37,17 +37,11 @@ function moduloBusquedas(props){
     const [posicionPasaje, setPosicionPasaje]=React.useState(0);
     const [idPasaje, setIdPasaje]=React.useState("");
 
-    // React.useEffect(() => {
-    // }, [true])
-
-
-    console.log(expresionesEncontradas)
-
     return(
         <Grid container>
             <Grid item xs={8}>
                 <SearchBusqueda expresionesEncontradas={expresionesEncontradas} setExpresionesEncontradas={setExpresionesEncontradas} posicionPasaje={posicionPasaje} 
-                setPosicionPasaje={setPosicionPasaje}/>
+                setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusqueda}/>
             </Grid>
             <Grid item xs={2} className={classes.gridSelectorLetras}>
                 <SelectLetraBusqueda letraBuscada={letraBuscada} setLetraBuscada={setLetraBuscada}/>
@@ -68,14 +62,12 @@ function moduloBusquedas(props){
             {
                 expresionesEncontradas.length < 1 ? null :
                 <Grid item xs={9} className={classes.gridResultados}>
-                    {/* {tipoBusqueda == "Referencia" ?
-                    <ResultadoBusquedaReferencia expresionesEncontradas={expresionesEncontradas}/>
+                    {tipoBusqueda == "Referencia" ?
+                    <ResultadoBusquedaReferencia pasajeSeleccionado={expresionesEncontradas[posicionPasaje]} idPasaje={idPasaje}/>
                     :
-                    <ResultadoBusquedaExpresion idExpresionSeleccionada={idExpresionSeleccionada} setIdExpresionSeleccionada={setIdExpresionSeleccionada}
-                    tipoBusqueda={tipoBusqueda}/>
-                    } */}
-                    {/* <ResultadoBusquedaReferencia expresionesEncontradas={expresionesEncontradas[posicionPasaje]} idPasaje={idPasaje}/> */}
-                    <ResultadoBusquedaExpresion idPasaje={idPasaje} setIdPasaje={setIdPasaje}/>
+                    <ResultadoBusquedaExpresion expresionSeleccionada={expresionesEncontradas[posicionPasaje]} idPasaje={idPasaje} setIdPasaje={setIdPasaje}/>
+                    }
+                    {/* <ResultadoBusquedaExpresion idPasaje={idPasaje} setIdPasaje={setIdPasaje}/> */}
                 </Grid>
             }
         </Grid>
