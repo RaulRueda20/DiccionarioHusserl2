@@ -485,12 +485,12 @@ hr{
   margin: 10px 20px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(91vh - 160px) !important;
+  height: 74vh;
 }
 
-.ulBusqueda{
+/* .ulBusqueda{
   height: calc(100vh - 9vh - 31px) !important;
-}
+} */
 
 .tituloResultados{
   margin: 10px !important;
@@ -521,13 +521,13 @@ hr{
 
 .jerarquiaBusquedaIzquierda{
   border-right: dashed lightgray 1px;
-  margin-left: 20px !important;
-  margin-top: 20px !important;
+  padding-left: 20px !important;
+  padding-top: 20px !important;
 }
 
 .jerarquiaBusquedaDerecha{
-  margin-left: 20px !important;
-  margin-top: 20px !important;
+  padding-left: 20px !important;
+  padding-top: 20px !important;
 }
 
 .consultaDePasajesB{
@@ -543,15 +543,12 @@ hr{
 }
 
 .ulDeBusqueda{
-  max-height: 105px;
-  margin-top: 10px;
+  max-height: 100vh !important;
   background-color: rgba(20,10,10,.0.08);
   overflow: scroll;
 }
 
 .ulDeBusquedaVerTambien{
-  max-height: 105px !important;
-  margin-top: 10px;
   background-color: rgba(20,10,10,.0.08);
   overflow: scroll;
 }
@@ -578,4 +575,12 @@ hr{
 
 .ulExpresionesRelacionadas{
   padding-left: 30px !important;
+}
+
+.case{
+  opacity: .4;
+}
+
+.caseSeleccionado{
+  opacity: 1;
 }

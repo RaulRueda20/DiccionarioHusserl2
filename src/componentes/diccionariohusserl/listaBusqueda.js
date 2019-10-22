@@ -42,9 +42,9 @@ function ListaBusqueda(props){
                     <ul className="ulBusqueda">
                         {props.expresionesEncontradas.map((expresionEncontradaPorExpresion,index)=>(
                             <li
-                                id={"busqueda"+expresionEncontradaPorExpresion.ref_id}
-                                value={expresionEncontradaPorExpresion.ref_id+"-"+index}
-                                key={expresionEncontradaPorExpresion.ref_id+"-"+index}
+                                id={expresionEncontradaPorExpresion.term_id+"-"+index}
+                                value={expresionEncontradaPorExpresion.term_id+"-"+index}
+                                key={expresionEncontradaPorExpresion.term_id+"-"+index}
                                 className="liBusqueda"
                             >
                                 <Typography onClick={event => clickCambioIdBuscado(event)} id={expresionEncontradaPorExpresion.term_id+"/"+index}>

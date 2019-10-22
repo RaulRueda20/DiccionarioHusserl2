@@ -13,8 +13,12 @@ import {webService} from '../../js/webServices';
 
 const resultadoBusqueda={
     typosTitulos:{
-        marginTop:"15px !important",
-        marginBottom:"15px !important"
+        paddingTop:"15px !important",
+        paddingBottom:"15px !important"
+    },
+    contenedorDeResultados:{
+        maxWidth: "100%",
+        maxHeight: "100%"
     }
 }
 
@@ -30,9 +34,39 @@ function ResultadoBusquedaExpresion(props){
     const [lang, setLang] = React.useState(true);
 
     React.useEffect(() => {
-       console.log(props.expresionSeleccionada)
-        console.log(props.expresionSeleccionada.referencias[0].ref_def_de)
+        console.log("idPasaje",props.idPasaje)
+
+        if(props.idPasaje==""){
+            var service = "/vertambien/" + props.expresionSeleccionada.term_id
+            webService(service, "GET", {}, data => {
+                setListaVerTambien(data.data.response)
+                webService(("/expresiones/"+(lang ? "al" : "es")+"/hijosList/"+props.expresionSeleccionada.term_id),"GET", {}, (data) => {
+                    console.log("hijos",data.data.response)
+                    setHijos(data.data.response)
+                })
+                webService(("/expresiones/"+(lang ? "al" : "es")+"/abuelosList/"+props.expresionSeleccionada.term_id), "GET", {}, (data2) =>{
+                    console.log("padres",data2.data.response)
+                    setPadres(data2.data.response)
+                })
+            })
+        }else{
+            var service = "/vertambien/" + props.idPasaje
+            webService(service, "GET", {}, data => {
+                setListaVerTambien(data.data.response)
+                webService(("/expresiones/"+(lang ? "al" : "es")+"/hijosList/"+props.idPasaje),"GET", {}, (data) => {
+                    console.log("hijos",data.data.response)
+                    setHijos(data.data.response)
+                })
+                webService(("/expresiones/"+(lang ? "al" : "es")+"/abuelosList/"+props.idPasaje), "GET", {}, (data2) =>{
+                    setPadres(data2.data.response)
+                    console.log("padres",data2.data.response)
+                })
+            })
+        }
+        
     }, [props.idPasaje, lang, props.expresionSeleccionada])
+
+
 
     function htmlPasajeOriginal(){
         return {__html:props.expresionSeleccionada.referencias[0].ref_def_de}
@@ -43,16 +77,16 @@ function ResultadoBusquedaExpresion(props){
     }
 
     return(
-        <Grid container>
+        <Grid container className={classes.contenedorDeResultados}>
             <Grid item xs={12} className="pasajesRenderizadosBusqueda">
-            <Typography variant="h4" className={classes.typosTitulos}>{props.expresionSeleccionada.term_de+"  /  "+props.expresionSeleccionada.term_es}</Typography>
+                <Typography variant="h4" className={classes.typosTitulos}>{props.expresionSeleccionada.term_de+"  /  "+props.expresionSeleccionada.term_es}</Typography>
                 <div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div>
                 <div dangerouslySetInnerHTML={htmlPasajeTraduccion()}></div>
             </Grid> 
-            {/* <Grid item xs={5} className="jerarquiaBusquedaIzquierda">
+            <Grid item xs={5} className="jerarquiaBusquedaIzquierda">
                 <Typography variant="h5">Jerarquia</Typography>
                 <Typography variant="caption">Derivada de:</Typography>
-                <ul className="ulDeBusqueda" key={padres.refid}>
+                <ul className="ulDeBusqueda" key={padres.id}>
                 {padres.map((padre, index)=>(
                     <li key={padre.id+"-"+index}>
                         <Typography variant="h6" className="consultaDePasajesB">{padre.expresion}</Typography>
@@ -60,7 +94,7 @@ function ResultadoBusquedaExpresion(props){
                 ))}
                 </ul>
                 <Typography variant="caption">Expresiones derivadas:</Typography>
-                <ul className="ulDeBusqueda" key={hijos.refid}>
+                <ul className="ulDeBusqueda" key={hijos.id}>
                 {hijos.map((hijo, index)=>(
                     <li key={hijo.id+"-"+index}>
                         <Typography variant="h6" className="consultaDePasajesB">{hijo.expresion}</Typography>
@@ -78,17 +112,14 @@ function ResultadoBusquedaExpresion(props){
                 ))}
                 </ul>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={2}>
                 <FormControlLabel
                     value="al"
                     control={<Switch color="primary" checked={lang} onChange={event =>setLang(!lang)}/>}
                     label={lang ? "Aleman" : "Español"}
                     labelPlacement="end"
                 />
-            </Grid> */}
-            {/* <Grid item xs={12}>
-                <Typography>Busqueda por expresiones</Typography>
-            </Grid> */}
+            </Grid>
         </Grid>
     )
 }

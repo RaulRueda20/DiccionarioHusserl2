@@ -10,6 +10,10 @@ import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Tooltip from '@material-ui/core/Tooltip';
+import Icon from '@mdi/react';
+import { mdiFormatLetterCase } from '@mdi/js';
 
 //Other request
 import {webService} from '../../js/webServices';
@@ -29,6 +33,7 @@ function SearchBusqueda(props){
     const {classes}=props;
     const [busqueda, setBusqueda] = React.useState("");
     const [loading, setLoading]=React.useState(false);
+    const [insensitiveCase,setInsensitiveCase]=React.useState(false)
 
     const fixPasajes = (pasajes) => {
         var pasajesArreglados = [];
@@ -73,11 +78,10 @@ function SearchBusqueda(props){
         var posicActual = -1
         var expreActual = ""
         var i = 0
-        console.log(referencias.length)
         while (i<referencias.length){
-            if (expreActual != referencias[i].expresion){
+            if (expreActual != referencias[i].term_de){
                 posicActual++
-                expreActual = referencias[i].expresion
+                expreActual = referencias[i].term_de
                 expresiones.push({
                     term_de : referencias[i].term_de,
                     term_es : referencias[i].term_es,
@@ -103,28 +107,43 @@ function SearchBusqueda(props){
           }
         }
         return expresiones
-      }
+    }
 
     const handleChangeBusqueda=(event)=>{
         event.preventDefault()
         setLoading(true)
         if(props.tipoBusqueda=="Referencia"){
-            var serviceb = "/expresiones/busqueda"
+            var serviceb = "/expresiones/busqueda/" + insensitiveCase
             webService(serviceb, "POST", {parametro:busqueda}, (data) => {
                 var referencias = data.data.response
+                props.setExpresionesEncontradas([])
+                props.setTipoBusquedaRealizada("Referencia")
                 props.setExpresionesEncontradas(fixPasajes(referencias))
-             })
+                console.log("ExpresionesEncontradas por ref",referencias)
+                setLoading(false)
+            })
         }else{
-            var servicebe = "/referencias/busquedaExpresion"
-            webService(servicebe, "POST", {parametro:busqueda}, (data) => {
+            var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
+            webService(servicebe, "POST", {parametro:busqueda,case:insensitiveCase}, (data) => {
                 var expresiones = data.data.response
+                props.setExpresionesEncontradas([])
+                props.setTipoBusquedaRealizada("Expresion")
                 props.setExpresionesEncontradas(fixReferencias(expresiones))
+                console.log("ExpresionesEncontradas por exp",expresiones)
+                setLoading(false)
             })
         }
-        setLoading(false)
     }
 
-    console.log("pasajes",props.expresionesEncontradas)
+    function handleInsensitiveCase(){
+        setInsensitiveCase(!insensitiveCase)
+    }
+
+    console.log("insensitiveCase",insensitiveCase)
+
+    // React.useEffect(() => {
+        
+    // }, [handleChangeBusqueda])
 
     return (
         <form onSubmit={handleChangeBusqueda}>
@@ -135,6 +154,18 @@ function SearchBusqueda(props){
                         <Input
                         id="input-with-icon-adornment"
                         onChange={event => setBusqueda(event.target.value)}
+                        startAdornment={
+                            <InputAdornment edge="end">
+                                <Tooltip title="Distincion de mayúsculas/minúsculas">
+                                    <IconButton onClick={handleInsensitiveCase} className={classNames([{"caseSeleccionado" : insensitiveCase == true}, "case"])}>
+                                        <Icon path={mdiFormatLetterCase}
+                                        title="User Profile"
+                                        size={1}
+                                        />
+                                    </IconButton>
+                                </Tooltip>
+                            </InputAdornment>
+                        }
                     />
                     </FormControl>
                 </Grid>
