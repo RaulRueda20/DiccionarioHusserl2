@@ -119,7 +119,6 @@ function SearchBusqueda(props){
                 props.setExpresionesEncontradas([])
                 props.setTipoBusquedaRealizada("Referencia")
                 props.setExpresionesEncontradas(fixPasajes(referencias))
-                console.log("ExpresionesEncontradas por ref",referencias)
                 setLoading(false)
             })
         }else{
@@ -129,7 +128,6 @@ function SearchBusqueda(props){
                 props.setExpresionesEncontradas([])
                 props.setTipoBusquedaRealizada("Expresion")
                 props.setExpresionesEncontradas(fixReferencias(expresiones))
-                console.log("ExpresionesEncontradas por exp",expresiones)
                 setLoading(false)
             })
         }
@@ -139,23 +137,17 @@ function SearchBusqueda(props){
         setInsensitiveCase(!insensitiveCase)
     }
 
-    console.log("insensitiveCase",insensitiveCase)
-
-    // React.useEffect(() => {
-        
-    // }, [handleChangeBusqueda])
-
     return (
         <form onSubmit={handleChangeBusqueda}>
             <Grid container>
-                <Grid item xs={9}>
+                <Grid item xs={10}>
                     <FormControl className={classes.buscador} >
                         <InputLabel htmlFor="input-with-icon-adornment">{"Busqueda general"}</InputLabel>
                         <Input
                         id="input-with-icon-adornment"
                         onChange={event => setBusqueda(event.target.value)}
                         startAdornment={
-                            <InputAdornment edge="end">
+                            <InputAdornment position="end">
                                 <Tooltip title="Distincion de mayúsculas/minúsculas">
                                     <IconButton onClick={handleInsensitiveCase} className={classNames([{"caseSeleccionado" : insensitiveCase == true}, "case"])}>
                                         <Icon path={mdiFormatLetterCase}
@@ -166,13 +158,15 @@ function SearchBusqueda(props){
                                 </Tooltip>
                             </InputAdornment>
                         }
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton type="submit">
+                                    <SearchIcon fontSize="small"/>
+                                </IconButton>
+                            </InputAdornment>
+                        }
                     />
                     </FormControl>
-                </Grid>
-                <Grid item xs={3}>
-                    <IconButton className={classes.botonBuscador} type="submit">
-                        <SearchIcon fontSize="large"/>
-                    </IconButton>
                 </Grid>
             </Grid>
             <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>

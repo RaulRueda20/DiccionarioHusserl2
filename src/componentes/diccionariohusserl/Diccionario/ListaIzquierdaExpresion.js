@@ -44,9 +44,9 @@ export default function ListaIzquierdaExpresiones(props){
 
   return (
     <div className="listaIzquierda">
-      <ul>
+      <ul key={expresiones.id}>
       {expresiones.map((expresion, index)=>(
-        <PanelExpresionIzquierdo expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
+        <PanelExpresionIzquierdo key={expresiones.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
         getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} idExpresion={props.idExpresion}/>
         ))}
       </ul>

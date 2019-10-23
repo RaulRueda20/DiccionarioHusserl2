@@ -89,7 +89,7 @@ function Pasaje(props){
 
   React.useEffect(()=>{
     var idDeExpresion=props.match.params.expresion;
-    var idDeLaReferencia=props.match.params.id;
+    var idDeLaReferencia=props.match.params.id ? props.match.params.id : false;
     var service = "/expresiones/" + props.language + "/" + props.letraMain
     if(pasajeService != service){
       setPasajeService(service)
@@ -100,7 +100,9 @@ function Pasaje(props){
     // if(idExpresion != idDeExpresion){
       service = "/referencias/obtieneReferencias/" + idDeExpresion
       webService(service, "GET", {}, (data) => {
-        setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
+        data.data.response[0]
+        if(idDeLaReferencia) setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
+        else setReferenciaSeleccionada(data.data.response[0])
         setReferencias(data.data.response)
         setIdExpresion(idDeExpresion)
       })

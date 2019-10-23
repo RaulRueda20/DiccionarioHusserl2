@@ -18,6 +18,7 @@ export default function Subvistas({match, lang, setLang}){
             <Switch>
                 <Route path={`${match.url}/diccionario`} render={(props) => <Expresion {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
                 <Route path={`${match.url}/pasaje/:expresion/:id`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
+                <Route path={`${match.url}/pasaje/:expresion`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
                 <Route path={`${match.url}/busquedas`} component={moduloBusquedas}/>
                 <Route path={`${match.url}/acercade`} component={Acercade}/>
                 <Route path={`${match.url}/guia`} component={Guia}/>

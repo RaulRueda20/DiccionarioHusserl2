@@ -114,8 +114,8 @@ function MenuDerechoPasajes(props){
           {menuDerechoJerarquiaDerivadaDe(props.lang)}
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
-            {padres.map(padre=>(
-              <li>
+            {padres.map((padre,index)=>(
+              <li key={padre.refid+"-"+index}>
                 <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
               </li>
             ))}
@@ -134,8 +134,8 @@ function MenuDerechoPasajes(props){
         <ExpansionPanelDetails className="panelDeDetalleHijos">
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
-            {hijos.map(hijo=>(
-              <li>
+            {hijos.map((hijo,index)=>(
+              <li key={hijo.refid+"-"+index}>>
                 <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
               </li>
             ))}
@@ -148,8 +148,8 @@ function MenuDerechoPasajes(props){
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleVerTambien">
             <ul className="ulDelMenuDerechoVerTambien">
-              {listaVerTambien.map(expresion=>{
-                return <li>
+              {listaVerTambien.map((expresion,index)=>{
+                return <li key={expresion.id+"-"+index}>
                   <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                 </li>
               })}
@@ -162,8 +162,8 @@ function MenuDerechoPasajes(props){
         </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
-              {referenciasConsultadasVista.map(consultas=>(
-                <li className="bordeDeConsultas">
+              {referenciasConsultadasVista.map((consultas,index)=>(
+                <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
                   <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
                 </li>
               ))}

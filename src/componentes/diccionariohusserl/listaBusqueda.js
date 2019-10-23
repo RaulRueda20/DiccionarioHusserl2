@@ -4,8 +4,19 @@ import React from 'react';
 //Components
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import Tooltip from '@material-ui/core/Tooltip';
+
+// const listaBusqueda={
+//     gridListaBusqueda:{
+//         maxHeight:"74.5vh",
+//         overflowY:"scroll",
+//     }
+// }
 
 function ListaBusqueda(props){
+    const {classes}=props;
 
     function clickCambioIdBuscado(event){
         // if(props.tipoBusqueda=="Referencia"){
@@ -18,8 +29,15 @@ function ListaBusqueda(props){
 
     return(
         <Grid container justify="center" alignItems="center">
-            <Grid item xs={12}>
+            <Grid item xs={11}>
                 <Typography variant="h3" className="tituloResultados"> Resultado de busqueda</Typography>
+            </Grid>
+            <Grid item xs={1}>
+                <Tooltip title="Cerrar lista de busqueda">
+                    <IconButton onClick={props.abrirLista}>
+                        <ArrowBackIosIcon/>
+                    </IconButton>
+                </Tooltip>
             </Grid>
             {props.tipoBusqueda=="Referencia" ?
                 <Grid item xs={12} className="contenedorBusqueda">

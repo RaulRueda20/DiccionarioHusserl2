@@ -37,10 +37,10 @@ function SelectorBusqueda(props){
                 // }}
             >
                 <MenuItem value="Expresion">
-                    Dentro  expresion
+                    Dentro expresion
                 </MenuItem>
                 <MenuItem value="Referencia">
-                    Dentro  referencia
+                    Dentro referencia
                 </MenuItem>
             </Select>
         </FormControl>

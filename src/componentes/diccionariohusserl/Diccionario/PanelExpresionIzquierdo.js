@@ -15,7 +15,7 @@ export default function PanelExpresionIzquierdo(props){
   return (
     <li 
         className={classNames([{"pasajeSeleccionado":props.expresion.id==props.idExpresion}, "sideListIzquierdo"])} 
-        key={props.expresion.id} 
+        key={props.expresion.id+"-"+props.index} 
         id={"VP"+props.expresion.id} value={props.expresion.id}
     >
         <Grid container justify="center" alignItems="center">
@@ -38,8 +38,8 @@ export default function PanelExpresionIzquierdo(props){
         <div>
             {open ?
                 <ul key={props.expresion.id} id={"referencias"+props.expresion.id} className="ulDelPanelDeExpresiones">
-                    {props.expresion.referencias.map(referencia =>(
-                        <li className="referencia">
+                    {props.expresion.referencias.map((referencia,index) =>(
+                        <li className="referencia" key={referencia.referencia_original+"-"+index}>
                             <Typography variant="h6" className={classNames([{"remarcadoDeReferencias" : referencia.orden==1}])}>
                             <Link to={`/husserl/pasaje/${props.expresion.id}/${props.expresion.referencias[0].refid}`} className="consultaDePasajes">{referencia.referencia_original + "    //    " + referencia.referencia_traduccion}</Link>
                             </Typography>
