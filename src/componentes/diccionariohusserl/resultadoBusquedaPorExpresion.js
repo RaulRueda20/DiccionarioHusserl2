@@ -35,6 +35,10 @@ const resultadoBusqueda={
 function ResultadoBusquedaExpresion(props){
     const {classes}=props;
     const [listaVerTambien,setListaVerTambien] = React.useState([]);
+    const [pasajes, setPasajes] = React.useState({
+        "original" : "",
+        "traduccion" : ""
+    })
     const [hijos,setHijos] = React.useState([]);
     const [padres,setPadres] = React.useState([]);
     const [lang, setLang] = React.useState("al");
@@ -46,11 +50,9 @@ function ResultadoBusquedaExpresion(props){
                 setListaVerTambien(data.data.response)
                 webService(("/expresiones/"+lang+"/hijosList/"+props.expresionSeleccionada.term_id),"GET", {}, (data) => {
                     setHijos(data.data.response)
-                    console.log("hijos",data.data.response)
                 })
                 webService(("/expresiones/"+lang+"/abuelosList/"+props.expresionSeleccionada.term_id), "GET", {}, (data2) =>{
                     setPadres(data2.data.response)
-                    console.log("padres",data2.data.response)
                 })
             })
         }else{
@@ -65,23 +67,32 @@ function ResultadoBusquedaExpresion(props){
                 })
             })
         }
-        console.log("expresion seleccionada",props.expresionSeleccionada)
+        setPasajes({
+            original : resaltarBusqueda(props.expresionSeleccionada.referencias[0].ref_def_de, props.busqueda),
+            traduccion : resaltarBusqueda(props.expresionSeleccionada.referencias[0].ref_def_es, props.busqueda)
+        })
     }, [props.idPasaje, lang, props.expresionSeleccionada])
+
+    function resaltarBusqueda(string,separador){
+        var split = string.split(separador)
+        var resultado = split.join("<span class='resaltador'>" + separador + "</span>")
+        return resultado
+    }
 
     const clickChangeLangEsVB=()=>{
         setLang("es");
       }
     
-      const clickChangeLanALVB=()=>{
-        setLang("al");
-      }
+    const clickChangeLanALVB=()=>{
+    setLang("al");
+    }
 
     function htmlPasajeOriginal(){
-        return {__html:props.expresionSeleccionada.referencias[0].ref_def_de}
+        return {__html: pasajes.original}
     }
 
     function htmlPasajeTraduccion(){
-        return {__html:props.expresionSeleccionada.referencias[0].ref_def_es}
+        return {__html: pasajes.traduccion}
     }
 
     return(

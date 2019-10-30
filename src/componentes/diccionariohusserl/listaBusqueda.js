@@ -8,6 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Tooltip from '@material-ui/core/Tooltip';
 
+//Other req
+import classNames from 'classnames';
+
 // const listaBusqueda={
 //     gridListaBusqueda:{
 //         maxHeight:"74.5vh",
@@ -46,7 +49,7 @@ function ListaBusqueda(props){
                         <li id={"busqueda"+expresionEncontradaporReferencia.ref_id}
                             value={expresionEncontradaporReferencia.ref_id + "-" + index}
                             key={expresionEncontradaporReferencia.ref_id+"-"+index}
-                            className="liBusqueda"
+                            className={classNames([{"pasajeSeleccionado":props.posicionPasaje==index},"liBusqueda"])}
                         >
                             <Typography onClick={event => clickCambioIdBuscado(event)} id={expresionEncontradaporReferencia.ref_id+"/"+index}>
                             {expresionEncontradaporReferencia.ref_libro_de + "  /  " + expresionEncontradaporReferencia.ref_libro_es}
@@ -63,7 +66,7 @@ function ListaBusqueda(props){
                                 id={expresionEncontradaPorExpresion.term_id+"-"+index}
                                 value={expresionEncontradaPorExpresion.term_id+"-"+index}
                                 key={expresionEncontradaPorExpresion.term_id+"-"+index}
-                                className="liBusqueda"
+                                className={classNames([{"pasajeSeleccionado":props.posicionPasaje==index},"liBusqueda"])}
                             >
                                 <Typography onClick={event => clickCambioIdBuscado(event)} id={expresionEncontradaPorExpresion.term_id+"/"+index}>
                                     {expresionEncontradaPorExpresion.term_de+"  /  "+expresionEncontradaPorExpresion.term_es}

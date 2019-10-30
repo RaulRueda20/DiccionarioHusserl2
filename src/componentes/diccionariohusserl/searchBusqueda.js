@@ -31,7 +31,6 @@ const search={
 
 function SearchBusqueda(props){
     const {classes}=props;
-    const [busqueda, setBusqueda] = React.useState("");
     const [loading, setLoading]=React.useState(false);
     const [insensitiveCase,setInsensitiveCase]=React.useState(false)
 
@@ -114,7 +113,7 @@ function SearchBusqueda(props){
         setLoading(true)
         if(props.tipoBusqueda=="Referencia"){
             var serviceb = "/expresiones/busqueda/" + insensitiveCase
-            webService(serviceb, "POST", {parametro:busqueda}, (data) => {
+            webService(serviceb, "POST", {parametro:props.busqueda}, (data) => {
                 var referencias = data.data.response
                 props.setExpresionesEncontradas([])
                 props.setTipoBusquedaRealizada("Referencia")
@@ -123,7 +122,7 @@ function SearchBusqueda(props){
             })
         }else{
             var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
-            webService(servicebe, "POST", {parametro:busqueda,case:insensitiveCase}, (data) => {
+            webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
                 var expresiones = data.data.response
                 props.setExpresionesEncontradas([])
                 props.setTipoBusquedaRealizada("Expresion")
@@ -145,7 +144,7 @@ function SearchBusqueda(props){
                         <InputLabel htmlFor="input-with-icon-adornment">{"Busqueda general"}</InputLabel>
                         <Input
                         id="input-with-icon-adornment"
-                        onChange={event => setBusqueda(event.target.value)}
+                        onChange={event => props.setBusqueda(event.target.value)}
                         startAdornment={
                             <InputAdornment position="end">
                                 <Tooltip title="Distincion de mayúsculas/minúsculas">

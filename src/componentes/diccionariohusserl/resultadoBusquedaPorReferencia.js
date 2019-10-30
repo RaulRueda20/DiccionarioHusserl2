@@ -20,19 +20,31 @@ const resultadoBusquedaRef={
 
 function ResultadoBusquedaReferencia(props){
     const {classes}=props;
+    const [pasajes,setPasajes]=React.useState({
+        "original": "",
+        "traduccion": ""
+    })
 
     React.useEffect(() => {
-        console.log(props.pasajeSeleccionado)
-        console.log(props.idPasaje)
+        setPasajes({
+            original : resaltarBusqueda(props.pasajeSeleccionado.ref_original, props.busqueda),
+            traduccion : resaltarBusqueda(props.pasajeSeleccionado.ref_traduccion, props.busqueda)
+        })
     }, [props.posicionPasaje])
     
 
+    function resaltarBusqueda(string,separador){
+        var split = string.split(separador)
+        var resultado = split.join("<span class='resaltador'>" + separador + "</span>")
+        return resultado
+    }
+
     function htmlPasajeOriginal(){
-        return {__html:props.pasajeSeleccionado.ref_original}
+        return {__html: pasajes.original}
     }
 
     function htmlPasajeTraduccion(){
-        return {__html:props.pasajeSeleccionado.ref_traduccion}
+        return {__html: pasajes.traduccion}
     }
 
     return(

@@ -34,8 +34,8 @@ function moduloBusquedas(props){
     const [tipoBusquedaRealizada,setTipoBusquedaRealizada]=React.useState("");
     const [posicionPasaje, setPosicionPasaje]=React.useState(0);
     const [idPasaje, setIdPasaje]=React.useState("");
-    const [abierto,setAbierto]=React.useState(false);
-    
+    const [abierto,setAbierto]=React.useState(true);
+    const [busqueda, setBusqueda] = React.useState("");
 
     function abrirLista(){
         setAbierto(!abierto)
@@ -45,7 +45,7 @@ function moduloBusquedas(props){
         <Grid container>
             <Grid item xs={12} sm={8}>
                 <SearchBusqueda expresionesEncontradas={expresionesEncontradas} setExpresionesEncontradas={setExpresionesEncontradas} posicionPasaje={posicionPasaje} 
-                setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusqueda} setTipoBusquedaRealizada={setTipoBusquedaRealizada}/>
+                setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusqueda} setTipoBusquedaRealizada={setTipoBusquedaRealizada} busqueda={busqueda} setBusqueda={setBusqueda}/>
             </Grid>
             <Grid item xs={12} sm={4} className={classes.gridSelectorBusqueda}>
                 <SelectorBusqueda tipoBusqueda={tipoBusqueda} setTipoBusqueda={setTipoBusqueda}/>
@@ -61,7 +61,7 @@ function moduloBusquedas(props){
                     </Tooltip> : 
                     <ListaBusqueda expresionesEncontradas={expresionesEncontradas} posicionPasaje={posicionPasaje} 
                         setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusquedaRealizada} idPasaje={idPasaje} 
-                        setIdPasaje={setIdPasaje} abrirLista={abrirLista}
+                        setIdPasaje={setIdPasaje} abrirLista={abrirLista} expresionSeleccionada={expresionesEncontradas[posicionPasaje]}
                     />}
                 </Grid>
             }
@@ -69,10 +69,10 @@ function moduloBusquedas(props){
                 expresionesEncontradas.length < 1 ? null :
                 <Grid item xs={abierto ? false : 11} sm={abierto ? 6:11} md={abierto ? 8:11}>
                     {tipoBusquedaRealizada == "Referencia" ?
-                        <ResultadoBusquedaReferencia pasajeSeleccionado={expresionesEncontradas[posicionPasaje]} idPasaje={idPasaje}/>
+                        <ResultadoBusquedaReferencia pasajeSeleccionado={expresionesEncontradas[posicionPasaje]} idPasaje={idPasaje} busqueda={busqueda}/>
                     :
                         <ResultadoBusquedaExpresion expresionSeleccionada={expresionesEncontradas[posicionPasaje]} 
-                        idPasaje={idPasaje} setIdPasaje={setIdPasaje} abierto={abierto} setAbierto={setAbierto}/>
+                        idPasaje={idPasaje} setIdPasaje={setIdPasaje} abierto={abierto} setAbierto={setAbierto} busqueda={busqueda}/>
                     }
                     {/* <ResultadoBusquedaExpresion idPasaje={idPasaje} setIdPasaje={setIdPasaje}/> */}
                 </Grid>

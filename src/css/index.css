@@ -582,3 +582,7 @@ hr{
 .caseSeleccionado{
   opacity: 1;
 }
+
+.resaltador{
+  background: yellow;
+}

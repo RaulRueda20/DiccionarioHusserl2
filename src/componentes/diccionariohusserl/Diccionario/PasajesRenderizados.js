@@ -1,15 +1,24 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
-const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
+// const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
 function PasajesRenderizados(props){
     const {classes}=props;
-    const [pasaje, setPasaje] = React.useState(emptyPasaje);
+    // const [pasaje, setPasaje] = React.useState(emptyPasaje);
+    const [pasajes, setPasajes] = React.useState({
+        "original" : "",
+        "traduccion" : ""
+    })
+
 
     React.useEffect(() => {
         var pasaje_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
-        setPasaje(pasaje_original)
+        setPasajes({
+            original : resaltarBusqueda(props.referenciaSeleccionada.pasaje_original, props.busqueda),
+            traduccion : resaltarBusqueda(props.referenciaSeleccionada.pasaje_traduccion, props.busqueda)
+        })
+        console.log("expresionSeleccionada",props.referenciaSeleccionada)
     }, [props.referenciaSeleccionada])
 
     function htmlPasajeOriginal(){
