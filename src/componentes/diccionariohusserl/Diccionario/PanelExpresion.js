@@ -17,7 +17,7 @@ export default function PanelExpresion(props){
   return (
     <li 
         className={classNames([{"pasajeSeleccionado":props.expresion.id==props.expresionSeleccionada.id}, "sideList"])} 
-        key={props.expresion.id} 
+        key={props.expresion.id+"-"+props.index} 
         id={"expresion"+props.expresion.id} value={props.expresion.id}
     >
         <Grid container justify="center" alignItems="center">

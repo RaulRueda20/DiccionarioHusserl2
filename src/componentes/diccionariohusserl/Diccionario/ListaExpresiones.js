@@ -38,7 +38,7 @@ export default function ListaExpresiones(props){
     <div className="list-container">
       <ul>
       {props.expresiones.map((expresion, index)=>(
-        <PanelExpresion expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
+        <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
         getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}/> 
       ))}
       </ul>

@@ -135,7 +135,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <li key={hijo.refid+"-"+index}>>
+              <li key={hijo.refid+"-"+index}>
                 <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
               </li>
             ))}

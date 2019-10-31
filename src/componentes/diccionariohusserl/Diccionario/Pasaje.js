@@ -14,6 +14,8 @@ import Paginador from './Paginador';
 
 import {webService} from '../../../js/webServices';
 
+const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
+
 function Pasaje(props){
   const [expresiones, setExpresiones] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState('');
@@ -26,6 +28,9 @@ function Pasaje(props){
   const [pasajeService, setPasajeService] = React.useState("");
   const [panelIzquierdo,setPanelIzquierdo]=React.useState(false);
   const [panelDerecho, setPanelDerecho]=React.useState(false);
+  const [pasaje, setPasaje] = React.useState([emptyPasaje]);
+  const [busqueda, setBusqueda] = React.useState("");
+  const [state, setState]=React.useState({checkedA:true});
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -101,14 +106,24 @@ function Pasaje(props){
       service = "/referencias/obtieneReferencias/" + idDeExpresion
       webService(service, "GET", {}, (data) => {
         data.data.response[0]
-        if(idDeLaReferencia) setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-        else setReferenciaSeleccionada(data.data.response[0])
-        setReferencias(data.data.response)
-        setIdExpresion(idDeExpresion)
-      })
-    // }else{
-      // setReferenciaSeleccionada(findReferencias(referencias, idDeLaReferencia))
-    // }  
+        if(idDeLaReferencia){
+          setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
+          if(data.data.response == null){
+            setPasaje(emptyPasaje)
+          }else{
+            setPasaje(data.data.response)
+          }
+        }else{
+          setReferenciaSeleccionada(data.data.response[0])
+          setReferencias(data.data.response)
+          setIdExpresion(idDeExpresion)
+          if(data.data.response == null){
+            setPasaje(emptyPasaje)
+          }else{
+            setPasaje(data.data.response)
+          }
+        }
+    })
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
 
   return(
@@ -138,7 +153,8 @@ function Pasaje(props){
         </Grid>
         <Grid item xs={3} className={classNames([{"panelIzquierdoEscondido" : panelIzquierdo==true}])}>
           <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
-          language={props.language} setLanguage={props.setLanguage} 
+          language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
+          state={state} setState={setState}
           />
           <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
             setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
@@ -148,9 +164,9 @@ function Pasaje(props){
         <Grid item xs={panelDerecho ? panelIzquierdo ? 12 : 9 : 6 && panelIzquierdo ? 9 : 6}>
             <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
-            lang={props.lang}
+            lang={props.lang} pasaje={pasaje}  
             />
-            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
+            {/* <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/> */}
         </Grid>
         <Grid item xs={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}])}>
           <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}

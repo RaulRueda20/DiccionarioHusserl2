@@ -11,6 +11,7 @@ import PasajesRenderizados from './PasajesRenderizados';
 import ModalDescargas from './ModalDescargas';
 
 import {descarga} from '../../../js/Language';
+import { compose } from '@material-ui/system';
 
 const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
@@ -56,7 +57,7 @@ function clickHandleDescargas(){
       <Grid container>
         <Grid item xs={12}>
           <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}
-          cerrado={props.panelIzquierdo || props.panelDerecho}
+          cerrado={props.panelIzquierdo || props.panelDerecho} pasaje={props.pasaje}
           />
         </Grid>
       </Grid>

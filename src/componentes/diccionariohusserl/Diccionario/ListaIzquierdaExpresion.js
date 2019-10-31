@@ -8,9 +8,7 @@ export default function ListaIzquierdaExpresiones(props){
   const [panelesAbiertos,setPanelesAbiertos] = React.useState([]);
 
   const {classes, match}=props;
-
-  var expresiones=props.expresiones;
-
+  
   function clickHandleVista(event){
     var expresionClickeada=event.currentTarget.id;
     var expresionesReferencias=props.expresiones[expresionClickeada];
@@ -44,12 +42,12 @@ export default function ListaIzquierdaExpresiones(props){
 
   return (
     <div className="listaIzquierda">
-      <ul key={expresiones.id}>
-      {expresiones.map((expresion, index)=>(
-        <PanelExpresionIzquierdo key={expresiones.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
+      <ul key={props.expresiones.id}>
+      {props.expresiones.map((expresion, index)=>(
+        <PanelExpresionIzquierdo key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
         getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} idExpresion={props.idExpresion}/>
         ))}
-      </ul>
+      </ul>  
     </div>
   );
 }

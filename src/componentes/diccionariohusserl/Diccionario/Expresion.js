@@ -27,6 +27,8 @@ function Expresion(props){
   const [expanded2, setExpanded2] = React.useState(false);
   const [expanded3, setExpanded3] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
+  const [state, setState]=React.useState({checkedA:true});
+  const [busqueda, setBusqueda] = React.useState("");
   
 const fixReferencias = (referencias) => {
   var expresiones=[]
@@ -105,7 +107,7 @@ const fixReferencias = (referencias) => {
             <LetraIndice letraMain={letraMain}/>
             <BanderaButon language={language} setLanguage={setLanguage} lang={props.lang}/>
         </Grid>
-        <Grid item xs={8} aling='center'>
+        <Grid item xs={8} aling='center' className="contenedorListaExpresiones">
             <ListaExpresiones expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
             setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} 
             expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
@@ -113,7 +115,8 @@ const fixReferencias = (referencias) => {
             />
         </Grid>
         <Grid item xs={3} className="bordoDelMenuDerecho">
-            <Busqueda expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang}/>
+            <Busqueda expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} state={state} setState={setState}
+            busqueda={busqueda} setBusqueda={setBusqueda}/>
             <MenuDerecho idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 

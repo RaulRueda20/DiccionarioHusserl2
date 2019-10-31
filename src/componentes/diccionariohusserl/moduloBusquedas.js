@@ -74,7 +74,6 @@ function moduloBusquedas(props){
                         <ResultadoBusquedaExpresion expresionSeleccionada={expresionesEncontradas[posicionPasaje]} 
                         idPasaje={idPasaje} setIdPasaje={setIdPasaje} abierto={abierto} setAbierto={setAbierto} busqueda={busqueda}/>
                     }
-                    {/* <ResultadoBusquedaExpresion idPasaje={idPasaje} setIdPasaje={setIdPasaje}/> */}
                 </Grid>
             }
         </Grid>

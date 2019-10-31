@@ -112,8 +112,8 @@ function SearchBusqueda(props){
         event.preventDefault()
         setLoading(true)
         if(props.tipoBusqueda=="Referencia"){
-            var serviceb = "/expresiones/busqueda/" + insensitiveCase
-            webService(serviceb, "POST", {parametro:props.busqueda}, (data) => {
+            var servicebr = "/expresiones/busqueda/" + insensitiveCase
+            webService(servicebr, "POST", {parametro:props.busqueda}, (data) => {
                 var referencias = data.data.response
                 props.setExpresionesEncontradas([])
                 props.setTipoBusquedaRealizada("Referencia")
