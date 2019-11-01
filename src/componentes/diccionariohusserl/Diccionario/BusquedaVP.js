@@ -16,7 +16,7 @@ import { mdiFormatLetterCase } from '@mdi/js';
 import { withStyles } from '@material-ui/styles';
 
 //LanguageChanges
-import {busquedaPorLetra, toolTipIdiomaDeLaLista} from '../../../js/Language';
+import {busquedas, toolTipIdiomaDeLaLista, distincionMayusyMinus, BusquedaGeneral} from '../../../js/Language';
 
 //Other request
 import {webService} from '../../../js/webServices';
@@ -122,14 +122,14 @@ function BusquedaVP(props){
             <Grid container justify="center" alignItems="center" alignContent="center">
                 <Grid item xs={7} lg={9}>
                     <FormControl>
-                        <InputLabel htmlFor="input-with-icon-adornment">{busquedaPorLetra(props.lang)}</InputLabel>
+                        <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
                         <Input  
                             onChange={event => props.setBusqueda(event.target.value)}
                             fullWidth
                             id="input-with-icon-adornment"
                             startAdornment={
                                 <InputAdornment position="end">
-                                    <Tooltip title="Distincion de mayúsculas/minúsculas">
+                                    <Tooltip title={distincionMayusyMinus(props.lang)}>
                                         <IconButton onClick={handleInsensitiveCase} className={classNames([{"caseSeleccionado" : insensitiveCase == true}, "case"])}>
                                             <Icon path={mdiFormatLetterCase}
                                             title="User Profile"
@@ -150,7 +150,7 @@ function BusquedaVP(props){
                     </FormControl>
                 </Grid>
                 <Grid item xs={3} lg={2}>
-                    <Tooltip title={props.state.checkedA ? "Busqueda por letra" : "Busqueda General"}>
+                    <Tooltip title={props.state.checkedA ? busquedaPorLetra(props.lang) : BusquedaGeneral(props.lang)}>
                         <Switch
                             checked={props.state.checkedA}
                             onChange={handleSwitch("checkedA")}

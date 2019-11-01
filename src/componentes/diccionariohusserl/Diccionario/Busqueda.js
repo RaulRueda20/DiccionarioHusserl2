@@ -22,7 +22,7 @@ import {webService} from '../../../js/webServices';
 import classNames from 'classnames';
 
 //Language
-import {busquedaPorLetra} from '../../../js/Language';
+import {busquedas, distincionMayusyMinus, BusquedaGeneral, busquedaPorLetra} from '../../../js/Language';
 
 const styles = {
   TextFieldbus:{
@@ -108,13 +108,13 @@ function Busqueda(props){
       <Grid container className={classes.contenedor}>
         <Grid item xs={10}>
           <FormControl className={classes.TextFieldbus}>
-            <InputLabel htmlFor="input-with-icon-adornment">{busquedaPorLetra(props.lang)}</InputLabel>
+            <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
             <Input
             onChange={event => props.setBusqueda(event.target.value)}
             id="input-with-icon-adornment"
             startAdornment={
               <InputAdornment position="end">
-                <Tooltip title="Distincion de mayúsculas/minúsculas">
+                <Tooltip title={distincionMayusyMinus(props.lang)}>
                     <IconButton onClick={handleInsensitiveCase} className={classNames([{"caseSeleccionado" : insensitiveCase == true}, "case"])}>
                         <Icon path={mdiFormatLetterCase}
                         title="User Profile"
@@ -135,7 +135,7 @@ function Busqueda(props){
           </FormControl>  
         </Grid>
         <Grid item xs={2}>
-          <Tooltip title={props.state.checkedA ? "Busqueda por letra" : "Busqueda General"}>
+          <Tooltip title={props.state.checkedA ? busquedaPorLetra(props.lang) : BusquedaGeneral(props.lang)}>
             <Switch
                 checked={props.state.checkedA}
                 onChange={handleSwitch("checkedA")}

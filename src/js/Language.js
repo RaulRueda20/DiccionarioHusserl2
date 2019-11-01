@@ -683,9 +683,40 @@ const busquedas= lang => {
   }
 }
 
+const distincionMayusyMinus= lang => {
+  switch (lang) {
+    case "es":
+      return "Distincion entre mayúsculas/minúsculas"
+    case "en":
+      return "Distinction between upper / lower case"
+    case "fr":
+      return "Distinction entre majuscules et minuscules"
+    case "al":
+      return "Unterscheidung zwischen Groß- und Kleinschreibung"
+    case "ca":
+      return "Distinció entre majúscules / minúscules"
+  }
+}
+
+const BusquedaGeneral= lang => {
+  switch (lang) {
+    case "es":
+      return "Busqueda General"
+    case "en":
+      return "General search"
+    case "fr":
+      return "Recherche générale"
+    case "al":
+      return "Allgemeine Suche"
+    case "ca":
+      return "Cerca general"
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
   menuAcercaDe, menuGuia, menuSalir, menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, 
   menuDerechoJerarquiaExpresionesDerivadas, menuDerechoReferenciasConsultadas, menuDerechoVerTambien, busquedaPorLetra,
-  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas, busquedas}
+  toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas, busquedas,
+  distincionMayusyMinus, BusquedaGeneral}
