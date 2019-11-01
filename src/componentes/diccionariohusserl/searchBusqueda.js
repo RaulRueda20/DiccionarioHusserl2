@@ -19,6 +19,10 @@ import { mdiFormatLetterCase } from '@mdi/js';
 import {webService} from '../../js/webServices';
 import classNames from 'classnames';
 
+//Language
+import {busquedas, distincionMayusyMinus} from '../../js/Language';
+
+
 const search={
     buscador:{
         margin:"30px 40px",
@@ -141,13 +145,13 @@ function SearchBusqueda(props){
             <Grid container>
                 <Grid item xs={10}>
                     <FormControl className={classes.buscador} >
-                        <InputLabel htmlFor="input-with-icon-adornment">{"Busqueda general"}</InputLabel>
+                        <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
                         <Input
                         id="input-with-icon-adornment"
                         onChange={event => props.setBusqueda(event.target.value)}
                         startAdornment={
                             <InputAdornment position="end">
-                                <Tooltip title="Distincion de mayúsculas/minúsculas">
+                                <Tooltip title={distincionMayusyMinus(props.lang)}>
                                     <IconButton onClick={handleInsensitiveCase} className={classNames([{"caseSeleccionado" : insensitiveCase == true}, "case"])}>
                                         <Icon path={mdiFormatLetterCase}
                                         title="User Profile"

@@ -16,7 +16,7 @@ import { mdiFormatLetterCase } from '@mdi/js';
 import { withStyles } from '@material-ui/styles';
 
 //LanguageChanges
-import {busquedas, toolTipIdiomaDeLaLista, distincionMayusyMinus, BusquedaGeneral} from '../../../js/Language';
+import {busquedas, toolTipIdiomaDeLaLista, distincionMayusyMinus, BusquedaGeneral, busquedaPorLetra} from '../../../js/Language';
 
 //Other request
 import {webService} from '../../../js/webServices';

@@ -11,6 +11,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/styles';
 
+//Language
+import {tipoDeBusqueda, dentroExpresion, dentroReferencia} from '../../js/Language';
+
 const seleccion={
     selector:{
         marginTop:"30px",
@@ -18,7 +21,7 @@ const seleccion={
 }
 
 function SelectorBusqueda(props){
-    const {classes}=props;
+    const {classes}=props;dentroExpresion
 
     function handleChange(event){
         props.setTipoBusqueda(event.target.value)
@@ -26,7 +29,7 @@ function SelectorBusqueda(props){
 
     return(
         <FormControl className={classes.selector} fullWidth>
-            <InputLabel htmlFor="Busquedas">Tipo de busquedas</InputLabel>
+            <InputLabel htmlFor="Busquedas">{tipoDeBusqueda(props.lang)}</InputLabel>
             <Select
                 fullWidth
                 value={props.tipoBusqueda}
@@ -37,10 +40,10 @@ function SelectorBusqueda(props){
                 // }}
             >
                 <MenuItem value="Expresion">
-                    Dentro expresion
+                    {dentroExpresion(props.lang)}
                 </MenuItem>
                 <MenuItem value="Referencia">
-                    Dentro referencia
+                    {dentroReferencia(props.lang)}
                 </MenuItem>
             </Select>
         </FormControl>

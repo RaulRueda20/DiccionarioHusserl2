@@ -713,10 +713,55 @@ const BusquedaGeneral= lang => {
   }
 }
 
+const tipoDeBusqueda= lang => {
+  switch (lang) {
+    case "es":
+      return "Tipo de busqueda"
+    case "en":
+      return "Search Type"
+    case "fr":
+      return "Type de recherche"
+    case "al":
+      return "Suchtyp"
+    case "ca":
+      return "Tipus de cerca"
+  }
+}
+
+const dentroExpresion= lang => {
+  switch (lang) {
+    case "es":
+      return "Dentro de Expresion"
+    case "en":
+      return "Within expression"
+    case "fr":
+      return "Dans l'expression"
+    case "al":
+      return "Im Ausdruck"
+    case "ca":
+      return "Dins d'expressió"
+  }
+}
+
+const dentroReferencia= lang => {
+  switch (lang) {
+    case "es":
+      return "Dentro de Referencia"
+    case "en":
+      return "Within reference"
+    case "fr":
+      return "Dans la référence"
+    case "al":
+      return "Innerhalb der Referenz"
+    case "ca":
+      return "Dins de referència"
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
   menuAcercaDe, menuGuia, menuSalir, menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, 
   menuDerechoJerarquiaExpresionesDerivadas, menuDerechoReferenciasConsultadas, menuDerechoVerTambien, busquedaPorLetra,
   toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas, busquedas,
-  distincionMayusyMinus, BusquedaGeneral}
+  distincionMayusyMinus, BusquedaGeneral, tipoDeBusqueda, dentroExpresion, dentroReferencia}

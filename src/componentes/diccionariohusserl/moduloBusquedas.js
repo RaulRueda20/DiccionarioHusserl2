@@ -27,7 +27,7 @@ const moduloBusqueda={
     }
 }
 
-function moduloBusquedas(props){
+function ModuloBusquedas(props){
     const {classes}=props;
     const [expresionesEncontradas,setExpresionesEncontradas]=React.useState([]);
     const [tipoBusqueda,setTipoBusqueda]=React.useState("Expresion");
@@ -44,11 +44,11 @@ function moduloBusquedas(props){
     return(
         <Grid container>
             <Grid item xs={12} sm={8}>
-                <SearchBusqueda expresionesEncontradas={expresionesEncontradas} setExpresionesEncontradas={setExpresionesEncontradas} posicionPasaje={posicionPasaje} 
+                <SearchBusqueda lang={props.lang} expresionesEncontradas={expresionesEncontradas} setExpresionesEncontradas={setExpresionesEncontradas} posicionPasaje={posicionPasaje} 
                 setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusqueda} setTipoBusquedaRealizada={setTipoBusquedaRealizada} busqueda={busqueda} setBusqueda={setBusqueda}/>
             </Grid>
             <Grid item xs={12} sm={4} className={classes.gridSelectorBusqueda}>
-                <SelectorBusqueda tipoBusqueda={tipoBusqueda} setTipoBusqueda={setTipoBusqueda}/>
+                <SelectorBusqueda lang={props.lang} tipoBusqueda={tipoBusqueda} setTipoBusqueda={setTipoBusqueda}/>
             </Grid>
             {
                 expresionesEncontradas.length < 1 ? null :
@@ -80,4 +80,4 @@ function moduloBusquedas(props){
     )
 }
 
-export default withStyles(moduloBusqueda)(moduloBusquedas);
+export default withStyles(moduloBusqueda)(ModuloBusquedas);

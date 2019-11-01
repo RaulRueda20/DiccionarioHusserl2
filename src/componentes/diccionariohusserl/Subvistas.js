@@ -6,7 +6,7 @@ import Expresion from './Diccionario/Expresion';
 import Pasaje from './Diccionario/Pasaje';
 import Acercade from './Acercade';
 import Guia from './Guia';
-import moduloBusquedas from './moduloBusquedas'
+import ModuloBusquedas from './moduloBusquedas'
 
 export default function Subvistas({match, lang, setLang}){
     const [language,setLanguage] = React.useState("al");
@@ -19,7 +19,7 @@ export default function Subvistas({match, lang, setLang}){
                 <Route path={`${match.url}/diccionario`} render={(props) => <Expresion {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
                 <Route path={`${match.url}/pasaje/:expresion/:id`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
                 <Route path={`${match.url}/pasaje/:expresion`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
-                <Route path={`${match.url}/busquedas`} component={moduloBusquedas}/>
+                <Route path={`${match.url}/busquedas`} render={(props) => <ModuloBusquedas {...props} lang={lang} setLang={setLang}/>}/>
                 <Route path={`${match.url}/acercade`} component={Acercade}/>
                 <Route path={`${match.url}/guia`} component={Guia}/>
                 <Route path={`${match.url}/`}>
