@@ -60,18 +60,6 @@ tp, b, strong{
   margin-top: 25px;
 }
 
-.contenedorListaExpresiones{
-  height: calc(100vh - 131.77px) !important;
-}
-
-.list-container{
-  height: calc(100vh - 9vh - 45.77px) !important;
-  overflow-y: scroll; 
-  overflow-x: hidden;
-  width: auto;
-  background-color: rgb(230,230,230);
-}
-
 .list-containerP{
   height: 87.5vh;
   overflow-y: scroll;
@@ -397,6 +385,12 @@ a:hover{
   overflow: auto;
 }
 
+.contenedorMenuBajo{
+  max-height: 33vh;
+  width: 100%;
+  overflow: auto;
+}
+
 .panelPrincipal{
   border-bottom: 1px rgba(0,0,0,.18) solid !important;
 }
@@ -467,6 +461,28 @@ hr{
   position: fixed !important;
   right:-16px !important;
   top:60%;
+}
+
+.iconoAbajo{
+  position: absolute !important;
+  left:  calc(50% - 30px) !important;
+  top:59vh;
+}
+
+.iconoAbajoEscondido{
+  position: fixed !important;
+  bottom: -5px !important;
+  left: 48%
+}
+
+.menuAbajoEscondido{
+  display: none;
+}
+
+.iconoArriba{
+  position: absolute !important;
+  left: calc(50% - 30px) !important;
+  bottom: 0px;
 }
 
 .panelIzquierdoEscondido{

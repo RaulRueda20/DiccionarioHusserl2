@@ -1,10 +1,36 @@
 import  React from 'react';
 
 import PanelExpresion from './PanelExpresion';
+import classNames from 'classnames';
 
 import * as localStore from '../../../js/localStore';
 
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  listContainer:{
+    [theme.breakpoints.up('sm')]: {
+      height: "calc(100vh - 9vh - 31px) !important",
+      overflowY: "scroll", 
+      overflowX: "hidden",
+    },
+    [theme.breakpoints.down('sm')]: {
+      height: "47vh",
+      overflowY: "scroll", 
+    },
+    width: "auto",
+    backgroundColor: "rgb(230,230,230)",
+  },
+  listContainer2:{
+    height: "calc(100vh - 9vh - 84px) !important",
+      overflowY: "scroll", 
+      overflowX: "hidden",
+  }
+}))
+
 export default function ListaExpresiones(props){
+  const classes = useStyles();
+  const theme = useTheme();
   const [panelesAbiertos,setPanelesAbiertos] = React.useState([]);
   
   function clickHandleVista(event){
@@ -35,7 +61,7 @@ export default function ListaExpresiones(props){
   }
   
   return (
-    <div className="list-container">
+    <div className={classNames([{[classes.listContainer2] : props.menuEscondido == true}, classes.listContainer])}>
       <ul>
       {props.expresiones.map((expresion, index)=>(
         <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}

@@ -54,33 +54,11 @@ const ExpansionPanelSummary = withStyles({
   expanded: {minHeight: "0px !important", height: "48px", alignItems: "center"},
 })(MuiExpansionPanelSummary);
 
-const emptyObj = {
-  clave: "",
-  epretty: "",
-  expresion_original: "",
-  expresion_traduccion: "",
-  id: null,
-  orden: null,
-  ref_original: "",
-  ref_traduccion: "",
-  refid: "",
-  tpretty: ""}
-
 function MenuDerecho(props){
   const [referenciasConsultadasVista, setReferenciasConsultadasVista]=React.useState([])
   const [listaVerTambien,setListaVerTambien]=React.useState([]);
   const [hijos,setHijos]=React.useState([]);
   const [padres,setPadres]=React.useState([]);
-
-  const paintJerarquia = (lista) => {
-    var lastString = ""
-    for(var i in lista){
-      if(i == lista.length-1)
-        lastString += lista[i].expresion + "."
-      else lastString += lista[i].expresion + ", "
-    }
-    return lastString
-  }
 
   React.useEffect(()=>{
     if(localStore.getObjects("referenciasConsultadas")!=false){

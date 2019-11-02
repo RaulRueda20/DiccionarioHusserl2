@@ -16,12 +16,14 @@ const styleList = {
   },
   contenedorLista:{
     backgroundColor: "#daa79f",
-    overflow: "auto",
-    height: "100%"
   },
   listaItem: {
     justifyContent: "center",
     padding: "7px 0",
+  },
+  divListaLetras:{
+    height: "31px",
+    overflowY: "scroll"
   }
 }
 
@@ -35,7 +37,7 @@ function ListaLetras (props){
   };
 
   return(
-    <div>
+    <div className={classes.divListaLetras}>
       <div className={classes.contenedorLista}>
         <List className={classes.lista}>
           <Grid container
@@ -44,7 +46,7 @@ function ListaLetras (props){
             alignItems="center"
           >
             {letras.map(letra =>(
-              <Grid item xs key={letra} className={classNames({"selected" : props.letraMain == letra})}>
+              <Grid item xs={1} md key={letra} className={classNames({"selected" : props.letraMain == letra})}>
                 <ListItem className={classes.listaItem} button onClick={handleChangeLetraMain} id={letra}>
                   <Typography variant="h6" align="center">{letra}</Typography>
                 </ListItem> 
