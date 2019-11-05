@@ -96,6 +96,13 @@ function Pasaje(props){
     setPanelDerecho(!panelDerecho)
   }
 
+  function updateDimensions(){
+    console.log(window.innerWidth)
+    if(window.innerWidth < 600) {
+      setOpenHidden(false);
+    } 
+  }
+  
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
   React.useEffect(()=>{
@@ -130,6 +137,8 @@ function Pasaje(props){
           }
         }
     })
+    updateDimensions()
+    window.addEventListener("resize", updateDimensions);
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
 
   return(
