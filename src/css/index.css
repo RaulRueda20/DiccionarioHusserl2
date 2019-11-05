@@ -364,7 +364,7 @@ a:hover{
 }
 
 .listaIzquierda{
-  height: calc(100vh - 165px) !important;
+  height: calc(100vh - 9vh - 80px) !important;
   overflow-y: scroll; 
   overflow-x: hidden;
   width: auto;
@@ -605,4 +605,22 @@ hr{
 
 .resaltador{
   background: yellow;
+}
+
+.contenidoPasajes{
+  display:none
+}
+
+.menuPasajeEscondido{
+  height: 24vh;
+  overflow-y: scroll;
+}
+
+
+.listaIzquierdaEscondida{
+  height: 55vh;
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  width: auto;
+  background-color: rgb(230,230,230);
 }

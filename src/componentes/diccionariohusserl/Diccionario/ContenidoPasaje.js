@@ -4,6 +4,8 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import Hidden from '@material-ui/core/Hidden';
 import { withStyles } from '@material-ui/styles';
 
 import BanderaPasajes from './BanderaPasajes';
@@ -30,16 +32,27 @@ function ContenidoPasaje(props){
   React.useEffect(() => {
     var nombreExpresion =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setTituloPasaje(nombreExpresion)
-}, [props.referenciaSeleccionada])
+  }, [props.referenciaSeleccionada])
 
-function clickHandleDescargas(){
-  setOpenDescargas(true)
-}
+  function clickHandleDescargas(){
+    setOpenDescargas(true)
+  }
+
+  function clickHandleHidden(){
+    props.setOpenHidden(!props.openHidden)
+  }
 
   return(
     <div>
       <Grid container justify="center" alignItems="center" alignContent="center" style={{borderRight: "1px double lightgrey",
     borderLeft: "1px double lightgrey"}}>
+        <Grid item xs={1}>
+          <Hidden smUp>
+            <IconButton size="small" onClick={clickHandleHidden}>
+              <SwapHorizIcon fontSize="large"/>
+            </IconButton>
+          </Hidden>
+        </Grid>
         <Grid item xs={1}>
           <Tooltip title={descarga(props.lang)}>
             <IconButton size="small" className="iconosIluminados" onClick={clickHandleDescargas}>
@@ -47,7 +60,7 @@ function clickHandleDescargas(){
             </IconButton>
           </Tooltip>
         </Grid>
-        <Grid item xs={10} className={classes.gridTituloPasaje}>
+        <Grid item xs={9} className={classes.gridTituloPasaje}>
           <Typography variant="h2">{props.languageP=="al" ? tituloPasaje.expresion_original : tituloPasaje.expresion_traduccion}</Typography>
         </Grid>
         <Grid item xs={1}>

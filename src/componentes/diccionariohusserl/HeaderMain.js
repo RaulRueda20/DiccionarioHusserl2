@@ -13,6 +13,9 @@ import {tituloDiccionario} from '../../js/Language';
 const useStyles = makeStyles(theme => ({
   titulo:{
     color: "white",
+    [theme.breakpoints.down('sm')]:{
+      display: "none"
+    }
   }
 }))
 

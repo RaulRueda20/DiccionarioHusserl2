@@ -49,5 +49,5 @@ export default function ListaIzquierdaExpresiones(props){
         ))}
       </ul>  
     </div>
-  );
+  )
 }
