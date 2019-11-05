@@ -24,7 +24,8 @@ const modalDescargas={
         position:"absolute",
         padding: "30px 30px",
         overflowY: "auto",
-        left: "calc(25% - 30px)"
+        left: "calc(25% - 30px)",
+        height: "50vh"
     },
     gridDeBotones:{
         textAlign: "right",
@@ -43,10 +44,12 @@ const modalDescargas={
 
 function ModalDescargas(props){
     const {classes}=props;
-    const [checkedA,setCheckedA] =React.useState(false)
-    const [checkedB,setCheckedB] =React.useState(false)
-    const [checkedC,setCheckedC] =React.useState(false)
-    const [value, setValue] = React.useState('Texto')
+    const [checkedA,setCheckedA] =React.useState(false);
+    const [checkedB,setCheckedB] =React.useState(false);
+    const [checkedC,setCheckedC] =React.useState(false);
+    const [checkedD,setCheckedD] =React.useState(false);
+    const [checkedE,setCheckedE] =React.useState(false);
+    const [value, setValue] = React.useState('Texto');
 
     const handleChangeA=name=>event=>{
         setCheckedA({...checkedA, [name]:event.target.checked})
@@ -58,6 +61,14 @@ function ModalDescargas(props){
 
     const handleChangeC=name=>event=>{
         setCheckedC({...checkedC, [name]:event.target.checked})
+    };
+
+    const handleChangeD=name=>event=>{
+        setCheckedD({...checkedD, [name]:event.target.checked})
+    };
+
+    const handleChangeE=name=>event=>{
+        setCheckedE({...checkedE, [name]:event.target.checked})
     };
 
     const handleChangeRadio=event=>{
@@ -158,6 +169,31 @@ function ModalDescargas(props){
                                 />
                                 }
                                 label="Español"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography>Descargar Pasaje Seleccionado o Todos los Pasajes:</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControlLabel control={
+                                <Checkbox
+                                    checked={checkedD}
+                                    onChange={() => setCheckedB(!checkedD)}
+                                    value="checkedD"
+                                />
+                                }
+                                label="Pasaje seleccionado"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControlLabel control={
+                                <Checkbox
+                                    checked={checkedE}
+                                    onChange={() => setCheckedC(!checkedE)}
+                                    value="checkedE"
+                                />
+                                }
+                                label="Todos los Pasajes"
                             />
                         </Grid>
                         <Grid item xs={12}>

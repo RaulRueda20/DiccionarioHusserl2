@@ -97,8 +97,7 @@ function Pasaje(props){
   }
 
   function updateDimensions(){
-    console.log(window.innerWidth)
-    if(window.innerWidth < 600) {
+    if(window.innerWidth > 600) {
       setOpenHidden(false);
     } 
   }

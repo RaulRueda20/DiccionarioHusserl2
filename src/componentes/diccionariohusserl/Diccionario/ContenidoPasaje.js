@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Hidden from '@material-ui/core/Hidden';
-import { withStyles } from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import BanderaPasajes from './BanderaPasajes';
 import PasajesRenderizados from './PasajesRenderizados';
@@ -24,8 +24,21 @@ const contenidoPasajes={
   }
 }
 
+const useStyles = makeStyles(theme => ({
+  gridTituloPasaje:{
+    textAlign: "center",
+    margin:"20px 0 !important"
+  },
+  typoSize:{
+    [theme.breakpoints.down('xs')]: {
+      fontSize : " 1.5rem !important",
+    }
+  }
+}))
+
 function ContenidoPasaje(props){
-  const {classes}=props;
+  const classes = useStyles();
+  const theme = useTheme();
   const [tituloPasaje, setTituloPasaje]=React.useState("");
   const [openDescargas, setOpenDescargas]=React.useState(false)
 
@@ -46,24 +59,24 @@ function ContenidoPasaje(props){
     <div>
       <Grid container justify="center" alignItems="center" alignContent="center" style={{borderRight: "1px double lightgrey",
     borderLeft: "1px double lightgrey"}}>
-        <Grid item xs={1}>
+        <Grid item xs={2} sm={2} md={1} lg={1}>
           <Hidden smUp>
             <IconButton size="small" onClick={clickHandleHidden}>
               <SwapHorizIcon fontSize="large"/>
             </IconButton>
           </Hidden>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2} sm={2} md={1} lg={1}>
           <Tooltip title={descarga(props.lang)}>
             <IconButton size="small" className="iconosIluminados" onClick={clickHandleDescargas}>
               <GetAppIcon fontSize="large"/>
             </IconButton>
           </Tooltip>
         </Grid>
-        <Grid item xs={9} className={classes.gridTituloPasaje}>
-          <Typography variant="h2">{props.languageP=="al" ? tituloPasaje.expresion_original : tituloPasaje.expresion_traduccion}</Typography>
+        <Grid item xs={6} sm={6} md={9} lg={9} className={classes.gridTituloPasaje}>
+          <Typography className={classes.typoSize} variant="h2">{props.languageP=="al" ? tituloPasaje.expresion_original : tituloPasaje.expresion_traduccion}</Typography>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2} sm={2} md={1} lg={1}>
           <BanderaPasajes languageP={props.languageP} setLanguageP={props.setLanguageP} lang={props.lang}/>
         </Grid>
       </Grid>
@@ -80,4 +93,4 @@ function ContenidoPasaje(props){
   )
 }
 
-export default withStyles(contenidoPasajes)(ContenidoPasaje);
+export default (ContenidoPasaje);

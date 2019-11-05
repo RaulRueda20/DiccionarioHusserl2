@@ -126,7 +126,7 @@ function BusquedaEscondida(props){
     return(
         <form onSubmit={handleChangeBusquedaPasajes}>
             <Grid container justify="center" alignItems="center" alignContent="center">
-                <Grid item xs={5} sm={7} md={9} lg={9}>
+                <Grid item xs={6} sm={7} md={9} lg={9}>
                     <FormControl>
                         <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
                         <Input  
@@ -162,7 +162,7 @@ function BusquedaEscondida(props){
                         </IconButton>
                     </Grid>
                 </Hidden>
-                <Grid item xs={3} sm={3} md={2} lg={2}>
+                <Grid item xs={2} sm={3} md={2} lg={2}>
                     <Tooltip title={props.state.checkedA ? busquedaPorLetra(props.lang) : BusquedaGeneral(props.lang)}>
                         <Switch
                             checked={props.state.checkedA}
