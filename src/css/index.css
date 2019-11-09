@@ -624,3 +624,16 @@ hr{
   width: auto;
   background-color: rgb(230,230,230);
 }
+
+.iconoJerarquiaPasajes{
+  font-size: 17px !important;
+}
+
+.iconosIluminadosPasaje{
+  margin-bottom: 3px;
+}
+
+.iconosIluminadosPasaje:hover{
+  color: rgb(7, 142, 184);
+  cursor: pointer;
+}

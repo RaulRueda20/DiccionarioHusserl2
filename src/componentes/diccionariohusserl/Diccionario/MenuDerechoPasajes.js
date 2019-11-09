@@ -1,4 +1,8 @@
+// React
 import React from 'react';
+import {Link} from 'react-router-dom';
+
+// Elements
 import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -6,8 +10,14 @@ import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
+// Components
+import ListaPadres from './LIstaPadres';
+import ListaHijos from './ListaHijos'
+
+// Language
 import {menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, menuDerechoJerarquiaExpresionesDerivadas, menuDerechoVerTambien, menuDerechoReferenciasConsultadas} from '../../../js/Language';
 
+// Other req
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
 
@@ -76,9 +86,9 @@ function MenuDerechoPasajes(props){
         webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>setPadres(data2.data.response))
       })
     }
-      var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
-      setNombre(expresion_original)
-  },[props.idExpresion])
+    var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
+    setNombre(expresion_original)
+  },[props.idExpresion,props.referenciaSeleccionada])
  
   return (
     <div className="contenedorMenuDerecho">
@@ -91,11 +101,9 @@ function MenuDerechoPasajes(props){
           {menuDerechoJerarquiaDerivadaDe(props.lang)}
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
-            {padres.map((padre,index)=>(
-              <li key={padre.refid+"-"+index}>
-                <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
-              </li>
-            ))}
+          {padres.map((padre,index)=>(
+            <ListaPadres padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
+          ))}
           </ul>
         </ExpansionPanelDetails>
         <Divider />
@@ -112,9 +120,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <li key={hijo.refid+"-"+index}>
-                <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
-              </li>
+              <ListaHijos hijo={hijo} index={index} language={props.language} key={hijo.id+"-"+index}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -127,7 +133,9 @@ function MenuDerechoPasajes(props){
             <ul className="ulDelMenuDerechoVerTambien">
               {listaVerTambien.map((expresion,index)=>{
                 return <li key={expresion.id+"-"+index}>
-                  <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                  <Link to={`/husserl/pasaje/${expresion.id}`}>
+                    <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                  </Link>
                 </li>
               })}
             </ul>

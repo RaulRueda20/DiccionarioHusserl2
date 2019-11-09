@@ -1,5 +1,10 @@
 import  React from 'react';
 
+var Scroll = require('react-scroll');
+var Element = Scroll.Element;
+var Events = Scroll.Events;
+var scroller = Scroll.scroller;
+
 import * as localStore from '../../../js/localStore';
 import PanelExpresionIzquierdo from './PanelExpresionIzquierdo';
 
@@ -26,7 +31,6 @@ export default function ListaIzquierdaExpresiones(props){
     props.setExpanded2(true)
   }
 
-
   function handleClickPanel(event){
     var expresionesAbiertas=panelesAbiertos;
     var referenciasPrincipales= event.currentTarget.value;
@@ -40,12 +44,30 @@ export default function ListaIzquierdaExpresiones(props){
       setPanelesAbiertos(expresionesAbiertas)
   }
 
+  // function scroll(element){
+  //   scroller.scrollTo(element, {
+  //       duration: 500,
+  //       delay: 50,
+  //       smooth: true,
+  //       // containerId: 'ContainerElementID',
+  //       offset: -100, 
+  //   })
+// }
+
+  React.useEffect(()=>{
+    setTimeout(() => {
+      if(document.getElementById("VP" + props.idExpresion) != null)
+        document.getElementById("VP" + props.idExpresion).scrollIntoView()
+    }, 1000)
+  },[props.idExpresion])
+
   return (
     <div className="listaIzquierda">
-      <ul key={props.expresiones.id}>
+      <ul>
       {props.expresiones.map((expresion, index)=>(
         <PanelExpresionIzquierdo key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
-        getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} idExpresion={props.idExpresion}/>
+        getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} idExpresion={props.idExpresion} open={props.idExpresion == expresion.id}
+        match={props.match}/>
         ))}
       </ul>  
     </div>

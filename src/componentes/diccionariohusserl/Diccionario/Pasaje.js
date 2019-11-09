@@ -36,7 +36,7 @@ function Pasaje(props){
   const [pasaje, setPasaje] = React.useState([emptyPasaje]);
   const [busqueda, setBusqueda] = React.useState("");
   const [state, setState]=React.useState({checkedA:true});
-  const [openHidden, setOpenHidden]=React.useState(false)
+  const [openHidden, setOpenHidden]=React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -118,9 +118,10 @@ function Pasaje(props){
       service = "/referencias/obtieneReferencias/" + idDeExpresion
       webService(service, "GET", {}, (data) => {
         data.data.response[0]
+        setIdExpresion(idDeExpresion)
         if(idDeLaReferencia){
           setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-          if(data.data.response == null){
+          if(data.data.response == null){data.data.response
             setPasaje(emptyPasaje)
           }else{
             setPasaje(data.data.response)
@@ -128,13 +129,14 @@ function Pasaje(props){
         }else{
           setReferenciaSeleccionada(data.data.response[0])
           setReferencias(data.data.response)
-          setIdExpresion(idDeExpresion)
           if(data.data.response == null){
             setPasaje(emptyPasaje)
           }else{
             setPasaje(data.data.response)
           }
         }
+      setExpanded1(true)
+      setExpanded2(true)
     })
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
@@ -175,7 +177,7 @@ function Pasaje(props){
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2}
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match}
             />
           </Hidden>
           {openHidden == true ?

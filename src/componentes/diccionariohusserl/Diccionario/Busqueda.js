@@ -48,7 +48,7 @@ function Busqueda(props){
             posicActual++
             expreActual = referencias[i].term_de
             expresiones.push({
-                expresion : referencias[i].term_de,
+                expresion: referencias[i].term_de,
                 traduccion : referencias[i].term_es,
                 index_de: referencias[i].index_de,
                 index_es: referencias[i].index_es,
@@ -56,8 +56,8 @@ function Busqueda(props){
                 referencias : [],
             })
             expresiones[posicActual].referencias.push({
-                referencia_original : referencias[i].ref_def_de,
-                referencia_traduccion: referencias[i].ref_def_es,
+                referencia_original : referencias[i].ref_libro_de,
+                referencia_traduccion: referencias[i].ref_libro_es,
                 refid : referencias[i].ref_id,
             })
             i++
@@ -76,11 +76,13 @@ function Busqueda(props){
 }
   
   const handleChangeBusquedaExpresiones = (event) => {
-    if(props.state.checkedA == false){  
+    props.setLoading(true)
+    if(props.state.checkedA == false){
       var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
       webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
           var expresiones = data.data.response
           props.setExpresiones(fixReferencias(expresiones))
+      props.setLoading(false)
       })
     }else{
       var expresionBuscadaDic=event.target.value
@@ -92,6 +94,7 @@ function Busqueda(props){
           document.getElementById("expresion"+expresion.id).className += " hiddenE";
         }
       })
+      props.setLoading(false)
     }
   }
 

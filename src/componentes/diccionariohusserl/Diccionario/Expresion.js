@@ -141,12 +141,12 @@ function Expresion(props){
         <Grid item xs={12} sm={3} md={3} lg={3} className={classNames([{"menuAbajoEscondido" : menuEscondido==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown> 
             <Busqueda expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} state={state} setState={setState}
-            busqueda={busqueda} setBusqueda={setBusqueda}/>
+            busqueda={busqueda} setBusqueda={setBusqueda} setLoading={setLoading}/>
             <MenuDerecho idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            getJerarquia={getJerarquia} lang={props.lang} 
+            getJerarquia={getJerarquia} lang={props.lang}
             />
           </Hidden>
           <Hidden smUp>

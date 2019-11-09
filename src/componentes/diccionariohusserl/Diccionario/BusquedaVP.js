@@ -79,8 +79,8 @@ function BusquedaVP(props){
                     referencias : [],
                 })
                 expresiones[posicActual].referencias.push({
-                    referencia_original : referencias[i].ref_def_de,
-                    referencia_traduccion: referencias[i].ref_def_es,
+                    referencia_original : referencias[i].ref_libro_de,
+                    referencia_traduccion: referencias[i].ref_libro_es,
                     refid : referencias[i].ref_id,
                 })
                 i++
