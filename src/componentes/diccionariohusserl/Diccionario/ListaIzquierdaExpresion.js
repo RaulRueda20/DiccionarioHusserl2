@@ -44,16 +44,6 @@ export default function ListaIzquierdaExpresiones(props){
       setPanelesAbiertos(expresionesAbiertas)
   }
 
-  // function scroll(element){
-  //   scroller.scrollTo(element, {
-  //       duration: 500,
-  //       delay: 50,
-  //       smooth: true,
-  //       // containerId: 'ContainerElementID',
-  //       offset: -100, 
-  //   })
-// }
-
   React.useEffect(()=>{
     setTimeout(() => {
       if(document.getElementById("VP" + props.idExpresion) != null)

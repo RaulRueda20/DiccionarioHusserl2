@@ -6,6 +6,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import classNames from 'classnames';
 import Hidden from '@material-ui/core/Hidden';
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 import ListaIzquierdaExpresion from './ListaIzquierdaExpresion';
 import BusquedaVP from './BusquedaVP';
@@ -37,6 +38,8 @@ function Pasaje(props){
   const [busqueda, setBusqueda] = React.useState("");
   const [state, setState]=React.useState({checkedA:true});
   const [openHidden, setOpenHidden]=React.useState(false);
+  const [loading, setLoading]=React.useState(false);
+  const [flagLetraMain,setFlagLetraMain]=React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -105,48 +108,49 @@ function Pasaje(props){
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
   React.useEffect(()=>{
+    setLoading(true)
     var idDeExpresion=props.match.params.expresion;
     var idDeLaReferencia=props.match.params.id ? props.match.params.id : false;
-    var service = "/expresiones/" + props.language + "/" + props.letraMain
+    var service = "/expresiones/" + props.language + "/" + props.letraMain;
     if(pasajeService != service){
       setPasajeService(service)
       webService(service, "GET", {}, (data) => {
         setExpresiones(fixReferencias(data.data.response))
       })
     }
-      service = "/referencias/obtieneReferencias/" + idDeExpresion
-      webService(service, "GET", {}, (data) => {
-        setIdExpresion(idDeExpresion)
-        console.log(data.data.response[0].index_de.replace(/ /g,''), props.letraMain)
-        if(idDeLaReferencia){
-          setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-          if(data.data.response == null){data.data.response
-            setPasaje(emptyPasaje)
-          }else{
-            setPasaje(data.data.response)
-          }
+    service = "/referencias/obtieneReferencias/" + idDeExpresion
+    webService(service, "GET", {}, (data) => {
+      setIdExpresion(idDeExpresion)
+      console.log(data.data.response[0].index_de.replace(/ /g,''), props.letraMain)
+      if(idDeLaReferencia){
+        setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
+        if(data.data.response == null){data.data.response
+          setPasaje(emptyPasaje)
         }else{
-          setReferenciaSeleccionada(data.data.response[0])
-          setReferencias(data.data.response)
-          if(data.data.response == null){
-            setPasaje(emptyPasaje)
-          }else{
-            setPasaje(data.data.response)
-          }
+          setPasaje(data.data.response)
         }
+      }else{
+        setReferenciaSeleccionada(data.data.response[0])
+        setReferencias(data.data.response)
+        if(data.data.response == null){
+          setPasaje(emptyPasaje)
+        }else{
+          setPasaje(data.data.response)
+        }
+      }
+      setLoading(false)
       setExpanded1(true)
       setExpanded2(true)
-      if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
-        props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
-        // setTimeout(() => {
-        //   if(document.getElementById("VP"+props.expresion.id) != null)
-        //     document.getElementById("VP"+props.expresion.id).scrollIntoView()
-        // }, 1000)
+      if(!flagLetraMain){
+        if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+          props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
+          setFlagLetraMain(true)
+        }
       }
     })
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
-  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id])
+  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain])
 
   return(
     <div>
@@ -183,7 +187,7 @@ function Pasaje(props){
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match}
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={setFlagLetraMain}
             />
           </Hidden>
           {openHidden == true ?
@@ -212,6 +216,7 @@ function Pasaje(props){
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
             lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} letraMain={props.letraMain} setLetraMain={props.setLetraMain}
+            setFlagLetraMain={setFlagLetraMain}
             />
           </Hidden>
         </Grid>
@@ -220,14 +225,15 @@ function Pasaje(props){
             <MenuEscondido idExpresion={idExpresion} language={props.language}
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
+            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} setFlagLetraMain={setFlagLetraMain}
             />
           </Grid>
           :null
         }
       </Grid>
+      <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
     </div>
-    )
+  )
 }
 
 export default Pasaje;

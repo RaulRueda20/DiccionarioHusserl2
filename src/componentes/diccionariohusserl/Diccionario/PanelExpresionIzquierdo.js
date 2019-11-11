@@ -17,8 +17,6 @@ import '../../../css/expresiones.css';
 export default function PanelExpresionIzquierdo(props){
     const [open, setOpen] = React.useState(props.open);
 
-    console.log(event.currentTarget.id)
-
     return (
         <li 
             className={classNames([{"pasajeSeleccionado":props.expresion.id==props.idExpresion}, "sideListIzquierdo"])} 

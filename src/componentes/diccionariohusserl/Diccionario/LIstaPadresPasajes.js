@@ -37,13 +37,16 @@ function ListaPadresPasajes(props){
     setAnchorEl(null);
     };
 
+    function handleFlagLetraMain(){
+        props.setFlagLetraMain(false)
+    }
 
     return(
         <div>
             <li key={props.padre.refid+"-"+props.index}>
                 <Grid container alignItems="center">
                     <Grid item xs={8}>
-                        <Link to={`/husserl/pasaje/${props.padre.padre}`}>
+                        <Link to={`/husserl/pasaje/${props.padre.padre}`} onClick={()=>handleFlagLetraMain()}>
                             <Typography variant="h6" className="consultaDePasajes">{props.padre.expresion}</Typography>
                         </Link>
                     </Grid>
@@ -69,7 +72,7 @@ function ListaPadresPasajes(props){
                     <Divider/>
                     {padreDePadres.length < 1 ? <MenuItem>No deriva de ninguna expresión.</MenuItem> : padreDePadres.map((padresPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={padresPadre.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${padresPadre.padre}`}>
+                            <Link to={`/husserl/pasaje/${padresPadre.padre}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{padresPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>
