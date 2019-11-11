@@ -31,11 +31,12 @@ function ListaPadresPasajes(props){
         webService(("/expresiones/"+props.language+"/hijosList/"+pid),"GET", {}, (data) => {
           setHijosDePadres(data.data.response)
         })
-      };
-    
-      const handleCloseDerivadaDe = () => {
-        setAnchorEl(null);
-      };
+    };
+
+    const handleCloseDerivadaDe = () => {
+    setAnchorEl(null);
+    };
+
 
     return(
         <div>

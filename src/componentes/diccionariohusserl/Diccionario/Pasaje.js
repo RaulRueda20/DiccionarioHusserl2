@@ -114,11 +114,10 @@ function Pasaje(props){
         setExpresiones(fixReferencias(data.data.response))
       })
     }
-    // if(idExpresion != idDeExpresion){
       service = "/referencias/obtieneReferencias/" + idDeExpresion
       webService(service, "GET", {}, (data) => {
-        data.data.response[0]
         setIdExpresion(idDeExpresion)
+        console.log(data.data.response[0].index_de.replace(/ /g,''), props.letraMain)
         if(idDeLaReferencia){
           setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
           if(data.data.response == null){data.data.response
@@ -137,6 +136,13 @@ function Pasaje(props){
         }
       setExpanded1(true)
       setExpanded2(true)
+      if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+        props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
+        // setTimeout(() => {
+        //   if(document.getElementById("VP"+props.expresion.id) != null)
+        //     document.getElementById("VP"+props.expresion.id).scrollIntoView()
+        // }, 1000)
+      }
     })
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
@@ -205,7 +211,7 @@ function Pasaje(props){
             <MenuDerechoPasajes idExpresion={idExpresion} language={props.language}
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada}
+            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} letraMain={props.letraMain} setLetraMain={props.setLetraMain}
             />
           </Hidden>
         </Grid>

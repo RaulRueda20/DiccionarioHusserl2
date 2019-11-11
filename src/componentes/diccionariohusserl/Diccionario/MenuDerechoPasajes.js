@@ -84,17 +84,15 @@ function MenuDerechoPasajes(props){
         setListaVerTambien(data.data.response)
         webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) => {
           setHijos(data.data.response)
-          console.log("hijos",data.data.response)
         })
         webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>{
           setPadres(data2.data.response)
-          console.log("padres",data2.data.response)
         })
       })
     }
     var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setNombre(expresion_original)
-  },[props.idExpresion,props.referenciaSeleccionada])
+  },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
  
   return (
     <div className="contenedorMenuDerecho">
@@ -108,7 +106,7 @@ function MenuDerechoPasajes(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
           {padres.map((padre,index)=>(
-            <ListaPadresPasajes padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
+            <ListaPadresPasajes padre={padre} index={index} language={props.language} key={padre.id+'-'+index} letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
           ))}
           </ul>
         </ExpansionPanelDetails>
