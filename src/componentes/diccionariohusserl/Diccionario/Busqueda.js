@@ -38,7 +38,6 @@ function Busqueda(props){
   const [insensitiveCase,setInsensitiveCase]=React.useState(false);
 
   const fixReferencias = (referencias) => {
-    console.log("referencias",referencias)
     var expresiones=[]
     var posicActual = -1
     var expreActual = ""

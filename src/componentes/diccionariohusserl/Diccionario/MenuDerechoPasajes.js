@@ -11,8 +11,8 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
 // Components
-import ListaPadres from './LIstaPadres';
-import ListaHijos from './ListaHijos'
+import ListaPadresPasajes from './LIstaPadresPasajes';
+import ListaHijosPasajes from './ListaHijosPasajes'
 
 // Language
 import {menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, menuDerechoJerarquiaExpresionesDerivadas, menuDerechoVerTambien, menuDerechoReferenciasConsultadas} from '../../../js/Language';
@@ -82,8 +82,14 @@ function MenuDerechoPasajes(props){
       var service = "/vertambien/" + props.idExpresion
       webService(service, "GET", {}, data => {
         setListaVerTambien(data.data.response)
-        webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) => setHijos(data.data.response))
-        webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>setPadres(data2.data.response))
+        webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) => {
+          setHijos(data.data.response)
+          console.log("hijos",data.data.response)
+        })
+        webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>{
+          setPadres(data2.data.response)
+          console.log("padres",data2.data.response)
+        })
       })
     }
     var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
@@ -102,7 +108,7 @@ function MenuDerechoPasajes(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
           {padres.map((padre,index)=>(
-            <ListaPadres padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
+            <ListaPadresPasajes padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
           ))}
           </ul>
         </ExpansionPanelDetails>
@@ -120,7 +126,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <ListaHijos hijo={hijo} index={index} language={props.language} key={hijo.id+"-"+index}/>
+              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} key={hijo.id+"-"+index}/>
             ))}
           </ul>
         </ExpansionPanelDetails>

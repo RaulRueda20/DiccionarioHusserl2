@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -10,6 +11,9 @@ import {menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarqu
 
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
+
+import ListaPadresExpresion from './ListaPadresExpresion';
+import ListaHijosExpresion from './ListaHijosExpresion';
 
 const ExpansionPanel = withStyles({
   root: {
@@ -69,8 +73,12 @@ function MenuDerecho(props){
       var service = "/vertambien/" + props.expresionSeleccionada.id
       webService(service, "GET", {}, data => {
         setListaVerTambien(data.data.response)
-        webService(("/expresiones/"+props.language+"/hijosList/"+props.expresionSeleccionada.id),"GET", {}, (data) => setHijos(data.data.response))
-        webService(("/expresiones/"+props.language+"/abuelosList/"+props.expresionSeleccionada.id), "GET", {}, (data2) =>setPadres(data2.data.response))
+        webService(("/expresiones/"+props.language+"/hijosList/"+props.expresionSeleccionada.id),"GET", {}, (data) => {
+          setHijos(data.data.response)
+        })
+        webService(("/expresiones/"+props.language+"/abuelosList/"+props.expresionSeleccionada.id), "GET", {}, (data2) =>{
+          setPadres(data2.data.response)
+        })
       })
     }
   },[props.expresionSeleccionada])
@@ -87,9 +95,7 @@ function MenuDerecho(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
             {padres.map((padre,index)=>(
-              <li key={padre.refid+"-"+index}>
-                <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
-              </li>
+              <ListaPadresExpresion padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -107,9 +113,7 @@ function MenuDerecho(props){
           <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <li key={hijo.refid+"-"+index}>
-                <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
-              </li>
+              <ListaHijosExpresion hijo={hijo} index={index} language={props.language} key={hijo.id+"-"+index}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -122,7 +126,9 @@ function MenuDerecho(props){
             <ul className="ulDelMenuDerechoVerTambien">
               {listaVerTambien.map((expresion,index)=>{
                 return <li key={expresion.id+"-"+index}>
-                  <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                  <Link to={`/husserl/pasaje/${expresion.id}`}>
+                    <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                  </Link>
                 </li>
               })}
             </ul>

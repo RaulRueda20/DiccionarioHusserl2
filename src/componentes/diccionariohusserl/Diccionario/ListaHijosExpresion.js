@@ -16,7 +16,7 @@ import {webService} from '../../../js/webServices';
 
 const ITEM_HEIGHT = 48;
 
-function ListaHijos(props){
+function ListaHijosExpresion(props){
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const [padreDeHijos,setPadreDeHijos]=React.useState([]);
@@ -91,4 +91,4 @@ function ListaHijos(props){
     )
 }
 
-export default ListaHijos;
+export default ListaHijosExpresion;

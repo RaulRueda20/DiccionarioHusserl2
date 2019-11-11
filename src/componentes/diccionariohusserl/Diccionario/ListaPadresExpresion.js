@@ -16,7 +16,7 @@ import {webService} from '../../../js/webServices';
 
 const ITEM_HEIGHT = 48;
 
-function ListaPadres(props){
+function ListaPadresExpresion(props){
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const [padreDePadres,setPadreDePadres]=React.useState([]);
@@ -90,4 +90,4 @@ function ListaPadres(props){
     )
 }
 
-export default ListaPadres;
+export default ListaPadresExpresion;
