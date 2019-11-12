@@ -121,7 +121,6 @@ function Pasaje(props){
     service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
       setIdExpresion(idDeExpresion)
-      console.log(data.data.response[0].index_de.replace(/ /g,''), props.letraMain)
       if(idDeLaReferencia){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
         if(data.data.response == null){data.data.response

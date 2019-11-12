@@ -90,7 +90,6 @@ function Expresion(props){
         setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
       }
       setLoading(false)
-      console.log("expresiones", expresiones)
     })
     if(localStore.getObjects("bienvenida")==false){
       setOpenModal(true)

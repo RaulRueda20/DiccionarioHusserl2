@@ -22,13 +22,12 @@ function ListaBusqueda(props){
     const {classes}=props;
 
     function clickCambioIdBuscado(event){
-        console.log(event.currentTarget.id)
-        // if(props.tipoBusqueda=="Referencia"){
-            props.setIdPasaje(event.currentTarget.id.split("-")[0])
-            props.setPosicionPasaje(parseInt(event.currentTarget.id.split("-")[1]))
-        // }else{
-        //     props.setIdPasaje(event.currentTarget.id)
-        // }
+        props.setIdPasaje(event.currentTarget.id.split("-")[0])
+        props.setPosicionPasaje(parseInt(event.currentTarget.id.split("-")[1]))
+        // console.log("id",event.currentTarget.id.split("-")[1])
+        if(props.tipoBusqueda=="Referencia"){
+            props.setPosicionPasaje(parseInt(event.currentTarget.id.split("-")[2]))
+        }
     }
 
     return(
@@ -47,7 +46,7 @@ function ListaBusqueda(props){
                 <Grid item xs={12} className="contenedorBusqueda">
                 <ul className="ulBusqueda">
                     {props.expresionesEncontradas.map((expresionEncontradaporReferencia,index)=>(
-                        <li id={"busqueda"+expresionEncontradaporReferencia.ref_id}
+                        <li id={expresionEncontradaporReferencia.ref_id + "-" + index}
                             onClick={event => clickCambioIdBuscado(event)}
                             value={expresionEncontradaporReferencia.ref_id + "-" + index}
                             key={expresionEncontradaporReferencia.ref_id+"-"+index}

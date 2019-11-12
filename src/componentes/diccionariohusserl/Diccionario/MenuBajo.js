@@ -11,6 +11,9 @@ import {menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarqu
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
 
+import ListaPadresBajo from './ListaPadresBajo';
+import ListaHijosBajo from './ListaHijosBajo';
+
 const ExpansionPanel = withStyles({
     root: {
       border: '1px solid rgba(0, 0, 0,.1)',
@@ -87,9 +90,7 @@ function MenuBajo(props){
             </Typography>
             <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
                 {padres.map((padre,index)=>(
-                <li key={padre.refid+"-"+index}>
-                    <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
-                </li>
+                    <ListaPadresBajo padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
                 ))}
             </ul>
             </ExpansionPanelDetails>
@@ -107,9 +108,7 @@ function MenuBajo(props){
             <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
             <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
                 {hijos.map((hijo,index)=>(
-                <li key={hijo.refid+"-"+index}>
-                    <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
-                </li>
+                 <ListaHijosBajo hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index}/>
                 ))}
             </ul>
             </ExpansionPanelDetails>

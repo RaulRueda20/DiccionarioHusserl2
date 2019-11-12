@@ -43,10 +43,13 @@ export default function PanelExpresionIzquierdo(props){
             <div>
                 {open ?
                     <ul key={props.expresion.id} id={"referencias"+props.expresion.id} className="ulDelPanelDeExpresiones">
-                        {props.expresion.referencias.map((referencia,index) =>(
-                            <li className="referencia" key={referencia.referencia_original+"-"+index}>
+                        {props.expresion.referencias[0].refid == null ? "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas." : 
+                            props.expresion.referencias.map(referencia =>(
+                            <li className="referencia">
                                 <Typography variant="h6" className={classNames([{"remarcadoDeReferencias" : referencia.orden==1}])}>
-                                <Link to={`/husserl/pasaje/${props.expresion.id}/${props.expresion.referencias[0].refid}`} className="consultaDePasajes">{referencia.referencia_original + "    //    " + referencia.referencia_traduccion}</Link>
+                                    <Link to={`/husserl/pasaje/${props.expresion.id}/${referencia.refid}`} className="consultaDePasajes">
+                                        {referencia.refid + "  :  " + referencia.referencia_original + "/" + referencia.referencia_traduccion}
+                                    </Link>
                                 </Typography>
                             </li>
                         ))}

@@ -197,6 +197,7 @@ a{
 
 .consultaDePasajes{
   max-height: 40px;
+  display: inline-block;
 }
 
 .ulDelMenuDerecho{
@@ -235,10 +236,11 @@ a{
 }
 
 .ulDelMenuDerechoReferenciasConsultadas{
-  max-height: 80px;
+  max-height: 130px;
   margin-top: 5px;
   background-color: rgba(20,10,10,.0.02);
   overflow: scroll;
+  /* display: inline-block !important; */
 }
 
 .panelDeDetallePadres{
@@ -277,7 +279,7 @@ a{
 
 .panelDeDetalleReferenciasConsultadas{
   display: block !important;
-  max-height: 80px;
+  max-height: 133px;
   background-color: rgba(20,10,10,.02);
   padding: 5px 0 0 25px !important;
   border-bottom: 1px rgba(0,0,0,.1) dashed;
@@ -386,7 +388,7 @@ a:hover{
 }
 
 .contenedorMenuBajo{
-  max-height: 33vh;
+  max-height: 32vh;
   width: 100%;
   overflow: auto;
 }

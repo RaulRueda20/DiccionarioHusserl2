@@ -8,8 +8,11 @@ import Typography from '@material-ui/core/Typography';
 
 import {menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, menuDerechoJerarquiaExpresionesDerivadas, menuDerechoVerTambien, menuDerechoReferenciasConsultadas} from '../../../js/Language';
 
+import ListaPadresEscondidos from './ListaPadresEscondidos';
+
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
+import ListaHijosEscondido from './ListaHijosEscondido';
 
 const ExpansionPanel = withStyles({
   root: {
@@ -54,35 +57,12 @@ const ExpansionPanelSummary = withStyles({
   expanded: {minHeight: "0px !important", height: "48px", alignItems: "center"},
 })(MuiExpansionPanelSummary);
 
-const emptyObj = {
-  clave: "",
-  epretty: "",
-  expresion_original: "",
-  expresion_traduccion: "",
-  id: null,
-  orden: null,
-  ref_original: "",
-  ref_traduccion: "",
-  refid: "",
-  tpretty: ""
-}
-
 function MenuEscondido(props){
     const [referenciasConsultadasVista, setReferenciasConsultadasVista]=React.useState([])
     const [listaVerTambien,setListaVerTambien]=React.useState([]);
     const [hijos,setHijos]=React.useState([]);
     const [padres,setPadres]=React.useState([]);
     const [nombre, setNombre] = React.useState("")
-  
-    const paintJerarquia = (lista) => {
-      var lastString = ""
-      for(var i in lista){
-        if(i == lista.length-1)
-          lastString += lista[i].expresion + "."
-        else lastString += lista[i].expresion + ", "
-      }
-      return lastString
-    }
 
     const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
@@ -116,9 +96,7 @@ function MenuEscondido(props){
               </Typography>
               <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
                 {padres.map((padre,index)=>(
-                  <li key={padre.refid+"-"+index}>
-                    <Typography variant="h6" className="consultaDePasajes">{padre.expresion}</Typography>
-                  </li>
+                  <ListaPadresEscondidos padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
                 ))}
               </ul>
             </ExpansionPanelDetails>
@@ -136,9 +114,7 @@ function MenuEscondido(props){
               <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
               <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
                 {hijos.map((hijo,index)=>(
-                  <li key={hijo.refid+"-"+index}>
-                    <Typography variant="h6" className="consultaDePasajes">{hijo.expresion}</Typography>
-                  </li>
+                  <ListaHijosEscondido hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index}/>
                 ))}
               </ul>
             </ExpansionPanelDetails>

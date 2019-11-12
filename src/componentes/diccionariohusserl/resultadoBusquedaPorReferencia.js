@@ -62,7 +62,7 @@ function ResultadoBusquedaReferencia(props){
                             key={expresion.t_id}
                             className="liExpresionesRelacionadas"
                         >
-                            <Link to={`/husserl/pasaje/${expresion.t_id}/${props.pasajeSeleccionado.ref_id}`}>
+                            <Link to={`/husserl/pasaje/${expresion.t_id}/${expresion.ref_id}`}>
                                 <Typography>{expresion.expresion_original +"  /  "+ expresion.expresion_traduccion}</Typography>
                             </Link>
                         </li>

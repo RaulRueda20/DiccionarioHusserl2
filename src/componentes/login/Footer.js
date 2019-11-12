@@ -12,6 +12,7 @@ const styles = {
   footerBody: {
     bottom: "25px",
     position: "absolute",
+    width: "100%"
   }
 }
 
