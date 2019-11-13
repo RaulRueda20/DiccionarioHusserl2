@@ -333,6 +333,7 @@ a{
 
 .bordoDelMenuDerecho{
   border-left:1px solid lightgrey;
+  background: rgba(0,0,0,0.05);
 }
 
 .menuSimple{
@@ -370,7 +371,7 @@ a:hover{
   overflow-y: scroll; 
   overflow-x: hidden;
   width: auto;
-  background-color: rgb(230,230,230);
+  background-color: rgb(245,245,245);
 }
 
 

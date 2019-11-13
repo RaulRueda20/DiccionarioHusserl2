@@ -115,7 +115,7 @@ function Expresion(props){
             <ListaLetras letraMain={letraMain} setLetraMain={setLetraMain}/>
         </Grid>
         <Grid item xs={2} sm={1} md={1} xl={1} align="center" style={{borderRight:"1px rgb(240, 240, 240) solid"}}>
-            <LetraIndice letraMain={letraMain}/>
+            <LetraIndice letraMain={letraMain} state={state}/>
             <BanderaButon language={language} setLanguage={setLanguage} lang={props.lang}/>
         </Grid>
         <Grid item xs={10} sm={8} md={8} xl={8} aling='center' >

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
       overflowY: "scroll", 
     },
     width: "auto",
-    backgroundColor: "rgb(230,230,230)",
+    backgroundColor: "rgb(245,245,245)",
   },
   listContainer2:{
     height: "calc(100vh - 9vh - 84px) !important",

@@ -14,9 +14,14 @@ function LetraIndice(props){
     const {classes}=props;
 
     return(
-        <Typography className={classes.correccionesDeLetraIndice}>
-            {props.letraMain}
-        </Typography>
+        <div>
+            {props.state.checkedA == false ? <Typography className={classes.correccionesDeLetraIndice}>#</Typography>
+            :
+            <Typography className={classes.correccionesDeLetraIndice}>
+                {props.letraMain}
+            </Typography>
+            }
+        </div>
     )
 }
 
