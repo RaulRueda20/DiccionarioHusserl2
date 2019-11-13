@@ -17,13 +17,6 @@ import { compose } from '@material-ui/system';
 
 const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
-const contenidoPasajes={
-  gridTituloPasaje:{
-    textAlign: "center",
-    margin:"20px 0 !important"
-  }
-}
-
 const useStyles = makeStyles(theme => ({
   gridTituloPasaje:{
     textAlign: "center",
@@ -83,7 +76,7 @@ function ContenidoPasaje(props){
       <Grid container>
         <Grid item xs={12}>
           <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}
-          cerrado={props.panelIzquierdo || props.panelDerecho} pasaje={props.pasaje}
+          cerrado={props.panelIzquierdo || props.panelDerecho} pasaje={props.pasaje} idDelURL={props.idDelURL}
           />
         </Grid>
       </Grid>

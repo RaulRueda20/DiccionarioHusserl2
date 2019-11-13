@@ -68,7 +68,6 @@ function MenuDerecho(props){
     if(localStore.getObjects("referenciasConsultadas")!=false){
       var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
       setReferenciasConsultadasVista(referenciaConsultadaSacada)
-      console.log("referencias consultadas",referenciasConsultadasVista)
     }
     if (props.expresionSeleccionada.id!=""){
       var service = "/vertambien/" + props.expresionSeleccionada.id

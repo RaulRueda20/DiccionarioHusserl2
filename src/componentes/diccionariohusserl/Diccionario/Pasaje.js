@@ -40,6 +40,7 @@ function Pasaje(props){
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
   const [flagLetraMain,setFlagLetraMain]=React.useState(false);
+  const [idDelURL,setIdDelURL]=React.useState("")
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -111,6 +112,7 @@ function Pasaje(props){
     setLoading(true)
     var idDeExpresion=props.match.params.expresion;
     var idDeLaReferencia=props.match.params.id ? props.match.params.id : false;
+    setIdDelURL(idDeLaReferencia)
     var service = "/expresiones/" + props.language + "/" + props.letraMain;
     if(pasajeService != service){
       setPasajeService(service)
@@ -147,9 +149,10 @@ function Pasaje(props){
         }
       }
     })
+    // console.log(pasaje)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
-  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain])
+  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain, idDelURL])
 
   return(
     <div>
@@ -205,7 +208,7 @@ function Pasaje(props){
         className={classNames([{"contenidoPasajes" : openHidden==true}])}>
             <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
-            lang={props.lang} pasaje={pasaje} openHidden={openHidden} setOpenHidden={setOpenHidden}
+            lang={props.lang} pasaje={pasaje} openHidden={openHidden} setOpenHidden={setOpenHidden} idDelURL={idDelURL}
             />
             {/* <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/> */}
         </Grid>

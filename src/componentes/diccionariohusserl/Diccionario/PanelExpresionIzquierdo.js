@@ -17,6 +17,12 @@ import '../../../css/expresiones.css';
 export default function PanelExpresionIzquierdo(props){
     const [open, setOpen] = React.useState(props.open);
 
+    function handleVisitados(event,index,referencia){
+        if(document.getElementById(referencia + "-" + index).className.indexOf("pasajesVisitados")==-1){
+            document.getElementById(referencia + "-" + index).className += " pasajesVisitados";
+        }   
+    }
+
     return (
         <li 
             className={classNames([{"pasajeSeleccionado":props.expresion.id==props.idExpresion}, "sideListIzquierdo"])} 
@@ -44,10 +50,10 @@ export default function PanelExpresionIzquierdo(props){
                 {open ?
                     <ul key={props.expresion.id} id={"referencias"+props.expresion.id} className="ulDelPanelDeExpresiones">
                         {props.expresion.referencias[0].refid == null ? "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas." : 
-                            props.expresion.referencias.map(referencia =>(
+                            props.expresion.referencias.map((referencia,index) =>(
                             <li className="referencia">
                                 <Typography variant="h6" className={classNames([{"remarcadoDeReferencias" : referencia.orden==1}])}>
-                                    <Link to={`/husserl/pasaje/${props.expresion.id}/${referencia.refid}`} className="consultaDePasajes">
+                                    <Link to={`/husserl/pasaje/${props.expresion.id}/${referencia.refid}`} className="consultaDePasajes" onClick={(event) => handleVisitados(event,index,referencia.refid)} id={referencia.refid+"-"+index}>
                                         {referencia.refid + "  :  " + referencia.referencia_original + "/" + referencia.referencia_traduccion}
                                     </Link>
                                 </Typography>

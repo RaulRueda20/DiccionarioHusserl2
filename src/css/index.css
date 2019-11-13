@@ -200,6 +200,11 @@ a{
   display: inline-block;
 }
 
+.pasajesVisitados{
+  color: rgb(100, 30, 30);
+  text-decoration: underline; 
+}
+
 .ulDelMenuDerecho{
   max-height: 67px;
   overflow: scroll;
@@ -372,6 +377,7 @@ a:hover{
   overflow-x: hidden;
   width: auto;
   background-color: rgb(245,245,245);
+  margin-right: 10px !important;
 }
 
 

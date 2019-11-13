@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 function PasajesRenderizados(props){
     const {classes}=props;
@@ -8,14 +7,24 @@ function PasajesRenderizados(props){
         "original" : "",
         "traduccion" : ""
     })
+    const [refId,setRefId]=React.useState({})
 
+    function pasajesOriginal(PasajeO){
+        for(var i in PasajeO){
+            if(props.idDelURL==PasajeO[i].refid){
+                console.log("pasajeO",PasajeO[i].pasaje_original)
+                setPasajeRenderizado({
+                    original : resaltarBusqueda(PasajeO[i].pasaje_original,PasajeO[i].expresion_original),
+                    traduccion : resaltarBusqueda(PasajeO[i].pasaje_traduccion,PasajeO[i].expresion_traduccion) 
+                })
+            }
+        }
+    }
 
     React.useEffect(() => {
-        setPasajeRenderizado({
-            original : resaltarBusqueda(props.pasaje[0].pasaje_original,props.pasaje[0].expresion_original),
-            traduccion : resaltarBusqueda(props.pasaje[0].pasaje_traduccion,props.pasaje[0].expresion_traduccion) 
-        })
-    }, [props.referenciaSeleccionada, props.pasaje])
+        console.log("url",props.idDelURL)
+        pasajesOriginal(props.pasaje)
+    }, [props.referenciaSeleccionada, props.pasaje, props.idDelURL])
 
     function resaltarBusqueda(string,separador){
         var split = string.split(separador)

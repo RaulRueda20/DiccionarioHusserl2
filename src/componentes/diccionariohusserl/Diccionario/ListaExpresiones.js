@@ -20,6 +20,8 @@ const useStyles = makeStyles(theme => ({
     },
     width: "auto",
     backgroundColor: "rgb(245,245,245)",
+    marginLeft: "30px !important",
+    marginRight: "30px !important"
   },
   listContainer2:{
     height: "calc(100vh - 9vh - 84px) !important",
