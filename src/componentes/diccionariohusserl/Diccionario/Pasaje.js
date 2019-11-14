@@ -125,7 +125,7 @@ function Pasaje(props){
       setIdExpresion(idDeExpresion)
       if(idDeLaReferencia){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-        if(data.data.response == null){data.data.response
+        if(data.data.response == null){
           setPasaje(emptyPasaje)
         }else{
           setPasaje(data.data.response)

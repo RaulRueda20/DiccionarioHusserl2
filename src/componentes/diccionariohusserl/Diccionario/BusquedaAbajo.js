@@ -39,7 +39,7 @@ const styles = {
     }
 }
 
-function busquedaAbajo(props){
+function BusquedaAbajo(props){
     const {classes}=props;
     const [insensitiveCase,setInsensitiveCase]=React.useState(false);
 
@@ -156,4 +156,4 @@ function busquedaAbajo(props){
     )
 }
 
-export default withStyles(styles)(busquedaAbajo);
+export default withStyles(styles)(BusquedaAbajo);

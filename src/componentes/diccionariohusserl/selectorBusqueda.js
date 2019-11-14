@@ -21,7 +21,7 @@ const seleccion={
 }
 
 function SelectorBusqueda(props){
-    const {classes}=props;dentroExpresion
+    const {classes}=props;
 
     function handleChange(event){
         props.setTipoBusqueda(event.target.value)
