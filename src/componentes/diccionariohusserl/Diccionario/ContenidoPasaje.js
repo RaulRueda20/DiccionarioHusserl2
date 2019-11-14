@@ -38,6 +38,7 @@ function ContenidoPasaje(props){
   React.useEffect(() => {
     var nombreExpresion =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setTituloPasaje(nombreExpresion)
+    console.log('language',props.language)
   }, [props.referenciaSeleccionada])
 
   function clickHandleDescargas(){
@@ -81,7 +82,7 @@ function ContenidoPasaje(props){
         </Grid>
       </Grid>
       <ModalDescargas openDescargas={openDescargas} setOpenDescargas={setOpenDescargas} idExpresion={props.idExpresion} 
-      lang={props.lang} match={props.match}/>
+      lang={props.lang} match={props.match} language={props.language}/>
     </div>
   )
 }

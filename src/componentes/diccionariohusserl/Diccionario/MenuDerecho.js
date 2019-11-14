@@ -95,7 +95,7 @@ function MenuDerecho(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
             {padres.map((padre,index)=>(
-              <ListaPadresExpresion padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
+              <ListaPadresExpresion padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -113,7 +113,7 @@ function MenuDerecho(props){
           <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <ListaHijosExpresion hijo={hijo} index={index} language={props.language} key={hijo.id+"-"+index}/>
+              <ListaHijosExpresion hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+"-"+index}/>
             ))}
           </ul>
         </ExpansionPanelDetails>

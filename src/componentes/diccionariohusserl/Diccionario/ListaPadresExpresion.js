@@ -14,6 +14,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 // Other req
 import {webService} from '../../../js/webServices';
 
+//Language
+import {noDerivaDe, noContieneExpresionesDerivadas, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresionesDerivadas} from '../../../js/Language';
+
 const ITEM_HEIGHT = 48;
 
 function ListaPadresExpresion(props){
@@ -64,9 +67,9 @@ function ListaPadresExpresion(props){
                         },
                     }}
                     >
-                    <MenuItem><b>Deriva De:</b></MenuItem>
+                    <MenuItem><b>{menuDerechoJerarquiaDerivadaDe(props.lang)}</b></MenuItem>
                     <Divider/>
-                    {padreDePadres.length < 1 ? <MenuItem>No deriva de ninguna expresión.</MenuItem> : padreDePadres.map((padresPadre,index)=>
+                    {padreDePadres.length < 1 ? <MenuItem>{noDerivaDe(props.lang)}</MenuItem> : padreDePadres.map((padresPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={padresPadre.id + "-" + index}>
                             <Link to={`/husserl/pasaje/${padresPadre.padre}`}>
                                 <Typography>{padresPadre.expresion}</Typography>
@@ -74,9 +77,9 @@ function ListaPadresExpresion(props){
                         </MenuItem>
                     )}
                     <Divider/>  
-                    <MenuItem><b>Expresiones Derivadas:</b></MenuItem>
+                    <MenuItem><b>{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</b></MenuItem>
                     <Divider/>                    
-                    {hijosDePadres.length < 1 ? <MenuItem>No contiene ninguna expresión derivada.</MenuItem> : hijosDePadres.map((HijosPadre,index)=>
+                    {hijosDePadres.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> : hijosDePadres.map((HijosPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={hijosDePadres.id + "-" + index}>
                             <Link to={`/husserl/pasaje/${HijosPadre.hijo}`}>
                                 <Typography>{HijosPadre.expresion}</Typography>

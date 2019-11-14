@@ -149,7 +149,7 @@ function Pasaje(props){
         }
       }
     })
-    // console.log(pasaje)
+    console.log(props.language)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain, idDelURL])
@@ -208,7 +208,7 @@ function Pasaje(props){
         className={classNames([{"contenidoPasajes" : openHidden==true}])}>
             <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
-            lang={props.lang} pasaje={pasaje} openHidden={openHidden} setOpenHidden={setOpenHidden} idDelURL={idDelURL}
+            lang={props.lang} pasaje={pasaje} openHidden={openHidden} setOpenHidden={setOpenHidden} idDelURL={idDelURL} 
             />
             {/* <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/> */}
         </Grid>

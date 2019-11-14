@@ -163,7 +163,7 @@ function Expresion(props){
         </Grid>
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
-      <ModalDeBienvenida openModal={openModal} setOpenModal={setOpenModal}/>
+      <ModalDeBienvenida openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
     </div>
   )
 }

@@ -14,6 +14,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 // Other req
 import {webService} from '../../../js/webServices';
 
+//Language
+import {noDerivaDe, noContieneExpresionesDerivadas, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresionesDerivadas} from '../../../js/Language';
+
 const ITEM_HEIGHT = 48;
 
 function ListaHijosBajo(props){
@@ -65,9 +68,9 @@ function ListaHijosBajo(props){
                         },
                     }}
                     >
-                    <MenuItem><b>Deriva De:</b></MenuItem>
+                    <MenuItem><b>{menuDerechoJerarquiaDerivadaDe(props.lang)}</b></MenuItem>
                     <Divider/>
-                    {padreDeHijos.length < 1 ?  <MenuItem>No deriva de ninguna expresión.</MenuItem> : padreDeHijos.map((padresHijo,index)=>
+                    {padreDeHijos.length < 1 ?  <MenuItem>{noDerivaDe(props.lang)}</MenuItem> : padreDeHijos.map((padresHijo,index)=>
                         <MenuItem onClick={handleCloseExpresionesDerivadas} key={padresHijo.id + "-" + index}>
                             <Link to={`/husserl/pasaje/${padresHijo.padre}`}>
                                 <Typography>{padresHijo.expresion}</Typography>
@@ -75,9 +78,9 @@ function ListaHijosBajo(props){
                         </MenuItem>
                     )}
                     <Divider/>
-                    <MenuItem><b>Expresiones Derivadas:</b></MenuItem>
+                    <MenuItem><b>{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</b></MenuItem>
                     <Divider/>
-                    {hijosDeHijos.length < 1 ? <MenuItem>No contiene ninguna expresión derivada.</MenuItem>: hijosDeHijos.map((hijosHijo,index)=>
+                    {hijosDeHijos.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem>: hijosDeHijos.map((hijosHijo,index)=>
                         <MenuItem onClick={handleCloseExpresionesDerivadas} key={hijosHijo.id + "-" + index}>
                             <Link to={`/husserl/pasaje/${hijosHijo.hijo}`}>
                                 <Typography>{hijosDeHijos.expresion}</Typography>

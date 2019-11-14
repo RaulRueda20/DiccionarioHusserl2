@@ -1,13 +1,7 @@
 import  React from 'react';
 
-var Scroll = require('react-scroll');
-var Element = Scroll.Element;
-var Events = Scroll.Events;
-var scroller = Scroll.scroller;
-
 import * as localStore from '../../../js/localStore';
 import PanelExpresionIzquierdo from './PanelExpresionIzquierdo';
-
 
 export default function ListaIzquierdaExpresiones(props){
   const [panelesAbiertos,setPanelesAbiertos] = React.useState([]);
