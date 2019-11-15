@@ -367,7 +367,7 @@ a:hover{
 .ulDelPanelDeExpresiones{
   padding: 10px 20px !important;
   border-top: solid lightgrey;
-  background-color: whitesmoke;
+  background-color: rgb(255,255,255);
   border-width: 1px;
 }
 

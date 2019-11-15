@@ -20,27 +20,23 @@ import Paginador from './Paginador';
 
 import {webService} from '../../../js/webServices';
 
-const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
-
 function Pasaje(props){
   const [expresiones, setExpresiones] = React.useState([]);
+  const [expresionesGlobales, setExpresionesGlobales] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState('');
   const [languageP,setLanguageP] = React.useState("al");
   const [referenciaSeleccionada, setReferenciaSeleccionada]=React.useState(null);
-  const [referencias, setReferencias] = React.useState([]);
   const [expanded1, setExpanded1] = React.useState(false);
   const [expanded2, setExpanded2] = React.useState(false);
   const [expanded3, setExpanded3] = React.useState(false);
   const [pasajeService, setPasajeService] = React.useState("");
   const [panelIzquierdo,setPanelIzquierdo]=React.useState(false);
   const [panelDerecho, setPanelDerecho]=React.useState(false);
-  const [pasaje, setPasaje] = React.useState([emptyPasaje]);
   const [busqueda, setBusqueda] = React.useState("");
   const [state, setState]=React.useState({checkedA:true});
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
   const [flagLetraMain,setFlagLetraMain]=React.useState(false);
-  const [idDelURL,setIdDelURL]=React.useState("");
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
   
   const fixReferencias = (referencias) => {
@@ -113,7 +109,6 @@ function Pasaje(props){
     setLoading(true)
     var idDeExpresion=props.match.params.expresion;
     var idDeLaReferencia=props.match.params.id ? props.match.params.id : false;
-    setIdDelURL(idDeLaReferencia)
     var service = "/expresiones/" + props.language + "/" + props.letraMain;
     if(pasajeService != service){
       setPasajeService(service)
@@ -126,19 +121,8 @@ function Pasaje(props){
       setIdExpresion(idDeExpresion)
       if(idDeLaReferencia){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-        if(data.data.response == null){data.data.response
-          setPasaje(emptyPasaje)
-        }else{
-          setPasaje(data.data.response)
-        }
       }else{
         setReferenciaSeleccionada(data.data.response[0])
-        setReferencias(data.data.response)
-        if(data.data.response == null){
-          setPasaje(emptyPasaje)
-        }else{
-          setPasaje(data.data.response)
-        }
       }
       setLoading(false)
       setExpanded1(true)
@@ -150,10 +134,9 @@ function Pasaje(props){
         }
       }
     })
-    console.log("posicionReferenciasConsultadas",posicionReferenciasConsultadas)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
-  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain, idDelURL])
+  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain])
 
   return(
     <div>
@@ -186,21 +169,21 @@ function Pasaje(props){
           <Hidden xsDown>
             <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
             language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-            state={state} setState={setState}
+            state={state} setState={setState} setExpresionesGlobales={setExpresionesGlobales}
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
               setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={setFlagLetraMain}
-              setPosicionReferenciasConsultadas={setPosicionReferenciasConsultadas}/>
+              setPosicionReferenciasConsultadas={setPosicionReferenciasConsultadas} expresionesGlobales={expresionesGlobales} state={state}/>
           </Hidden>
           {openHidden == true ?
             <div>
               <BusquedaEscondida expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
               language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden}/>
+               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} setExpresionesGlobales={setExpresionesGlobales}/>
               <ListaEscondida expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2}/>
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} state={state}/>
             </div>
              : null
           }
@@ -209,7 +192,7 @@ function Pasaje(props){
         className={classNames([{"contenidoPasajes" : openHidden==true}])}>
             <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
-            lang={props.lang} pasaje={pasaje} openHidden={openHidden} setOpenHidden={setOpenHidden} idDelURL={idDelURL} 
+            lang={props.lang} openHidden={openHidden} setOpenHidden={setOpenHidden}
             />
             {/* <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/> */}
         </Grid>

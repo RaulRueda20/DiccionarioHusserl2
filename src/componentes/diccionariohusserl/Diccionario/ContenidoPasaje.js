@@ -76,7 +76,7 @@ function ContenidoPasaje(props){
       <Grid container>
         <Grid item xs={12}>
           <PasajesRenderizados referenciaSeleccionada={props.referenciaSeleccionada} languageP={props.languageP}
-          cerrado={props.panelIzquierdo || props.panelDerecho} pasaje={props.pasaje} idDelURL={props.idDelURL}
+          cerrado={props.panelIzquierdo || props.panelDerecho} idDelURL={props.idDelURL}
           />
         </Grid>
       </Grid>

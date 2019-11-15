@@ -34,10 +34,6 @@ const ExpansionPanel = withStyles({
 
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
-    // padding: "0",
-    // overflowX:"hidden",
-    // paddingTop:"5px",
-    // maxHeight: "70px !important",
     // backgroundColor:'rgb(180,180,180)'
   },
 }))(MuiExpansionPanelDetails);
@@ -139,13 +135,13 @@ function MenuDerecho(props){
           <Typography>{menuDerechoReferenciasConsultadas(props.lang)}</Typography>
         </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
-            {/* <ul className="ulDelMenuDerechoReferenciasConsultadas">
+            <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map((consultas,index)=>(
                 <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
                   <Typography className="consultaDePasajes" variant="h6">{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
                 </li>
               ))}
-            </ul> */}
+            </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
     </div>
