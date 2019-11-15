@@ -34,12 +34,17 @@ function BanderaButon(props){
 
   return(
       <div>
-        <Tooltip title={toolTipIdiomaDeLaLista(props.lang)}>
-          {props.language == 'es' ?
-            <Button size="small" className={classes.imagenesBandera} onClick={clickChangeLanguageAl}><img className="banderaIzquierda" src={al}/></Button>
-            : <Button size="small" className={classes.imagenesBandera} onClick={clickChangeLanguageEs}><img className="banderaIzquierda" src={es}/></Button>
+          {props.state.checkedA == false ? null
+          :
+          props.language == 'es' ?
+            <Tooltip title={toolTipIdiomaDeLaLista(props.lang)}>
+              <Button size="small" className={classes.imagenesBandera} onClick={clickChangeLanguageAl}><img className="banderaIzquierda" src={al}/></Button>
+            </Tooltip>
+            :
+            <Tooltip title={toolTipIdiomaDeLaLista(props.lang)}> 
+              <Button size="small" className={classes.imagenesBandera} onClick={clickChangeLanguageEs}><img className="banderaIzquierda" src={es}/></Button>
+            </Tooltip>
           }
-        </Tooltip>
       </div>
     )
 }

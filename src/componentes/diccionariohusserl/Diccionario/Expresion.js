@@ -26,6 +26,7 @@ function Expresion(props){
   const [letraMain, setLetraMain] = React.useState('A');
   const [language,setLanguage] = React.useState("al");
   const [expresiones, setExpresiones] = React.useState([]);
+  const [expresionesGlobales, setExpresionesGlobales] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState('');
   const [open,setOpen]=React.useState(true);
   const [loading, setLoading]=React.useState(false);
@@ -116,13 +117,13 @@ function Expresion(props){
         </Grid>
         <Grid item xs={2} sm={1} md={1} xl={1} align="center" style={{borderRight:"1px rgb(240, 240, 240) solid"}}>
             <LetraIndice letraMain={letraMain} state={state}/>
-            <BanderaButon language={language} setLanguage={setLanguage} lang={props.lang}/>
+            <BanderaButon language={language} setLanguage={setLanguage} lang={props.lang} state={state}/>
         </Grid>
         <Grid item xs={10} sm={8} md={8} xl={8} aling='center' >
             <ListaExpresiones expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
             setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} 
             expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
-            getJerarquia={getJerarquia} menuEscondido={menuEscondido}
+            getJerarquia={getJerarquia} menuEscondido={menuEscondido} state={state} expresionesGlobales={expresionesGlobales}
             />
         </Grid>
         <Hidden smUp>
@@ -140,7 +141,8 @@ function Expresion(props){
         <Grid item xs={12} sm={3} md={3} lg={3} className={classNames([{"menuAbajoEscondido" : menuEscondido==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown> 
             <Busqueda expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} state={state} setState={setState}
-            busqueda={busqueda} setBusqueda={setBusqueda} setLoading={setLoading}/>
+            busqueda={busqueda} setBusqueda={setBusqueda} setLoading={setLoading} expresionesGlobales={expresionesGlobales} 
+            setExpresionesGlobales={setExpresionesGlobales}/>
             <MenuDerecho idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 
@@ -150,7 +152,8 @@ function Expresion(props){
           </Hidden>
           <Hidden smUp>
             <BusquedaAbajo expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} state={state} setState={setState}
-            busqueda={busqueda} setBusqueda={setBusqueda}/>
+            busqueda={busqueda} setBusqueda={setBusqueda} expresionesGlobales={expresionesGlobales} 
+            setExpresionesGlobales={setExpresionesGlobales}/>
             <MenuBajo idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 
