@@ -92,6 +92,7 @@ function MenuDerechoPasajes(props){
     }
     var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setNombre(expresion_original)
+    console.log("nombre",nombre)
   },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
  
   return (
@@ -154,13 +155,13 @@ function MenuDerechoPasajes(props){
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map((consultas,index)=>{
-
-                console.log(consultas)
-
                 return(
-                <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
-                  <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
-                </li>)
+                  <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`}>
+                    <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
+                      <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                    </li>
+                  </Link>
+                )
               })}
             </ul>
           </ExpansionPanelDetails>
