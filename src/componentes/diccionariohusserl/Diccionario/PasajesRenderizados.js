@@ -12,7 +12,6 @@ function PasajesRenderizados(props){
     function pasajesOriginal(PasajeO){
         for(var i in PasajeO){
             if(props.idDelURL==PasajeO[i].refid){
-                console.log("pasajeO",PasajeO[i].pasaje_original)
                 setPasajeRenderizado({
                     original : resaltarBusqueda(PasajeO[i].pasaje_original,PasajeO[i].expresion_original),
                     traduccion : resaltarBusqueda(PasajeO[i].pasaje_traduccion,PasajeO[i].expresion_traduccion) 
@@ -22,7 +21,6 @@ function PasajesRenderizados(props){
     }
 
     React.useEffect(() => {
-        console.log("url",props.idDelURL)
         pasajesOriginal(props.pasaje)
     }, [props.referenciaSeleccionada, props.pasaje, props.idDelURL])
 

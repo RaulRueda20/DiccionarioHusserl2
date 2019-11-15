@@ -38,7 +38,6 @@ function ContenidoPasaje(props){
   React.useEffect(() => {
     var nombreExpresion =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setTituloPasaje(nombreExpresion)
-    console.log('language',props.language)
   }, [props.referenciaSeleccionada])
 
   function clickHandleDescargas(){

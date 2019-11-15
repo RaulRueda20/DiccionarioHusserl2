@@ -153,11 +153,15 @@ function MenuDerechoPasajes(props){
         </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
-              {referenciasConsultadasVista.map((consultas,index)=>(
+              {referenciasConsultadasVista.map((consultas,index)=>{
+
+                console.log(consultas)
+
+                return(
                 <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
                   <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
-                </li>
-              ))}
+                </li>)
+              })}
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>

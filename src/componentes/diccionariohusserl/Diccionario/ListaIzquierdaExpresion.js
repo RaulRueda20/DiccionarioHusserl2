@@ -9,8 +9,10 @@ export default function ListaIzquierdaExpresiones(props){
   const {classes, match}=props;
   
   function clickHandleVista(event){
-    var expresionClickeada=event.currentTarget.id;
-    var expresionesReferencias=props.expresiones[expresionClickeada];
+    var expresionClickeada=event.currentTarget.id.split("-")[0];
+    var posicionExpresion=event.currentTarget.id.split("-")[1]
+    var expresionesReferencias=props.expresiones[posicionExpresion];
+    console.log("expresionesReferencias",expresionesReferencias)
     if(localStore.getObjects("referenciasConsultadas")==false){
       var referenciasConsultadas=[];
       referenciasConsultadas.push(expresionesReferencias)
@@ -20,6 +22,7 @@ export default function ListaIzquierdaExpresiones(props){
       store.push(expresionesReferencias)
       localStore.setObjects("referenciasConsultadas",store)
     }
+    props.setPosicionReferenciasConsultadas(posicionExpresion)
     props.setIdExpresion(expresionClickeada)
     props.setExpanded1(true)
     props.setExpanded2(true)
@@ -27,8 +30,6 @@ export default function ListaIzquierdaExpresiones(props){
 
   function handleClickPanel(event){
     var expresionesAbiertas=panelesAbiertos;
-    var referenciasPrincipales= event.currentTarget.value;
-    console.log("referenciasprincipales", referenciasPrincipales)
     props.setIdExpresion(event.currentTarget.id)
     if(expresionesAbiertas.indexOf(event.currentTarget.id)>-1){
       expresionesAbiertas.splice(expresionesAbiertas.indexOf(event.currentTarget.id),1)

@@ -30,7 +30,7 @@ export default function PanelExpresionIzquierdo(props){
             id={"VP"+props.expresion.id} value={props.expresion.id}
         >
             <Grid container justify="center" alignItems="center">
-                <Grid item xs={10} id={props.expresion.id} onClick={props.clickHandleVista}>
+                <Grid item xs={10} id={props.expresion.id+"-"+props.index} onClick={props.clickHandleVista}>
                     <Link to={`/husserl/pasaje/${props.expresion.id}/${props.expresion.referencias[0].refid}`}>
                         <p className={"parrafo"}>{props.expresion.expresion + '//' + props.expresion.traduccion}</p>
                     </Link>

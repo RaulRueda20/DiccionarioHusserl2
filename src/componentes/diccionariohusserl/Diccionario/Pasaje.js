@@ -40,7 +40,8 @@ function Pasaje(props){
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
   const [flagLetraMain,setFlagLetraMain]=React.useState(false);
-  const [idDelURL,setIdDelURL]=React.useState("")
+  const [idDelURL,setIdDelURL]=React.useState("");
+  const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -149,7 +150,7 @@ function Pasaje(props){
         }
       }
     })
-    console.log(props.language)
+    console.log("posicionReferenciasConsultadas",posicionReferenciasConsultadas)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain, idDelURL])
@@ -190,7 +191,7 @@ function Pasaje(props){
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
               setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={setFlagLetraMain}
-            />
+              setPosicionReferenciasConsultadas={setPosicionReferenciasConsultadas}/>
           </Hidden>
           {openHidden == true ?
             <div>
@@ -218,7 +219,7 @@ function Pasaje(props){
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
             lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} letraMain={props.letraMain} setLetraMain={props.setLetraMain}
-            setFlagLetraMain={setFlagLetraMain}
+            setFlagLetraMain={setFlagLetraMain} posicionReferenciasConsultadas={posicionReferenciasConsultadas}
             />
           </Hidden>
         </Grid>
