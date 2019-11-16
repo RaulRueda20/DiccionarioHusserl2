@@ -92,7 +92,6 @@ function MenuDerechoPasajes(props){
     }
     var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setNombre(expresion_original)
-    console.log("nombre",nombre)
   },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
  
   return (

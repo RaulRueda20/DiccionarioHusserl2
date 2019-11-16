@@ -127,13 +127,14 @@ function Pasaje(props){
       setLoading(false)
       setExpanded1(true)
       setExpanded2(true)
-      if(!flagLetraMain){
+      if(flagLetraMain == false){
         if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           setFlagLetraMain(true)
         }
       }
     })
+    console.log("letraMain",props.letraMain)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain])
