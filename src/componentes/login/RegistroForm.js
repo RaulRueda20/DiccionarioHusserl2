@@ -9,20 +9,13 @@ import { withStyles } from '@material-ui/styles';
 
 import {registro, nombre, apellido, escuela, puesto, pais, email, contra, comprobacionContra, ingresar, registrado, aqui} from '../../js/Language';
 
+import Snackbars from './Snackbars';
 import Alerts from '../Alerts';
+
 import {loginService} from '../../js/webServices';
 import * as localStore from '../../js/localStore';
 
-
 const stylesReg = {
-  // subtitulo1:{
-  //   marginTop: 20,
-  //   fontSize: 20
-  // },
-  // subtitulo2:{
-  //   marginTop: 20,
-  //   fontSize: 30
-  // },
   TextField1:{
     justify: 'center',
     width:"100%",
@@ -32,11 +25,6 @@ const stylesReg = {
     justify: 'center',
     width:"100%",
   }
-  // boton:{
-  //   margin: 8,
-  //   align: 'left',
-  //   marginTop: 20
-  // }
 }
 
 var setStore = (user, pass) => {
@@ -44,7 +32,6 @@ var setStore = (user, pass) => {
     newSession['ultimasVisitadas'] = []
     newSession["ultimaVisitada"] = "alfabeto"
     localStore.setObjects("sesion", newSession)
-    // linkTo("main.html")
 }
 
 function RegistroForm(props){
@@ -57,52 +44,47 @@ function RegistroForm(props){
   const [nuevoCorreo, setNuevoCorreo]=React.useState("");
   const [nuevoPassword, setNuevoPassword]=React.useState("");
   const [repassword, setRepassword]=React.useState("");
-  const [alerta, setAlerta]=React.useState(false);
-  const [mensajeDeAlerta, setMensajeDeAlerta]=React.useState({mensaje:"", tituloAlerta:""})
-  const [loading, setLoading]=React.useState(false)
+  const [mensajeDeAlerta, setMensajeDeAlerta]=React.useState({open:false,mensaje:"", tituloAlerta:""});
+  const [loading, setLoading]=React.useState(false);
 
-   function onFormSubmit(event){
-     event.preventDefault();
-     setLoading(true)
-     var comprobacion = repassword
-        console.log(comprobacion)
-        var params = {
-            'nombre' : nuevoNombre,
-            'apellidos' : nuevoApellido,
-            'email' : nuevoCorreo,
-            'institucion' : nuevaEscuela,
-            'grado' : nuevoPuesto,
-            'pais' : nuevoPais,
-            'password' : nuevoPassword
-        }
-        console.log(params)
-        if(params.password == repassword){
-          var service = "/login/registrar"
-          loginService(service, "POST", JSON.stringify(params), (data) => {
-            if(data.error === null){
-              var serviceh = "/login/sendRegistroEmail/" + localStore.getItem("es")
-              console.log(serviceh)
-              loginService(serviceh, "GET", {"nombre" : params.nombre,"email" : params.email,"pass" : params.password}, (data) => {
-                if(data.response){
-                  setMensajeDeAlerta({mensaje : "Operación Exitosa", alerta : true, tituloAlerta:"Operación Concluida con Exito"})
-                  setStore(params.email, params.password)
-                }else{
-                  setMensajeDeAlerta({mensaje : "Hubo Un Error El Enviar El Correo De Notificación", alerta : true, tituloAlerta:"Alerta de Error"})
-                }
-              })
-            }else{
-              setMensajeDeAlerta({mensaje : "El correo ya se encuentra registrado", alerta : true, tituloAlerta:"Alerta de Error"})
-            }
-          })
-        }else{
-          setMensajeDeAlerta({mensaje : "El password no coincide", alerta : true, tituloAlerta:"Alerta de Error"})
-        }
-        setLoading(false)
-      }
-
-    function handleAlertClose(){
-      setAlerta(false)
+  function onFormSubmit(event){
+    event.preventDefault();
+    setLoading(true)
+      var params = {
+      'nombre' : nuevoNombre,
+      'apellidos' : nuevoApellido,
+      'email' : nuevoCorreo,
+      'institucion' : nuevaEscuela,
+      'grado' : nuevoPuesto,
+      'pais' : nuevoPais,
+      'password' : nuevoPassword
     }
+    if(params.password == repassword){
+      var service = "/login/registrar"
+      loginService(service, "POST", JSON.stringify(params), (data) => {
+        console.log("error",data.error)
+        if(data.data.status == 200){
+          var serviceh = "/login/sendRegistroEmail/" + localStore.getItem("es")
+          loginService(serviceh, "GET", {"nombre" : params.nombre,"email" : params.email,"pass" : params.password}, (data) => {
+            console.log("data", JSON.parse(data.config.data))
+            setMensajeDeAlerta({mensaje : "Operación Exitosa", open : true, tituloAlerta:"Operación Concluida con Exito"})
+            setStore(params.email, params.password)
+          })
+        }else if(data.data.status == 501){
+          setMensajeDeAlerta({mensaje : "El correo ya se encuentra registrado", open : true, tituloAlerta:"Alerta de Error"})
+        }else if(data.data.status == 500){
+          setMensajeDeAlerta({mensaje : "Hubo Un Error El Enviar El Correo De Notificación", open : true, tituloAlerta:"Alerta de Error"})
+        }
+      })
+    }else{
+      setMensajeDeAlerta({mensaje : "El password no coincide", open : true, tituloAlerta:"Alerta de Error"})
+    }
+    setLoading(false)
+  }
+
+  function handleAlertClose(){
+    setMensajeDeAlerta({open:false,mensaje:mensajeDeAlerta.mensaje, tituloAlerta:mensajeDeAlerta.tituloAlerta})
+  }
 
   return (
     <form onSubmit={onFormSubmit}>
@@ -190,7 +172,6 @@ function RegistroForm(props){
           <Grid container justify="flex-end" className="grids">
             <Grid item>
               <Button
-                // onClick={this.handleSubmit}
                 color="primary"
                 variant="contained"
                 className={classes.boton}
@@ -206,13 +187,12 @@ function RegistroForm(props){
           <Typography variant = "h4">
             {registrado(props.lang)} <a href="#" onClick={() =>props.setLogin(true)}> {aqui(props.lang)} </a>
           </Typography>
+        </Grid>
       </Grid>
-      </Grid>
-      <Alerts mensaje={mensajeDeAlerta.mensaje} open={alerta} handleClose={handleAlertClose} titulo={mensajeDeAlerta.tituloAlerta}/>
+      <Alerts mensaje={mensajeDeAlerta.mensaje} open={mensajeDeAlerta.open} handleClose={handleAlertClose} titulo={mensajeDeAlerta.tituloAlerta}/>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
     </form>
   )
-
 }
 
 export default withStyles(stylesReg)(RegistroForm);

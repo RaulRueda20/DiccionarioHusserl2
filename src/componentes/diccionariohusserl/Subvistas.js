@@ -10,15 +10,16 @@ import ModuloBusquedas from './moduloBusquedas'
 
 export default function Subvistas({match, lang, setLang}){
     const [language,setLanguage] = React.useState("al");
-    const [letraMain, setLetraMain] = React.useState('A');
+    const [letraMain, setLetraMain] = React.useState("A");
+    const [flagLetraMain, setFlagLetraMain]=React.useState(true);
 
     return(
         <div>
             <HeaderMain match={match} lang={lang} setLang={setLang}/>
             <Switch>
-                <Route path={`${match.url}/diccionario`} render={(props) => <Expresion {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
-                <Route path={`${match.url}/pasaje/:expresion/:id`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
-                <Route path={`${match.url}/pasaje/:expresion`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain}/>}/>
+                <Route path={`${match.url}/diccionario`} render={(props) => <Expresion {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain} flagLetraMain={flagLetraMain} setFlagLetraMain={setFlagLetraMain}/>}/>
+                <Route path={`${match.url}/pasaje/:expresion/:id`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain} flagLetraMain={flagLetraMain} setFlagLetraMain={setFlagLetraMain}/>}/>
+                <Route path={`${match.url}/pasaje/:expresion`} render={(props) => <Pasaje {...props} lang={lang} setLang={setLang} language={language} setLanguage={setLanguage} letraMain={letraMain} setLetraMain={setLetraMain} flagLetraMain={flagLetraMain} setFlagLetraMain={setFlagLetraMain}/>}/>
                 <Route path={`${match.url}/busquedas`} render={(props) => <ModuloBusquedas {...props} lang={lang} setLang={setLang}/>}/>
                 <Route path={`${match.url}/acercade`} render={(props) => <Acercade {...props} lang={lang} setLang={setLang}/>}/>
                 <Route path={`${match.url}/guia`} render={(props) => <Guia {...props} lang={lang} setLang={setLang}/>}/>

@@ -85,8 +85,8 @@ function Expresion(props){
     setLoading(true)
     var service = "/expresiones/" + language + "/" + letraMain
     webService(service, "GET", {}, (data) => {
-      console.log(fixReferencias(data.data.response))
       setExpresiones(fixReferencias(data.data.response))
+      setExpresionesGlobales(fixReferencias(data.data.response))
       if(idExpresion === ''){
         setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
       }
@@ -124,6 +124,7 @@ function Expresion(props){
             setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} 
             expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
             getJerarquia={getJerarquia} menuEscondido={menuEscondido} state={state} expresionesGlobales={expresionesGlobales}
+            setFlagLetraMain={props.setFlagLetraMain}
             />
         </Grid>
         <Hidden smUp>
@@ -147,7 +148,7 @@ function Expresion(props){
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            getJerarquia={getJerarquia} lang={props.lang}
+            getJerarquia={getJerarquia} lang={props.lang} setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}
             />
           </Hidden>
           <Hidden smUp>

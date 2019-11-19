@@ -36,7 +36,6 @@ function Pasaje(props){
   const [state, setState]=React.useState({checkedA:true});
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
-  const [flagLetraMain,setFlagLetraMain]=React.useState(false);
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
   
   const fixReferencias = (referencias) => {
@@ -44,7 +43,6 @@ function Pasaje(props){
     var posicActual = -1
     var expreActual = ""
     var i = 0
-    // console.log(referencias.length)
     while (i<referencias.length){
       if (expreActual != referencias[i].expresion){
         posicActual++
@@ -73,7 +71,6 @@ function Pasaje(props){
           refid : referencias[i].refid, orden: referencias[i].orden,
         })
         i++
-        // expresiones
       }
     }
     return expresiones
@@ -116,7 +113,7 @@ function Pasaje(props){
         setExpresiones(fixReferencias(data.data.response))
       })
     }
-    service = "/referencias/obtieneReferencias/" + idDeExpresion
+    var service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
       setIdExpresion(idDeExpresion)
       if(idDeLaReferencia){
@@ -127,17 +124,16 @@ function Pasaje(props){
       setLoading(false)
       setExpanded1(true)
       setExpanded2(true)
-      if(flagLetraMain == false){
+      if(!props.flagLetraMain){
         if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
-          setFlagLetraMain(true)
+          props.setFlagLetraMain(true)
         }
       }
     })
-    console.log("letraMain",props.letraMain)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
-  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain])
+  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
 
   return(
     <div>
@@ -174,7 +170,7 @@ function Pasaje(props){
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={setFlagLetraMain}
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={props.setFlagLetraMain}
               setPosicionReferenciasConsultadas={setPosicionReferenciasConsultadas} expresionesGlobales={expresionesGlobales} state={state}/>
           </Hidden>
           {openHidden == true ?
@@ -203,7 +199,7 @@ function Pasaje(props){
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
             lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} letraMain={props.letraMain} setLetraMain={props.setLetraMain}
-            setFlagLetraMain={setFlagLetraMain} posicionReferenciasConsultadas={posicionReferenciasConsultadas}
+            setFlagLetraMain={props.setFlagLetraMain} posicionReferenciasConsultadas={posicionReferenciasConsultadas}
             />
           </Hidden>
         </Grid>

@@ -20,7 +20,7 @@ export default function PanelExpresionIzquierdo(props){
     function handleVisitados(event,index,referencia){
         if(document.getElementById(referencia + "-" + index).className.indexOf("pasajesVisitados")==-1){
             document.getElementById(referencia + "-" + index).className += " pasajesVisitados";
-        }   
+        }
     }
 
     return (
@@ -52,7 +52,7 @@ export default function PanelExpresionIzquierdo(props){
                         {props.expresion.referencias[0].refid == null ? "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas." : 
                             props.expresion.referencias.map((referencia,index) =>(
                             <li className="referencia">
-                                <Typography variant="h6" className={classNames([{"remarcadoDeReferencias" : referencia.orden==1}])}>
+                                <Typography variant="h6" className={classNames([{"remarcadoDeReferencias" : referencia.orden==1}])} >
                                     <Link to={`/husserl/pasaje/${props.expresion.id}/${referencia.refid}`} className="consultaDePasajes" onClick={(event) => handleVisitados(event,index,referencia.refid)} id={referencia.refid+"-"+index}>
                                         {referencia.refid + "  :  " + referencia.referencia_original + "/" + referencia.referencia_traduccion}
                                     </Link>

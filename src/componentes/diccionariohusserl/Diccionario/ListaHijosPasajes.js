@@ -42,7 +42,7 @@ function ListaHijosPasajes(props){
     };
 
     function handleFlagLetraMain(){
-    props.setFlagLetraMain(false)
+        props.setFlagLetraMain(false)
     }
 
     return(

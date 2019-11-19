@@ -94,6 +94,10 @@ function MenuDerechoPasajes(props){
     setNombre(expresion_original)
   },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
  
+  function handleFlagLetraMain(){
+    props.setFlagLetraMain(false)
+  }
+
   return (
     <div className="contenedorMenuDerecho">
         <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)} className="panelPrincipal">
@@ -116,7 +120,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresion(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoExpresion" >
             <li>
-              <Typography variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
+              <Typography key={nombre.refid} variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
             </li>
           </ul>
         </ExpansionPanelDetails>
@@ -139,7 +143,7 @@ function MenuDerechoPasajes(props){
             <ul className="ulDelMenuDerechoVerTambien">
               {listaVerTambien.map((expresion,index)=>{
                 return <li key={expresion.id+"-"+index}>
-                  <Link to={`/husserl/pasaje/${expresion.id}`}>
+                  <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
                     <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                   </Link>
                 </li>
@@ -155,8 +159,8 @@ function MenuDerechoPasajes(props){
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map((consultas,index)=>{
                 return(
-                  <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`}>
-                    <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
+                  <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
+                    <li className="bordeDeConsultas" key={consultas.expresion+"-"+index} >
                       <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
                     </li>
                   </Link>

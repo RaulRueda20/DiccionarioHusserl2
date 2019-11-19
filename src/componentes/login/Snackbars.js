@@ -52,11 +52,6 @@ function EnvoltorioDeSnack(props){
                 {message}
             </span>
         }
-        // action={[
-        //     <IconButton key="close" aria-label="close" color="inherent" onClick={onClose}>
-        //         <CloseIcon className={classes.icon}/>
-        //     </IconButton>
-        // ]}
         {...other}
         />
     )

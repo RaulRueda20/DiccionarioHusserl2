@@ -49,7 +49,6 @@ const useStyles = makeStyles(theme => ({
 
 function MenuIdioma(props){
   const classes = useStyles();
-  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   function handleClick(event) {
