@@ -180,7 +180,8 @@ function Pasaje(props){
                state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} setExpresionesGlobales={setExpresionesGlobales}/>
               <ListaEscondida expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} state={state}/>
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} state={state} setFlagLetraMain={props.setFlagLetraMain}
+              expresionesGlobales={expresionesGlobales}/>
             </div>
              : null
           }
@@ -208,7 +209,7 @@ function Pasaje(props){
             <MenuEscondido idExpresion={idExpresion} language={props.language}
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} setFlagLetraMain={setFlagLetraMain}
+            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} setFlagLetraMain={props.setFlagLetraMain}
             />
           </Grid>
           :null

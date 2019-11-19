@@ -42,7 +42,12 @@ function ListaHijosExpresion(props){
     };
 
     function handleFlagLetraMain(){
-    props.setFlagLetraMain(false)
+        props.setFlagLetraMain(false)
+        setTimeout(() => {
+            if(document.getElementById("VP" + props.idExpresion) != null){
+              document.getElementById("VP" + props.idExpresion).scrollIntoView()
+            }
+        }, 1000)
     }
 
     return(

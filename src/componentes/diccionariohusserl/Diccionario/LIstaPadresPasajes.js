@@ -42,6 +42,11 @@ function ListaPadresPasajes(props){
 
     function handleFlagLetraMain(){
         props.setFlagLetraMain(false)
+        setTimeout(() => {
+            if(document.getElementById("VP" + props.idExpresion) != null){
+              document.getElementById("VP" + props.idExpresion).scrollIntoView()
+            }
+        }, 1000)
     }
 
     return(
@@ -85,7 +90,7 @@ function ListaPadresPasajes(props){
                     <Divider/>                    
                     {hijosDePadres.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> : hijosDePadres.map((HijosPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={hijosDePadres.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${HijosPadre.hijo}`}>
+                            <Link to={`/husserl/pasaje/${HijosPadre.hijo}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{HijosPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>

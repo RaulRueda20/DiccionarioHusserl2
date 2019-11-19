@@ -6,8 +6,6 @@ import PanelExpresionIzquierdo from './PanelExpresionIzquierdo';
 export default function ListaIzquierdaExpresiones(props){
   const [panelesAbiertos,setPanelesAbiertos] = React.useState([]);
 
-  const {classes, match}=props;
-  
   function clickHandleVista(event){
     var expresionClickeada=event.currentTarget.id.split("-")[0];
     var posicionExpresion=event.currentTarget.id.split("-")[1]
@@ -41,8 +39,9 @@ export default function ListaIzquierdaExpresiones(props){
 
   React.useEffect(()=>{
     setTimeout(() => {
-      if(document.getElementById("VP" + props.idExpresion) != null)
+      if(document.getElementById("VP" + props.idExpresion) != null){
         document.getElementById("VP" + props.idExpresion).scrollIntoView()
+      }
     }, 1000)
   },[props.idExpresion])
 
