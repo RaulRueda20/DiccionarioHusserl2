@@ -394,6 +394,11 @@ a:hover{
   overflow: auto;
 }
 
+.contenedorMenuDerechoEscondido{
+  max-height: calc(100vh - 488px);
+  overflow: auto;
+}
+
 .contenedorMenuBajo{
   max-height: 32vh;
   width: 100%;
@@ -632,6 +637,7 @@ hr{
   overflow-x: hidden;
   width: auto;
   background-color: rgb(245,245,245);
+  margin-right: 10px !important;
 }
 
 .iconoJerarquiaPasajes{

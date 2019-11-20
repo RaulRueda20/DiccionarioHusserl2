@@ -52,21 +52,21 @@ function ContenidoPasaje(props){
     <div>
       <Grid container justify="center" alignItems="center" alignContent="center" style={{borderRight: "1px double lightgrey",
     borderLeft: "1px double lightgrey"}}>
-        <Grid item xs={2} sm={2} md={1} lg={1}>
-          <Hidden smUp>
+        <Hidden smUp>
+          <Grid item xs={2} sm={2} md={false} lg={false}>
             <IconButton size="small" onClick={clickHandleHidden}>
               <SwapHorizIcon fontSize="large"/>
             </IconButton>
-          </Hidden>
-        </Grid>
-        <Grid item xs={2} sm={2} md={1} lg={1}>
+          </Grid>
+        </Hidden>
+        <Grid item xs={2} sm={2} md={1} lg={1} style={{textAlign:"center"}}>
           <Tooltip title={descarga(props.lang)}>
             <IconButton size="small" className="iconosIluminados" onClick={clickHandleDescargas}>
               <GetAppIcon fontSize="large"/>
             </IconButton>
           </Tooltip>
         </Grid>
-        <Grid item xs={6} sm={6} md={9} lg={9} className={classes.gridTituloPasaje}>
+        <Grid item xs={6} sm={6} md={10} lg={10} className={classes.gridTituloPasaje}>
           <Typography className={classes.typoSize} variant="h2">{props.languageP=="al" ? tituloPasaje.expresion_original : tituloPasaje.expresion_traduccion}</Typography>
         </Grid>
         <Grid item xs={2} sm={2} md={1} lg={1}>

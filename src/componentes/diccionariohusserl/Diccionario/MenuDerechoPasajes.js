@@ -40,19 +40,12 @@ const ExpansionPanel = withStyles({
 
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
-    // padding: "0",
-    // overflowX:"hidden",
-    // paddingTop:"5px",
-    // maxHeight: "70px !important",
-    // backgroundColor:'rgb(180,180,180)'
   },
 }))(MuiExpansionPanelDetails);
 
 const ExpansionPanelSummary = withStyles({
   root: {
     backgroundColor: "rgba(0,0,0,.11) !important",
-    // borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    // marginBottom: -1,
     '&$expanded': {
     },
   },
@@ -141,13 +134,13 @@ function MenuDerechoPasajes(props){
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleVerTambien">
             <ul className="ulDelMenuDerechoVerTambien">
-              {listaVerTambien.map((expresion,index)=>{
-                return <li key={expresion.id+"-"+index}>
+              {listaVerTambien.map((expresion,index)=>(
+                <li key={expresion.id+"-"+index}>
                   <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
                     <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                   </Link>
                 </li>
-              })}
+              ))}
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -157,15 +150,13 @@ function MenuDerechoPasajes(props){
         </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
-              {referenciasConsultadasVista.map((consultas,index)=>{
-                return(
-                  <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
+              {referenciasConsultadasVista.map((consultas,index)=>(
+                  <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
                     <li className="bordeDeConsultas" key={consultas.expresion+"-"+index} >
                       <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
                     </li>
                   </Link>
-                )
-              })}
+              ))}
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>

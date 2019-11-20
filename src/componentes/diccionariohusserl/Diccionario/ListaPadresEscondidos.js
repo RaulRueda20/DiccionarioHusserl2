@@ -40,9 +40,13 @@ function ListaPadresEscondidos(props){
     setAnchorEl(null);
     };
 
+    function handleFlagLetraMain(){
+        props.setFlagLetraMain(false)
+    }
+
     return(
         <div>
-            <li key={props.padre.refid+"-"+props.index}>
+            <li key={props.padre.refid+"-"+props.index} onClick={()=>handleFlagLetraMain()}>
                 <Grid container alignItems="center">
                     <Grid item xs={8}>
                         <Link to={`/husserl/pasaje/${props.padre.padre}`}>
@@ -71,7 +75,7 @@ function ListaPadresEscondidos(props){
                     <Divider/>
                     {padreDePadres.length < 1 ? <MenuItem>{noDerivaDe(props.lang)}</MenuItem> : padreDePadres.map((padresPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={padresPadre.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${padresPadre.padre}`}>
+                            <Link to={`/husserl/pasaje/${padresPadre.padre}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{padresPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>
@@ -81,7 +85,7 @@ function ListaPadresEscondidos(props){
                     <Divider/>                    
                     {hijosDePadres.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> : hijosDePadres.map((HijosPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={hijosDePadres.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${HijosPadre.hijo}`}>
+                            <Link to={`/husserl/pasaje/${HijosPadre.hijo}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{HijosPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>

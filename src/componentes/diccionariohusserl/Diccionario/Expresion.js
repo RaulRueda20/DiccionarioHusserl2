@@ -159,7 +159,7 @@ function Expresion(props){
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            getJerarquia={getJerarquia} lang={props.lang}/>
+            getJerarquia={getJerarquia} lang={props.lang} setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
           </Hidden>
         </Grid>    
         <Grid item xs={12}>

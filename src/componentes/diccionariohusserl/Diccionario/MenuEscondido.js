@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -9,10 +11,10 @@ import Typography from '@material-ui/core/Typography';
 import {menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, menuDerechoJerarquiaExpresionesDerivadas, menuDerechoVerTambien, menuDerechoReferenciasConsultadas} from '../../../js/Language';
 
 import ListaPadresEscondidos from './ListaPadresEscondidos';
+import ListaHijosEscondido from './ListaHijosEscondido';
 
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
-import ListaHijosEscondido from './ListaHijosEscondido';
 
 const ExpansionPanel = withStyles({
   root: {
@@ -67,28 +69,32 @@ function MenuEscondido(props){
   const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
 
   React.useEffect(()=>{
-      if(localStore.getObjects("referenciasConsultadas")!=false){
+    if(localStore.getObjects("referenciasConsultadas")!=false){
       var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
       setReferenciasConsultadasVista(referenciaConsultadaSacada)
-      }
-      if (props.idExpresion!=""){
-      var service = "/vertambien/" + props.idExpresion
-      webService(service, "GET", {}, data => {
-          setListaVerTambien(data.data.response)
-          webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) => setHijos(data.data.response))
-          webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>setPadres(data2.data.response))
+    }
+    if (props.idExpresion!=""){
+    var service = "/vertambien/" + props.idExpresion
+    webService(service, "GET", {}, data => {
+      setListaVerTambien(data.data.response)
+      webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) =>{
+        setHijos(data.data.response)
       })
-      }
-      var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
-      setNombre(expresion_original)
-  },[props.idExpresion])
+      webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>{
+        setPadres(data2.data.response)
+      })
+    })
+    }
+    var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
+    setNombre(expresion_original)
+  },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
 
   function handleFlagLetraMain(){
     props.setFlagLetraMain(false)
   }
 
   return (
-    <div className="contenedorMenuDerecho">
+    <div className="contenedorMenuDerechoEscondido">
         <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)} className="panelPrincipal">
           <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography>{menuDerechoJerarquia(props.lang)}</Typography>
@@ -99,7 +105,8 @@ function MenuEscondido(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
             {padres.map((padre,index)=>(
-              <ListaPadresEscondidos padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
+              <ListaPadresEscondidos padre={padre} index={index} language={props.language} key={padre.id+'-'+index} letraMain={props.letraMain} 
+              setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -117,7 +124,8 @@ function MenuEscondido(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <ListaHijosEscondido hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index}/>
+              <ListaHijosEscondido hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index} letraMain={props.letraMain} 
+              setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -128,11 +136,13 @@ function MenuEscondido(props){
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleVerTambien">
             <ul className="ulDelMenuDerechoVerTambien">
-              {listaVerTambien.map((expresion,index)=>{
-                return <li key={expresion.id+"-"+index}>
-                  <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+              {listaVerTambien.map((expresion,index)=>(
+                <li key={expresion.id+"-"+index}>
+                  <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
+                    <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                  </Link>
                 </li>
-              })}
+              ))}
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -144,7 +154,9 @@ function MenuEscondido(props){
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map((consultas,index)=>(
                 <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
-                  <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                  <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
+                    <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                  </Link>
                 </li>
               ))}
             </ul>

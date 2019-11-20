@@ -35,18 +35,22 @@ function ListaHijosBajo(props){
         webService(("/expresiones/"+props.language+"/hijosList/"+hid),"GET", {}, (data) => {
           setHijosDeHijos(data.data.response)
         })
-      }
+    }
     
-      const handleCloseExpresionesDerivadas = () => {
-        setAnchorEl(null);
-      };
+    const handleCloseExpresionesDerivadas = () => {
+    setAnchorEl(null);
+    };
+
+    function handleFlagLetraMain(){
+        props.setFlagLetraMain(false)
+    }
 
     return(
         <div>
             <li key={props.hijo.refid+"-"+props.index}>
                 <Grid container alignItems="center">
                     <Grid item xs={8}>
-                        <Link to={`/husserl/pasaje/${props.hijo.hijo}`}>
+                        <Link to={`/husserl/pasaje/${props.hijo.hijo}`} onClick={()=>handleFlagLetraMain()}>
                             <Typography variant="h6" className="consultaDePasajes">{props.hijo.expresion}</Typography>
                         </Link>
                     </Grid>
@@ -72,7 +76,7 @@ function ListaHijosBajo(props){
                     <Divider/>
                     {padreDeHijos.length < 1 ?  <MenuItem>{noDerivaDe(props.lang)}</MenuItem> : padreDeHijos.map((padresHijo,index)=>
                         <MenuItem onClick={handleCloseExpresionesDerivadas} key={padresHijo.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${padresHijo.padre}`}>
+                            <Link to={`/husserl/pasaje/${padresHijo.padre}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{padresHijo.expresion}</Typography>
                             </Link>
                         </MenuItem>
@@ -82,7 +86,7 @@ function ListaHijosBajo(props){
                     <Divider/>
                     {hijosDeHijos.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem>: hijosDeHijos.map((hijosHijo,index)=>
                         <MenuItem onClick={handleCloseExpresionesDerivadas} key={hijosHijo.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${hijosHijo.hijo}`}>
+                            <Link to={`/husserl/pasaje/${hijosHijo.hijo}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{hijosDeHijos.expresion}</Typography>
                             </Link>
                         </MenuItem>
