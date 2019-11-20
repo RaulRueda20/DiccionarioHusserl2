@@ -26,8 +26,12 @@ const stylesFor = {
   },
   gridsF : {
     margin: "7.5vh 2.5vw"
+  },
+  divDelForm: {
+    minHeight: "55vh",
+    paddingTop: "5vh"
   }
- }
+}
 
 var setStore = (user, pass) => {
     var newSession = {"user" : user, "password" : pass}
@@ -73,7 +77,7 @@ function LoginForm (props){
   }
 
   return (
-    <div>
+    <div className={classes.divDelForm}>
       <Typography variant="h3" align="center" gutterBottom >
         {inicio(props.lang)}
       </Typography>

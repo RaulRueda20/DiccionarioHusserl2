@@ -10,8 +10,7 @@ const styles = {
     color: "rgba(255,255,255, .9)",
   },
   footerBody: {
-    bottom: "-73px",
-    position: "absolute",
+    bottom: "0px",
     width: "100%"
   }
 }
