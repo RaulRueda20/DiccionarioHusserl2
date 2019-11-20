@@ -129,6 +129,9 @@ function Pasaje(props){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           props.setFlagLetraMain(true)
         }
+      }else{
+        props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
+        props.setFlagLetraMain(true)
       }
     })
     updateDimensions()
