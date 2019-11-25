@@ -87,7 +87,6 @@ function Pasaje(props){
 
   function handlePanelIzquierdo(){
     setPanelIzquierdo(!panelIzquierdo)
-
   }
 
   function handlePanelDerecho(){
@@ -129,9 +128,6 @@ function Pasaje(props){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           props.setFlagLetraMain(true)
         }
-      }else{
-        props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
-        props.setFlagLetraMain(true)
       }
     })
     updateDimensions()

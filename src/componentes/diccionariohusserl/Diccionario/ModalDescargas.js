@@ -1,4 +1,7 @@
+// React
 import React from 'react';
+
+// Components
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -14,7 +17,12 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { withStyles } from '@material-ui/styles';
 
+// Elements
+import ListaDeConsultados from './ListaDeConsultados';
+
+// Other req
 import {webService} from '../../../js/webServices';
+
 
 //Language
 import {descargarConsulta, seGeneraArchivo, menuDerechoJerarquia, conReferencias, descargarEn, idiomaAl, idiomaEs, pasajeSeleccionadoOTodos, pasajeSeleccionado, todosLosPasajes, tipoDeArchivos, texto} from '../../../js/Language';
@@ -32,9 +40,12 @@ const modalDescargas={
     },
     gridDeBotones:{
         textAlign: "right",
+    },
+    tituloConsultados:{
+        marginTop:"10px",
+        marginBottom:"10px"
     }
 }
-
 
 function ModalDescargas(props){
     const {classes}=props;
@@ -43,6 +54,7 @@ function ModalDescargas(props){
     const [checkedC,setCheckedC] =React.useState(false);
     const [checkedD,setCheckedD] =React.useState(false);
     const [checkedE,setCheckedE] =React.useState(false);
+    const [checked, setChecked] = React.useState([]);
     const [value, setValue] = React.useState('Texto');
 
     const handleChangeA=name=>event=>{
@@ -78,25 +90,64 @@ function ModalDescargas(props){
         checkedB ? opciones.push(1) : opciones.push(0)
         checkedC ? opciones.push(1) : opciones.push(0)
         checkedA ? opciones.push(1) : opciones.push(0)
-        if(value=='texto'){
-            var serviceR = "/reporte/reporteText/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
-            &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
-            "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + props.match.params.id
-            webService(serviceR, "GET", {}, (data) => {
-                console.log("data",data)
-                document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".txt' id='fileToDownload' download></a>"
-                document.getElementById("fileToDownload").click()
-            })
-        }else{
-            var serviceR = "/reporte/reportepdf/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
-            &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
-            "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + props.match.params.id
-            webService(serviceR, "GET", {}, (data) => {
-                console.log("data")
-                document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".pdf' id='fileToDownload' download></a>"
-                document.getElementById("fileToDownload").click()
-            })
+        if(checkedD){
+            if(value=='texto'){
+                var serviceR = "/reporte/reporteText/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
+                &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
+                "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + props.match.params.id
+                webService(serviceR, "GET", {}, (data) => {
+                    document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".txt' id='fileToDownload' download></a>"
+                    document.getElementById("fileToDownload").click()
+                })
+                if(checked.length > 0){
+                    for(var i in checked){
+                        var refid = checked[i].split("/")[0]
+                        var id = checked[i].split("/")[1]
+                        console.log("refid y id",refid, id)
+                        var serviceR = "/reporte/reporteText/" + id + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
+                        &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
+                        "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + refid
+                        webService(serviceR, "GET", {}, (data) => {
+                            document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".txt' id='fileToDownload' download></a>"
+                            document.getElementById("fileToDownload").click()
+                        })
+                    }
+                }
+            }else{
+                var serviceR = "/reporte/reportepdf/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
+                &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
+                "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + props.match.params.id
+                webService(serviceR, "GET", {}, (data) => {
+                    document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".pdf' id='fileToDownload' download></a>"
+                    document.getElementById("fileToDownload").click()
+                })
+                if(checked.length > 0){
+                    for(var i in checked){
+                        var refid = checked[i].split("/")[0]
+                        var id = checked[i].split("/")[1]
+                        console.log("refid y id",refid, id)
+                        var serviceR = "/reporte/reportepdf/" + id + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
+                        &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
+                        "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + refid
+                        webService(serviceR, "GET", {}, (data) => {
+                            document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".txt' id='fileToDownload' download></a>"
+                            document.getElementById("fileToDownload").click()
+                        })
+                    }
+                }
+            }
         }
+        if(checkedE){
+            if(value != 'texto'){
+                var serviceR = "/reporte/reportepdf/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
+                &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
+                "&hierarchy=" + opciones[6] + "&lang=" + props.lang + "&refid=" + props.match.params.id
+                webService(serviceR, "GET", {}, (data) => {
+                    document.getElementById("toDownloadDiv").innerHTML = "<a href='/files/"+data.data.response+".pdf' id='fileToDownload' download></a>"
+                    document.getElementById("fileToDownload").click()
+                })
+            }   
+        }   
     }
 
     return(
@@ -172,7 +223,7 @@ function ModalDescargas(props){
                             <FormControlLabel control={
                                 <Checkbox
                                     checked={checkedD}
-                                    onChange={() => setCheckedB(!checkedD)}
+                                    onChange={() => setCheckedD(!checkedD)}
                                     value="checkedD"
                                 />
                                 }
@@ -183,7 +234,7 @@ function ModalDescargas(props){
                             <FormControlLabel control={
                                 <Checkbox
                                     checked={checkedE}
-                                    onChange={() => setCheckedC(!checkedE)}
+                                    onChange={() => setCheckedE(!checkedE)}
                                     value="checkedE"
                                 />
                                 }
@@ -203,6 +254,15 @@ function ModalDescargas(props){
                         </RadioGroup>
                     </Grid>
                 </FormGroup>
+                <Divider className="divisor"/>
+                <Grid container >
+                        <Grid item xs={12} className={classes.tituloConsultados}>
+                            <Typography>Descargar expresiones consultadas</Typography>
+                        </Grid>
+                    <Grid item xs={12}>
+                        <ListaDeConsultados checked={checked} setChecked={setChecked}/>
+                    </Grid>
+                </Grid>
                 <Divider className="divisor"/>
                 <Grid container>
                     <Grid item xs={12} className={classes.gridDeBotones}>

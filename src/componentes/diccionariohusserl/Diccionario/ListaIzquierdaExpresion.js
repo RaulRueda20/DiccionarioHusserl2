@@ -20,6 +20,7 @@ export default function ListaIzquierdaExpresiones(props){
       store.push(expresionesReferencias)
       localStore.setObjects("referenciasConsultadas",store)
     }
+    console.log("store",store)
     props.setPosicionReferenciasConsultadas(posicionExpresion)
     props.setIdExpresion(expresionClickeada)
     props.setExpanded1(true)
@@ -39,7 +40,6 @@ export default function ListaIzquierdaExpresiones(props){
 
   React.useEffect(()=>{
     setTimeout(() => {
-      console.log("TimeOut", document.getElementById("VP" + props.idExpresion))
       if(document.getElementById("VP" + props.idExpresion) != null){
         document.getElementById("VP" + props.idExpresion).scrollIntoView()
       }

@@ -941,7 +941,7 @@ const pasajeSeleccionado = lang => {
 const todosLosPasajes = lang => {
   switch (lang) {
     case "es":
-      return "Pasaje seleccionado"
+      return "Todos los pasajes"
     case "en":
       return "All the Passages"
     case "fr":

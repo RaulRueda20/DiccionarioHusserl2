@@ -11,7 +11,7 @@ import ModuloBusquedas from './moduloBusquedas'
 export default function Subvistas({match, lang, setLang}){
     const [language,setLanguage] = React.useState("al");
     const [letraMain, setLetraMain] = React.useState("A");
-    const [flagLetraMain, setFlagLetraMain]=React.useState(true);
+    const [flagLetraMain, setFlagLetraMain]=React.useState(false);
 
     return(
         <div>
