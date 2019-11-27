@@ -37,6 +37,7 @@ function Pasaje(props){
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
+  const [referencias, setReferencias] = React.useState([])
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -114,6 +115,7 @@ function Pasaje(props){
     }
     var service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
+      setReferencias(data.data.response)
       setIdExpresion(idDeExpresion)
       if(idDeLaReferencia){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
@@ -130,6 +132,7 @@ function Pasaje(props){
         }
       }
     })
+
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
@@ -191,7 +194,7 @@ function Pasaje(props){
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
             lang={props.lang} openHidden={openHidden} setOpenHidden={setOpenHidden}
             />
-            {/* <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/> */}
+            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
         </Grid>
         <Grid item sm={3} md={3} lg={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown>

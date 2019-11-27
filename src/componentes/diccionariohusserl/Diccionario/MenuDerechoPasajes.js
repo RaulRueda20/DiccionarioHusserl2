@@ -68,7 +68,6 @@ function MenuDerechoPasajes(props){
 
   React.useEffect(()=>{
     if(localStore.getObjects("referenciasConsultadas")!=false){
-      console.log("store Menu",localStore.getObjects("referenciasConsultadas"))
       var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
       setReferenciasConsultadasVista(referenciaConsultadaSacada)    
     }
