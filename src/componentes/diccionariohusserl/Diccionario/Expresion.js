@@ -44,7 +44,6 @@ function Expresion(props){
     var posicActual = -1
     var expreActual = ""
     var i = 0
-    console.log(referencias.length)
     while (i<referencias.length){
       if (expreActual != referencias[i].expresion){
         posicActual++

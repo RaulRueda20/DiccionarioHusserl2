@@ -138,7 +138,7 @@ function MenuDerecho(props){
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map((consultas,index)=>(
-                <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
+                <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}  key={consultas.referencias[0].refid+"-"+index}>
                   <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
                       <Typography className="consultaDePasajes" variant="h6">{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
                   </li>

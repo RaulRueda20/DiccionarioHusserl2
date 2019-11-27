@@ -132,9 +132,13 @@ function Pasaje(props){
         }
       }
     })
-
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
+    setTimeout(() => {
+      if(document.getElementById("VP" + props.idExpresion) != null){
+        document.getElementById("VP" + props.idExpresion).scrollIntoView()
+      }
+    }, 1000)
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
 
   return(

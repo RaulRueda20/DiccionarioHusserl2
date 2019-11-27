@@ -58,7 +58,6 @@ export default function PanelExpresionIzquierdo(props){
                 localStore.setObjects("referenciasConsultadas",store)
             }
         })
-        
     }
 
     return (

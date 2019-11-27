@@ -153,7 +153,7 @@ function MenuDerechoPasajes(props){
               {referenciasConsultadasVista.map((consultas,index)=>(
                   <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
                     <li className="bordeDeConsultas" key={consultas.expresion+"-"+index} >
-                      <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                      <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
                     </li>
                   </Link>
               ))}

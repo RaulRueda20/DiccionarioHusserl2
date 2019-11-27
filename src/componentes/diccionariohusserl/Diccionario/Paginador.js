@@ -24,7 +24,6 @@ function Pasaje(props){
     if(props.referenciaSeleccionada != null){
       setReferenciaSeleccionada(props.referenciaSeleccionada)
       acortadorPaginador(props.referencias)
-      console.log("length",props.referencias.length)
     }
   }, [props.referencias, props.referenciaSeleccionada])
 
