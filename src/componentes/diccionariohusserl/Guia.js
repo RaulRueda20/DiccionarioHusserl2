@@ -8,19 +8,27 @@ function Guia(props){
 
     React.useEffect(()=>{
         webService("/manual/get", "GET", {}, (data) => {
-           console.log(data)
            setGuia(data.data.response[0])
         })
     }, [])
 
-    var guiaEs=guia.contenido;
-
-    function htmlguiaEs(){
-        return {__html: guiaEs}
+    function renderizadoGuia(){
+        switch(props.lang){
+            case "es":
+                return {__html: guia.contenido}
+            case "ca":
+                return {__html: guia.contenido_ca}
+            case "al":
+                return {__html: guia.contenido_de}
+            case "en":
+                return {__html: guia.contenido_en}
+            case "fr":
+                return {__html: guia.contenido_fr}
+        }
     }
 
     return(
-        <div dangerouslySetInnerHTML={htmlguiaEs()}></div>
+        <div className="guia" dangerouslySetInnerHTML={renderizadoGuia()}></div>
     )
 }
 

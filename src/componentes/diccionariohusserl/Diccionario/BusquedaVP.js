@@ -103,7 +103,7 @@ function BusquedaVP(props){
             var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
             webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
                 var expresiones = data.data.response
-                props.setExpresiones(fixReferencias(expresiones))
+                props.setExpresionesGlobales(fixReferencias(expresiones))
             })
         }else{
             props.expresiones.map(expresion=>{

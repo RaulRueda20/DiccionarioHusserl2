@@ -64,13 +64,24 @@ export default function ListaExpresiones(props){
   }
   
   return (
-    <div className={classNames([{[classes.listContainer2] : props.menuEscondido == true}, classes.listContainer])}>
-      <ul>
-      {props.expresiones.map((expresion, index)=>(
-        <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
-        getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}/> 
-      ))}
-      </ul>
+    <div>
+      {props.state.checkedA == false ? 
+      <div className={classNames([{[classes.listContainer2] : props.menuEscondido == true}, classes.listContainer])}>
+        <ul>
+          {props.expresionesGlobales.map((expresion, index)=>(
+            <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
+            getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}/> 
+          ))}
+        </ul>
+      </div> :
+      <div className={classNames([{[classes.listContainer2] : props.menuEscondido == true}, classes.listContainer])}>
+        <ul>
+          {props.expresiones.map((expresion, index)=>(
+            <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
+            getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}/> 
+          ))}
+        </ul>
+      </div>}
     </div>
   );
 }

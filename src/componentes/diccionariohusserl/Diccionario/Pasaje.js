@@ -20,34 +20,30 @@ import Paginador from './Paginador';
 
 import {webService} from '../../../js/webServices';
 
-const emptyPasaje = {clave:"", epretty:"", expresion_original:"", expresion_traduccion:"", orden:"", pasaje_original: "", pasaje_traduccion:"",ref_original:"", ref_traduccion:"", refid:"", tpretty:""}
-
 function Pasaje(props){
   const [expresiones, setExpresiones] = React.useState([]);
+  const [expresionesGlobales, setExpresionesGlobales] = React.useState([]);
   const [idExpresion, setIdExpresion] = React.useState('');
   const [languageP,setLanguageP] = React.useState("al");
   const [referenciaSeleccionada, setReferenciaSeleccionada]=React.useState(null);
-  const [referencias, setReferencias] = React.useState([]);
   const [expanded1, setExpanded1] = React.useState(false);
   const [expanded2, setExpanded2] = React.useState(false);
   const [expanded3, setExpanded3] = React.useState(false);
   const [pasajeService, setPasajeService] = React.useState("");
   const [panelIzquierdo,setPanelIzquierdo]=React.useState(false);
   const [panelDerecho, setPanelDerecho]=React.useState(false);
-  const [pasaje, setPasaje] = React.useState([emptyPasaje]);
   const [busqueda, setBusqueda] = React.useState("");
   const [state, setState]=React.useState({checkedA:true});
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
-  const [flagLetraMain,setFlagLetraMain]=React.useState(false);
-  const [idDelURL,setIdDelURL]=React.useState("")
+  const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
+  const [referencias, setReferencias] = React.useState([])
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
     var posicActual = -1
     var expreActual = ""
     var i = 0
-    // console.log(referencias.length)
     while (i<referencias.length){
       if (expreActual != referencias[i].expresion){
         posicActual++
@@ -76,7 +72,6 @@ function Pasaje(props){
           refid : referencias[i].refid, orden: referencias[i].orden,
         })
         i++
-        // expresiones
       }
     }
     return expresiones
@@ -93,7 +88,6 @@ function Pasaje(props){
 
   function handlePanelIzquierdo(){
     setPanelIzquierdo(!panelIzquierdo)
-
   }
 
   function handlePanelDerecho(){
@@ -112,7 +106,6 @@ function Pasaje(props){
     setLoading(true)
     var idDeExpresion=props.match.params.expresion;
     var idDeLaReferencia=props.match.params.id ? props.match.params.id : false;
-    setIdDelURL(idDeLaReferencia)
     var service = "/expresiones/" + props.language + "/" + props.letraMain;
     if(pasajeService != service){
       setPasajeService(service)
@@ -120,39 +113,33 @@ function Pasaje(props){
         setExpresiones(fixReferencias(data.data.response))
       })
     }
-    service = "/referencias/obtieneReferencias/" + idDeExpresion
+    var service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
+      setReferencias(data.data.response)
       setIdExpresion(idDeExpresion)
       if(idDeLaReferencia){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
-        if(data.data.response == null){
-          setPasaje(emptyPasaje)
-        }else{
-          setPasaje(data.data.response)
-        }
       }else{
         setReferenciaSeleccionada(data.data.response[0])
-        setReferencias(data.data.response)
-        if(data.data.response == null){
-          setPasaje(emptyPasaje)
-        }else{
-          setPasaje(data.data.response)
-        }
       }
       setLoading(false)
       setExpanded1(true)
       setExpanded2(true)
-      if(!flagLetraMain){
+      if(!props.flagLetraMain){
         if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
-          setFlagLetraMain(true)
+          props.setFlagLetraMain(true)
         }
       }
     })
-    // console.log(pasaje)
     updateDimensions()
     window.addEventListener("resize", updateDimensions);
-  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, flagLetraMain, idDelURL])
+    setTimeout(() => {
+      if(document.getElementById("VP" + props.idExpresion) != null){
+        document.getElementById("VP" + props.idExpresion).scrollIntoView()
+      }
+    }, 1000)
+  }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
 
   return(
     <div>
@@ -185,21 +172,22 @@ function Pasaje(props){
           <Hidden xsDown>
             <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
             language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-            state={state} setState={setState}
+            state={state} setState={setState} setExpresionesGlobales={setExpresionesGlobales}
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={setFlagLetraMain}
-            />
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} match={props.match} setFlagLetraMain={props.setFlagLetraMain}
+              setPosicionReferenciasConsultadas={setPosicionReferenciasConsultadas} expresionesGlobales={expresionesGlobales} state={state}/>
           </Hidden>
           {openHidden == true ?
             <div>
               <BusquedaEscondida expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
               language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden}/>
+               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} setExpresionesGlobales={setExpresionesGlobales}/>
               <ListaEscondida expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
-              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2}/>
+              setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} state={state} setFlagLetraMain={props.setFlagLetraMain}
+              expresionesGlobales={expresionesGlobales}/>
             </div>
              : null
           }
@@ -208,9 +196,9 @@ function Pasaje(props){
         className={classNames([{"contenidoPasajes" : openHidden==true}])}>
             <ContenidoPasaje referenciaSeleccionada={referenciaSeleccionada} languageP={languageP} setLanguageP={setLanguageP}
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
-            lang={props.lang} pasaje={pasaje} openHidden={openHidden} setOpenHidden={setOpenHidden} idDelURL={idDelURL}
+            lang={props.lang} openHidden={openHidden} setOpenHidden={setOpenHidden}
             />
-            {/* <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/> */}
+            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
         </Grid>
         <Grid item sm={3} md={3} lg={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown>
@@ -218,7 +206,7 @@ function Pasaje(props){
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
             lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} letraMain={props.letraMain} setLetraMain={props.setLetraMain}
-            setFlagLetraMain={setFlagLetraMain}
+            setFlagLetraMain={props.setFlagLetraMain} posicionReferenciasConsultadas={posicionReferenciasConsultadas}
             />
           </Hidden>
         </Grid>
@@ -227,7 +215,7 @@ function Pasaje(props){
             <MenuEscondido idExpresion={idExpresion} language={props.language}
             expresiones={expresiones} expanded1={expanded1} setExpanded1={setExpanded1} 
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
-            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} setFlagLetraMain={setFlagLetraMain}
+            lang={props.lang} referenciaSeleccionada={referenciaSeleccionada} setFlagLetraMain={props.setFlagLetraMain}
             />
           </Grid>
           :null

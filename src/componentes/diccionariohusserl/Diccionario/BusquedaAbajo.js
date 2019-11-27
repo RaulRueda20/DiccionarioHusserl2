@@ -86,13 +86,12 @@ function BusquedaAbajo(props){
         var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
         webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
             var expresiones = data.data.response
-            props.setExpresiones(fixReferencias(expresiones))
+            props.setExpresionesGlobales(fixReferencias(expresiones))
         })
         }else{
-        var expresionBuscadaDic=event.target.value
         props.expresiones.map(expresion=>{
             var expresionNombre=expresion.expresion +  expresion.traduccion +  expresion.id
-            var expresionEncontrada= expresionNombre.indexOf(expresionBuscadaDic)
+            var expresionEncontrada= expresionNombre.indexOf(props.busqueda)
             document.getElementById("expresion"+expresion.id).classList.remove("hiddenE")
             if (expresionEncontrada == -1){
             document.getElementById("expresion"+expresion.id).className += " hiddenE";

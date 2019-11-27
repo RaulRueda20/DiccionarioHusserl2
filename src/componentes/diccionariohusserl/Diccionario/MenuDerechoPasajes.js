@@ -40,19 +40,12 @@ const ExpansionPanel = withStyles({
 
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
-    // padding: "0",
-    // overflowX:"hidden",
-    // paddingTop:"5px",
-    // maxHeight: "70px !important",
-    // backgroundColor:'rgb(180,180,180)'
   },
 }))(MuiExpansionPanelDetails);
 
 const ExpansionPanelSummary = withStyles({
   root: {
     backgroundColor: "rgba(0,0,0,.11) !important",
-    // borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    // marginBottom: -1,
     '&$expanded': {
     },
   },
@@ -76,7 +69,7 @@ function MenuDerechoPasajes(props){
   React.useEffect(()=>{
     if(localStore.getObjects("referenciasConsultadas")!=false){
       var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
-      setReferenciasConsultadasVista(referenciaConsultadaSacada)
+      setReferenciasConsultadasVista(referenciaConsultadaSacada)    
     }
     if (props.idExpresion!=""){
       var service = "/vertambien/" + props.idExpresion
@@ -94,6 +87,10 @@ function MenuDerechoPasajes(props){
     setNombre(expresion_original)
   },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
  
+  function handleFlagLetraMain(){
+    props.setFlagLetraMain(false)
+  }
+
   return (
     <div className="contenedorMenuDerecho">
         <ExpansionPanel square expanded={props.expanded1} onChange={()=>props.setExpanded1(!props.expanded1)} className="panelPrincipal">
@@ -106,7 +103,7 @@ function MenuDerechoPasajes(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
           {padres.map((padre,index)=>(
-            <ListaPadresPasajes padre={padre} index={index} language={props.language} key={padre.id+'-'+index} letraMain={props.letraMain} 
+            <ListaPadresPasajes padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} letraMain={props.letraMain} 
             setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
           ))}
           </ul>
@@ -116,7 +113,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresion(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoExpresion" >
             <li>
-              <Typography variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
+              <Typography key={nombre.refid} variant="h6" className="consultaDePasajes">{nombre.expresion_original}</Typography>
             </li>
           </ul>
         </ExpansionPanelDetails>
@@ -125,7 +122,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} key={hijo.id+"-"+index}letraMain={props.letraMain} 
+              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+"-"+index}letraMain={props.letraMain} 
               setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
             ))}
           </ul>
@@ -137,13 +134,13 @@ function MenuDerechoPasajes(props){
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="panelDeDetalleVerTambien">
             <ul className="ulDelMenuDerechoVerTambien">
-              {listaVerTambien.map((expresion,index)=>{
-                return <li key={expresion.id+"-"+index}>
-                  <Link to={`/husserl/pasaje/${expresion.id}`}>
+              {listaVerTambien.map((expresion,index)=>(
+                <li key={expresion.id+"-"+index}>
+                  <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
                     <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                   </Link>
                 </li>
-              })}
+              ))}
             </ul>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -154,9 +151,11 @@ function MenuDerechoPasajes(props){
           <ExpansionPanelDetails className="panelDeDetalleReferenciasConsultadas">
             <ul className="ulDelMenuDerechoReferenciasConsultadas">
               {referenciasConsultadasVista.map((consultas,index)=>(
-                <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
-                  <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
-                </li>
+                  <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
+                    <li className="bordeDeConsultas" key={consultas.expresion+"-"+index} >
+                      <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
+                    </li>
+                  </Link>
               ))}
             </ul>
           </ExpansionPanelDetails>

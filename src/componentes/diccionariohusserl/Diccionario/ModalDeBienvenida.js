@@ -9,6 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 
+import {bienvenido, bienvenidaModal, aceptarAlert} from '../../../js/Language';
+
 const modalBienvenida={
     modalinB:{
         width: "50%",
@@ -51,7 +53,7 @@ function ModalDeBienvenida(props){
                 <Grid container>
                     <Grid item xs={11}>
                         <Typography variant="h4">
-                            Bienvenido
+                            {bienvenido(props.lang)}
                         </Typography>
                     </Grid>
                     <Grid item xs={1}>
@@ -65,7 +67,7 @@ function ModalDeBienvenida(props){
                     <Divider/>
                     <Grid item xs={12} className={classes.gridDelTypo}>
                         <Typography variant="h5">
-                            Si esta es tu primera vez que utiliza el diccionario, será conveniente que visite nuestra guía.
+                            {bienvenidaModal(props.lang)}
                         </Typography>
                     </Grid>
                     <Divider/>
@@ -77,7 +79,7 @@ function ModalDeBienvenida(props){
                         className={classes.botonAceptar}
                         onClick={clickHandleCloseModal}
                         >
-                            Aceptar
+                            {aceptarAlert(props.lang)}
                         </Button>
                     </Grid>
                 </Grid>

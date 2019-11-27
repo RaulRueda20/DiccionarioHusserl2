@@ -758,10 +758,237 @@ const dentroReferencia= lang => {
   }
 }
 
+const noDerivaDe= lang => {
+  switch (lang) {
+    case "es":
+      return "No deriva de ninguna expresión"
+    case "en":
+      return "It does not derive from any expression"
+    case "fr":
+      return "Il ne dérive d'aucune expression"
+    case "al":
+      return "Sie leitet sich nicht aus irgendeinem Ausdruck ab"
+    case "ca":
+      return "No deriva de cap expressió"
+  }
+}
+
+const noContieneExpresionesDerivadas= lang => {
+  switch (lang) {
+    case "es":
+      return "No contiene ninguna expresión derivada."
+    case "en":
+      return "It does not contain any derived expression."
+    case "fr":
+      return "Il ne contient aucune expression dérivée."
+    case "al":
+      return "Es enthält keinen abgeleiteten Ausdruck."
+    case "ca":
+      return "No conté cap expressió derivada."
+  }
+}
+
+const bienvenido= lang => {
+  switch (lang) {
+    case "es":
+      return "Bienvenido"
+    case "en":
+      return "Welcome"
+    case "fr":
+      return "Bienvenue"
+    case "al":
+      return "Herzlich willkommen"
+    case "ca":
+      return "Benvingut"
+  }
+}
+
+const bienvenidaModal= lang => {
+  switch (lang) {
+    case "es":
+      return "Si esta es tu primera vez que utiliza el diccionario, será conveniente que visite nuestra guía."
+    case "en":
+      return "If this is your first time using the dictionary, you should visit our guide."
+    case "fr":
+      return "Si vous utilisez le dictionnaire pour la première fois, vous devriez consulter notre guide."
+    case "al":
+      return "Wenn Sie das Wörterbuch zum ersten Mal verwenden, sollten Sie unseren Leitfaden besuchen."
+    case "ca":
+      return "Si aquesta és la teva primera vegada que utilitza el diccionari, serà convenient que visiti la nostra guia."
+  }
+}
+
+const descargarConsulta = lang => {
+  switch (lang) {
+    case "es":
+      return "Descargar Consulta"
+    case "en":
+      return "Lookup Download"
+    case "fr":
+      return "Consultation télécharger"
+    case "al":
+      return "Suche Herunterladen"
+    case "ca":
+      return "Cerca de descàrrega"
+  }
+}
+
+const seGeneraArchivo = lang => {
+  switch (lang) {
+    case "es":
+      return "Se genera un archivo con las siguientes especificaciones"
+    case "en":
+      return "A file with the following specifications is generated"
+    case "fr":
+      return "Un fichier avec les spécifications suivantes est généré"
+    case "al":
+      return "Eine Datei mit den folgenden Spezifikationen wird generiert"
+    case "ca":
+      return "Es genera un arxiu amb les següents especificacions"
+  }
+}
+
+const conReferencias = lang => {
+  switch (lang) {
+    case "es":
+      return "¿Con referencias?"
+    case "en":
+      return "With references?"
+    case "fr":
+      return "Avec des références?"
+    case "al":
+      return "Mit Referenzen?"
+    case "ca":
+      return "Amb referències?"
+  }
+}
+
+const descargarEn = lang => {
+  switch (lang) {
+    case "es":
+      return "Descargar Pasaje En:"
+    case "en":
+      return "Download Passage In:"
+    case "fr":
+      return "Télécharger Passage In:"
+    case "al":
+      return "Passage In herunterladen:"
+    case "ca":
+      return "Descarregar Passatge En:"
+  }
+}
+
+const idiomaAl = lang => {
+  switch (lang) {
+    case "es":
+      return "Alemán"
+    case "en":
+      return "German"
+    case "fr":
+      return "Allemand"
+    case "al":
+      return "Deutsch"
+    case "ca":
+      return "Alemany"
+  }
+}
+
+const idiomaEs = lang => {
+  switch (lang) {
+    case "es":
+      return "Español"
+    case "en":
+      return "Spanish"
+    case "fr":
+      return "Espagnol"
+    case "al":
+      return "Spanisch"
+    case "ca":
+      return "Espanyol"
+  }
+}
+
+const pasajeSeleccionadoOTodos = lang => {
+  switch (lang) {
+    case "es":
+      return "Descargar Pasaje Seleccionado o Todos los Pasajes:"
+    case "en":
+      return "Download Selected Passage or All Passages:"
+    case "fr":
+      return "Télécharger le passage sélectionné ou tous les passages:"
+    case "al":
+      return "Download der ausgewählten Passage oder aller Passagen:"
+    case "ca":
+      return "Descarregar Passatge Seleccionat o Tots els Passatges:"
+  }
+}
+
+const pasajeSeleccionado = lang => {
+  switch (lang) {
+    case "es":
+      return "Pasaje seleccionado"
+    case "en":
+      return "Selected Passage"
+    case "fr":
+      return "Passage sélectionné"
+    case "al":
+      return "Ausgewählte Passage"
+    case "ca":
+      return "Passatge Seleccionat"
+  }
+}
+
+const todosLosPasajes = lang => {
+  switch (lang) {
+    case "es":
+      return "Todos los pasajes"
+    case "en":
+      return "All the Passages"
+    case "fr":
+      return "Tous les passages"
+    case "al":
+      return "Alle Passagen"
+    case "ca":
+      return "Tots els Passatges"
+  }
+}
+
+const tipoDeArchivos = lang => {
+  switch (lang) {
+    case "es":
+      return "Tipo de archivo"
+    case "en":
+      return "Type of file"
+    case "fr":
+      return "Type de fichier"
+    case "al":
+      return "Dateityp"
+    case "ca":
+      return "Tipus d'arxiu"
+  }
+}
+
+const texto = lang => {
+  switch (lang) {
+    case "es":
+      return "Texto"
+    case "en":
+      return "Text"
+    case "fr":
+      return "Texte"
+    case "al":
+      return "Text"
+    case "ca":
+      return "Text"
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
   menuAcercaDe, menuGuia, menuSalir, menuDerechoJerarquia, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresion, 
   menuDerechoJerarquiaExpresionesDerivadas, menuDerechoReferenciasConsultadas, menuDerechoVerTambien, busquedaPorLetra,
   toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas, busquedas,
-  distincionMayusyMinus, BusquedaGeneral, tipoDeBusqueda, dentroExpresion, dentroReferencia}
+  distincionMayusyMinus, BusquedaGeneral, tipoDeBusqueda, dentroExpresion, dentroReferencia, noDerivaDe, noContieneExpresionesDerivadas,
+  bienvenido, bienvenidaModal, descargarConsulta, seGeneraArchivo, conReferencias, descargarEn, idiomaAl, idiomaEs, pasajeSeleccionadoOTodos,
+  pasajeSeleccionado, todosLosPasajes, tipoDeArchivos, texto}

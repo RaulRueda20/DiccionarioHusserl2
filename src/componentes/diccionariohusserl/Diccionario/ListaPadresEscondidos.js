@@ -14,6 +14,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 // Other req
 import {webService} from '../../../js/webServices';
 
+//Language
+import {noDerivaDe, noContieneExpresionesDerivadas, menuDerechoJerarquiaDerivadaDe, menuDerechoJerarquiaExpresionesDerivadas} from '../../../js/Language';
+
 const ITEM_HEIGHT = 48;
 
 function ListaPadresEscondidos(props){
@@ -37,9 +40,13 @@ function ListaPadresEscondidos(props){
     setAnchorEl(null);
     };
 
+    function handleFlagLetraMain(){
+        props.setFlagLetraMain(false)
+    }
+
     return(
         <div>
-            <li key={props.padre.refid+"-"+props.index}>
+            <li key={props.padre.refid+"-"+props.index} onClick={()=>handleFlagLetraMain()}>
                 <Grid container alignItems="center">
                     <Grid item xs={8}>
                         <Link to={`/husserl/pasaje/${props.padre.padre}`}>
@@ -64,21 +71,21 @@ function ListaPadresEscondidos(props){
                         },
                     }}
                     >
-                    <MenuItem><b>Deriva De:</b></MenuItem>
+                    <MenuItem><b>{menuDerechoJerarquiaDerivadaDe(props.lang)}</b></MenuItem>
                     <Divider/>
-                    {padreDePadres.length < 1 ? <MenuItem>No deriva de ninguna expresión.</MenuItem> : padreDePadres.map((padresPadre,index)=>
+                    {padreDePadres.length < 1 ? <MenuItem>{noDerivaDe(props.lang)}</MenuItem> : padreDePadres.map((padresPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={padresPadre.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${padresPadre.padre}`}>
+                            <Link to={`/husserl/pasaje/${padresPadre.padre}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{padresPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>
                     )}
                     <Divider/>  
-                    <MenuItem><b>Expresiones Derivadas:</b></MenuItem>
+                    <MenuItem><b>{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</b></MenuItem>
                     <Divider/>                    
-                    {hijosDePadres.length < 1 ? <MenuItem>No contiene ninguna expresión derivada.</MenuItem> : hijosDePadres.map((HijosPadre,index)=>
+                    {hijosDePadres.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> : hijosDePadres.map((HijosPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={hijosDePadres.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${HijosPadre.hijo}`}>
+                            <Link to={`/husserl/pasaje/${HijosPadre.hijo}`} onClick={()=>handleFlagLetraMain()}>
                                 <Typography>{HijosPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>

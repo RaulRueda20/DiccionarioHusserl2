@@ -367,7 +367,7 @@ a:hover{
 .ulDelPanelDeExpresiones{
   padding: 10px 20px !important;
   border-top: solid lightgrey;
-  background-color: whitesmoke;
+  background-color: rgb(255,255,255);
   border-width: 1px;
 }
 
@@ -391,6 +391,11 @@ a:hover{
 
 .contenedorMenuDerecho{
   max-height: calc(100vh - 150px);
+  overflow: auto;
+}
+
+.contenedorMenuDerechoEscondido{
+  max-height: calc(100vh - 488px);
   overflow: auto;
 }
 
@@ -631,7 +636,8 @@ hr{
   overflow-y: scroll; 
   overflow-x: hidden;
   width: auto;
-  background-color: rgb(230,230,230);
+  background-color: rgb(245,245,245);
+  margin-right: 10px !important;
 }
 
 .iconoJerarquiaPasajes{
@@ -645,4 +651,12 @@ hr{
 .iconosIluminadosPasaje:hover{
   color: rgb(7, 142, 184);
   cursor: pointer;
+}
+
+.acercaDe{
+  margin:50px;
+}
+
+.guia{
+  margin:50px;
 }

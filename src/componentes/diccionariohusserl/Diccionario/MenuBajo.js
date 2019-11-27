@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -65,18 +67,26 @@ function MenuBajo(props){
 
     React.useEffect(()=>{
         if(localStore.getObjects("referenciasConsultadas")!=false){
-        var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
-        setReferenciasConsultadasVista(referenciaConsultadaSacada)
-        }
-        if (props.expresionSeleccionada.id!=""){
-        var service = "/vertambien/" + props.expresionSeleccionada.id
-        webService(service, "GET", {}, data => {
-            setListaVerTambien(data.data.response)
-            webService(("/expresiones/"+props.language+"/hijosList/"+props.expresionSeleccionada.id),"GET", {}, (data) => setHijos(data.data.response))
-            webService(("/expresiones/"+props.language+"/abuelosList/"+props.expresionSeleccionada.id), "GET", {}, (data2) =>setPadres(data2.data.response))
-        })
+            var referenciaConsultadaSacada = localStore.getObjects("referenciasConsultadas")
+            setReferenciasConsultadasVista(referenciaConsultadaSacada)
+            }
+            if (props.idExpresion!=""){
+            var service = "/vertambien/" + props.idExpresion
+            webService(service, "GET", {}, data => {
+                setListaVerTambien(data.data.response)
+                webService(("/expresiones/"+props.language+"/hijosList/"+props.idExpresion),"GET", {}, (data) =>{
+                    setHijos(data.data.response)
+                })
+                webService(("/expresiones/"+props.language+"/abuelosList/"+props.idExpresion), "GET", {}, (data2) =>{
+                    setPadres(data2.data.response)
+                })
+            })
         }
     },[props.expresionSeleccionada])
+
+    function handleFlagLetraMain(){
+        props.setFlagLetraMain(false)
+    }
 
     return (
         <div className="contenedorMenuBajo" xs={12}>
@@ -90,7 +100,8 @@ function MenuBajo(props){
             </Typography>
             <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
                 {padres.map((padre,index)=>(
-                    <ListaPadresBajo padre={padre} index={index} language={props.language} key={padre.id+'-'+index}/>
+                    <ListaPadresBajo padre={padre} index={index} language={props.language} key={padre.id+'-'+index} letraMain={props.letraMain} 
+                    setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
                 ))}
             </ul>
             </ExpansionPanelDetails>
@@ -108,7 +119,8 @@ function MenuBajo(props){
             <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
             <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
                 {hijos.map((hijo,index)=>(
-                 <ListaHijosBajo hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index}/>
+                 <ListaHijosBajo hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index} letraMain={props.letraMain} 
+                 setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
                 ))}
             </ul>
             </ExpansionPanelDetails>
@@ -119,11 +131,13 @@ function MenuBajo(props){
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className="panelDeDetalleVerTambien">
                 <ul className="ulDelMenuDerechoVerTambien">
-                {listaVerTambien.map((expresion,index)=>{
-                    return <li key={expresion.id+"-"+index}>
-                    <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                {listaVerTambien.map((expresion,index)=>(
+                    <li key={expresion.id+"-"+index}>
+                        <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
+                            <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                        </Link>
                     </li>
-                })}
+                ))}
                 </ul>
             </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -135,7 +149,9 @@ function MenuBajo(props){
                 <ul className="ulDelMenuDerechoReferenciasConsultadas">
                 {referenciasConsultadasVista.map((consultas,index)=>(
                     <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
-                    <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                        <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
+                            <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                        </Link>
                     </li>
                 ))}
                 </ul>

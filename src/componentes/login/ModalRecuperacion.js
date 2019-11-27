@@ -45,14 +45,11 @@ var setStore = (user, pass) => {
     newSession['ultimasVisitadas'] = []
     newSession["ultimaVisitada"] = "alfabeto"
     localStore.setObjects("sesion", newSession)
-    // linkTo("main.html")
 }
 
 function ModalRecuperacion(props){
     const {classes}=props;
     const [correoRecuperado, setCorreoRecuperado]=React.useState("")
-
-    var lang=props.lang;
 
     function onFormSubmit1(event){
         event.preventDefault();
@@ -60,13 +57,12 @@ function ModalRecuperacion(props){
         var email = correoRecuperado
         var service = "/login/recoverPassword/es?email=" + email
         loginService(service, "GET", {}, (data) => {
-            console.log(data)
             props.setLoading(false)
             if(data.response){
-                props.setSnackbar({open:true,variant:"success",message:exitoBody(lang)})
+                props.setSnackbar({open:true,variant:"success",message:exitoBody(props.lang)})
                 setStore(data.response, email.correo)
             }else{
-                props.setSnackbar({open:true,variant:"error",message:correoNoEncontrado(lang)})
+                props.setSnackbar({open:true,variant:"error",message:correoNoEncontrado(props.lang)})
             }
         })
     }
