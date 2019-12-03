@@ -31,7 +31,7 @@ const ExpansionPanel = withStyles({
       },
     },
     expanded: {minHeight:'40px !important'},
-  })(MuiExpansionPanel);
+})(MuiExpansionPanel);
   
 const ExpansionPanelDetails = withStyles(theme => ({
 root: {
@@ -84,8 +84,43 @@ function MenuBajo(props){
         }
     },[props.expresionSeleccionada])
 
+    function fixReferenciasConsultadas(expresion){
+        var referencia = {
+            clave: expresion[0].clave,
+            expresion: expresion[0].expresion_original,
+            traduccion: expresion[0].expresion_traduccion,
+            id: expresion[0].id,
+            index_de: expresion[0].index_de,
+            index_es: expresion[0].index_es,
+            pretty_e: expresion[0].epretty,
+            pretty_t: expresion[0].tpretty,
+            referencias : []
+        }
+        referencia.referencias.push({
+            referencia_original : expresion[0].ref_original,
+            referencia_traduccion : expresion[0].ref_traduccion,
+            refid : expresion[0].refid,
+            orden: expresion[0].orden,
+        })
+        return referencia
+      }
+
     function handleFlagLetraMain(){
         props.setFlagLetraMain(false)
+        var idExpresion = event.target.id.split("/")[0]
+        var service = "/referencias/obtieneReferencias/" + idExpresion
+        webService(service, "GET", {}, data => {
+            var referencias = fixReferenciasConsultadas(data.data.response)
+            if(localStore.getObjects("referenciasConsultadas")==false){
+                var referenciasConsultadas = []
+                referenciasConsultadas.push(referencias)
+                localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+            }else{
+                var store = localStore.getObjects("referenciasConsultadas")
+                store.push(referencias)
+                localStore.setObjects("referenciasConsultadas",store)
+            }
+        })
     }
 
     return (
@@ -100,7 +135,7 @@ function MenuBajo(props){
             </Typography>
             <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
                 {padres.map((padre,index)=>(
-                    <ListaPadresBajo padre={padre} index={index} language={props.language} key={padre.id+'-'+index} letraMain={props.letraMain} 
+                    <ListaPadresBajo padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} letraMain={props.letraMain} 
                     setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
                 ))}
             </ul>
@@ -119,7 +154,7 @@ function MenuBajo(props){
             <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
             <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
                 {hijos.map((hijo,index)=>(
-                 <ListaHijosBajo hijo={hijo} index={index} language={props.language} key={hijo.id+'-'+index} letraMain={props.letraMain} 
+                 <ListaHijosBajo hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+'-'+index} letraMain={props.letraMain} 
                  setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
                 ))}
             </ul>
@@ -134,7 +169,7 @@ function MenuBajo(props){
                 {listaVerTambien.map((expresion,index)=>(
                     <li key={expresion.id+"-"+index}>
                         <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
-                            <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                            <Typography className={"consultaDePasajes"} variant="h6" id={expresion.id+"/"+index}>{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                         </Link>
                     </li>
                 ))}
@@ -150,7 +185,7 @@ function MenuBajo(props){
                 {referenciasConsultadasVista.map((consultas,index)=>(
                     <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
                         <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
-                            <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
+                            <Typography className={"consultaDePasajes"} variant="h6" id={consultas.id+"/"+index}>{consultas.expresion + "  //  " + consultas.traduccion + "  --  " + consultas.referencias[0].refid}</Typography>
                         </Link>
                     </li>
                 ))}

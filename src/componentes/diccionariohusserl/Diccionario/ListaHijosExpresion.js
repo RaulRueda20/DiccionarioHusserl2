@@ -16,6 +16,7 @@ import {noDerivaDe, noContieneExpresionesDerivadas, menuDerechoJerarquiaDerivada
 
 // Other req
 import {webService} from '../../../js/webServices';
+import * as localStore from '../../../js/localStore';
 
 const ITEM_HEIGHT = 48;
 
@@ -30,7 +31,6 @@ function ListaHijosExpresion(props){
         var hid = event.currentTarget.id.split("hijo")[1]
         webService(("/expresiones/"+props.language+"/abuelosList/"+hid),"GET", {}, (data2) => {
           setPadreDeHijos(data2.data.response)
-          console.log("idPa",data2.data.response)
         })
         webService(("/expresiones/"+props.language+"/hijosList/"+hid),"GET", {}, (data) => {
           setHijosDeHijos(data.data.response)
@@ -41,6 +41,27 @@ function ListaHijosExpresion(props){
     setAnchorEl(null);
     };
 
+    function fixReferenciasConsultadas(expresion){
+        var referencia = {
+            clave: expresion[0].clave,
+            expresion: expresion[0].expresion_original,
+            traduccion: expresion[0].expresion_traduccion,
+            id: expresion[0].id,
+            index_de: expresion[0].index_de,
+            index_es: expresion[0].index_es,
+            pretty_e: expresion[0].epretty,
+            pretty_t: expresion[0].tpretty,
+            referencias : []
+        }
+        referencia.referencias.push({
+            referencia_original : expresion[0].ref_original,
+            referencia_traduccion : expresion[0].ref_traduccion,
+            refid : expresion[0].refid,
+            orden: expresion[0].orden,
+        })
+        return referencia
+    }
+
     function handleFlagLetraMain(){
         props.setFlagLetraMain(false)
         setTimeout(() => {
@@ -48,6 +69,21 @@ function ListaHijosExpresion(props){
               document.getElementById("VP" + props.idExpresion).scrollIntoView()
             }
         }, 1000)
+        var idExpresion = event.target.id.split("/")[0]
+        var service = "/referencias/obtieneReferencias/" + idExpresion
+        webService(service, "GET", {}, data => {
+            var referencias = fixReferenciasConsultadas(data.data.response)
+            console.log("referencias",referencias)
+            if(localStore.getObjects("referenciasConsultadas")==false){
+                var referenciasConsultadas = []
+                referenciasConsultadas.push(referencias)
+                localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+            }else{
+                var store = localStore.getObjects("referenciasConsultadas")
+                store.push(referencias)
+                localStore.setObjects("referenciasConsultadas",store)
+            }
+        })
     }
 
     return(
@@ -56,7 +92,7 @@ function ListaHijosExpresion(props){
                 <Grid container alignItems="center">
                     <Grid item xs={8}>
                         <Link to={`/husserl/pasaje/${props.hijo.hijo}`} onClick={()=>handleFlagLetraMain()}>
-                            <Typography variant="h6" className="consultaDePasajes">{props.hijo.expresion}</Typography>
+                            <Typography variant="h6" className="consultaDePasajes" id={props.hijo.hijo+"/"+props.index}>{props.hijo.expresion}</Typography>
                         </Link>
                     </Grid>
                     <Grid item xs={4}>
@@ -80,22 +116,23 @@ function ListaHijosExpresion(props){
                     <MenuItem><b>{menuDerechoJerarquiaDerivadaDe(props.lang)}</b></MenuItem>
                     <Divider/>
                     {padreDeHijos.length < 1 ?  <MenuItem>{noDerivaDe(props.lang)}</MenuItem> : padreDeHijos.map((padresHijo,index)=>
-                        <MenuItem onClick={handleCloseExpresionesDerivadas} key={padresHijo.id + "-" + index}>
+                        <MenuItem onClick={handleCloseExpresionesDerivadas} key={padresHijo.padres + "-" + index}>
                             <Link to={`/husserl/pasaje/${padresHijo.padre}`} onClick={()=>handleFlagLetraMain()}>
-                                <Typography>{padresHijo.expresion}</Typography>
+                                <Typography id={padresHijo.padre+"/"+index}>{padresHijo.expresion}</Typography>
                             </Link>
                         </MenuItem>
                     )}
                     <Divider/>
                     <MenuItem><b>{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</b></MenuItem>
                     <Divider/>
-                    {hijosDeHijos.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> : hijosDeHijos.map((hijosHijo,index)=>
-                        <MenuItem onClick={handleCloseExpresionesDerivadas} key={hijosHijo.id + "-" + index}>
-                            <Link to={`/husserl/pasaje/${hijosHijo.hijo}`} onClick={()=>handleFlagLetraMain()}>
-                                <Typography>{hijosDeHijos.expresion}</Typography>
-                            </Link>
-                        </MenuItem>
-                    )}
+                    {hijosDeHijos.length > 1 ? hijosDeHijos.map((hijosHijo,index)=>
+                            <MenuItem onClick={handleCloseExpresionesDerivadas} key={hijosHijo.hijos + "-" + index}>
+                                <Link to={`/husserl/pasaje/${hijosHijo.hijo}`} onClick={()=>handleFlagLetraMain()}>
+                                    <Typography id={hijosHijo.hijo+"/"+index}>{hijosHijo.expresion}</Typography>
+                                </Link>
+                            </MenuItem>) 
+                        :   <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> 
+                    }
                     </Menu>
                 </Grid>
             </li>
