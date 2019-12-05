@@ -69,12 +69,11 @@ function ListaPadresPasajes(props){
               document.getElementById("VP" + props.idExpresion).scrollIntoView()
             }
         }, 1000)
-        console.log("evento", event.target.id)
         var idExpresion = event.target.id.split("/")[0]
         var service = "/referencias/obtieneReferencias/" + idExpresion
         webService(service, "GET", {}, data => {
-            console.log("data",data.data.response)
             var referencias = fixReferenciasConsultadas(data.data.response)
+            console.log("referencias", referencias)
             if(localStore.getObjects("referenciasConsultadas")==false){
                 var referenciasConsultadas = []
                 referenciasConsultadas.push(referencias)
@@ -129,7 +128,7 @@ function ListaPadresPasajes(props){
                     {hijosDePadres.length < 1 ? <MenuItem>{noContieneExpresionesDerivadas(props.lang)}</MenuItem> : hijosDePadres.map((hijosPadre,index)=>
                         <MenuItem onClick={handleCloseDerivadaDe} key={hijosPadre.id + "-" + index}>
                             <Link to={`/husserl/pasaje/${hijosPadre.hijo}`} onClick={()=>handleFlagLetraMain()}>
-                                <Typography id={hijosPadre.id+"/"+index}>{hijosPadre.expresion}</Typography>
+                                <Typography id={hijosPadre.hijo+"/"+index}>{hijosPadre.expresion}</Typography>
                             </Link>
                         </MenuItem>
                     )}

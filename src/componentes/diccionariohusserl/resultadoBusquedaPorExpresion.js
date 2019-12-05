@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 
 //Other req
 import {webService} from '../../js/webServices';
+import * as localStore from '../../js/localStore';
 import es from "../../Imagenes/spain.png";
 import al from "../../Imagenes/germany.png";
 
@@ -95,6 +96,50 @@ function ResultadoBusquedaExpresion(props){
         return {__html: pasajes.traduccion}
     }
 
+    function fixReferenciasConsultadas(expresion){
+        var referencia = {
+            clave: expresion[0].clave,
+            expresion: expresion[0].expresion_original,
+            traduccion: expresion[0].expresion_traduccion,
+            id: expresion[0].id,
+            index_de: expresion[0].index_de,
+            index_es: expresion[0].index_es,
+            pretty_e: expresion[0].epretty,
+            pretty_t: expresion[0].tpretty,
+            referencias : []
+        }
+        referencia.referencias.push({
+            referencia_original : expresion[0].ref_original,
+            referencia_traduccion : expresion[0].ref_traduccion,
+            refid : expresion[0].refid,
+            orden: expresion[0].orden,
+        })
+        return referencia
+    }
+
+    function consultaDePasajes(){
+        setTimeout(() => {
+            if(document.getElementById("VP" + props.idExpresion) != null){
+              document.getElementById("VP" + props.idExpresion).scrollIntoView()
+            }
+        }, 1000)
+        var idExpresion = event.target.id.split("/")[0]
+        var service = "/referencias/obtieneReferencias/" + idExpresion
+        webService(service, "GET", {}, data => {
+            var referencias = fixReferenciasConsultadas(data.data.response)
+            console.log("referencias", referencias)
+            if(localStore.getObjects("referenciasConsultadas")==false){
+                var referenciasConsultadas = []
+                referenciasConsultadas.push(referencias)
+                localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+            }else{
+                var store = localStore.getObjects("referenciasConsultadas")
+                store.push(referencias)
+                localStore.setObjects("referenciasConsultadas",store)
+            }
+        })
+    }
+
     return(
         <div className={classes.contenedorPrincipal}>
             <Grid container alignItems="center" alignContent="center">
@@ -113,8 +158,8 @@ function ResultadoBusquedaExpresion(props){
                     <ul className="ulDeBusqueda" key={padres.id}>
                     {padres.map((padre, index)=>(
                         <li key={padre.id+"-"+index}>
-                            <Link to={`/husserl/pasaje/${padre.padre}`}>
-                                <Typography variant="h6" className="consultaDePasajesB">{padre.expresion}</Typography>
+                            <Link to={`/husserl/pasaje/${padre.padre}`} onClick={consultaDePasajes}>
+                                <Typography variant="h6" className="consultaDePasajesB" id={padre.padre+"/"+index}>{padre.expresion}</Typography>
                             </Link>
                         </li>
                     ))}
@@ -123,8 +168,8 @@ function ResultadoBusquedaExpresion(props){
                     <ul className="ulDeBusqueda" key={hijos.id}>
                     {hijos.map((hijo, index)=>(
                         <li key={hijo.id+"-"+index}>
-                            <Link to={`/husserl/pasaje/${hijo.hijo}`}>
-                                <Typography variant="h6" className="consultaDePasajesB">{hijo.expresion}</Typography>
+                            <Link to={`/husserl/pasaje/${hijo.hijo}`} onClick={consultaDePasajes}>
+                                <Typography variant="h6" className="consultaDePasajesB" id={hijo.hijo+"/"+index}>{hijo.expresion}</Typography>
                             </Link>
                         </li>
                     ))}
@@ -135,7 +180,9 @@ function ResultadoBusquedaExpresion(props){
                     <ul className="ulDeBusquedaVerTambien" key={listaVerTambien.id}>
                     {listaVerTambien.map((lista, index)=>(
                         <li key={lista.id+"-"+index}>
-                            <Typography variant="h6" className="consultaDePasajesB">{lista.expresion + "  //  " + lista.traduccion}</Typography>
+                            <Link to={`/husserl/pasaje/${lista.id}`}  onClick={consultaDePasajes}>
+                                <Typography variant="h6" className="consultaDePasajesB" id={lista.id+"/"+index}>{lista.expresion + "  //  " + lista.traduccion}</Typography>
+                            </Link>
                         </li>
                     ))}
                     </ul>

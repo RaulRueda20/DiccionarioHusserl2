@@ -73,7 +73,6 @@ function ListaHijosExpresion(props){
         var service = "/referencias/obtieneReferencias/" + idExpresion
         webService(service, "GET", {}, data => {
             var referencias = fixReferenciasConsultadas(data.data.response)
-            console.log("referencias",referencias)
             if(localStore.getObjects("referenciasConsultadas")==false){
                 var referenciasConsultadas = []
                 referenciasConsultadas.push(referencias)

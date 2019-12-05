@@ -23,27 +23,12 @@ function Pasaje(props){
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
   React.useEffect(()=>{
-    // console.log(posicion-1, referencias[posicion -1])
-    // console.log("PAGINADOR")
-    // var penultimo = referencias.length -1
     setPosicion(0)
     if(props.referencias.length > 0) setReferencias(props.referencias)
     if(props.referenciaSeleccionada != null){
       setReferenciaSeleccionada(props.referenciaSeleccionada)
       acortadorPaginador(props.referencias)
     }
-    // console.log("posicion", posicion)
-    // console.log("length", props.referencias.length -1)
-    // console.log("referencias", referencias.length)
-    // if(props.referencias.length>1 && posicion!=props.referencias.length -1){
-    //   // console.log("next", next)
-    //   setNext(props.referencias[posicion+1].ref_original)
-    //   setIdDelPaginador(props.referencias[posicion+1].refid)
-    // }else if(props.referencias.length==1){
-    //   setNext("No hay más pasajes")
-    //   console.log("next", next)
-    // }else 
-    console.log("penultimo",props.referencias.length -2)
     if(posicion == props.referencias.length -1 || props.referencias.length==1){
       setNext("No hay más pasajes")
     }else if(props.referencias.length>1 && posicion==props.referencias.length -2){
@@ -65,7 +50,6 @@ function Pasaje(props){
       }
       i++
     }
-    console.log("leol", refPos)
     if(refPos==0){
       var siguientesEscenario1 = refPos + 3
       setCasillas(referencias.slice(refPos,siguientesEscenario1))
@@ -78,13 +62,11 @@ function Pasaje(props){
       var siguientesEscenario3 = refPos + 3
       setCasillas(referencias.slice(anterioresEscenario3,siguientesEscenario3))
     }else if(refPos == penultimo){
-      console.log("penultimo")
       var anterioresEscenario4 = refPos -3
       var siguienteEscenario4 = refPos +2
       console.log(referencias.slice(anterioresEscenario4,siguienteEscenario4))
       setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
     }else if(refPos == referencias.length - 1){
-      console.log("ultimo")
       var anterioresEscenario5 = refPos - 4
       // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
       setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
@@ -123,7 +105,6 @@ function Pasaje(props){
       </div> : null}
       <Typography variant="h5">Hay {referencias.length} {referencias.length > 1 ? "pasajes" : "pasaje"} en total.</Typography>
     </div>
-    // <Typography>Dicks</Typography>
   )
 }
 

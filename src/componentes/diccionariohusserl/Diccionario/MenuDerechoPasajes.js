@@ -138,8 +138,7 @@ function MenuDerechoPasajes(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
           {padres.map((padre,index)=>(
-            <ListaPadresPasajes padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} letraMain={props.letraMain} 
-            setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
+            <ListaPadresPasajes padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} setFlagLetraMain={props.setFlagLetraMain}/>
           ))}
           </ul>
         </ExpansionPanelDetails>
@@ -157,8 +156,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+"-"+index}letraMain={props.letraMain} 
-              setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
+              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+"-"+index} setFlagLetraMain={props.setFlagLetraMain}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
