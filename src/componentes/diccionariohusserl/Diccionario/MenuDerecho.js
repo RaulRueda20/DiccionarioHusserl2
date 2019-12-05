@@ -76,8 +76,43 @@ function MenuDerecho(props){
     }
   },[props.expresionSeleccionada])
 
+  function fixReferenciasConsultadas(expresion){
+    var referencia = {
+        clave: expresion[0].clave,
+        expresion: expresion[0].expresion_original,
+        traduccion: expresion[0].expresion_traduccion,
+        id: expresion[0].id,
+        index_de: expresion[0].index_de,
+        index_es: expresion[0].index_es,
+        pretty_e: expresion[0].epretty,
+        pretty_t: expresion[0].tpretty,
+        referencias : []
+    }
+    referencia.referencias.push({
+        referencia_original : expresion[0].ref_original,
+        referencia_traduccion : expresion[0].ref_traduccion,
+        refid : expresion[0].refid,
+        orden: expresion[0].orden,
+    })
+    return referencia
+  }
+
   function handleFlagLetraMain(){
     props.setFlagLetraMain(false)
+    var idExpresion = event.target.id.split("/")[0]
+    var service = "/referencias/obtieneReferencias/" + idExpresion
+    webService(service, "GET", {}, data => {
+      var referencias = fixReferenciasConsultadas(data.data.response)
+      if(localStore.getObjects("referenciasConsultadas")==false){
+          var referenciasConsultadas = []
+          referenciasConsultadas.push(referencias)
+          localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+      }else{
+          var store = localStore.getObjects("referenciasConsultadas")
+          store.push(referencias)
+          localStore.setObjects("referenciasConsultadas",store)
+      }
+    })
   }
 
   return (
@@ -91,9 +126,9 @@ function MenuDerecho(props){
           {menuDerechoJerarquiaDerivadaDe(props.lang)}
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
-            {padres.map((padre,index)=>(
+            {padres.map((padre,index)=>
               <ListaPadresExpresion padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} setFlagLetraMain={props.setFlagLetraMain}/>
-            ))}
+            )}
           </ul>
         </ExpansionPanelDetails>
         <Divider />
@@ -124,7 +159,7 @@ function MenuDerecho(props){
               {listaVerTambien.map((expresion,index)=>{
                 return <li key={expresion.id+"-"+index}>
                   <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
-                    <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                    <Typography className={"consultaDePasajes"} variant="h6" id={expresion.id+"/"+index}>{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                   </Link>
                 </li>
               })}
@@ -140,7 +175,7 @@ function MenuDerecho(props){
               {referenciasConsultadasVista.map((consultas,index)=>(
                 <Link to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}  key={consultas.referencias[0].refid+"-"+index}>
                   <li className="bordeDeConsultas" key={consultas.referencias[0].refid+"-"+index}>
-                      <Typography className="consultaDePasajes" variant="h6">{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
+                      <Typography className="consultaDePasajes" variant="h6" id={consultas.id+"/"+index}>{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
                   </li>
                 </Link>
               ))}

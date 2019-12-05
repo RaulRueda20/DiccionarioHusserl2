@@ -86,9 +86,44 @@ function MenuDerechoPasajes(props){
     var expresion_original =  props.referenciaSeleccionada != null ? props.referenciaSeleccionada : emptyPasaje
     setNombre(expresion_original)
   },[props.idExpresion,props.referenciaSeleccionada,props.setLetraMain])
+
+  function fixReferenciasConsultadas(expresion){
+    var referencia = {
+        clave: expresion[0].clave,
+        expresion: expresion[0].expresion_original,
+        traduccion: expresion[0].expresion_traduccion,
+        id: expresion[0].id,
+        index_de: expresion[0].index_de,
+        index_es: expresion[0].index_es,
+        pretty_e: expresion[0].epretty,
+        pretty_t: expresion[0].tpretty,
+        referencias : []
+    }
+    referencia.referencias.push({
+        referencia_original : expresion[0].ref_original,
+        referencia_traduccion : expresion[0].ref_traduccion,
+        refid : expresion[0].refid,
+        orden: expresion[0].orden,
+    })
+    return referencia
+  }
  
   function handleFlagLetraMain(){
     props.setFlagLetraMain(false)
+    var idExpresion = event.target.id.split("/")[0]
+    var service = "/referencias/obtieneReferencias/" + idExpresion
+    webService(service, "GET", {}, data => {
+      var referencias = fixReferenciasConsultadas(data.data.response)
+      if(localStore.getObjects("referenciasConsultadas")==false){
+          var referenciasConsultadas = []
+          referenciasConsultadas.push(referencias)
+          localStore.setObjects("referenciasConsultadas",referenciasConsultadas)
+      }else{
+          var store = localStore.getObjects("referenciasConsultadas")
+          store.push(referencias)
+          localStore.setObjects("referenciasConsultadas",store)
+      }
+    })
   }
 
   return (
@@ -103,8 +138,7 @@ function MenuDerechoPasajes(props){
           </Typography>
           <ul className="ulDelMenuDerechoPadres" key={padres.refid}>
           {padres.map((padre,index)=>(
-            <ListaPadresPasajes padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} letraMain={props.letraMain} 
-            setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
+            <ListaPadresPasajes padre={padre} index={index} language={props.language} lang={props.lang} key={padre.id+'-'+index} setFlagLetraMain={props.setFlagLetraMain}/>
           ))}
           </ul>
         </ExpansionPanelDetails>
@@ -122,8 +156,7 @@ function MenuDerechoPasajes(props){
           <Typography variant="caption">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
             {hijos.map((hijo,index)=>(
-              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+"-"+index}letraMain={props.letraMain} 
-              setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
+              <ListaHijosPasajes hijo={hijo} index={index} language={props.language} lang={props.lang} key={hijo.id+"-"+index} setFlagLetraMain={props.setFlagLetraMain}/>
             ))}
           </ul>
         </ExpansionPanelDetails>
@@ -137,7 +170,7 @@ function MenuDerechoPasajes(props){
               {listaVerTambien.map((expresion,index)=>(
                 <li key={expresion.id+"-"+index}>
                   <Link to={`/husserl/pasaje/${expresion.id}`} onClick={()=>handleFlagLetraMain()}>
-                    <Typography className={"consultaDePasajes"} variant="h6">{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
+                    <Typography className={"consultaDePasajes"} variant="h6" id={expresion.id+"/"+index}>{expresion.expresion + "  //  " + expresion.traduccion + "  --  " + expresion.id}</Typography>
                   </Link>
                 </li>
               ))}
@@ -153,7 +186,7 @@ function MenuDerechoPasajes(props){
               {referenciasConsultadasVista.map((consultas,index)=>(
                   <Link key={"link" + index} to={`/husserl/pasaje/${consultas.id}/${consultas.referencias[0].refid}`} onClick={()=>handleFlagLetraMain()}>
                     <li className="bordeDeConsultas" key={consultas.expresion+"-"+index} >
-                      <Typography className={"consultaDePasajes"} variant="h6">{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
+                      <Typography className={"consultaDePasajes"} variant="h6" id={consultas.id+"/"+index}>{consultas.expresion + "  :  " + consultas.referencias[0].referencia_original + "/" + consultas.referencias[0].referencia_traduccion}</Typography>
                     </li>
                   </Link>
               ))}
