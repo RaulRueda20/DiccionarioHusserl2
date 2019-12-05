@@ -18,7 +18,8 @@ function Pasaje(props){
   const [posicion, setPosicion] = React.useState(0)
   const [referenciaSeleccionada, setReferenciaSeleccionada] = React.useState(null);
   const [next, setNext] = React.useState("");
-  const [idDelPaginador, setIdDelPaginador] = React.useState("")
+  const [nextMasUno,setNextMasUno]= React.useState("")
+  const [idURL,setIdURL] = React.useState("")
 
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
@@ -31,13 +32,15 @@ function Pasaje(props){
     }
     if(posicion == props.referencias.length -1 || props.referencias.length==1){
       setNext("No hay más pasajes")
-    }else if(props.referencias.length>1 && posicion==props.referencias.length -2){
-      setNext(props.referencias[posicion+1].ref_original)
     }
+    if(props.referencias.length > 1 || posicion==props.referencias.length -2){
+      setNext(props.referencias[posicion+1].ref_original)
+      setIdURL(props.referencias[posicion+1].refid)
+    }
+    // console.log("referenciaSeleccionada", props.referenciaSeleccionada.refid)
   }, [props.referencias, props.referenciaSeleccionada, posicion])
 
   function acortadorPaginador(referencias){
-    // console.log("entre a la funcion del paginador")
     var i = 0
     var refPos = 0
     // console.log(props.referencias.length)
@@ -71,6 +74,7 @@ function Pasaje(props){
       // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
       setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
     }
+    return referencias
   }
 
   return(
@@ -90,14 +94,14 @@ function Pasaje(props){
           return (
             (
               <Tooltip title={referencias[index].ref_original}>
-                <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": props.referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
+                <Link to={`/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
               </Tooltip>
             )
           )})
         }
 
         <Tooltip title={next}>
-          <Link to={posicion >= referencias.length -2 ? null : `/husserl/pasaje/${props.expresionId}/${idDelPaginador}`}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
+          <Link to={posicion >= referencias.length -2 ? null : `/husserl/pasaje/${props.expresionId}/${idURL}`}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
         </Tooltip>
         <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
           <Link to={posicion == referencias.length - 1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[referencias.length -1].refid}`}><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>
