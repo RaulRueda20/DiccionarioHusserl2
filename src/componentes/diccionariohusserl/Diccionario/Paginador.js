@@ -29,13 +29,14 @@ function Pasaje(props){
       setReferenciaSeleccionada(props.referenciaSeleccionada)
       acortadorPaginador(props.referencias)
     }
-    // console.log("referenciaSeleccionada", props.referenciaSeleccionada.refid)
+    console.log("referencias", props.referencias)
+    console.log("posicion", posicion)
   }, [props.referencias, props.referenciaSeleccionada, posicion])
 
   function acortadorPaginador(referencias){
     var i = 0
     var refPos = 0
-    // console.log(props.referencias.length)
+    console.log(props.referencias.length)
     var penultimo = props.referencias.length - 2
     while(i<referencias.length){
       referencias[i].index = i
@@ -45,26 +46,50 @@ function Pasaje(props){
       }
       i++
     }
-    if(refPos==0){
-      var siguientesEscenario1 = refPos + 3
-      setCasillas(referencias.slice(refPos,siguientesEscenario1))
-    }else if(refPos==1){
-      var anteriorEscenario2=refPos - 1
-      var siguientesEscenario2 = refPos + 2
-      setCasillas(referencias.slice(anteriorEscenario2,siguientesEscenario2))
-    }else if(refPos > 1 && refPos < penultimo){
-      var anterioresEscenario3 = refPos - 2
-      var siguientesEscenario3 = refPos + 3
-      setCasillas(referencias.slice(anterioresEscenario3,siguientesEscenario3))
-    }else if(refPos == penultimo){
-      var anterioresEscenario4 = refPos -3
-      var siguienteEscenario4 = refPos +2
-      console.log(referencias.slice(anterioresEscenario4,siguienteEscenario4))
-      setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
-    }else if(refPos == referencias.length - 1){
-      var anterioresEscenario5 = refPos - 4
-      // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
-      setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
+    if(referencias.length>5){
+      if(refPos==0){
+        var siguientesEscenario1 = refPos + 3
+        setCasillas(referencias.slice(refPos,siguientesEscenario1))
+      }else if(refPos==1){
+        var anteriorEscenario2=refPos - 1
+        var siguientesEscenario2 = refPos + 2
+        setCasillas(referencias.slice(anteriorEscenario2,siguientesEscenario2))
+      }else if(refPos > 1 && refPos < penultimo){
+        var anterioresEscenario3 = refPos - 2
+        var siguientesEscenario3 = refPos + 3
+        setCasillas(referencias.slice(anterioresEscenario3,siguientesEscenario3))
+      }else if(refPos == penultimo){
+        var anterioresEscenario4 = refPos -3
+        var siguienteEscenario4 = refPos +2
+        console.log(referencias.slice(anterioresEscenario4,siguienteEscenario4))
+        setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
+      }else if(refPos == referencias.length - 1){
+        var anterioresEscenario5 = refPos - 4
+        // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
+        setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
+      }
+    }else{
+      if(refPos==0){
+        var siguientesEscenario1 = refPos + 3
+        setCasillas(referencias.slice(refPos,siguientesEscenario1))
+      }else if(refPos==1){
+        var anteriorEscenario2=refPos - 1
+        var siguientesEscenario2 = refPos + 3
+        setCasillas(referencias.slice(anteriorEscenario2,siguientesEscenario2))
+      }else if(refPos > 1 && refPos < penultimo){
+        var anterioresEscenario3 = refPos - 1
+        var siguientesEscenario3 = refPos + 1
+        setCasillas(referencias.slice(anterioresEscenario3,siguientesEscenario3))
+      }else if(refPos == penultimo){
+        var anterioresEscenario4 = refPos -2
+        var siguienteEscenario4 = refPos +2
+        console.log(referencias.slice(anterioresEscenario4,siguienteEscenario4))
+        setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
+      }else if(refPos == referencias.length - 1){
+        var anterioresEscenario5 = refPos - 3
+        // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
+        setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
+      }
     }
     return referencias
   }
@@ -99,7 +124,7 @@ function Pasaje(props){
         }
 
         <Tooltip title={posicion == props.referencias.length -1 || props.referencias.length==1 ? "No hay más pasajes" : props.referencias[posicion+1].ref_original}>
-          <Link to={posicion >= referencias.length -1 ? null : `/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
+          <Link to={posicion >= referencias.length -1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
         </Tooltip>
         <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
           <Link to={posicion == referencias.length - 1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[referencias.length -1].refid}`}><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>
