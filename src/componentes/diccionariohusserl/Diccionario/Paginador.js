@@ -102,7 +102,7 @@ function Pasaje(props){
           )})
         }
 
-        <Tooltip title={next}>
+        <Tooltip title={posicion == props.referencias.length -1 || props.referencias.length==1 ? "No hay más pasajes" : props.referencias[posicion+1].ref_original}>
           <Link to={posicion >= referencias.length -2 ? null : `/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
         </Tooltip>
         <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
