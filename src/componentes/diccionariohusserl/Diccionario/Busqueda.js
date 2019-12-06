@@ -78,8 +78,10 @@ function Busqueda(props){
     props.setLoading(true)
     event.preventDefault()
     if(props.state.checkedA == false){
+      console.log("case",insensitiveCase)
       var servicebe = "/referencias/busquedaExpresion"
       webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
+        console.log("data",data.data.response)
         var expresiones = data.data.response
         props.setExpresionesGlobales(fixReferencias(expresiones))
         props.setLoading(false)

@@ -125,8 +125,9 @@ function SearchBusqueda(props){
                 setLoading(false)
             })
         }else{
-            var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
+            var servicebe = "/referencias/busquedaExpresion"
             webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
+                console.log("data",data.data.response)
                 var expresiones = data.data.response
                 props.setExpresionesEncontradas([])
                 props.setTipoBusquedaRealizada("Expresion")
