@@ -11,6 +11,7 @@ import { Typography } from '@material-ui/core';
 // import {webService} from '../../../js/webServices';
 
 var nextNulo = ""
+var idNulo = ""
 
 function Pasaje(props){
   const [casillas, setCasillas] = React.useState([]);
@@ -18,8 +19,6 @@ function Pasaje(props){
   const [posicion, setPosicion] = React.useState(0)
   const [referenciaSeleccionada, setReferenciaSeleccionada] = React.useState(null);
   const [next, setNext] = React.useState("");
-  const [nextMasUno,setNextMasUno]= React.useState("")
-  const [idURL,setIdURL] = React.useState("")
 
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
@@ -29,13 +28,6 @@ function Pasaje(props){
     if(props.referenciaSeleccionada != null){
       setReferenciaSeleccionada(props.referenciaSeleccionada)
       acortadorPaginador(props.referencias)
-    }
-    if(posicion == props.referencias.length -1 || props.referencias.length==1){
-      setNext("No hay más pasajes")
-    }
-    if(props.referencias.length > 1 || posicion==props.referencias.length -2){
-      setNext(props.referencias[posicion+1].ref_original)
-      setIdURL(props.referencias[posicion+1].refid)
     }
     // console.log("referenciaSeleccionada", props.referenciaSeleccionada.refid)
   }, [props.referencias, props.referenciaSeleccionada, posicion])
@@ -77,6 +69,16 @@ function Pasaje(props){
     return referencias
   }
 
+  function handleForward(){
+    if(posicion == props.referencias.length -1 || props.referencias.length==1){
+      setNext("No hay más pasajes")
+    }else if(props.referencias.length > 1){
+      setNext(props.referencias[posicion+1].ref_original)
+    }else if(posicion==props.referencias.length -1){
+      setNext(props.referencias[referencias.length -1])
+    }
+  }
+
   return(
     <div style={{borderLeft: "1px lightgray solid",borderRight: "1px lightgray solid",padding: "0px 10px"}}>
       { referenciaSeleccionada != null && referencias.length > 0 ? 
@@ -94,14 +96,14 @@ function Pasaje(props){
           return (
             (
               <Tooltip title={referencias[index].ref_original}>
-                <Link to={`/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
+                <Link to={`/husserl/pasaje/${props.expresionId}/${props.referencias[posicion].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
               </Tooltip>
             )
           )})
         }
 
         <Tooltip title={next}>
-          <Link to={posicion >= referencias.length -2 ? null : `/husserl/pasaje/${props.expresionId}/${idURL}`}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
+          <Link to={posicion >= referencias.length -2 ? null : `/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
         </Tooltip>
         <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
           <Link to={posicion == referencias.length - 1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[referencias.length -1].refid}`}><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>
