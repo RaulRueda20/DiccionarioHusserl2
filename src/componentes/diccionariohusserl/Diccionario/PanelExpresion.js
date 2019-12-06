@@ -59,6 +59,7 @@ export default function PanelExpresion(props){
                 localStore.setObjects("referenciasConsultadas",store)
             }
         })
+        props.setFlagLetraMain(true)
     }
 
     return (

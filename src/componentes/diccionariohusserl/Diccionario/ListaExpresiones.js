@@ -69,7 +69,8 @@ export default function ListaExpresiones(props){
         <ul>
           {props.expresionesGlobales.map((expresion, index)=>(
             <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
-            getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}/> 
+            getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}
+            setFlagLetraMain={props.setFlagLetraMain}/> 
           ))}
         </ul>
       </div> :
@@ -77,7 +78,8 @@ export default function ListaExpresiones(props){
         <ul>
           {props.expresiones.map((expresion, index)=>(
             <PanelExpresion key={expresion.id+"-"+index} expresion={expresion} handleClickPanel={handleClickPanel} clickHandleVista={clickHandleVista} index={index}
-            getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}/> 
+            getJerarquia={props.getJerarquia} idReferencias={props.idReferencias} setIdReferencias={props.setIdReferencias} expresionSeleccionada={props.expresionSeleccionada}
+            setFlagLetraMain={props.setFlagLetraMain}/> 
           ))}
         </ul>
       </div>}

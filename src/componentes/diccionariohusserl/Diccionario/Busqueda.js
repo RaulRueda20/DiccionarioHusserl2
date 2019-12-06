@@ -35,7 +35,7 @@ const styles = {
 
 function Busqueda(props){
   const {classes}=props;
-  const [insensitiveCase,setInsensitiveCase]=React.useState(true);
+  const [insensitiveCase,setInsensitiveCase]=React.useState(false);
 
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -72,7 +72,7 @@ function Busqueda(props){
     }
     console.log("expresiones",expresiones)
     return expresiones
-}
+  }
   
   const handleChangeBusquedaExpresiones = (event) => {
     props.setLoading(true)

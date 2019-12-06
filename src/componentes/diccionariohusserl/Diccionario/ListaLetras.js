@@ -35,6 +35,9 @@ function ListaLetras (props){
   const handleChangeLetraMain = (event) => {
     console.log("Evento",event.target.innerText)
     props.setLetraMain(event.target.innerText)
+    if(!props.flagLetraMain){
+      props.setFlagLetraMain(true)
+    }
   };
 
   return(
