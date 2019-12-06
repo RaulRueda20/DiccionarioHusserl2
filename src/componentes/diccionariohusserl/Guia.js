@@ -1,15 +1,23 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
+// React
+import React from 'react'
 
+// Components
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+// Other reqs
 import {webService} from '../../js/webServices';
+import classNames from 'classnames';
 
 function Guia(props){
-    const [guia, setGuia]=React.useState("")
+    const [guia, setGuia]=React.useState("");
+    const [loading, setLoading]=React.useState(false);
 
     React.useEffect(()=>{
+        setLoading(true)
         webService("/manual/get", "GET", {}, (data) => {
            setGuia(data.data.response[0])
         })
+        setLoading(false)
     }, [])
 
     function renderizadoGuia(){
@@ -28,7 +36,10 @@ function Guia(props){
     }
 
     return(
-        <div className="guia" dangerouslySetInnerHTML={renderizadoGuia()}></div>
+        <div>
+            <div className="guia" dangerouslySetInnerHTML={renderizadoGuia()}></div>
+            <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
+        </div>
     )
 }
 
