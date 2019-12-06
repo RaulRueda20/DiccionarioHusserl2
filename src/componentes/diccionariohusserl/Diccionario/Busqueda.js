@@ -35,7 +35,7 @@ const styles = {
 
 function Busqueda(props){
   const {classes}=props;
-  const [insensitiveCase,setInsensitiveCase]=React.useState(false);
+  const [insensitiveCase,setInsensitiveCase]=React.useState(true);
 
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -76,12 +76,13 @@ function Busqueda(props){
   
   const handleChangeBusquedaExpresiones = (event) => {
     props.setLoading(true)
+    event.preventDefault()
     if(props.state.checkedA == false){
-      var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
+      var servicebe = "/referencias/busquedaExpresion"
       webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
-          var expresiones = data.data.response
-          props.setExpresionesGlobales(fixReferencias(expresiones))
-      props.setLoading(false)
+        var expresiones = data.data.response
+        props.setExpresionesGlobales(fixReferencias(expresiones))
+        props.setLoading(false)
       })
     }else{
       props.expresiones.map(expresion=>{

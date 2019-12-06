@@ -70,11 +70,7 @@ function Pasaje(props){
   }
 
   function handleForward(){
-    if(posicion == props.referencias.length -1 || props.referencias.length==1){
-      setNext("No hay más pasajes")
-    }else if(props.referencias.length > 1){
-      setNext(props.referencias[posicion+1].ref_original)
-    }else if(posicion==props.referencias.length -1){
+    if(posicion==props.referencias.length -1){
       setNext(props.referencias[referencias.length -1])
     }
   }
@@ -96,14 +92,14 @@ function Pasaje(props){
           return (
             (
               <Tooltip title={referencias[index].ref_original}>
-                <Link to={`/husserl/pasaje/${props.expresionId}/${props.referencias[posicion].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
+                <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[posicion].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
               </Tooltip>
             )
           )})
         }
 
         <Tooltip title={posicion == props.referencias.length -1 || props.referencias.length==1 ? "No hay más pasajes" : props.referencias[posicion+1].ref_original}>
-          <Link to={posicion >= referencias.length -2 ? null : `/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
+          <Link to={posicion >= referencias.length -1 ? null : `/husserl/pasaje/${props.expresionId}/${props.referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
         </Tooltip>
         <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
           <Link to={posicion == referencias.length - 1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[referencias.length -1].refid}`}><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>

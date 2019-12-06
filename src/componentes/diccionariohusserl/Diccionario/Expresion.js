@@ -81,6 +81,7 @@ function Expresion(props){
   }
 
   React.useEffect(()=>{
+    console.log("LLAMADA", language, letraMain)
     setLoading(true)
     var service = "/expresiones/" + language + "/" + letraMain
     webService(service, "GET", {}, (data) => {

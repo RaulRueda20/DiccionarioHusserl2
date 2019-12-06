@@ -38,7 +38,6 @@ export default function ListaExpresiones(props){
   function clickHandleVista(event){
     var expresionClickeada=event.currentTarget.id;
     var expresionesReferencias=props.expresiones[expresionClickeada];
-    console.log("evento",expresionesReferencias)
     if(localStore.getObjects("referenciasConsultadas")==false){
       var referenciasConsultadas=[];
       referenciasConsultadas.push(expresionesReferencias)
