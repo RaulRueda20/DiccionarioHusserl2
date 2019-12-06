@@ -72,16 +72,17 @@ function Busqueda(props){
     }
     console.log("expresiones",expresiones)
     return expresiones
-}
+  }
   
   const handleChangeBusquedaExpresiones = (event) => {
     props.setLoading(true)
+    event.preventDefault()
     if(props.state.checkedA == false){
-      var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
+      var servicebe = "/referencias/busquedaExpresion"
       webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
-          var expresiones = data.data.response
-          props.setExpresionesGlobales(fixReferencias(expresiones))
-      props.setLoading(false)
+        var expresiones = data.data.response
+        props.setExpresionesGlobales(fixReferencias(expresiones))
+        props.setLoading(false)
       })
     }else{
       props.expresiones.map(expresion=>{

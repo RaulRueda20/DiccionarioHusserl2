@@ -166,7 +166,7 @@ function Pasaje(props){
       </Hidden>
       <Grid container>
         <Grid item xs={12}>
-          <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain}/>
+          <ListaLetras letraMain={props.letraMain} setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain} flagLetraMain={props.flagLetraMain}/>
         </Grid>
         <Grid item xs={12} sm={3} md={3} lg={3} className={classNames([{"panelIzquierdoEscondido" : panelIzquierdo==true}])}>
           <Hidden xsDown>

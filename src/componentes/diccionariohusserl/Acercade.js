@@ -1,15 +1,23 @@
+// React
 import React from 'react'
 
+// Components
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+// Other reqs
 import {webService} from '../../js/webServices';
-import { SwipeableDrawer } from '@material-ui/core';
+import classNames from 'classnames';
 
 function Acercade(props){
-    const [acercade, setAcercade] = React.useState("")
+    const [acercade, setAcercade] = React.useState("");
+    const [loading, setLoading]=React.useState(false);
 
     React.useEffect(()=>{
+        setLoading(true)
         webService("/acerca_de/get", "GET", {}, (data) => {
            setAcercade(data.data.response[0]) 
         })
+        setLoading(false)
     }, [])
 
     function renderizadoDeAcercaDe(){
@@ -28,7 +36,10 @@ function Acercade(props){
     }
 
     return(
-        <div className="acercaDe" dangerouslySetInnerHTML={renderizadoDeAcercaDe()}></div>
+        <div>
+            <div className="acercaDe" dangerouslySetInnerHTML={renderizadoDeAcercaDe()}></div>
+            <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
+        </div>
     )
 }
 
