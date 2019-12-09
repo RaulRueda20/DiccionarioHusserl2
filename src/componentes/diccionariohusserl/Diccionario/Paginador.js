@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
@@ -29,14 +30,11 @@ function Pasaje(props){
       setReferenciaSeleccionada(props.referenciaSeleccionada)
       acortadorPaginador(props.referencias)
     }
-    console.log("referencias", props.referencias)
-    console.log("posicion", posicion)
   }, [props.referencias, props.referenciaSeleccionada, posicion])
 
   function acortadorPaginador(referencias){
     var i = 0
     var refPos = 0
-    console.log(props.referencias.length)
     var penultimo = props.referencias.length - 2
     while(i<referencias.length){
       referencias[i].index = i
@@ -101,36 +99,40 @@ function Pasaje(props){
   }
 
   return(
-    <div style={{borderLeft: "1px lightgray solid",borderRight: "1px lightgray solid",padding: "0px 10px"}}>
-      { referenciaSeleccionada != null && referencias.length > 0 ? 
-      <div style={{textAlign: 'center'}}>
-        <Tooltip title={posicion==0 ? "No hay más pasajes" : referencias[0].ref_original}>
-          <Link to={posicion==0 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[0].refid}`} 
-            className="botonPaginador"><FirstPage fontSize="small"/></Link>
-        </Tooltip>
-        <Tooltip title={posicion<=0 ? "No hay más pasajes" : referencias[posicion-1].ref_original}>
-          <Link to={posicion<=0 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[posicion-1].refid}`}
-            className="botonPaginador"><Back fontSize="small"/></Link>
-        </Tooltip>
-
-        {casillas.map((referencia, index) => {
-          return (
-            (
-              <Tooltip title={referencias[index].ref_original}>
-                <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[posicion].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
-              </Tooltip>
-            )
-          )})
-        }
-
-        <Tooltip title={posicion == props.referencias.length -1 || props.referencias.length==1 ? "No hay más pasajes" : props.referencias[posicion+1].ref_original}>
-          <Link to={posicion >= referencias.length -1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
-        </Tooltip>
-        <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
-          <Link to={posicion == referencias.length - 1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[referencias.length -1].refid}`}><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>
-        </Tooltip>
-      </div> : null}
-      <Typography variant="h5">Hay {referencias.length} {referencias.length > 1 ? "pasajes" : "pasaje"} en total.</Typography>
+    <div>
+      {props.referencias.refid==null ? null:
+        <div style={{borderLeft: "1px lightgray solid",borderRight: "1px lightgray solid",padding: "0px 10px"}}>
+          { referenciaSeleccionada != null && referencias.length > 0 ? 
+          <div style={{textAlign: 'center'}}>
+            <Tooltip title={posicion==0 ? "No hay más pasajes" : referencias[0].ref_original}>
+              <Link to={posicion==0 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[0].refid}`} 
+                className="botonPaginador"><FirstPage fontSize="small"/></Link>
+            </Tooltip>
+            <Tooltip title={posicion<=0 ? "No hay más pasajes" : referencias[posicion-1].ref_original}>
+              <Link to={posicion<=0 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[posicion-1].refid}`}
+                className="botonPaginador"><Back fontSize="small"/></Link>
+            </Tooltip>
+    
+            {casillas.map((referencia, index) => {
+              return (
+                (
+                  <Tooltip title={referencias[index].ref_original}>
+                    <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[posicion].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
+                  </Tooltip>
+                )
+              )})
+            }
+    
+            <Tooltip title={posicion == props.referencias.length -1 ? props.referencias.length==1 ? referencias[0].refid ?  null : "No hay más pasajes" : "No hay más pasajes" : props.referencias[posicion+1].ref_original}>
+              <Link to={posicion >= referencias.length -1 ? referencias[0].refid ? null : null : `/husserl/pasaje/${props.expresionId}/${referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
+            </Tooltip>
+            <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>
+              <Link to={posicion == referencias.length - 1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[referencias.length -1].refid}`}><span className="botonPaginador"><LastPage fontSize="small"/></span></Link>
+            </Tooltip>
+          </div> : null}
+          <Typography variant="h5">Hay {referencias.length} {referencias.length > 1 ? "pasajes" : "pasaje"} en total.</Typography>
+        </div>
+      }
     </div>
   )
 }

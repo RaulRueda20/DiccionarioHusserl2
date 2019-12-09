@@ -17,6 +17,7 @@ import MenuEscondido from './MenuEscondido';
 import BusquedaEscondida from './BusquedaEscondida';
 import ListaEscondida from './ListaEscondida';
 import Paginador from './Paginador';
+import ModalDeNulos from './ModalDeNulos';
 
 import {webService} from '../../../js/webServices';
 
@@ -37,7 +38,8 @@ function Pasaje(props){
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
-  const [referencias, setReferencias] = React.useState([])
+  const [referencias, setReferencias] = React.useState([]);
+  const [openModal, setOpenModal] = React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -117,7 +119,7 @@ function Pasaje(props){
     webService(service, "GET", {}, (data) => {
       setReferencias(data.data.response)
       setIdExpresion(idDeExpresion)
-      if(idDeLaReferencia){
+      if(idDeLaReferencia && idDeLaReferencia==null){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
       }else{
         setReferenciaSeleccionada(data.data.response[0])
@@ -126,7 +128,10 @@ function Pasaje(props){
       setExpanded1(true)
       setExpanded2(true)
       if(!props.flagLetraMain){
-        if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+        if(data.data.response[0]==null){
+          props.setLetraMain(props.letraMain)
+          setOpenModal(true)
+        }else if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           props.setFlagLetraMain(true)
         }
@@ -222,6 +227,7 @@ function Pasaje(props){
         }
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
+      <ModalDeNulos openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
     </div>
   )
 }
