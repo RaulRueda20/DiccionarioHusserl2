@@ -8,11 +8,18 @@ function PasajesRenderizados(props){
     })
 
     React.useEffect(() => {
-        if(props.referenciaSeleccionada != null)
+        console.log(props.referenciaSeleccionada)
+        if(props.referenciaSeleccionada != null){
             setPasajeRenderizado({
                 original : resaltarBusqueda(props.referenciaSeleccionada.pasaje_original,props.referenciaSeleccionada.expresion_original),
                 traduccion : resaltarBusqueda(props.referenciaSeleccionada.pasaje_traduccion,props.referenciaSeleccionada.expresion_traduccion) 
             })
+        }else{
+            setPasajeRenderizado({
+                original: "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas.",
+                traduccion : "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas."
+            })
+        }   
     }, [props.referenciaSeleccionada])
 
     function resaltarBusqueda(string,separador){
