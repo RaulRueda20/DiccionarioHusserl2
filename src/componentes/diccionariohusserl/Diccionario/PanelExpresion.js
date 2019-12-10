@@ -52,7 +52,6 @@ export default function PanelExpresion(props){
         var refIdReferenciaConsultada = event.currentTarget.id.split("/")[0]
         var service = "/referencias/obtieneReferenciasIdRefId/"+ idReferenciaConsultada + "/" + refIdReferenciaConsultada
         webService(service, "GET", {}, data => {
-            console.log("data",data)
             var referencias = fixReferenciasConsultadas(data.data.response)
             if(localStore.getObjects("referenciasConsultadas")==false){
                 var referenciasConsultadas = []

@@ -17,7 +17,6 @@ function Pasaje(props){
   const [posicion, setPosicion] = React.useState(0)
   const [referenciaSeleccionada, setReferenciaSeleccionada] = React.useState(null);
   const [next, setNext] = React.useState("");
-  const [urlId,setUrlId] = React.useState("");
 
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
@@ -41,7 +40,7 @@ function Pasaje(props){
         setPosicion(i)
       }
       i++
-      console.log("posicion", posicion)
+      // console.log("posicion", posicion)
     }
     if(referencias.length>5){
       if(refPos==0){
@@ -96,7 +95,7 @@ function Pasaje(props){
           )})
         }
 
-        <Tooltip title={posicion == props.referencias.length -1 || props.referencias.length==1 ? "No hay más pasajes" : props.referencias[posicion+1].ref_original}>
+        <Tooltip title={posicion == referencias.length -1 || referencias.length==1 ? "No hay más pasajes" : referencias[posicion+1].ref_original}>
           <Link to={posicion >= referencias.length -1 ? null : `/husserl/pasaje/${props.expresionId}/${referencias[posicion+1].refid}`} onClick={handleForward}><span className="botonPaginador"><Next fontSize="small"/></span></Link>
         </Tooltip>
         <Tooltip title={posicion == referencias.length - 1 ? "No hay más pasajes" : referencias[referencias.length -1].ref_original}>

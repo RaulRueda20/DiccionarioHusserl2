@@ -111,15 +111,15 @@ function Pasaje(props){
     var service = "/expresiones/" + props.language + "/" + props.letraMain;
     if(pasajeService != service){
       setPasajeService(service)
-      webService(service, "GET", {}, (data) => {
-        setExpresiones(fixReferencias(data.data.response))
+      webService(service, "GET", {}, (dataE) => {
+        setExpresiones(fixReferencias(dataE.data.response))
       })
     }
     var service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
       setReferencias(data.data.response)
       setIdExpresion(idDeExpresion)
-      if(idDeLaReferencia && idDeLaReferencia==null){
+      if(idDeLaReferencia && idDeLaReferencia!=null){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
       }else{
         setReferenciaSeleccionada(data.data.response[0])
@@ -203,7 +203,7 @@ function Pasaje(props){
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
             lang={props.lang} openHidden={openHidden} setOpenHidden={setOpenHidden}
             />
-            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
+            {referenciaSeleccionada== null ? null : <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>}
         </Grid>
         <Grid item sm={3} md={3} lg={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown>
