@@ -19,6 +19,7 @@ function Pasaje(props){
   const [posicion, setPosicion] = React.useState(0)
   const [referenciaSeleccionada, setReferenciaSeleccionada] = React.useState(null);
   const [next, setNext] = React.useState("");
+  const [urlId,setUrlId] = React.useState("");
 
   // var idDeExpresion es el id que se toma de la URL, idExpresion es un estado que llama servicios y tiene otras funcionalidades
 
@@ -29,14 +30,11 @@ function Pasaje(props){
       setReferenciaSeleccionada(props.referenciaSeleccionada)
       acortadorPaginador(props.referencias)
     }
-    console.log("referencias", props.referencias)
-    console.log("posicion", posicion)
   }, [props.referencias, props.referenciaSeleccionada, posicion])
 
   function acortadorPaginador(referencias){
     var i = 0
     var refPos = 0
-    console.log(props.referencias.length)
     var penultimo = props.referencias.length - 2
     while(i<referencias.length){
       referencias[i].index = i
@@ -46,7 +44,7 @@ function Pasaje(props){
       }
       i++
     }
-    if(referencias.length>5){
+    if(referencias.length>4){
       if(refPos==0){
         var siguientesEscenario1 = refPos + 3
         setCasillas(referencias.slice(refPos,siguientesEscenario1))
@@ -61,14 +59,12 @@ function Pasaje(props){
       }else if(refPos == penultimo){
         var anterioresEscenario4 = refPos -3
         var siguienteEscenario4 = refPos +2
-        console.log(referencias.slice(anterioresEscenario4,siguienteEscenario4))
         setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
       }else if(refPos == referencias.length - 1){
         var anterioresEscenario5 = refPos - 4
-        // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
         setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
       }
-    }else{
+    }else if(referencias.length<4){
       if(refPos==0){
         var siguientesEscenario1 = refPos + 3
         setCasillas(referencias.slice(refPos,siguientesEscenario1))
@@ -87,7 +83,6 @@ function Pasaje(props){
         setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
       }else if(refPos == referencias.length - 1){
         var anterioresEscenario5 = refPos - 3
-        // console.log(referencias.slice(anterioresEscenario5,refPos + 1))
         setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
       }
     }
@@ -117,7 +112,7 @@ function Pasaje(props){
           return (
             (
               <Tooltip title={referencias[index].ref_original}>
-                <Link to={`/husserl/pasaje/${props.expresionId}/${referencias[posicion].refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
+                <Link to={`/husserl/pasaje/${props.expresionId}/${referencia.refid}`} className={classNames(["botonPaginador", {"pasajeSeleccionado": props.referenciaSeleccionada.refid == referencia.refid}])} style={{padding: "13px 0px"}}><span>{referencia.index+1}</span></Link>
               </Tooltip>
             )
           )})
