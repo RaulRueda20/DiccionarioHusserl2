@@ -132,6 +132,7 @@ function Pasaje(props){
           props.setLetraMain(props.letraMain)
           setOpenModal(true)
           setReferenciaSeleccionada(null)
+          console.log("open",openModal)
         }else if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           props.setFlagLetraMain(true)
