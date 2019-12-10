@@ -13,10 +13,9 @@ const modalNul={
     modalinN:{
         width: "50%",
         maxHeight:"75vh",
-        top: "25.5vh",
+        top: "35.5vh",
         position:"absolute",
-        padding: "30px 30px",
-        overflowY: "auto",
+        padding: "20px 20px",
         left: "calc(25% - 30px)"
     },
     botonClear:{
@@ -48,9 +47,9 @@ function ModalDeNulos(props){
         open={props.openModal}
         >
             <Paper className={classes.modalinN}>
-                <Grid container>
+                <Grid container alignContent="center" alignItems="center">
                     <Grid item xs={11}>
-                        <Typography>
+                        <Typography variant="h4">
                             No contiene pasajes
                         </Typography>
                     </Grid>
