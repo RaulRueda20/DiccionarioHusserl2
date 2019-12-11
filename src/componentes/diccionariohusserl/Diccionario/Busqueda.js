@@ -22,7 +22,6 @@ import classNames from 'classnames';
 
 //Language
 import {busquedas, distincionMayusyMinus, BusquedaGeneral, busquedaPorLetra} from '../../../js/Language';
-import ModalDeBusqueda from './ModalDeBusqueda';
 
 const styles = {
   TextFieldbus:{
@@ -89,7 +88,6 @@ function Busqueda(props){
         props.setLoading(true)
         var servicebe = "/referencias/busquedaExpresion"
         webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
-          console.log("data",data.data.response)
           var expresiones = data.data.response
           props.setExpresionesGlobales(fixReferencias(expresiones))
           props.setLoading(false)

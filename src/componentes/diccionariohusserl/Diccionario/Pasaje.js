@@ -18,6 +18,9 @@ import BusquedaEscondida from './BusquedaEscondida';
 import ListaEscondida from './ListaEscondida';
 import Paginador from './Paginador';
 import ModalDeNulos from './ModalDeNulos';
+import ModalDeBusqueda from './ModalDeBusqueda';
+import ModalCaracterInvalido from './ModalCaracterInvalido';
+import ModalNumeros from './ModalNumeros'
 
 import {webService} from '../../../js/webServices';
 
@@ -40,6 +43,9 @@ function Pasaje(props){
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
   const [referencias, setReferencias] = React.useState([]);
   const [openModal, setOpenModal] = React.useState(false);
+  const [modalDeBusquedas,setModalDebusquedas]=React.useState(false);
+  const [modalCaracteresIvalidos,setModalCaracteresInvalidos]=React.useState(false);
+  const [modalNumeros,setModalNumeros]=React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -180,7 +186,8 @@ function Pasaje(props){
           <Hidden xsDown>
             <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
             language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-            state={state} setState={setState} setExpresionesGlobales={setExpresionesGlobales}
+            state={state} setState={setState} setExpresionesGlobales={setExpresionesGlobales} setModalDebusquedas={setModalDebusquedas} 
+            setModalCaracteresInvalidos={setModalCaracteresInvalidos} setModalNumeros={setModalNumeros} setLoading={setLoading}
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
@@ -231,6 +238,9 @@ function Pasaje(props){
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
       <ModalDeNulos openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
+      <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas} lang={props.lang}/>
+      <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos} lang={props.lang}/>
+      <ModalNumeros modalNumeros={modalNumeros} setModalNumeros={setModalNumeros} lang={props.lang}/>
     </div>
   )
 }

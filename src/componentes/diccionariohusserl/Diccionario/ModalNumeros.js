@@ -1,4 +1,7 @@
+// React
 import React from 'react';
+
+// Components
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -7,6 +10,9 @@ import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/styles';
+
+//Language
+import {tituloNumeros, mensajeNumeros} from '../../../js/Language';
 
 const modalNumeros={
     modalinb:{
@@ -49,7 +55,7 @@ function ModalNumeros(props){
                 <Grid container alignContent="center" alignItems="center">
                     <Grid item xs={11}>
                         <Typography variant="h4">
-                            Números Invalidos
+                            {tituloNumeros(props.lang)}
                         </Typography>
                     </Grid>
                     <Grid item xs={1}>
@@ -63,7 +69,7 @@ function ModalNumeros(props){
                     <Divider/>
                     <Grid item xs={12} className={classes.gridDelTypo}>
                         <Typography variant="h5">
-                            El buscador no acepta números, solo letras. Favor de hacer una busqueda más especifíca.
+                            {mensajeNumeros(props.lang)}
                         </Typography>
                     </Grid>
                 </Grid>
