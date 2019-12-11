@@ -983,6 +983,141 @@ const texto = lang => {
   }
 }
 
+const tituloNulos = lang => {
+  switch (lang) {
+    case "es":
+      return "No contiene pasajes"
+    case "en":
+      return "It does not contain passages"
+    case "fr":
+      return "Il ne contient pas de passages"
+    case "al":
+      return "Es enthält keine Passagen"
+    case "ca":
+      return "No conté passatges"
+  }
+}
+
+const mensajeNulos = lang => {
+  switch (lang) {
+    case "es":
+      return "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas."
+    case "en":
+      return "There is no reference for this expression. Please see the list of derived expressions."
+    case "fr":
+      return "Il n'y a aucune référence pour cette expression. Veuillez consulter la liste des expressions dérivées."
+    case "al":
+      return "Es gibt keine Referenz für diesen Ausdruck. Bitte beachten Sie die Liste der abgeleiteten Ausdrücke."
+    case "ca":
+      return "No hi ha cap referència per a aquesta expressió. Veure per favor la llista d'expressions derivades."
+  }
+}
+
+const tituloBusqueda = lang => {
+  switch (lang) {
+    case "es":
+      return "La busqueda es muy pequeña."
+    case "en":
+      return "The search is very small."
+    case "fr":
+      return "La recherche est très petite."
+    case "al":
+      return "Die Suche ist sehr klein."
+    case "ca":
+      return "La recerca és molt petita."
+  }
+}
+
+const mensajeBusqueda = lang => {
+  switch (lang) {
+    case "es":
+      return "Favor de hacer una busqueda más especifíca."
+    case "en":
+      return "Please do a more specific search."
+    case "fr":
+      return "Veuillez effectuer une recherche plus spécifique."
+    case "al":
+      return "Bitte führen Sie eine genauere Suche durch."
+    case "ca":
+      return "Favor de fer una cerca més especifíca."
+  }
+}
+
+const tituloNumeros = lang => {
+  switch (lang) {
+    case "es":
+      return "Números Invalidos."
+    case "en":
+      return "Invalid Numbers."
+    case "fr":
+      return "Numéros invalides."
+    case "al":
+      return "Ungültige Nummern."
+    case "ca":
+      return "números Invalidos."
+  }
+}
+
+const mensajeNumeros = lang => {
+  switch (lang) {
+    case "es":
+      return "El buscador no acepta números, solo letras. Favor de hacer una busqueda más especifíca."
+    case "en":
+      return "The search engine does not accept numbers, only letters. Please do a more specific search."
+    case "fr":
+      return "Le moteur de recherche n'accepte pas les chiffres, seulement les lettres. Veuillez effectuer une recherche plus spécifique."
+    case "al":
+      return "Die Suchmaschine akzeptiert keine Zahlen, nur Buchstaben. Bitte führen Sie eine genauere Suche durch."
+    case "ca":
+      return "El cercador no accepta nombres, només lletres. Favor de fer una cerca més especifíca."
+  }
+}
+
+const tituloCaracteres = lang => {
+  switch (lang) {
+    case "es":
+      return "Carácteres Invalidos."
+    case "en":
+      return "Invalid characters."
+    case "fr":
+      return "Caractères non valides."
+    case "al":
+      return "Ungültige Zeichen"
+    case "ca":
+      return "Caràcters Invalidos."
+  }
+}
+
+const mensajeCaracteres = lang => {
+  switch (lang) {
+    case "es":
+      return "No se toman en cuenta los carácteres, solo las letras. Favor de hacer una busqueda más especifíca."
+    case "en":
+      return "Characters are not taken into account, only letters. Please do a more specific search."
+    case "fr":
+      return "Les caractères ne sont pas pris en compte, seules les lettres. Veuillez effectuer une recherche plus spécifique."
+    case "al":
+      return "Zeichen werden nicht berücksichtigt, nur Buchstaben. Bitte führen Sie eine genauere Suche durch."
+    case "ca":
+      return "No es tenen en compte els caràcters, només les lletres. Favor de fer una cerca més especifíca."
+  }
+}
+
+const tooltipPaginador = lang => {
+  switch (lang) {
+    case "es":
+      return "No hay más pasajes."
+    case "en":
+      return "There are no more passages."
+    case "fr":
+      return "Il n'y a plus de passages."
+    case "al":
+      return "Es gibt keine Passagen mehr."
+    case "ca":
+      return "No hi ha més passatges."
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
@@ -991,4 +1126,6 @@ export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra
   toolTipMenuPrincipal, toolTipMenuIdiomas, toolTipIdiomaDeLaLista, cintilla, guia, descarga, idiomaConsultas, busquedas,
   distincionMayusyMinus, BusquedaGeneral, tipoDeBusqueda, dentroExpresion, dentroReferencia, noDerivaDe, noContieneExpresionesDerivadas,
   bienvenido, bienvenidaModal, descargarConsulta, seGeneraArchivo, conReferencias, descargarEn, idiomaAl, idiomaEs, pasajeSeleccionadoOTodos,
-  pasajeSeleccionado, todosLosPasajes, tipoDeArchivos, texto}
+  pasajeSeleccionado, todosLosPasajes, tipoDeArchivos, texto, tituloNulos, mensajeNulos, tituloBusqueda, mensajeBusqueda, tituloNumeros,
+  mensajeNumeros, tituloCaracteres, mensajeCaracteres, tooltipPaginador
+}

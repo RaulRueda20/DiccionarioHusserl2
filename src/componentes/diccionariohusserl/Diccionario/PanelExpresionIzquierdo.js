@@ -15,8 +15,7 @@ import classNames from 'classnames';
 import '../../../css/expresiones.css';
 
 export default function PanelExpresionIzquierdo(props){
-    const [open, setOpen] = React.useState(props.open);
-    const [referencias,setReferencias]=React.useState()
+    const [open, setOpen] = React.useState(false);
 
     function fixReferenciasConsultadas(expresion){
         var referencia = {
@@ -42,6 +41,7 @@ export default function PanelExpresionIzquierdo(props){
     function handleVisitados(event,index,referencia){
         if(document.getElementById(referencia + "/" + index).className.indexOf("pasajesVisitados")==-1){
             document.getElementById(referencia + "/" + index).className += " pasajesVisitados";
+            setOpen(true)
         }
         var idReferenciaConsultada = props.expresion.id
         var refIdReferenciaConsultada = event.currentTarget.id.split("/")[0]

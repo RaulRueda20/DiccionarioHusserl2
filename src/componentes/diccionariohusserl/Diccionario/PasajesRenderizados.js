@@ -8,11 +8,17 @@ function PasajesRenderizados(props){
     })
 
     React.useEffect(() => {
-        if(props.referenciaSeleccionada != null)
+        if(props.referenciaSeleccionada != null){
             setPasajeRenderizado({
                 original : resaltarBusqueda(props.referenciaSeleccionada.pasaje_original,props.referenciaSeleccionada.expresion_original),
                 traduccion : resaltarBusqueda(props.referenciaSeleccionada.pasaje_traduccion,props.referenciaSeleccionada.expresion_traduccion) 
             })
+        }else{
+            setPasajeRenderizado({
+                original: "Es gibt keine Referenz für diesen Ausdruck. Bitte beachten Sie die Liste der abgeleiteten Ausdrücke.",
+                traduccion : "No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas."
+            })
+        }   
     }, [props.referenciaSeleccionada])
 
     function resaltarBusqueda(string,separador){

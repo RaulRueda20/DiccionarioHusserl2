@@ -17,6 +17,10 @@ import MenuEscondido from './MenuEscondido';
 import BusquedaEscondida from './BusquedaEscondida';
 import ListaEscondida from './ListaEscondida';
 import Paginador from './Paginador';
+import ModalDeNulos from './ModalDeNulos';
+import ModalDeBusqueda from './ModalDeBusqueda';
+import ModalCaracterInvalido from './ModalCaracterInvalido';
+import ModalNumeros from './ModalNumeros'
 
 import {webService} from '../../../js/webServices';
 
@@ -37,7 +41,11 @@ function Pasaje(props){
   const [openHidden, setOpenHidden]=React.useState(false);
   const [loading, setLoading]=React.useState(false);
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
-  const [referencias, setReferencias] = React.useState([])
+  const [referencias, setReferencias] = React.useState([]);
+  const [openModal, setOpenModal] = React.useState(false);
+  const [modalDeBusquedas,setModalDebusquedas]=React.useState(false);
+  const [modalCaracteresIvalidos,setModalCaracteresInvalidos]=React.useState(false);
+  const [modalNumeros,setModalNumeros]=React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -109,15 +117,15 @@ function Pasaje(props){
     var service = "/expresiones/" + props.language + "/" + props.letraMain;
     if(pasajeService != service){
       setPasajeService(service)
-      webService(service, "GET", {}, (data) => {
-        setExpresiones(fixReferencias(data.data.response))
+      webService(service, "GET", {}, (dataE) => {
+        setExpresiones(fixReferencias(dataE.data.response))
       })
     }
     var service = "/referencias/obtieneReferencias/" + idDeExpresion
     webService(service, "GET", {}, (data) => {
       setReferencias(data.data.response)
       setIdExpresion(idDeExpresion)
-      if(idDeLaReferencia){
+      if(idDeLaReferencia && idDeLaReferencia!=null){
         setReferenciaSeleccionada(findReferencias(data.data.response, idDeLaReferencia))
       }else{
         setReferenciaSeleccionada(data.data.response[0])
@@ -125,8 +133,12 @@ function Pasaje(props){
       setLoading(false)
       setExpanded1(true)
       setExpanded2(true)
-      if(!props.flagLetraMain){
-        if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+      if(data.data.response[0]==null){
+        props.setLetraMain(props.letraMain)
+        setOpenModal(true)
+        setReferenciaSeleccionada(null)
+      }else if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+          if(!props.flagLetraMain){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           props.setFlagLetraMain(true)
         }
@@ -137,8 +149,10 @@ function Pasaje(props){
     setTimeout(() => {
       if(document.getElementById("VP" + props.idExpresion) != null){
         document.getElementById("VP" + props.idExpresion).scrollIntoView()
+        
       }
     }, 1000)
+    console.log("open",openModal)
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
 
   return(
@@ -172,7 +186,8 @@ function Pasaje(props){
           <Hidden xsDown>
             <BusquedaVP expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
             language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-            state={state} setState={setState} setExpresionesGlobales={setExpresionesGlobales}
+            state={state} setState={setState} setExpresionesGlobales={setExpresionesGlobales} setModalDebusquedas={setModalDebusquedas} 
+            setModalCaracteresInvalidos={setModalCaracteresInvalidos} setModalNumeros={setModalNumeros} setLoading={setLoading}
             />
             <ListaIzquierdaExpresion expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
@@ -183,7 +198,9 @@ function Pasaje(props){
             <div>
               <BusquedaEscondida expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
               language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} setExpresionesGlobales={setExpresionesGlobales}/>
+               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} 
+               setExpresionesGlobales={setExpresionesGlobales} setModalDebusquedas={setModalDebusquedas} 
+               setModalCaracteresInvalidos={setModalCaracteresInvalidos} setModalNumeros={setModalNumeros} setLoading={setLoading}/>
               <ListaEscondida expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
               setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} state={state} setFlagLetraMain={props.setFlagLetraMain}
@@ -198,7 +215,7 @@ function Pasaje(props){
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
             lang={props.lang} openHidden={openHidden} setOpenHidden={setOpenHidden}
             />
-            <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>
+            {referenciaSeleccionada== null ? null : <Paginador lang={props.lang} referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>}
         </Grid>
         <Grid item sm={3} md={3} lg={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown>
@@ -222,6 +239,10 @@ function Pasaje(props){
         }
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
+      <ModalDeNulos openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
+      <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas} lang={props.lang}/>
+      <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos} lang={props.lang}/>
+      <ModalNumeros modalNumeros={modalNumeros} setModalNumeros={setModalNumeros} lang={props.lang}/>
     </div>
   )
 }

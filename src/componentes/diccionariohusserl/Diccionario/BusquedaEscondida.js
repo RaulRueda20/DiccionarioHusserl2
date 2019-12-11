@@ -63,7 +63,6 @@ function BusquedaEscondida(props){
     }
 
     const fixReferencias = (referencias) => {
-        console.log("referencias",referencias)
         var expresiones=[]
         var posicActual = -1
         var expreActual = ""
@@ -101,12 +100,25 @@ function BusquedaEscondida(props){
     }
 
     const handleChangeBusquedaPasajes = (event) => {
+        event.preventDefault()
         if(props.state.checkedA == false){
-            var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
-            webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
+            var stringCaracteres = props.busqueda.replace(/(?!\w|\s)./g, '')
+            var stringNumeros = props.busqueda.replace(/([0-9])./g, '')
+            if(props.busqueda.length<2){
+              props.setModalDebusquedas(true)
+            }else if(stringCaracteres.length<2){
+              props.setModalCaracteresInvalidos(true)
+            }else if(stringNumeros.length<2){
+              props.setModalNumeros(true)
+            }else if(props.busqueda.length>2){
+              props.setLoading(true)
+              var servicebe = "/referencias/busquedaExpresion"
+              webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
                 var expresiones = data.data.response
-                props.setExpresiones(fixReferencias(expresiones))
-            })
+                props.setExpresionesGlobales(fixReferencias(expresiones))
+                props.setLoading(false)
+              })
+            }
         }else{
             props.expresiones.map(expresion=>{
             var expresionNombre=expresion.expresion +  expresion.traduccion +  expresion.id
