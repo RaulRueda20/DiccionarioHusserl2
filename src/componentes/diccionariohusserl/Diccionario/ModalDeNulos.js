@@ -42,14 +42,14 @@ function ModalDeNulos(props){
     const {classes}=props;
 
     function clickHandleCloseModal(){
-        props.setOpenModal(false)
+        props.setOpenModalN(false)
     }
 
     return(
         <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={props.openModal}
+        open={props.openModalN}
         >
             <Paper className={classes.modalinN}>
                 <Grid container alignContent="center" alignItems="center">

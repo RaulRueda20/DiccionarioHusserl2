@@ -24,7 +24,8 @@ import MenuBajo from './MenuBajo';
 import BusquedaAbajo from './BusquedaAbajo';
 import ModalDeBusqueda from './ModalDeBusqueda';
 import ModalCaracterInvalido from './ModalCaracterInvalido';
-import ModalNumeros from './ModalNumeros'
+import ModalNumeros from './ModalNumeros';
+import ModalDeNulos from './ModalDeNulos';
 
 function Expresion(props){
   const [letraMain, setLetraMain] = React.useState('A');
@@ -45,6 +46,7 @@ function Expresion(props){
   const [modalDeBusquedas,setModalDebusquedas]=React.useState(false);
   const [modalCaracteresIvalidos,setModalCaracteresInvalidos]=React.useState(false);
   const [modalNumeros,setModalNumeros]=React.useState(false);
+  const [openModalN, setOpenModalN] = React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -130,7 +132,7 @@ function Expresion(props){
             setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} 
             expresionSeleccionada={expresionSeleccionada} setExpresionSeleccionada={setExpresionSeleccionada}
             getJerarquia={getJerarquia} menuEscondido={menuEscondido} state={state} expresionesGlobales={expresionesGlobales}
-            setFlagLetraMain={props.setFlagLetraMain}
+            setFlagLetraMain={props.setFlagLetraMain} setOpenModalN={setOpenModalN}
             />
         </Grid>
         <Hidden smUp>
@@ -175,6 +177,7 @@ function Expresion(props){
         </Grid>
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
+      <ModalDeNulos openModalN={openModalN} setOpenModalN={setOpenModalN} lang={props.lang}/>
       <ModalDeBienvenida openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
       <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas} lang={props.lang}/>
       <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos} lang={props.lang}/>
