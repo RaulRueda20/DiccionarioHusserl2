@@ -42,7 +42,7 @@ function Pasaje(props){
   const [loading, setLoading]=React.useState(false);
   const [posicionReferenciasConsultadas,setPosicionReferenciasConsultadas]=React.useState("");
   const [referencias, setReferencias] = React.useState([]);
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModalN, setOpenModalN] = React.useState(false);
   const [modalDeBusquedas,setModalDebusquedas]=React.useState(false);
   const [modalCaracteresIvalidos,setModalCaracteresInvalidos]=React.useState(false);
   const [modalNumeros,setModalNumeros]=React.useState(false);
@@ -135,7 +135,7 @@ function Pasaje(props){
       setExpanded2(true)
       if(data.data.response[0]==null){
         props.setLetraMain(props.letraMain)
-        setOpenModal(true)
+        setOpenModalN(true)
         setReferenciaSeleccionada(null)
       }else if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
           if(!props.flagLetraMain){
@@ -152,7 +152,6 @@ function Pasaje(props){
         
       }
     }, 1000)
-    console.log("open",openModal)
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
 
   return(
@@ -239,7 +238,7 @@ function Pasaje(props){
         }
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
-      <ModalDeNulos openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
+      <ModalDeNulos openModalN={openModalN} setOpenModalN={setOpenModalN} lang={props.lang}/>
       <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas} lang={props.lang}/>
       <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos} lang={props.lang}/>
       <ModalNumeros modalNumeros={modalNumeros} setModalNumeros={setModalNumeros} lang={props.lang}/>

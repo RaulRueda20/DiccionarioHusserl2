@@ -24,7 +24,6 @@ import '../../../css/expresiones.css';
 
 export default function PanelExpresion(props){
     const [open, setOpen] = React.useState(false);
-    const [openModal,setOpenModal] = React.useState(false);
 
     function fixReferenciasConsultadas(expresion){
         var referencia = {
@@ -68,7 +67,7 @@ export default function PanelExpresion(props){
 
     function handleModal(){
         if(props.expresion.referencias[0].refid==null){
-            setOpenModal(true)
+            props.setOpenModalN(true)
         }
     }
 
@@ -123,9 +122,6 @@ export default function PanelExpresion(props){
                     }
                 </div>
             </li>
-            <div>
-            <ModalDeNulos openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
-            </div>
         </div>
     );
 }
