@@ -8,8 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/styles';
 
-const modalNul={
-    modalinN:{
+const modalInvalido={
+    modalinb:{
         width: "50%",
         maxHeight:"75vh",
         top: "35.5vh",
@@ -32,24 +32,24 @@ const modalNul={
     }
 }
 
-function ModalDeNulos(props){
+function ModalCaracterInvalido(props){
     const {classes}=props;
 
     function clickHandleCloseModal(){
-        props.setOpenModal(false)
+        props.setModalCaracteresInvalidos(false)
     }
 
     return(
         <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={props.openModal}
+        open={props.modalCaracteresIvalidos}
         >
-            <Paper className={classes.modalinN}>
+            <Paper className={classes.modalinb}>
                 <Grid container alignContent="center" alignItems="center">
                     <Grid item xs={11}>
                         <Typography variant="h4">
-                            No contiene pasajes
+                            Carácteres Invalidos.
                         </Typography>
                     </Grid>
                     <Grid item xs={1}>
@@ -63,7 +63,7 @@ function ModalDeNulos(props){
                     <Divider/>
                     <Grid item xs={12} className={classes.gridDelTypo}>
                         <Typography variant="h5">
-                            No hay ninguna referencia para esta expresión. Ver por favor la lista de expresiones derivadas.
+                            No se tomaron en cuenta los carácteres, solo las letras. Favor de hacer una busqueda más especifíca.
                         </Typography>
                     </Grid>
                 </Grid>
@@ -72,4 +72,4 @@ function ModalDeNulos(props){
     )
 }
 
-export default withStyles(modalNul)(ModalDeNulos);
+export default withStyles (modalInvalido)(ModalCaracterInvalido);

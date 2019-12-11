@@ -11,6 +11,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
 
+//Elements
+import ModalDeBusqueda from './ModalDeBusqueda';
 import ListaLetras from './ListaLetras';
 import LetraIndice from './LetraIndice';
 import BanderaButon from './BanderaButon';
@@ -21,6 +23,8 @@ import Busqueda from './Busqueda';
 import ModalDeBienvenida from './ModalDeBienvenida';
 import MenuBajo from './MenuBajo';
 import BusquedaAbajo from './BusquedaAbajo';
+import ModalCaracterInvalido from './ModalCaracterInvalido';
+import ModalNumeros from './ModalNumeros'
 
 function Expresion(props){
   const [letraMain, setLetraMain] = React.useState('A');
@@ -38,6 +42,9 @@ function Expresion(props){
   const [state, setState]=React.useState({checkedA:true});
   const [busqueda, setBusqueda] = React.useState("");
   const [menuEscondido,setMenuEscondido]=React.useState(false);
+  const [modalDeBusquedas,setModalDebusquedas]=React.useState(false);
+  const [modalCaracteresIvalidos,setModalCaracteresInvalidos]=React.useState(false);
+  const [modalNumeros,setModalNumeros]=React.useState(false);
   
   const fixReferencias = (referencias) => {
     var expresiones=[]
@@ -142,7 +149,8 @@ function Expresion(props){
           <Hidden xsDown> 
             <Busqueda expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} state={state} setState={setState}
             busqueda={busqueda} setBusqueda={setBusqueda} setLoading={setLoading} expresionesGlobales={expresionesGlobales} 
-            setExpresionesGlobales={setExpresionesGlobales}/>
+            setExpresionesGlobales={setExpresionesGlobales} setModalDebusquedas={setModalDebusquedas} setModalCaracteresInvalidos={setModalCaracteresInvalidos}
+            setModalNumeros={setModalNumeros}/>
             <MenuDerecho idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 
@@ -167,6 +175,9 @@ function Expresion(props){
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
       <ModalDeBienvenida openModal={openModal} setOpenModal={setOpenModal} lang={props.lang}/>
+      <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas}/>
+      <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos}/>
+      <ModalNumeros modalNumeros={modalNumeros} setModalNumeros={setModalNumeros}/>
     </div>
   )
 }

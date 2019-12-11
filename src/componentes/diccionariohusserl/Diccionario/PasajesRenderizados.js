@@ -8,7 +8,6 @@ function PasajesRenderizados(props){
     })
 
     React.useEffect(() => {
-        console.log(props.referenciaSeleccionada)
         if(props.referenciaSeleccionada != null){
             setPasajeRenderizado({
                 original : resaltarBusqueda(props.referenciaSeleccionada.pasaje_original,props.referenciaSeleccionada.expresion_original),

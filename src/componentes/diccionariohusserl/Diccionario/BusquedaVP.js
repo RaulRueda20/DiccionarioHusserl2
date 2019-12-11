@@ -61,7 +61,6 @@ function BusquedaVP(props){
     }
 
     const fixReferencias = (referencias) => {
-        console.log("referencias",referencias)
         var expresiones=[]
         var posicActual = -1
         var expreActual = ""
@@ -94,13 +93,14 @@ function BusquedaVP(props){
             // expresiones
           }
         }
-        console.log("expresiones",expresiones)
         return expresiones
     }
 
     const handleChangeBusquedaPasajes = (event) => {
+        event.preventDefault()
         if(props.state.checkedA == false){
-            var servicebe = "/referencias/busquedaExpresion/" + insensitiveCase
+            console.log("busquedaHecha",props.busqueda)
+            var servicebe = "/referencias/busquedaExpresion/"
             webService(servicebe, "POST", {parametro:props.busqueda,case:insensitiveCase}, (data) => {
                 var expresiones = data.data.response
                 props.setExpresionesGlobales(fixReferencias(expresiones))

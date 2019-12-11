@@ -42,7 +42,7 @@ function Pasaje(props){
       i++
       // console.log("posicion", posicion)
     }
-    if(referencias.length>5){
+    if(referencias.length>=5){
       if(refPos==0){
         var siguientesEscenario1 = refPos + 3
         setCasillas(referencias.slice(refPos,siguientesEscenario1))
@@ -60,6 +60,26 @@ function Pasaje(props){
         setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
       }else if(refPos == referencias.length - 1){
         var anterioresEscenario5 = refPos - 4
+        setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
+      }
+    }else if(referencias.length<5){
+      if(refPos==0){
+        var siguientesEscenario1 = refPos + 3
+        setCasillas(referencias.slice(refPos,siguientesEscenario1))
+      }else if(refPos==1){
+        var anteriorEscenario2=refPos - 1
+        var siguientesEscenario2 = refPos + 2
+        setCasillas(referencias.slice(anteriorEscenario2,siguientesEscenario2))
+      }else if(refPos > 1 && refPos < penultimo){
+        var anterioresEscenario3 = refPos - 2
+        var siguientesEscenario3 = refPos + 2
+        setCasillas(referencias.slice(anterioresEscenario3,siguientesEscenario3))
+      }else if(refPos == penultimo){
+        var anterioresEscenario4 = refPos -2
+        var siguienteEscenario4 = refPos +2
+        setCasillas(referencias.slice(anterioresEscenario4,siguienteEscenario4))
+      }else if(refPos == referencias.length - 1){
+        var anterioresEscenario5 = refPos - 3
         setCasillas(referencias.slice(anterioresEscenario5,refPos + 1))
       }
     }

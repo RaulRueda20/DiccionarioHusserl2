@@ -127,13 +127,12 @@ function Pasaje(props){
       setLoading(false)
       setExpanded1(true)
       setExpanded2(true)
-      if(!props.flagLetraMain){
-        if(data.data.response[0]==null){
-          props.setLetraMain(props.letraMain)
-          setOpenModal(true)
-          setReferenciaSeleccionada(null)
-          console.log("open",openModal)
-        }else if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+      if(data.data.response[0]==null){
+        props.setLetraMain(props.letraMain)
+        setOpenModal(true)
+        setReferenciaSeleccionada(null)
+      }else if(props.letraMain != data.data.response[0].index_de.replace(/ /g,'')){
+          if(!props.flagLetraMain){
           props.setLetraMain(data.data.response[0].index_de.replace(/ /g,''))
           props.setFlagLetraMain(true)
         }
@@ -144,8 +143,10 @@ function Pasaje(props){
     setTimeout(() => {
       if(document.getElementById("VP" + props.idExpresion) != null){
         document.getElementById("VP" + props.idExpresion).scrollIntoView()
+        
       }
     }, 1000)
+    console.log("open",openModal)
   }, [props.letraMain, props.language, props.match.params.expresion, props.match.params.id, props.flagLetraMain])
 
   return(
