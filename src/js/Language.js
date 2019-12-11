@@ -1103,6 +1103,21 @@ const mensajeCaracteres = lang => {
   }
 }
 
+const tooltipPaginador = lang => {
+  switch (lang) {
+    case "es":
+      return "No hay más pasajes."
+    case "en":
+      return "There are no more passages."
+    case "fr":
+      return "Il n'y a plus de passages."
+    case "al":
+      return "Es gibt keine Passagen mehr."
+    case "ca":
+      return "No hi ha més passatges."
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
@@ -1112,5 +1127,5 @@ export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra
   distincionMayusyMinus, BusquedaGeneral, tipoDeBusqueda, dentroExpresion, dentroReferencia, noDerivaDe, noContieneExpresionesDerivadas,
   bienvenido, bienvenidaModal, descargarConsulta, seGeneraArchivo, conReferencias, descargarEn, idiomaAl, idiomaEs, pasajeSeleccionadoOTodos,
   pasajeSeleccionado, todosLosPasajes, tipoDeArchivos, texto, tituloNulos, mensajeNulos, tituloBusqueda, mensajeBusqueda, tituloNumeros,
-  mensajeNumeros, tituloCaracteres, mensajeCaracteres
+  mensajeNumeros, tituloCaracteres, mensajeCaracteres, tooltipPaginador
 }

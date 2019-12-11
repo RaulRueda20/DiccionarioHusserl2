@@ -161,7 +161,8 @@ function Expresion(props){
           <Hidden smUp>
             <BusquedaAbajo expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} state={state} setState={setState}
             busqueda={busqueda} setBusqueda={setBusqueda} expresionesGlobales={expresionesGlobales} 
-            setExpresionesGlobales={setExpresionesGlobales}/>
+            setExpresionesGlobales={setExpresionesGlobales} setModalDebusquedas={setModalDebusquedas} 
+            setModalCaracteresInvalidos={setModalCaracteresInvalidos} setModalNumeros={setModalNumeros}/>
             <MenuBajo idExpresion={idExpresion} setIdExpresion={setIdExpresion} language={language}
             expresiones={expresiones} expresionSeleccionada={expresionSeleccionada} 
             setExpresionSeleccionada={setExpresionSeleccionada} expanded1={expanded1} setExpanded1={setExpanded1} 

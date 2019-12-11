@@ -198,7 +198,9 @@ function Pasaje(props){
             <div>
               <BusquedaEscondida expresiones={expresiones} setExpresiones={setExpresiones} lang={props.lang} 
               language={props.language} setLanguage={props.setLanguage} busqueda={busqueda} setBusqueda={setBusqueda}
-               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} setExpresionesGlobales={setExpresionesGlobales}/>
+               state={state} setState={setState} openHidden={openHidden} setOpenHidden={setOpenHidden} 
+               setExpresionesGlobales={setExpresionesGlobales} setModalDebusquedas={setModalDebusquedas} 
+               setModalCaracteresInvalidos={setModalCaracteresInvalidos} setModalNumeros={setModalNumeros} setLoading={setLoading}/>
               <ListaEscondida expresiones={expresiones} setExpresiones={setExpresiones} idExpresion={idExpresion} 
               setIdExpresion={setIdExpresion} language={props.language} setLanguage={props.setLanguage} referenciaSeleccionada={referenciaSeleccionada}
               setReferenciaSeleccionada={setReferenciaSeleccionada} setExpanded1={setExpanded1} setExpanded2={setExpanded2} state={state} setFlagLetraMain={props.setFlagLetraMain}
@@ -213,7 +215,7 @@ function Pasaje(props){
             idExpresion={idExpresion} lang={props.lang} match={props.match} panelDerecho={panelDerecho} panelIzquierdo={panelIzquierdo} 
             lang={props.lang} openHidden={openHidden} setOpenHidden={setOpenHidden}
             />
-            {referenciaSeleccionada== null ? null : <Paginador referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>}
+            {referenciaSeleccionada== null ? null : <Paginador lang={props.lang} referencias={referencias} referenciaSeleccionada={referenciaSeleccionada} expresionId={props.match.params.expresion}/>}
         </Grid>
         <Grid item sm={3} md={3} lg={3} className={classNames([{"panelDerechoEscondido" : panelDerecho==true}, "bordoDelMenuDerecho"])}>
           <Hidden xsDown>
