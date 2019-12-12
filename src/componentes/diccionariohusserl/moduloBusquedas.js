@@ -15,6 +15,9 @@ import ListaBusqueda from './listaBusqueda';
 import ResultadoBusquedaExpresion from './resultadoBusquedaPorExpresion';
 import ResultadoBusquedaReferencia from './resultadoBusquedaPorReferencia';
 
+//Language
+import {abrirListaTooltip} from '../../js/Language';
+
 const moduloBusqueda={
     gridSelectorBusqueda:{
         paddingRight:"30px !important",
@@ -39,6 +42,7 @@ function ModuloBusquedas(props){
 
     function abrirLista(){
         setAbierto(!abierto)
+        console.log("abierto",abierto)
     }
 
     return(
@@ -54,7 +58,7 @@ function ModuloBusquedas(props){
                 expresionesEncontradas.length < 1 ? null :
                 <Grid item xs={abierto ? 8 : 1} sm={abierto ? 6 : 1} md={abierto ? 4 : 1} className={classes.botonLista}>
                     { !abierto ? 
-                    <Tooltip title="Abrir lista de busqueda">
+                    <Tooltip title={abrirListaTooltip(props.lang)}>
                         <IconButton onClick={abrirLista}>
                             <MenuIcon/>
                         </IconButton>
@@ -62,6 +66,7 @@ function ModuloBusquedas(props){
                     <ListaBusqueda expresionesEncontradas={expresionesEncontradas} posicionPasaje={posicionPasaje} 
                         setPosicionPasaje={setPosicionPasaje} tipoBusqueda={tipoBusquedaRealizada} idPasaje={idPasaje} 
                         setIdPasaje={setIdPasaje} abrirLista={abrirLista} expresionSeleccionada={expresionesEncontradas[posicionPasaje]}
+                        lang={props.lang}
                     />}
                 </Grid>
             }
