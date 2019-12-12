@@ -11,20 +11,14 @@ import Tooltip from '@material-ui/core/Tooltip';
 //Other req
 import classNames from 'classnames';
 
-// const listaBusqueda={
-//     gridListaBusqueda:{
-//         maxHeight:"74.5vh",
-//         overflowY:"scroll",
-//     }
-// }
+//Language
+import {resultadoBusqueda,cerrarListaTooltip} from '../../js/Language';
 
 function ListaBusqueda(props){
-    const {classes}=props;
 
     function clickCambioIdBuscado(event){
         props.setIdPasaje(event.currentTarget.id.split("-")[0])
         props.setPosicionPasaje(parseInt(event.currentTarget.id.split("-")[1]))
-        // console.log("id",event.currentTarget.id.split("-")[1])
         if(props.tipoBusqueda=="Referencia"){
             props.setPosicionPasaje(parseInt(event.currentTarget.id.split("-")[2]))
         }
@@ -33,10 +27,10 @@ function ListaBusqueda(props){
     return(
         <Grid container justify="center" alignItems="center">
             <Grid item xs={11}>
-                <Typography variant="h3" className="tituloResultados"> Resultado de busqueda</Typography>
+                <Typography variant="h3" className="tituloResultados">{resultadoBusqueda(props.lang)}</Typography>
             </Grid>
             <Grid item xs={1}>
-                <Tooltip title="Cerrar lista de busqueda">
+                <Tooltip title={cerrarListaTooltip(props.lang)}>
                     <IconButton onClick={props.abrirLista}>
                         <ArrowBackIosIcon/>
                     </IconButton>

@@ -1118,6 +1118,51 @@ const tooltipPaginador = lang => {
   }
 }
 
+const resultadoBusqueda = lang => {
+  switch (lang) {
+    case "es":
+      return "Resultado de busqueda."
+    case "en":
+      return "Search result."
+    case "fr":
+      return "Résultat de la recherche."
+    case "al":
+      return "Suchergebnis."
+    case "ca":
+      return "Resultat de cerca."
+  }
+}
+
+const abrirListaTooltip = lang => {
+  switch (lang) {
+    case "es":
+      return "Abrir lista de busqueda."
+    case "en":
+      return "Open search list."
+    case "fr":
+      return "Ouvrez la liste de recherche."
+    case "al":
+      return "Suchliste öffnen."
+    case "ca":
+      return "Obrir llista de cerca."
+  }
+}
+
+const cerrarListaTooltip = lang => {
+  switch (lang) {
+    case "es":
+      return "Cerrar lista de busqueda."
+    case "en":
+      return "Close search list."
+    case "fr":
+      return "Fermer la liste de recherche."
+    case "al":
+      return "Suchliste schließen."
+    case "ca":
+      return "Tancar llista de cerca."
+  }
+}
+
 export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra, olvidoDeContra, registrarse, 
   registrado, aqui, Footer1, Footer2, Footer3, registro, nombre, apellido, escuela, puesto, pais, comprobacionContra,
   modalRecuperacionContra,modalIngresarCorreo, exitoBody, correoInvalido, correoNoEncontrado, aceptarAlert, menuDiccionario,
@@ -1127,5 +1172,5 @@ export {tituloDiccionario, ingresar, subtituloDiccionario, inicio, email, contra
   distincionMayusyMinus, BusquedaGeneral, tipoDeBusqueda, dentroExpresion, dentroReferencia, noDerivaDe, noContieneExpresionesDerivadas,
   bienvenido, bienvenidaModal, descargarConsulta, seGeneraArchivo, conReferencias, descargarEn, idiomaAl, idiomaEs, pasajeSeleccionadoOTodos,
   pasajeSeleccionado, todosLosPasajes, tipoDeArchivos, texto, tituloNulos, mensajeNulos, tituloBusqueda, mensajeBusqueda, tituloNumeros,
-  mensajeNumeros, tituloCaracteres, mensajeCaracteres, tooltipPaginador
+  mensajeNumeros, tituloCaracteres, mensajeCaracteres, tooltipPaginador, resultadoBusqueda, abrirListaTooltip, cerrarListaTooltip
 }
