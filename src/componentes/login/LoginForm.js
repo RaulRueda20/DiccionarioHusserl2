@@ -28,8 +28,8 @@ const stylesFor = {
     margin: "7.5vh 2.5vw"
   },
   divDelForm: {
-    minHeight: "55vh",
-    paddingTop: "5vh"
+    paddingBottom: "15vh",
+    paddingTop: "7.5vh"
   }
 }
 
@@ -38,7 +38,7 @@ var setStore = (user, pass) => {
     newSession['ultimasVisitadas'] = []
     newSession["ultimaVisitada"] = "alfabeto"
     localStore.setObjects("sesion", newSession)
-    document.getElementById("toMain").click()
+    // document.getElementById("toMain").click()
 }
 
 function LoginForm (props){
@@ -59,6 +59,7 @@ function LoginForm (props){
         setSnackbar({open:true,variant:"error",message:correoInvalido(props.lang)})
       }else{
         setStore(data.response, password)
+        document.getElementById("toMain").click()
       }
       setLoading(false)
     })
@@ -69,8 +70,9 @@ function LoginForm (props){
   }
 
   React.useEffect(()=>{
-    if(localStore.getObjects("sesion")) document.getElementById("toMain").click()
-  }, [])
+    console.log("lol")
+    // if(localStore.getObjects("sesion")) props.setLogged(true)
+  }, [localStore.getObjects("sesion")])
 
   const handleClose=(event,reason)=>{
     setSnackbar({open:false,variant:snackbar.variant,message:""})
@@ -124,7 +126,7 @@ function LoginForm (props){
           </Grid>
           <Grid item xs={12} sm={8} lg={7}>
             <Typography variant = "h4">
-              {registrarse(props.lang)}<a href="#" onClick={() =>props.setLogin(false)} className="links"> {aqui(props.lang)}</a>
+              {registrarse(props.lang)}<a onClick={() =>props.setLogin(false)} className="links"> {aqui(props.lang)}</a>
             </Typography>
           </Grid>
         </Grid>
@@ -134,7 +136,6 @@ function LoginForm (props){
       />
       <Snackbars snackbar={snackbar} handleClose={handleClose} lang={props.lang}/>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
-      <Link id="toMain" to="/husserl"/> 
     </div>
   )
 };

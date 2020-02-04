@@ -24,6 +24,10 @@ const stylesReg = {
   TextField2:{
     justify: 'center',
     width:"100%",
+  },
+  divDelForm: {
+    paddingBottom: "15vh",
+    paddingTop: "7.5vh"
   }
 }
 
@@ -87,7 +91,7 @@ function RegistroForm(props){
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={onFormSubmit} className={classes.divDelForm}>
       <Typography variant="h3" align="center" gutterBottom >
         {registro(props.lang)}
       </Typography>
@@ -185,7 +189,7 @@ function RegistroForm(props){
 
         <Grid item xs={12} sm={8} lg={7}>
           <Typography variant = "h4">
-            {registrado(props.lang)} <a href="#" onClick={() =>props.setLogin(true)}> {aqui(props.lang)} </a>
+            {registrado(props.lang)} <a className="links" onClick={() =>props.setLogin(true)}> {aqui(props.lang)} </a>
           </Typography>
         </Grid>
       </Grid>

@@ -7,12 +7,14 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 // Other reqs
 import {webService} from '../../js/webServices';
 import classNames from 'classnames';
+import * as localStore from '../../js/localStore';
 
 function Guia(props){
     const [guia, setGuia]=React.useState("");
     const [loading, setLoading]=React.useState(false);
 
     React.useEffect(()=>{
+        if(!localStore.getObjects("sesion")) document.getElementById("toLogin").click()
         setLoading(true)
         webService("/manual/get", "GET", {}, (data) => {
            setGuia(data.data.response[0])
@@ -39,6 +41,7 @@ function Guia(props){
         <div>
             <div className="guia" dangerouslySetInnerHTML={renderizadoGuia()}></div>
             <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
+            <Link id="toLogin" to="/"/>
         </div>
     )
 }

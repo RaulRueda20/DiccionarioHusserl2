@@ -16,6 +16,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]:{
       display: "none"
     }
+  },
+  idiomas: {
+    textAlign: "center"
+  },
+  menu: {
+    textAlign: "center"
   }
 }))
 
@@ -28,15 +34,15 @@ function HeaderMain(props){
     <Grid container direction="row" justify="center" className="grids">
       <AppBar position="static" color="primary" className="headerMain">
         <Toolbar variant="dense">
-          <Grid item xs={2} sm={1} md={1} xl={1}>
-            <MenuHeader match={props.match} lang={props.lang} setLang={props.setLang}/>
+          <Grid item xs={2} sm={1} md={1} xl={1} className={classes.menu}>
+            <MenuHeader match={props.match} lang={props.lang} setLang={props.setLang} setLogged={props.setLogged}/>
           </Grid>
           <Grid item xs={8} sm={10} md={10} xl={10} align="center">
             <Typography variant="h2" className={classes.titulo}>
               {tituloDiccionario(props.lang)}
             </Typography>
           </Grid>
-          <Grid item xs={2} sm={1} md={1} xl={1}>
+          <Grid item xs={2} sm={1} md={1} xl={1} className={classes.idiomas}>
             <MenuIdioma lang={props.lang} setLang={props.setLang}/>
           </Grid>
         </Toolbar>

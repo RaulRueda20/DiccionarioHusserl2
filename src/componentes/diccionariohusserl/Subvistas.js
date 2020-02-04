@@ -13,6 +13,25 @@ export default function Subvistas({match, lang, setLang}){
     const [letraMain, setLetraMain] = React.useState("A");
     const [flagLetraMain, setFlagLetraMain]=React.useState(false);
 
+    React.useEffect(()=>{
+        console.log("here sd")
+        // if(!localStore.getObjects("sesion")) document.getElementById("toLogin").click()
+        // setLoading(true)
+        // var service = "/expresiones/" + language + "/" + letraMain
+        // webService(service, "GET", {}, (data) => {
+        //   setExpresiones(fixReferencias(data.data.response))
+        //   setExpresionesGlobales(fixReferencias(data.data.response))
+        //   if(idExpresion === ''){
+        //     setIdExpresion(data.data.response.length > 0 ? data.data.response[0].id : "")
+        //   }
+        //   setLoading(false)
+        // })
+        // if(localStore.getObjects("bienvenida")==false){
+        //   setOpenModal(true)
+        //   localStore.setObjects("bienvenida",true)
+        // }
+    }, [])
+
     return(
         <div>
             <HeaderMain match={match} lang={lang} setLang={setLang}/>
@@ -26,7 +45,6 @@ export default function Subvistas({match, lang, setLang}){
                 <Route path={`${match.url}/`}>
                     <Redirect to={`${match.url}/diccionario`} />
                 </Route>
-                <Link id="toLogin" to="/"/>
             </Switch>
         </div>
     )

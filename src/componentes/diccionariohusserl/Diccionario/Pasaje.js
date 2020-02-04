@@ -21,6 +21,7 @@ import ModalDeNulos from './ModalDeNulos';
 import ModalDeBusqueda from './ModalDeBusqueda';
 import ModalCaracterInvalido from './ModalCaracterInvalido';
 import ModalNumeros from './ModalNumeros'
+import * as localStore from '../../../js/localStore';
 
 import {webService} from '../../../js/webServices';
 
@@ -242,6 +243,7 @@ function Pasaje(props){
       <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas} lang={props.lang}/>
       <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos} lang={props.lang}/>
       <ModalNumeros modalNumeros={modalNumeros} setModalNumeros={setModalNumeros} lang={props.lang}/>
+      {/* <Link id="toLogin" to="/"/> */}
     </div>
   )
 }
