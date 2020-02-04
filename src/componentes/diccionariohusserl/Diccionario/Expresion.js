@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
+import {Switch, Redirect, Link, Route} from 'react-router-dom';
+
 import {webService} from '../../../js/webServices';
 import * as localStore from '../../../js/localStore';
 
@@ -90,6 +92,8 @@ function Expresion(props){
   }
 
   React.useEffect(()=>{
+    console.log("here")
+    if(!localStore.getObjects("sesion")) document.getElementById("toLogin").click()
     setLoading(true)
     var service = "/expresiones/" + language + "/" + letraMain
     webService(service, "GET", {}, (data) => {
@@ -171,9 +175,6 @@ function Expresion(props){
             expanded2={expanded2} setExpanded2={setExpanded2} expanded3={expanded3} setExpanded3={setExpanded3}
             getJerarquia={getJerarquia} lang={props.lang} setLetraMain={props.setLetraMain} setFlagLetraMain={props.setFlagLetraMain}/>
           </Hidden>
-        </Grid>    
-        <Grid item xs={12}>
-            <Cintilla open={open} setOpen={setOpen} lang={props.lang} match={props.match}/>
         </Grid>
       </Grid>
       <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
@@ -182,6 +183,7 @@ function Expresion(props){
       <ModalDeBusqueda modalDeBusquedas={modalDeBusquedas} setModalDebusquedas={setModalDebusquedas} lang={props.lang}/>
       <ModalCaracterInvalido modalCaracteresIvalidos={modalCaracteresIvalidos} setModalCaracteresInvalidos={setModalCaracteresInvalidos} lang={props.lang}/>
       <ModalNumeros modalNumeros={modalNumeros} setModalNumeros={setModalNumeros} lang={props.lang}/>
+      <Link id="toLogin" to="/"/>
     </div>
   )
 }

@@ -93,7 +93,7 @@ class MenuHeader extends React.Component{
             <ListItemText primary={menuSalir(this.props.lang)}/>
           </MenuItem>
         </Menu>
-        <Link id="toLogin" to={'/'} />
+        <Link id="toLogin" to="/"/>
       </div>
     )
   }

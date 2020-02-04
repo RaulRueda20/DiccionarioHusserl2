@@ -52,7 +52,6 @@ export default function ListaExpresiones(props){
   function handleClickPanel(event){
     var expresionesAbiertas=panelesAbiertos;
     var referenciasPrincipales= event.currentTarget.value;
-    console.log("referenciasprincipales", referenciasPrincipales)
     props.setIdExpresion(event.currentTarget.id)
     if(expresionesAbiertas.indexOf(event.currentTarget.id)>-1){
       expresionesAbiertas.splice(expresionesAbiertas.indexOf(event.currentTarget.id),1)

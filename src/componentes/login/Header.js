@@ -15,6 +15,9 @@ const stylesHed = {
   },
   grids : {
     margin: "5vh 0"
+  },
+  menuIdiomas : {
+    textAlign : "center"
   }
 }
 
@@ -29,7 +32,7 @@ function Header(props){
             {tituloDiccionario(props.lang)}
           </Typography>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={1} className={classes.menuIdiomas}>
           <MenuIdioma lang={props.lang} setLang={props.setLang}/>
         </Grid>
       </Grid>
