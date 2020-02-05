@@ -52,33 +52,32 @@ function ModalDescargas(props){
     const [checkedA,setCheckedA] =React.useState(false);
     const [checkedB,setCheckedB] =React.useState(false);
     const [checkedC,setCheckedC] =React.useState(false);
-    const [checkedD,setCheckedD] =React.useState(false);
-    const [checkedE,setCheckedE] =React.useState(false);
     const [checked, setChecked] = React.useState([]);
     const [value, setValue] = React.useState('Texto');
+    const [descargarPasajeSolo,setdescargarPasajeSolo] = React.useState('seleccionado')
 
     const handleChangeA=name=>event=>{
         setCheckedA({...checkedA, [name]:event.target.checked})
     };
 
     const handleChangeB=name=>event=>{
+        if(checkedC==true){
+            setCheckedB({...checkedB, [name]:false})
+        }
         setCheckedB({...checkedB, [name]:event.target.checked})
     };
 
     const handleChangeC=name=>event=>{
         setCheckedC({...checkedC, [name]:event.target.checked})
-    };
 
-    const handleChangeD=name=>event=>{
-        setCheckedD({...checkedD, [name]:event.target.checked})
-    };
-
-    const handleChangeE=name=>event=>{
-        setCheckedE({...checkedE, [name]:event.target.checked})
     };
 
     const handleChangeRadio=event=>{
         setValue(event.target.value)
+    };
+
+    const pasajeSeleccionadoRadio=event=>{
+        setdescargarPasajeSolo(event.target.value)
     };
 
     function closeDescargas(){
@@ -90,7 +89,7 @@ function ModalDescargas(props){
         checkedB ? opciones.push(1) : opciones.push(0)
         checkedC ? opciones.push(1) : opciones.push(0)
         checkedA ? opciones.push(1) : opciones.push(0)
-        if(checkedD){
+        if(descargarPasajeSolo=='todos'){
             if(value=='texto'){
                 var serviceR = "/reporte/reporteText/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
                 &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
@@ -137,7 +136,7 @@ function ModalDescargas(props){
                 }
             }
         }
-        if(checkedE){
+        if(descargarPasajeSolo=='seleccionado'){
             if(value != 'texto'){
                 var serviceR = "/reporte/reportepdf/" + props.idExpresion + "?expresion_aleman=1&expresion_espaniol=1&referencia_aleman=1\
                 &referencia_espaniol=1&pasaje_aleman=" + opciones[4] + "&pasaje_espaniol=" + opciones[5] +
@@ -219,28 +218,18 @@ function ModalDescargas(props){
                         <Grid item xs={12}>
                             <Typography>{pasajeSeleccionadoOTodos(props.lang)}</Typography>
                         </Grid>
-                        <Grid item xs={6}>
-                            <FormControlLabel control={
-                                <Checkbox
-                                    checked={checkedD}
-                                    onChange={() => setCheckedD(!checkedD)}
-                                    value="checkedD"
-                                />
-                                }
-                                label={pasajeSeleccionado(props.lang)}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <FormControlLabel control={
-                                <Checkbox
-                                    checked={checkedE}
-                                    onChange={() => setCheckedE(!checkedE)}
-                                    value="checkedE"
-                                />
-                                }
-                                label={todosLosPasajes(props.lang)}
-                            />
-                        </Grid>
+                        <RadioGroup aria-label={pasajeSeleccionadoOTodos(props.lang)} name="Pasaje seleccionado" value={descargarPasajeSolo} onChange={pasajeSeleccionadoRadio}>
+                            <Grid item xs={12}>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <FormControlLabel control={<Radio/>} value="seleccionado" label={pasajeSeleccionado(props.lang)}/>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <FormControlLabel control={<Radio/>} value="todos" label={todosLosPasajes(props.lang)}/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </RadioGroup>
                         <Grid item xs={12}>
                             <Typography>{tipoDeArchivos(props.lang)}</Typography>
                         </Grid>
