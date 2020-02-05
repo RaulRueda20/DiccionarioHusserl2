@@ -30,6 +30,10 @@ const resultadoBusqueda={
     },
     divPasajes:{
         marginTop:"40px"
+    },
+    boton:{
+        textAling: "center",
+        paddingTop: "15px"
     }
 }
 
@@ -187,7 +191,7 @@ function ResultadoBusquedaExpresion(props){
                     ))}
                     </ul>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={2} className={classes.boton}>
                     {lang== "es" ?
                         <Button className={classes.imagenesBandera} onClick={clickChangeLanALVB}><img className="banderaPasajes" src={al}/></Button>
                         : <Button className={classes.imagenesBandera} onClick={clickChangeLangEsVB}><img className="banderaPasajes" src={es}/></Button>

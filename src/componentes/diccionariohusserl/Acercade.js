@@ -41,7 +41,7 @@ function Acercade(props){
         <div>
             <div className="acercaDe" dangerouslySetInnerHTML={renderizadoDeAcercaDe()}></div>
             <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
-            <Link id="toLogin" to="/login"/>
+            {/* <Link id="toLogin" to="/login"/> */}
         </div>
     )
 }

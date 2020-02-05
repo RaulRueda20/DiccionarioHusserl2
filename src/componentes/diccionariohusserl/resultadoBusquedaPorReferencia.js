@@ -16,6 +16,10 @@ const resultadoBusquedaRef={
         marginTop:"15px !important",
         marginBottom:"15px !important",
         textAlign: "center"
+    },
+    contenedorReferencia:{
+        overflowY:"auto",
+        maxHeight:"calc(91vh - 108px)"
     }
 }
 
@@ -93,7 +97,7 @@ function ResultadoBusquedaReferencia(props){
     }
 
     return(
-        <Grid container>
+        <Grid container className={classes.contenedorReferencia}>
              <Grid item xs={12} className="pasajesRenderizadosBusqueda">
                 <Typography variant="h4" className={classes.typosTitulos}>{props.pasajeSeleccionado.ref_id}</Typography>
                 <div dangerouslySetInnerHTML={htmlPasajeOriginal()}></div>

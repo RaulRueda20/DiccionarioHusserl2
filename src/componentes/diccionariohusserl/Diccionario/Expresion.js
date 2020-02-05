@@ -118,7 +118,6 @@ function Expresion(props){
 
   function handleMenuEscondido(){
     setMenuEscondido(!menuEscondido)
-
   }
 
   return(

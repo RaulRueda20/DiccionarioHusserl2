@@ -41,7 +41,7 @@ function Guia(props){
         <div>
             <div className="guia" dangerouslySetInnerHTML={renderizadoGuia()}></div>
             <LinearProgress className={classNames([{"hidden" : !loading}, "loadingBar"])}/>
-            <Link id="toLogin" to="/"/>
+            {/* <Link id="toLogin" to="/"/> */}
         </div>
     )
 }

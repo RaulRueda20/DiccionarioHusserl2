@@ -143,7 +143,7 @@ function BusquedaAbajo(props){
                     }  
                     endAdornment={
                     <InputAdornment position="start">
-                        <IconButton type="submit">
+                        <IconButton type="submit" className="lupita">
                         <SearchIcon/>
                         </IconButton>
                     </InputAdornment>

@@ -507,13 +507,13 @@ const menuDerechoJerarquiaExpresionesDerivadas= lang => {
     case "es":
       return "Expresiones derivadas:"
     case "en":
-      return "Expressions derivades:"
+      return "Derived Expressions:"
     case "fr":
       return "Expresions Dérivées:"
     case "al":
       return "Ableitungsausdrücke:"
     case "ca":
-      return "Derived Expressions:"
+      return "Expressions derivades:"
   }
 }
 

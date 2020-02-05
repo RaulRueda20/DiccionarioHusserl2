@@ -24,9 +24,6 @@ import classNames from 'classnames';
 import {busquedas, distincionMayusyMinus, BusquedaGeneral, busquedaPorLetra} from '../../../js/Language';
 
 const styles = {
-  TextFieldbus:{
-    width:"95%"
-  },
   contenedor:{
     alignItems:"center !important"
   }
@@ -137,7 +134,7 @@ function Busqueda(props){
             }  
             endAdornment={
               <InputAdornment position="start">
-                <IconButton type="submit">
+                <IconButton type="submit" className="lupita">
                   <SearchIcon/>
                 </IconButton>
               </InputAdornment>

@@ -26,6 +26,15 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       fontSize : " 1.5rem !important",
     }
+  },
+  contenedor:{
+    justify: "center",
+    alignItems: "center",
+    alignContent: "center",
+    borderRight: "1px double lightgrey",
+    borderLeft: "1px double lightgrey",
+    overflowY: "auto",
+    maxHeight: "calc(91vh-31px)"
   }
 }))
 
@@ -50,8 +59,7 @@ function ContenidoPasaje(props){
 
   return(
     <div>
-      <Grid container justify="center" alignItems="center" alignContent="center" style={{borderRight: "1px double lightgrey",
-    borderLeft: "1px double lightgrey"}}>
+      <Grid container className={classes.contenedor}>
         <Hidden smUp>
           <Grid item xs={2} sm={2} md={false} lg={false}>
             <IconButton size="small" onClick={clickHandleHidden}>

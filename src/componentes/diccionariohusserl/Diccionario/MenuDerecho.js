@@ -131,7 +131,6 @@ function MenuDerecho(props){
             )}
           </ul>
         </ExpansionPanelDetails>
-        <Divider />
         <ExpansionPanelDetails className="panelDeDetalleExpresion">
           <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresion(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoExpresion">
@@ -140,7 +139,6 @@ function MenuDerecho(props){
             </li>
           </ul>
         </ExpansionPanelDetails>
-          <Divider />
         <ExpansionPanelDetails className="panelDeDetalleHijos">
           <Typography variant="caption" className="tagsMenuDerecho">{menuDerechoJerarquiaExpresionesDerivadas(props.lang)}</Typography>
           <ul className="ulDelMenuDerechoHijos"  key={hijos.refid}> 
