@@ -665,3 +665,11 @@ hr{
 .lupita{
   padding: 0 !important;
 }
+
+.busquedaEnExpresiones{
+  width: -webkit-fill-available;
+}
+
+.iconosAlineado{
+  text-align: center !important;
+}

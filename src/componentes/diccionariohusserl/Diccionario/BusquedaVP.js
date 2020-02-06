@@ -27,9 +27,6 @@ import es from "../../../Imagenes/spain.png";
 import al from "../../../Imagenes/germany.png";
 
 const styles={
-    // TextFieldbus:{
-    //    width:"50%"
-    // },
     imagenesBandera:{
         width: "25px !important",
         height: "15px !important",
@@ -37,6 +34,9 @@ const styles={
         minHeight: "0px",
         minWidth: "0px !important",
         padding: "0px !important"
+    },
+    switchPasaje:{
+        textAlign: "center"
     }
 }
 
@@ -132,7 +132,7 @@ function BusquedaVP(props){
         <form onSubmit={handleChangeBusquedaPasajes}>
             <Grid container justify="center" alignItems="center" alignContent="center">
                 <Grid item xs={7} lg={9}>
-                    <FormControl>
+                    <FormControl className="busquedaEnExpresiones">
                         <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
                         <Input  
                             onChange={event => props.setBusqueda(event.target.value)}
@@ -160,7 +160,7 @@ function BusquedaVP(props){
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={3} lg={2}>
+                <Grid item xs={3} lg={2} className={classes.switchPasaje}>
                     <Tooltip title={props.state.checkedA ? busquedaPorLetra(props.lang) : BusquedaGeneral(props.lang)}>
                         <Switch
                             checked={props.state.checkedA}

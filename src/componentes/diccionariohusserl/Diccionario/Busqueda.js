@@ -26,6 +26,9 @@ import {busquedas, distincionMayusyMinus, BusquedaGeneral, busquedaPorLetra} fro
 const styles = {
   contenedor:{
     alignItems:"center !important"
+  },
+  switch:{
+    textAlign: "center"
   }
 }
 
@@ -115,7 +118,7 @@ function Busqueda(props){
     <form onSubmit={handleChangeBusquedaExpresiones}>
       <Grid container className={classes.contenedor}>
         <Grid item xs={10}>
-          <FormControl className={classes.TextFieldbus}>
+          <FormControl className="busquedaEnExpresiones">
             <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
             <Input
             onChange={event => props.setBusqueda(event.target.value)}
@@ -142,7 +145,7 @@ function Busqueda(props){
             />
           </FormControl>  
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} className={classes.switch}>
           <Tooltip title={props.state.checkedA ? busquedaPorLetra(props.lang) : BusquedaGeneral(props.lang)}>
             <Switch
                 checked={props.state.checkedA}

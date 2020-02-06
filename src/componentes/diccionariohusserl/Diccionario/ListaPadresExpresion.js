@@ -94,7 +94,7 @@ function ListaPadresExpresion(props){
                             <Typography variant="h6" className="consultaDePasajes" id={props.padre.padre+"/"+props.index}>{props.padre.expresion}</Typography>
                         </Link>
                     </Grid>
-                    <Grid item xs={4} onClick={handleClickDerivadaDe} id={"padre" + props.padre.padre}>
+                    <Grid item xs={4} onClick={handleClickDerivadaDe} id={"padre" + props.padre.padre} className="iconosAlineado">
                     <Icon className="iconosIluminadosPasaje">
                         <Jerarquia className="iconoJerarquiaPasajes"/>
                     </Icon>

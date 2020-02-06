@@ -26,9 +26,6 @@ import {busquedas, distincionMayusyMinus, BusquedaGeneral, busquedaPorLetra} fro
 
 
 const styles = {
-    TextFieldbus:{
-      width:"95%"
-    },
     contenedor:{
       alignItems:"center !important"
     },
@@ -36,6 +33,9 @@ const styles = {
         marginRight: "5px",
         marginLeft: "20px",
         marginTop: "28px"
+    },
+    switchPasaje:{
+        textAlign: "center"
     }
 }
 
@@ -124,7 +124,7 @@ function BusquedaAbajo(props){
         <form onSubmit={handleChangeBusquedaExpresiones} className={classes.formularioBusqueda}>
             <Grid container className={classes.contenedor}>
                 <Grid item xs={10}>
-                <FormControl className={classes.TextFieldbus}>
+                <FormControl className="busquedaEnExpresiones">
                     <InputLabel htmlFor="input-with-icon-adornment">{busquedas(props.lang)}</InputLabel>
                     <Input
                     onChange={event => props.setBusqueda(event.target.value)}
@@ -151,7 +151,7 @@ function BusquedaAbajo(props){
                     />
                 </FormControl>  
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={2} className={classes.switchPasaje}>
                 <Tooltip title={props.state.checkedA ? busquedaPorLetra(props.lang) : BusquedaGeneral(props.lang)}>
                     <Switch
                         checked={props.state.checkedA}
