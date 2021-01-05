@@ -10,7 +10,7 @@
     "@mdi/js": "^4.5.95",
     "@mdi/react": "^1.2.1",
     "autoscroll-react": "^3.2.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
